@@ -1,0 +1,227 @@
+:root {
+  --h-font: 'Nunito', sans-serif;
+  --p-font: 'Nunito', sans-serif;
+  --normal-weight: 400;
+  --bold-weight: 700;
+
+  --color-primary: #07689f;
+  --color-primary-dark: #49759c;
+  --color-primary-alpha-50: rgba(104, 147, 186, .5);
+  --color-secondary: #a2d5f2;
+  --color-secondary-light: rgba(225, 181, 60, .26);
+  --color-tertiary: #ff9d5b;
+  --color-tertiary-light: #ffab9c;
+  --color-tertiary-alpha30: rgba(255, 126, 103, 0.3);
+  --color-light: #F1F2F6;
+  --color-lightest: #ffffff;
+  --color-gray: #dedede;
+  --color-dark: #404e4d;
+  --color-darkest: #1f2423;
+
+  --border-radius: 8px;
+  --card-dropshadow: 0 8px 80px 0 rgba(60,64,67,0.1);
+  --card-dropshadow-feature: 0 8px 80px 0 rgba(60,64,67,0.2);
+  --card-dropshadow-original: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+  --card-height-large: 100px;
+  --card-height-large: 250px;
+
+  --modal-dropshadow: 0 2px 3px 0 rgba(60,64,67,0.3),0 6px 10px 4px rgba(60,64,67,0.15);
+
+  --svg-dropshadow: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.2))
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: var(--color-light);
+  color: var(--color-darkest);
+  font-family: var(--p-font);
+  font-weight: var(--normal-weight);
+  overflow-x: hidden;
+}
+
+.page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  clear: both;
+  position: relative;
+}
+
+.hero, .hero-large {
+  height: 250px;
+  background-image: var(--color-primary);
+  color: var(--color-light);
+}
+
+.hero-large {
+  height: 400px;
+}
+
+@media (max-width: 500px) {
+  .hero {
+    height: 120px;
+  }
+}
+
+.card {
+  background-color: var(--color-lightest);
+  color: var(--color-dark);
+  box-shadow: var(--card-dropshadow);
+  width: 95%;
+  max-width: 700px;
+  border-radius: var(--border-radius);
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.card h3 {
+  color: var(--color-darkest);
+}
+
+@media (max-width: 500px) {
+  .card {
+    max-height: 150px;
+  }
+  .card h3, p {
+    font-size: 14px;
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--h-font);
+  font-weight: var(--bold-weight);
+  margin: 0;
+}
+
+h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  font-weight: var(--bold-weight);
+  margin: 0;
+}
+
+input {
+  background: none;
+  font-family: var(--p-font);
+  outline: none;
+  color: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+}
+
+/* Background utilities */
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-tertiary {
+  background-color: var(--color-tertiary);
+}
+.bg-light {
+  background-color: var(--color-light);
+}
+.bg-lightest {
+  background-color: var(--color-lightest);
+}
+.bg-dark {
+  background-color: var(--color-dark);
+}
+.bg-darkest {
+  background-color: var(--color-darkest);
+}
+
+/* Text color utilites */
+
+.darkest {
+  color: var(--color-darkest)
+}
+.dark {
+  color: var(--color-dark)
+}
+.light {
+  color: var(--color-light)
+}
+.lightest {
+  color: var(--color-lightest)
+}
+
+/* image utilities */
+
+.icon {
+  object-fit: cover;
+}
+
+.icon-large {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.svg-primary {
+  fill: var(--color-primary);
+}
+
+.svg-bold {
+  fill: var(--color-darkest);
+}
+
+.svg-soft {
+  fill: var(--color-dark);
+}
+
+/* text utilities */
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* button utilities */
+
+.clickable {
+  cursor: pointer;
+}
+
+/* link utilities */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* animations */
+
+.slide-in {
+  animation: slide-in ease-out 300ms;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
