@@ -1,12 +1,16 @@
 import * as React from 'react';
+import * as types from '../types/index';
 
 interface Props {
-  suggestion: string;
+  suggestion: types.PodcastSuggestion;
 }
 
 const PodcastSuggestion: React.SFC<Props> = (props) => {
   return (
-    <h1>{props.suggestion}</h1>
+    <a>
+      <h2>{props.suggestion.title}</h2>
+      <p>{props.suggestion.description}</p>
+    </a>
   );
 };
 

@@ -1,6 +1,7 @@
 export interface GpodderPodcastResponse {
   subscribers: number;
   logo_url: string;
+  url: string;
   description: string;
   title: string;
   mygpo_link: string;

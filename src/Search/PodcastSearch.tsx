@@ -5,7 +5,8 @@ import {
   InputProps, 
   ChangeEvent, 
   RenderSuggestion, 
-  SuggestionsFetchRequested } from 'react-autosuggest';
+  SuggestionsFetchRequested,
+  OnSuggestionSelected } from 'react-autosuggest';
 const Autosuggest = require('react-autosuggest') as new() => 
   React.Component<AutosuggestProps<types.PodcastSuggestion>, Object>;
 import PodcastSuggestion from './PodcastSuggestion';
@@ -88,10 +89,14 @@ class PodcastSearch extends React.Component<Props, State> {
     return suggestion.title;
   }
 
+  onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (event, {suggestion}) => {
+    console.log('go to podcast page for ' + suggestion.title);
+  }
+
   render() {
 
     const renderSuggestion: RenderSuggestion<types.PodcastSuggestion> = suggestion => {
-      return <PodcastSuggestion suggestion={suggestion.title} />;
+      return <PodcastSuggestion suggestion={suggestion} />;
     };
 
     const inputProps: InputProps<types.PodcastSuggestion> = {
@@ -112,6 +117,7 @@ class PodcastSearch extends React.Component<Props, State> {
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
+        onSuggestionSelected={this.onSuggestionSelected}
       />
     );
   }
