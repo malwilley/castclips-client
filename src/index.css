@@ -1,4 +1,7 @@
 :root {
+  --h-font: 'Lato', sans-serif;
+  --p-font: 'Roboto', sans-serif;
+
   --color-primary: #c3423f;
   --color-secondary: #9bc53d;
   --color-tertiary: #fde74c;
@@ -14,6 +17,11 @@ body {
   font-family: sans-serif;
   background: var(--color-light);
   color: var(--color-darkest);
+  font-family: var(--p-font);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--h-font);
 }
 
 /* Background utilities */
