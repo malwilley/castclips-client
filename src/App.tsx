@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <header className="bg-red m0 p2">
+          <header className="bg-primary m0 py2 px3">
             <h1 className="m0 white">podclips</h1>
           </header>
           <Route path="/" component={SearchPage} />

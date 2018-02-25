@@ -12,10 +12,14 @@ const Autosuggest = require('react-autosuggest') as new() =>
 import PodcastSuggestion from './PodcastSuggestion';
 import { searchPodcasts } from '../api/gpodder';
 import * as types from '../types/index';
+import './PodcastSearch.css';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 interface Props {
   searchDelay: number; // in ms
 }
+
+type WithRouterProps = RouteComponentProps<Props>;
 
 interface State {
   query: string;
@@ -23,9 +27,9 @@ interface State {
   searchRequest?: SuggestionsFetchRequested & Cancelable;
 }
 
-class PodcastSearch extends React.Component<Props, State> {
+class PodcastSearch extends React.Component<WithRouterProps, State> {
 
-  constructor(props: Props) {
+  constructor(props: WithRouterProps) {
     super(props);
     this.state = {
       query: '',
@@ -90,7 +94,7 @@ class PodcastSearch extends React.Component<Props, State> {
   }
 
   onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (event, {suggestion}) => {
-    console.log('go to podcast page for ' + suggestion.title);
+    this.props.history.push(`/podcast/${suggestion.podcastUrl}`);
   }
 
   render() {
@@ -123,4 +127,10 @@ class PodcastSearch extends React.Component<Props, State> {
   }
 }
 
-export default PodcastSearch;
+const RouterComponent = withRouter<WithRouterProps>(PodcastSearch);
+
+export default class PodcastSearchComponent extends React.Component<Props, State> {
+  render() {
+    return <RouterComponent {...this.props} />;
+  }
+}

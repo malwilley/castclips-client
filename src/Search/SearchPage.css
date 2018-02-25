@@ -1,3 +1,4 @@
 .search-hero {
   height: 400px;
+  border-bottom: 10px solid var(--color-secondary);
 }
