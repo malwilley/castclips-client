@@ -4,7 +4,8 @@ import {
   AutosuggestProps, 
   InputProps, 
   ChangeEvent, 
-  RenderSuggestion, 
+  RenderSuggestion,
+  RenderInputComponent,
   SuggestionsFetchRequested,
   OnSuggestionSelected } from 'react-autosuggest';
 const Autosuggest = require('react-autosuggest') as new() => 
@@ -13,6 +14,7 @@ import PodcastSuggestion from './PodcastSuggestion';
 import { searchPodcasts } from '../api/gpodder';
 import * as types from '../types/index';
 import './PodcastSearch.css';
+import IconSearch from '../icons/Search';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 interface Props {
@@ -49,7 +51,7 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
             title: r.title,
             description: r.description,
             logoUrl: r.logo_url,
-            podcastUrl: ''
+            podcastUrl: r.url
           };
         })
       }
@@ -94,10 +96,17 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
   }
 
   onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (event, {suggestion}) => {
-    this.props.history.push(`/podcast/${suggestion.podcastUrl}`);
+    this.props.history.push(`/podcast?feed=${suggestion.podcastUrl}`);
   }
 
   render() {
+
+    const renderInput: RenderInputComponent<types.PodcastSuggestion> = props => (
+      <div className="search-container">
+        <input {...props} />
+        <IconSearch className="search-icon" />
+      </div>
+    );
 
     const renderSuggestion: RenderSuggestion<types.PodcastSuggestion> = suggestion => {
       return <PodcastSuggestion suggestion={suggestion} />;
@@ -120,6 +129,7 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
         onSuggestionsClearRequested={this.clear}
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={renderSuggestion}
+        renderInputComponent={renderInput}
         inputProps={inputProps}
         onSuggestionSelected={this.onSuggestionSelected}
       />

@@ -68,3 +68,11 @@ h1, h2, h3, h4 {
 .icon {
   object-fit: cover;
 }
+
+/* text utilities */
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
