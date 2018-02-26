@@ -15,6 +15,7 @@ import { searchPodcasts } from '../api/gpodder';
 import * as types from '../types/index';
 import './PodcastSearch.css';
 import IconSearch from '../icons/Search';
+import IconSpinner from '../icons/Spinner';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 interface Props {
@@ -42,20 +43,34 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
   }
 
   updateSuggestions: SuggestionsFetchRequested = async ({value}) => {
-    const response: types.GpodderPodcastResponse[] = await searchPodcasts(value);
     this.setState({
       suggestions: {
-        type: 'success',
-        data: response.map(r => {
-          return {
-            title: r.title,
-            description: r.description,
-            logoUrl: r.logo_url,
-            podcastUrl: r.url
-          };
-        })
+        type: 'fetching'
       }
     });
+    try {
+      const response: types.GpodderPodcastResponse[] = await searchPodcasts(value);
+      this.setState({
+        suggestions: {
+          type: 'success',
+          data: response.map(r => {
+            return {
+              title: r.title,
+              description: r.description,
+              logoUrl: r.logo_url,
+              podcastUrl: r.url
+            };
+          })
+        }
+      });
+    } catch (err) {
+      this.setState({
+        suggestions: {
+          type: 'error',
+          message: err.message
+        }
+      });
+    }
   }
 
   updateSuggestionsDebounced: SuggestionsFetchRequested = (request) => {
@@ -99,12 +114,23 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
     this.props.history.push(`/podcast?feed=${suggestion.podcastUrl}`);
   }
 
+  getIcon = () => {
+      switch (this.state.suggestions.type) {
+        case 'fetching':
+          return <IconSpinner className="search-icon" />;
+        case 'error':
+          return <IconSearch className="search-icon" />;
+        default:
+          return <IconSearch className="search-icon" />;
+      }
+  }
+
   render() {
 
     const renderInput: RenderInputComponent<types.PodcastSuggestion> = props => (
       <div className="search-container">
         <input {...props} />
-        <IconSearch className="search-icon" />
+        {this.getIcon()}
       </div>
     );
 
