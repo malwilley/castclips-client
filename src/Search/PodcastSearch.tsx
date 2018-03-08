@@ -86,18 +86,15 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
   }
 
   clear = () => {
-    /*
     if (this.state.searchRequest) {
       this.state.searchRequest.cancel();
     }
     this.setState({
-      query: '',
       suggestions: {
         type: 'not_asked'
       },
       searchRequest: undefined
     });
-    */
   }
 
   onChange = (event: React.FormEvent<string>, { newValue }: ChangeEvent) => {
@@ -165,8 +162,4 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
 
 const RouterComponent = withRouter<WithRouterProps>(PodcastSearch);
 
-export default class PodcastSearchComponent extends React.Component<Props, State> {
-  render() {
-    return <RouterComponent {...this.props} />;
-  }
-}
+export default (props: Props) => <RouterComponent {...props} />;

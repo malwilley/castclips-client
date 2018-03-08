@@ -1,5 +1,6 @@
 .react-autosuggest__container {
   position: relative;
+  padding: 0 1em;
   display: flex;
   justify-content: center;
 }
@@ -14,7 +15,7 @@
   border: none;
   border-radius: 4px;
   -webkit-appearance: none;
-  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--card-dropshadow);
 }
 
 .react-autosuggest__input--open {
@@ -60,7 +61,6 @@
 .react-autosuggest__suggestion {
   cursor: pointer;
   padding: 10px 20px;
-  height: 48px;
   color: var(--color-darkest);
   border-bottom: 1px solid var(--color-light);
   overflow: hidden;

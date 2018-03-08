@@ -10,9 +10,11 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="App">
           <header className="bg-primary m0 py2 px3">
-            <h1 className="m0 white">pod-clips</h1>
+            <div className="page-container">
+              <h1 className="h2 m0 white">pod-clips</h1>
+            </div>
           </header>
-          <Route path="/" component={SearchPage} />
+          <Route exact={true} path="/" component={SearchPage} />
           <Route path="/podcast" component={PodcastPage} />
         </div>
       </BrowserRouter>

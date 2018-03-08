@@ -9,6 +9,8 @@
   --color-lightest: #ffffff;
   --color-dark: #404e4d;  
   --color-darkest: #1f2423;
+
+  --card-dropshadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -20,7 +22,24 @@ body {
   font-family: var(--p-font);
 }
 
-h1, h2, h3, h4 {
+.page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  clear: both;
+  position: relative;
+}
+
+.hero, .hero-large {
+  height: 200px;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+}
+
+.hero-large {
+  height: 400px;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   font-family: var(--h-font);
 }
 

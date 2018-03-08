@@ -7,7 +7,7 @@ interface State {
 
 }
 
-class SearchPage extends React.Component<Props, State> {
+class PodcastPage extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -15,11 +15,11 @@ class SearchPage extends React.Component<Props, State> {
 
   render() {
     return (
-      <section className="search-hero pt4 center bg-primary">
-        <p className="h2 mb4 white">Share your favorite podcast moments</p>
+      <section className="hero pt4 center bg-primary">
+        <h1>Podcast Name</h1>
       </section>
     );
   }
 }
 
-export default SearchPage;
+export default PodcastPage;
