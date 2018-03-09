@@ -2,8 +2,10 @@ import * as React from 'react';
 import { parse } from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 import PodcastCard from './PodcastCard';
+import EpisodeList from './EpisodeList';
 import { searchPodcasts } from '../api/podcastFeed';
 import { HttpRequest, PodcastData } from '../types/index';
+import './PodcastPage.css';
 
 interface Props {
   
@@ -49,10 +51,19 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
 
   render() {
 
+    const episodes = this.state.podcast.type === 'success'
+      ? <EpisodeList episodes={this.state.podcast.data.episodes} /> 
+      : null;
+
     return (
-      <section className="hero center bg-primary flex justify-center items-end">
-        <PodcastCard podcast={this.state.podcast}/>
-      </section>
+      <React.Fragment>
+        <section className="hero center bg-primary flex justify-center items-end">
+          <PodcastCard podcast={this.state.podcast}/>
+        </section>
+        <section className="flex justify-center pt-episodes">
+          {episodes}
+        </section>
+      </React.Fragment>
     );
   }
 }

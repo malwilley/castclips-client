@@ -1,0 +1,21 @@
+.episode-card {
+  background-color: var(--color-lightest);
+  color: var(--color-dark);
+  box-shadow: var(--card-dropshadow);
+  width: 100%;
+  max-width: 1000px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.episode-card .episode-row:hover {
+  background-color: var(--color-light);
+}
+
+.episode-row .title {
+  color: var(--color-darkest);
+}
+
+.episode-row * {
+  margin: 0;
+}

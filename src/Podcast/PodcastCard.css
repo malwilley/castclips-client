@@ -24,3 +24,24 @@
 .down-half {
   transform: translateY(50%);
 }
+
+@media (max-width: 700px) {
+  .card {
+    height: 200px;
+  }
+  .card img {
+    width: 200px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    height: 150px;
+  }
+  .card img {
+    width: 100px;
+  }
+  .card h3, p {
+    font-size: 14px;
+  }
+}
