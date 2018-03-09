@@ -8,15 +8,16 @@ interface Props {
 
 const renderSuccess = (podcast:  PodcastData) => {
   return (
-    <div className="card down-half">
-      <div className="flex">
-        <img src="" />
-        <div className="flex flex-column">
-          <h2>{podcast.title}</h2>
-          <p>{podcast.description}</p>
-        </div>
+    <div className="flex card down-half">
+      <img 
+        className="icon"
+        src="http://static.libsyn.com/p/assets/6/d/7/d/6d7d36d6929db515/MBMBAM_Update.jpg" 
+      />
+      <div className="flex flex-column flex-auto left-align px3 py1">
+        <h3>{podcast.title}</h3>
+        <p className="flex-auto">{podcast.description}</p>
+        <p className="flex-none">links? {podcast.link}</p>
       </div>
-      <div>links? {podcast.link}</div>
     </div>
   );
 };
