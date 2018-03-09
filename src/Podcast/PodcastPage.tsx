@@ -1,26 +1,43 @@
 import * as React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router';
 import PodcastCard from './PodcastCard';
+// import { searchPodcasts } from '../api/podcastFeed';
+import { HttpRequest, PodcastData } from '../types/index';
 
 interface Props {
+  
 }
 
 interface State {
-
+  podcast: HttpRequest<PodcastData>;
 }
 
-class PodcastPage extends React.Component<Props, State> {
+type WithRouterProps = RouteComponentProps<Props>;
 
-  constructor(props: Props) {
+class PodcastPage extends React.Component<WithRouterProps, State> {
+
+  constructor(props: WithRouterProps) {
     super(props);
+
+    this.state = {
+      podcast: {
+        type: 'not_asked'
+      }
+    };
+
+    console.log(this.props.location);
   }
 
   render() {
+
     return (
       <section className="hero center bg-primary flex justify-center items-end">
-        <PodcastCard />
+        <PodcastCard podcast={this.state.podcast}/>
       </section>
     );
   }
 }
 
-export default PodcastPage;
+const PodcastPageWithRouter = withRouter<WithRouterProps>(PodcastPage);
+
+export default (props: Props) => <PodcastPageWithRouter {...props} />;

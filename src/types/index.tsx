@@ -17,6 +17,20 @@ export interface PodcastSuggestion {
   podcastUrl: string;
 }
 
+export interface PodcastData {
+  title: string;
+  link: string;
+  description: string;
+  episodes: Episode[];
+}
+
+export interface Episode {
+  title: string;
+  description: string;
+  published: number;
+  mediaUrl: string;
+}
+
 export type HttpRequest<T> = 
   NotAsked |
   Fetching |
