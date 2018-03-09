@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PodcastCard from './PodcastCard';
 
 interface Props {
 }
@@ -15,8 +16,8 @@ class PodcastPage extends React.Component<Props, State> {
 
   render() {
     return (
-      <section className="hero pt4 center bg-primary">
-        <h1>Podcast Name</h1>
+      <section className="hero center bg-primary flex justify-center items-end">
+        <PodcastCard />
       </section>
     );
   }

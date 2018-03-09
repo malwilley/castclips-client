@@ -10,6 +10,7 @@
   --color-dark: #404e4d;  
   --color-darkest: #1f2423;
 
+  --border-radius: 4px;
   --card-dropshadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 

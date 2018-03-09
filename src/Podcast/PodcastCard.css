@@ -1,0 +1,17 @@
+.card {
+  background-color: var(--color-lightest);
+  color: var(--color-dark);
+  box-shadow: var(--card-dropshadow);
+  height: 300px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: var(--border-radius);
+}
+
+.card h2 {
+  color: var(--color-darkest);
+}
+
+.down-half {
+  transform: translateY(50%);
+}
