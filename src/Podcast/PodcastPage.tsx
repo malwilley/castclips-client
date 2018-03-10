@@ -3,7 +3,7 @@ import { parse } from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 import PodcastCard from './PodcastCard';
 import EpisodeList from './EpisodeList';
-import { searchPodcasts } from '../api/podcastFeed';
+import { parseFeed } from '../api/podcastFeed';
 import { HttpRequest, PodcastData } from '../types/index';
 import './PodcastPage.css';
 
@@ -27,26 +27,30 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
         type: 'fetching'
       }
     };
-    
+
+    this.retrieveEpisodes();
+  }
+
+  async retrieveEpisodes() {
     const query = parse(this.props.location.search);
 
-    searchPodcasts(query.feed)
-      .then(podcast => {
-        this.setState({
-          podcast: {
-            type: 'success',
-            data: podcast
-          }
-        });
-      })
-      .catch((err: Error) => {
-        this.setState({
-          podcast: {
-            type: 'error',
-            message: err.message
-          }
-        });
+    try {
+      const podcast = await parseFeed(query.feed);
+
+      await this.setState({
+        podcast: {
+          type: 'success',
+          data: podcast
+        }
       });
+    } catch (err) {
+      await this.setState({
+        podcast: {
+          type: 'error',
+          message: err.message
+        }
+      });
+    }
   }
 
   render() {

@@ -2,8 +2,10 @@
   --h-font: 'Lato', sans-serif;
   --p-font: 'Roboto', sans-serif;
 
-  --color-primary: #c3423f;
-  --color-secondary: #9bc53d;
+  /* --color-primary: #c3423f; */
+  --color-primary: #2b303a;
+  --color-secondary: #fdca40;
+  /* --color-secondary: #9bc53d; */
   --color-tertiary: #fde74c;
   --color-light: #f7f7f7;
   --color-lightest: #ffffff;
@@ -46,8 +48,13 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5 {
   font-family: var(--h-font);
+}
+
+h6 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Background utilities */
@@ -104,4 +111,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .no-wrap {
   white-space: nowrap;
+}
+
+/* button utilities */
+
+.clickable {
+  cursor: pointer;
 }

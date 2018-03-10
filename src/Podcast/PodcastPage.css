@@ -1,3 +1,15 @@
 .pt-episodes {
   padding-top: 150px;
 }
+
+@media (max-width: 700px) {
+  .pt-episodes {
+    padding-top: 120px;
+  }
+}
+
+@media (max-width: 500px) {
+  .pt-episodes {
+    padding-top: 100px;
+  }
+}

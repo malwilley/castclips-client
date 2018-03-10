@@ -1,0 +1,14 @@
+.card-spinner {
+  background: var(--color-lightest);
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  box-shadow: var(--card-dropshadow);
+  position: relative;
+}
+
+.card-spinner-icon {
+  fill: var(--color-primary);
+  width: 100%;
+  height: 100%;
+}

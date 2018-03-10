@@ -7,7 +7,7 @@
   color: var(--color-dark);
   box-shadow: var(--card-dropshadow);
   height: var(--card-height);
-  width: 100%;
+  width: 95%;
   max-width: 700px;
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -23,6 +23,30 @@
 
 .down-half {
   transform: translateY(50%);
+}
+
+.slide-in-fifty {
+  animation: slide-to-fifty ease-out 300ms;
+}
+
+@keyframes slide-to-fifty {
+  from {
+    opacity: 0;
+    transform: translateY(80%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes slide-to-normal {
+  from {
+    transform: translateY(-20%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 700px) {

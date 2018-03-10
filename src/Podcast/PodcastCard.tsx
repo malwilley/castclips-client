@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './PodcastCard.css';
 import { HttpRequest, PodcastData } from '../types/index';
+import Spinner from '../Common/Spinner/Spinner';
 
 interface Props {
   podcast: HttpRequest<PodcastData>;
@@ -8,7 +9,7 @@ interface Props {
 
 const renderSuccess = (podcast:  PodcastData) => {
   return (
-    <div className="flex card down-half">
+    <div className="flex card down-half slide-in-fifty">
       <img 
         className="icon"
         src="http://static.libsyn.com/p/assets/6/d/7/d/6d7d36d6929db515/MBMBAM_Update.jpg" 
@@ -24,7 +25,7 @@ const renderSuccess = (podcast:  PodcastData) => {
 
 const renderNotAsked = () => {
   return (
-    <div className="down-half">
+    <div className="">
       Not asked
     </div>
   );
@@ -33,7 +34,7 @@ const renderNotAsked = () => {
 const renderLoading = () => {
   return (
     <div className="down-half">
-      Loading...
+      <Spinner />
     </div>
   );
 };
@@ -46,7 +47,7 @@ const renderError = (message: string) => {
   );
 };
 
-const PodcastCard: React.SFC<Props> = props => {
+const PodcastCard  = (props: Props) => {
   switch (props.podcast.type) {
     case 'fetching':
       return renderLoading();
