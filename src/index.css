@@ -4,9 +4,8 @@
 
   /* --color-primary: #c3423f; */
   --color-primary: #2b303a;
-  --color-secondary: #fdca40;
-  /* --color-secondary: #9bc53d; */
-  --color-tertiary: #fde74c;
+  --color-secondary: #9bc53d;
+  --color-tertiary: #fdca40;
   --color-light: #f7f7f7;
   --color-lightest: #ffffff;
   --color-dark: #404e4d;  
@@ -14,6 +13,8 @@
 
   --border-radius: 4px;
   --card-dropshadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  --card-height-large: 100px;
+  --card-height-large: 250px;
 }
 
 body {
@@ -42,9 +43,33 @@ body {
   height: 400px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 500px) {
   .hero {
-    height: 150px;
+    height: 120px;
+  }
+}
+
+.card {
+  background-color: var(--color-lightest);
+  color: var(--color-dark);
+  box-shadow: var(--card-dropshadow);
+  width: 95%;
+  max-width: 700px;
+  border-radius: var(--border-radius);
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.card h3 {
+  color: var(--color-darkest);
+}
+
+@media (max-width: 500px) {
+  .card {
+    max-height: 150px;
+  }
+  .card h3, p {
+    font-size: 14px;
   }
 }
 

@@ -6,7 +6,6 @@ interface Props {
 }
 
 interface State {
-
 }
 
 class SearchPage extends React.Component<Props, State> {

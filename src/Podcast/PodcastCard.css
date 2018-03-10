@@ -1,28 +1,10 @@
-:root {
-  --card-height: 250px;
-}
-
-.card {
-  background-color: var(--color-lightest);
-  color: var(--color-dark);
-  box-shadow: var(--card-dropshadow);
-  height: var(--card-height);
-  width: 95%;
-  max-width: 700px;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.card img {
-  width: var(--card-height);
-}
-
-.card h3 {
-  color: var(--color-darkest);
-}
-
 .down-half {
   transform: translateY(50%);
+}
+
+.podcast-img {
+  width: 250px;
+  height: 250px;
 }
 
 .slide-in-fifty {
@@ -49,23 +31,9 @@
   }
 }
 
-@media (max-width: 700px) {
-  .card {
-    height: 200px;
-  }
-  .card img {
-    width: 200px;
-  }
-}
-
 @media (max-width: 500px) {
-  .card {
+  .podcast-img {
     height: 150px;
-  }
-  .card img {
     width: 100px;
-  }
-  .card h3, p {
-    font-size: 14px;
   }
 }

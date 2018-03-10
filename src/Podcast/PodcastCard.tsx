@@ -11,7 +11,7 @@ const renderSuccess = (podcast:  PodcastData) => {
   return (
     <div className="flex card down-half slide-in-fifty">
       <img 
-        className="icon"
+        className="icon podcast-img"
         src="http://static.libsyn.com/p/assets/6/d/7/d/6d7d36d6929db515/MBMBAM_Update.jpg" 
       />
       <div className="flex flex-column flex-auto left-align px3 py1">
@@ -41,7 +41,7 @@ const renderLoading = () => {
 
 const renderError = (message: string) => {
   return (
-    <div className="down-half">
+    <div className="flex card p2 slide-in-fifty down-half">
       Error! {message}
     </div>
   );
