@@ -163,3 +163,20 @@ a {
   text-decoration: none;
   color: unset;
 }
+
+/* animations */
+
+.slide-in {
+  animation: slide-in ease-out 300ms;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

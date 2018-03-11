@@ -34,11 +34,11 @@ class EpisodeList extends React.Component<Props, State> {
 
   renderEpisode (episode: Episode) {
     return (
-      <Link to={`/episode?podcasturl=${this.props.feedUrl}&episodeurl=${episode.mediaUrl}`}>
-        <div 
-          className="flex episode-row left-align items-center clickable" 
-          key={episode.title}
-        >
+      <Link 
+        to={`/episode?podcasturl=${this.props.feedUrl}&episodeurl=${episode.mediaUrl}&episodetitle=${episode.title}`}
+        key={episode.title}  
+      >
+        <div className="flex episode-row left-align items-center clickable" >
           <div className="flex flex-column flex-auto p2">
             <h5 className="title flex-none overflow-ellipsis no-wrap">{episode.title}</h5>
             <p className="h5 flex-auto overflow-ellipsis no-wrap">{episode.description}</p>
@@ -59,7 +59,7 @@ class EpisodeList extends React.Component<Props, State> {
           {this.shownEpisodes().map(e => this.renderEpisode(e))}
           <div 
             className="episode-row flex justify-center clickable"
-            onClick={() => this.showMoreEpisodes()} 
+            onClick={() => this.showMoreEpisodes()}
           >
             <h6 className="p2">show more</h6>
           </div>

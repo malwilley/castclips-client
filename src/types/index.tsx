@@ -10,6 +10,16 @@ export interface GpodderPodcastResponse {
   scaled_logo_url: string;
 }
 
+export interface GpodderEpisodeResponse {
+  title: string;
+  url: string;
+  podcast_title: string;
+  podcast_url: string;
+  description: string;
+  website: string;
+  released: string;
+}
+
 export interface PodcastSuggestion {
   title: string;
   description: string;

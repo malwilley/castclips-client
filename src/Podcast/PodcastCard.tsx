@@ -1,13 +1,13 @@
 import * as React from 'react';
 import './PodcastCard.css';
 import { HttpRequest, PodcastData } from '../types/index';
-import Spinner from '../Common/Spinner/Spinner';
+import FeatureCard from '../Common/FeatureCard/FeatureCard';
 
 interface Props {
   podcast: HttpRequest<PodcastData>;
 }
 
-const renderSuccess = (podcast:  PodcastData) => {
+const renderPodcastData = (podcast:  PodcastData) => {
   return (
     <div className="flex card down-half slide-in-fifty">
       <img 
@@ -23,41 +23,10 @@ const renderSuccess = (podcast:  PodcastData) => {
   );
 };
 
-const renderNotAsked = () => {
-  return (
-    <div className="">
-      Not asked
-    </div>
-  );
-};
-
-const renderLoading = () => {
-  return (
-    <div className="down-half">
-      <Spinner />
-    </div>
-  );
-};
-
-const renderError = (message: string) => {
-  return (
-    <div className="flex card p2 slide-in-fifty down-half">
-      Error! {message}
-    </div>
-  );
-};
-
 const PodcastCard  = (props: Props) => {
-  switch (props.podcast.type) {
-    case 'fetching':
-      return renderLoading();
-    case 'error':
-      return renderError(props.podcast.message);
-    case 'success':
-      return renderSuccess(props.podcast.data);
-    default:
-      return renderNotAsked();
-  }
+  return (
+    <FeatureCard content={props.podcast} renderContent={renderPodcastData} />
+  );
 };
 
 export default PodcastCard;

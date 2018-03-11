@@ -1,13 +1,16 @@
-import { GpodderPodcastResponse } from '../types';
+import { get } from './common';
+import { GpodderPodcastResponse, GpodderEpisodeResponse } from '../types';
 
 const host = 'https://gpodder.net/';
 
-export async function searchPodcasts(query: string): Promise<GpodderPodcastResponse[]> {
-  const response = await fetch(`${host}search.json?q=${query}`);
-  
-  if (response.ok) {
-    return response.json();
-  }
+export function searchPodcasts(query: string): Promise<GpodderPodcastResponse[]> {
+  return get<GpodderPodcastResponse[]>(
+    `${host}search.json?q=${query}`
+  );
+}
 
-  throw new Error(response.statusText);
+export function getEpisodeData(podcastUrl: string, episodeUrl: string): Promise<GpodderEpisodeResponse> {
+  return get<GpodderEpisodeResponse>(
+    `${host}api/2/data/episode.json?podcast-url=${podcastUrl}&episode-url=${episodeUrl}`
+  );
 }

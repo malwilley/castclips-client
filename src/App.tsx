@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import SearchPage from './Search/SearchPage';
 import PodcastPage from './Podcast/PodcastPage';
+import EpisodePage from './Episode/EpisodePage';
 
 class App extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
           </header>
           <Route exact={true} path="/" component={SearchPage} />
           <Route path="/podcast" component={PodcastPage} />
+          <Route path="/episode" component={EpisodePage} />
         </div>
       </BrowserRouter>
     );

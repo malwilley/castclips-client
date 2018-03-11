@@ -11,17 +11,6 @@
   animation: slide-to-fifty ease-out 300ms;
 }
 
-@keyframes slide-to-fifty {
-  from {
-    opacity: 0;
-    transform: translateY(80%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(50%);
-  }
-}
-
 @keyframes slide-to-normal {
   from {
     transform: translateY(-20%);
