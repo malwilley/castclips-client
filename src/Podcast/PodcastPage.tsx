@@ -19,7 +19,7 @@ type WithRouterProps = RouteComponentProps<Props>;
 
 class PodcastPage extends React.Component<WithRouterProps, State> {
 
-  constructor(props: WithRouterProps) {
+  constructor (props: WithRouterProps) {
     super(props);
 
     this.state = {
@@ -31,11 +31,16 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
     this.retrieveEpisodes();
   }
 
-  async retrieveEpisodes() {
+  feedUrl () {
     const query = parse(this.props.location.search);
+    return query.feed;
+  }
+
+  async retrieveEpisodes () {
+    const feedUrl = this.feedUrl();
 
     try {
-      const podcast = await parseFeed(query.feed);
+      const podcast = await parseFeed(feedUrl);
 
       await this.setState({
         podcast: {
@@ -56,7 +61,7 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
   render() {
 
     const episodes = this.state.podcast.type === 'success'
-      ? <EpisodeList episodes={this.state.podcast.data.episodes} /> 
+      ? <EpisodeList feedUrl={this.feedUrl()} episodes={this.state.podcast.data.episodes} /> 
       : null;
 
     return (
