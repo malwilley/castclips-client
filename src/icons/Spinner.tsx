@@ -10,7 +10,7 @@ const Spinner: React.SFC<React.SVGProps<SVGSVGElement>> = (props) => {
             attributeName="transform" 
             attributeType="XML" 
             type="rotate"
-            dur="800ms" 
+            dur="600ms" 
             from="0 50 50"
             to="360 50 50" 
             repeatCount="indefinite"

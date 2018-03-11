@@ -3,7 +3,6 @@
   color: var(--color-dark);
   box-shadow: var(--card-dropshadow);
   width: 100%;
-  max-width: 1000px;
   border-radius: var(--border-radius);
   overflow: hidden;
 }

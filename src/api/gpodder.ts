@@ -2,8 +2,12 @@ import { GpodderPodcastResponse } from '../types';
 
 const host = 'https://gpodder.net/';
 
-export function searchPodcasts(query: string): Promise<GpodderPodcastResponse[]> {
-  return fetch(`${host}search.json?q=${query}`)
-    .then(response => response.json())
-    .catch(console.error);
+export async function searchPodcasts(query: string): Promise<GpodderPodcastResponse[]> {
+  const response = await fetch(`${host}search.json?q=${query}`);
+  
+  if (response.ok) {
+    return response.json();
+  }
+
+  throw new Error(response.statusText);
 }
