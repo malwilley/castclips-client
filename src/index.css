@@ -1,6 +1,8 @@
 :root {
   --h-font: 'Lato', sans-serif;
   --p-font: 'Roboto', sans-serif;
+  --normal-weight: 400;
+  --bold-weight: 700;
 
   /* --color-primary: #c3423f; */
   --color-primary: #2b303a;
@@ -24,6 +26,7 @@ body {
   background: var(--color-light);
   color: var(--color-darkest);
   font-family: var(--p-font);
+  font-weight: var(--normal-weight);
 }
 
 .page-container {
@@ -58,6 +61,7 @@ body {
   border-radius: var(--border-radius);
   max-height: 250px;
   overflow: hidden;
+  z-index: 1000;
 }
 
 .card h3 {
@@ -75,11 +79,13 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: var(--h-font);
+  font-weight: var(--bold-weight);
 }
 
 h6 {
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: var(--bold-weight);
 }
 
 /* Background utilities */

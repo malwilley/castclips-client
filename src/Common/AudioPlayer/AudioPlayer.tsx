@@ -1,6 +1,10 @@
 import * as React from 'react';
+import { PlayStatus } from '../../types/index';
 
 interface Props {
+  status: PlayStatus;
+  time: number;
+
   autoPlay?: boolean;
   controls?: boolean;
   controlsList?: string;
@@ -11,6 +15,8 @@ interface Props {
   src: string;
   title: string;
 
+  onDuration?: (duration: number) => void;
+  onTimeChange?: (duration: number) => void;
   listenInterval?: number;
   onAbort?: (ev: UIEvent) => void;
   onCanPlay?: (ev: Event) => void;
@@ -34,6 +40,8 @@ interface DefaultProps {
   volume: number;
   preload: string;
 
+  onDuration: (duration: number) => void;
+  onTimeChange: (duration: number) => void;
   listenInterval: number;
   onAbort: (ev: UIEvent) => void;
   onCanPlay: (ev: Event) => void;
@@ -63,6 +71,8 @@ class AudioPlayer extends React.Component<Props, State> {
     listenInterval: 10000,
     loop: false,
     muted: false,
+    onDuration: () => undefined,
+    onTimeChange: () => undefined,
     onAbort: () => undefined,
     onCanPlay: () => undefined,
     onCanPlayThrough: () => undefined,
@@ -79,6 +89,7 @@ class AudioPlayer extends React.Component<Props, State> {
   };
 
   private audioEl: HTMLAudioElement | null;
+  private timer: NodeJS.Timer;
 
   constructor (props: Props) {
     super(props);
@@ -88,12 +99,17 @@ class AudioPlayer extends React.Component<Props, State> {
     const audio = this.audioEl as HTMLAudioElement;
 
     const { 
-      volume, onError, onCanPlay, onCanPlayThrough, 
+      onError, onCanPlay, onCanPlayThrough, 
       onPlay, onAbort, onEnded, onPause, onSeeked, 
-      onLoadedMetadata, onVolumeChanged 
+      onLoadedMetadata, onVolumeChanged, onTimeChange
     } = this.props as PropsWithDefaults;
 
-    this.updateVolume(volume);
+    this.updateAudio(this.props as PropsWithDefaults);
+
+    this.timer = setInterval(
+      () => onTimeChange(audio.currentTime),
+      1000
+    );
 
     audio.addEventListener('error', (e) => {
       onError(e);
@@ -143,20 +159,32 @@ class AudioPlayer extends React.Component<Props, State> {
     });
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    const { volume } = this.props as PropsWithDefaults;
-    this.updateVolume(volume);
+  componentWillUnmount () {
+    clearInterval(this.timer);
   }
 
-  /**
-   * Set the volume on the audio element from props
-   * @param {Number} volume
-   */
-  updateVolume(volume: number) {
-    const audio = this.audioEl as HTMLAudioElement;
+  componentWillReceiveProps (nextProps: Props) {
+    this.updateAudio(nextProps as PropsWithDefaults);
+  }
 
-    if (typeof volume === 'number' && volume !== audio.volume) {
+  updateAudio (props: PropsWithDefaults) {
+    const audio = this.audioEl as HTMLAudioElement;
+    const { volume } = props;
+    
+    props.onDuration(audio.duration);
+
+    if (volume !== audio.volume) {
       audio.volume = volume;
+    }
+    
+    if (audio.paused && props.status !== PlayStatus.Paused) {
+      audio.play();
+    } else if (!audio.paused && props.status === PlayStatus.Paused) {
+      audio.pause();
+    }
+
+    if (audio.currentTime !== props.time) {
+      audio.currentTime = props.time;
     }
   }
 

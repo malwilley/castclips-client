@@ -41,6 +41,11 @@ export interface Episode {
   mediaUrl: string;
 }
 
+export enum PlayStatus {
+  Paused,
+  Playing
+}
+
 export type HttpRequest<T> = 
   NotAsked |
   Fetching |

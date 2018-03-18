@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './EpisodeCard.css';
-import { HttpRequest, Episode } from '../types/index';
+import { HttpRequest, Episode, PlayStatus } from '../types/index';
 import FeatureCard from '../Common/FeatureCard/FeatureCard';
 import AudioPlayer from '../Common/AudioPlayer/AudioPlayer';
 
@@ -9,12 +9,40 @@ interface Props {
 }
 
 interface State {
+  playStatus: PlayStatus;
+  time: number;
+  duration: number;
 }
 
 class EpisodeCard extends React.Component<Props, State> {
 
   constructor (props: Props) {
     super(props);
+
+    this.state = {
+      playStatus: PlayStatus.Paused,
+      time: 0,
+      duration: 0
+    };
+  }
+
+  playPause () {
+    this.setState({
+      playStatus: this.state.playStatus === PlayStatus.Playing
+        ? PlayStatus.Paused 
+        : PlayStatus.Playing
+    });
+  }
+
+  setTime (time: number) {
+    if (time === this.state.time) {
+      return;
+    }
+    this.setState({ time });
+  }
+
+  setDuration (duration: number) {
+    this.setState({ duration });
   }
 
   renderEpisodeData (episode: Episode) {
@@ -26,8 +54,17 @@ class EpisodeCard extends React.Component<Props, State> {
           <AudioPlayer
             src={episode.mediaUrl}
             title={episode.title}
+            status={this.state.playStatus}
+            time={this.state.time}
+            onTimeChange={time => this.setTime(time)}
+            onDuration={dur => this.setDuration(dur)}
           />
-
+          <button onClick={() => this.playPause()}>
+            {this.state.playStatus === PlayStatus.Playing ? 'pause' : 'play'}
+          </button>
+          <div>
+            {this.state.time + '/' + this.state.duration}
+          </div>
         </div>
       </div>
     );
@@ -35,7 +72,7 @@ class EpisodeCard extends React.Component<Props, State> {
 
   render () {
     return (
-      <FeatureCard content={this.props.episode} renderContent={this.renderEpisodeData} />
+      <FeatureCard content={this.props.episode} renderContent={e => this.renderEpisodeData(e)} />
     );
   }
 }

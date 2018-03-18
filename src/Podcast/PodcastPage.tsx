@@ -27,7 +27,9 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
         type: 'fetching'
       }
     };
+  }
 
+  componentDidMount() {
     this.retrieveEpisodes();
   }
 
