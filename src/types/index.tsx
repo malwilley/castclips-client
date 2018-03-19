@@ -42,8 +42,8 @@ export interface Episode {
 }
 
 export enum PlayStatus {
-  Paused,
-  Playing
+  Paused = 'paused',
+  Playing = 'playing'
 }
 
 export type HttpRequest<T> = 

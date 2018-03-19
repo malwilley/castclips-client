@@ -3,7 +3,6 @@ import { PlayStatus } from '../../types/index';
 
 interface Props {
   status: PlayStatus;
-  time: number;
 
   autoPlay?: boolean;
   controls?: boolean;
@@ -43,16 +42,11 @@ interface DefaultProps {
   onDuration: (duration: number) => void;
   onTimeChange: (duration: number) => void;
   listenInterval: number;
-  onAbort: (ev: UIEvent) => void;
   onCanPlay: (ev: Event) => void;
   onCanPlayThrough: (ev: Event) => void;
   onEnded: (ev: Event) => void;
   onError: (ev: ErrorEvent) => void;
-  onSeeked: (ev: Event) => void;
   onListen: (ev: Event) => void;
-  onPause: (ev: Event) => void;
-  onPlay: (ev: Event) => void;
-  onVolumeChanged: (ev: Event) => void;
   onLoadedMetadata: (ev: Event) => void;
 }
 
@@ -73,22 +67,17 @@ class AudioPlayer extends React.Component<Props, State> {
     muted: false,
     onDuration: () => undefined,
     onTimeChange: () => undefined,
-    onAbort: () => undefined,
     onCanPlay: () => undefined,
     onCanPlayThrough: () => undefined,
     onEnded: () => undefined,
     onError: () => undefined,
     onListen: () => undefined,
-    onPause: () => undefined,
-    onPlay: () => undefined,
-    onSeeked: () => undefined,
-    onVolumeChanged: () => undefined,
     onLoadedMetadata: () => undefined,
     preload: 'metadata',
     volume: 1.0,
   };
 
-  private audioEl: HTMLAudioElement | null;
+  public audioEl: HTMLAudioElement | null;
   private timer: NodeJS.Timer;
 
   constructor (props: Props) {
@@ -99,16 +88,13 @@ class AudioPlayer extends React.Component<Props, State> {
     const audio = this.audioEl as HTMLAudioElement;
 
     const { 
-      onError, onCanPlay, onCanPlayThrough, 
-      onPlay, onAbort, onEnded, onPause, onSeeked, 
-      onLoadedMetadata, onVolumeChanged, onTimeChange
+      onError, onCanPlay, onCanPlayThrough, onEnded,
+      onLoadedMetadata, onTimeChange, onDuration
     } = this.props as PropsWithDefaults;
-
-    this.updateAudio(this.props as PropsWithDefaults);
 
     this.timer = setInterval(
       () => onTimeChange(audio.currentTime),
-      1000
+      500
     );
 
     audio.addEventListener('error', (e) => {
@@ -125,37 +111,17 @@ class AudioPlayer extends React.Component<Props, State> {
       onCanPlayThrough(e);
     });
 
-    // When audio play starts
-    audio.addEventListener('play', (e) => {
-      onPlay(e);
-    });
-
-    // When unloading the audio player (switching to another src)
-    audio.addEventListener('abort', (e) => {
-      onAbort(e);
-    });
-
     // When the file has finished playing to the end
     audio.addEventListener('ended', (e) => {
       onEnded(e);
-    });
-
-    // When the user pauses playback
-    audio.addEventListener('pause', (e) => {
-      onPause(e);
-    });
-
-    // When the user drags the time indicator to a new time
-    audio.addEventListener('seeked', (e) => {
-      onSeeked(e);
     });
 
     audio.addEventListener('loadedmetadata', (e) => {
       onLoadedMetadata(e);
     });
 
-    audio.addEventListener('volumechange', (e) => {
-      onVolumeChanged(e);
+    audio.addEventListener('durationchange', (e) => {
+      onDuration(audio.duration);
     });
   }
 
@@ -169,22 +135,16 @@ class AudioPlayer extends React.Component<Props, State> {
 
   updateAudio (props: PropsWithDefaults) {
     const audio = this.audioEl as HTMLAudioElement;
-    const { volume } = props;
-    
-    props.onDuration(audio.duration);
+    const { status, volume } = props;
 
     if (volume !== audio.volume) {
       audio.volume = volume;
     }
     
-    if (audio.paused && props.status !== PlayStatus.Paused) {
+    if (audio.paused && status !== PlayStatus.Paused) {
       audio.play();
-    } else if (!audio.paused && props.status === PlayStatus.Paused) {
+    } else if (!audio.paused && status === PlayStatus.Paused) {
       audio.pause();
-    }
-
-    if (audio.currentTime !== props.time) {
-      audio.currentTime = props.time;
     }
   }
 
@@ -199,7 +159,7 @@ class AudioPlayer extends React.Component<Props, State> {
         muted={muted}
         onPlay={onPlay}
         preload={preload}
-        ref={(ref) => { this.audioEl = ref; }}
+        ref={ref => this.audioEl = ref}
         src={this.props.src}
         title={this.props.title}
       >

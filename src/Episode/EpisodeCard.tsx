@@ -16,6 +16,8 @@ interface State {
 
 class EpisodeCard extends React.Component<Props, State> {
 
+  private audioEl: HTMLAudioElement | null;
+
   constructor (props: Props) {
     super(props);
 
@@ -24,6 +26,8 @@ class EpisodeCard extends React.Component<Props, State> {
       time: 0,
       duration: 0
     };
+
+    this.audioEl = null;
   }
 
   playPause () {
@@ -55,9 +59,9 @@ class EpisodeCard extends React.Component<Props, State> {
             src={episode.mediaUrl}
             title={episode.title}
             status={this.state.playStatus}
-            time={this.state.time}
             onTimeChange={time => this.setTime(time)}
             onDuration={dur => this.setDuration(dur)}
+            ref={ref => this.audioEl = ref ? ref.audioEl : null}
           />
           <button onClick={() => this.playPause()}>
             {this.state.playStatus === PlayStatus.Playing ? 'pause' : 'play'}
