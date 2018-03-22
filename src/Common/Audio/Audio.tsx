@@ -56,7 +56,7 @@ interface State {
 
 }
 
-class AudioPlayer extends React.Component<Props, State> {
+class Audio extends React.Component<Props, State> {
 
   public static defaultProps: DefaultProps = {
     autoPlay: false,
@@ -169,4 +169,4 @@ class AudioPlayer extends React.Component<Props, State> {
   }
 }
 
-export default AudioPlayer;
+export default Audio;
