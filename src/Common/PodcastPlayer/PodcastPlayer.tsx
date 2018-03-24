@@ -38,7 +38,7 @@ class PodcastPlayer extends React.Component<Props, State> {
     });
   }
 
-  changeTime(time: number) {
+  changeTime (time: number) {
     this.audioEl!.currentTime = time;
   }
 
@@ -47,6 +47,15 @@ class PodcastPlayer extends React.Component<Props, State> {
       return;
     }
     this.setState({ time });
+  }
+
+  onSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.seek(event.target.valueAsNumber);
+  }
+
+  seek (time: number) {
+    this.audioEl!.currentTime = time;
+    this.setState({time});
   }
 
   setDuration (duration: number) {
@@ -64,14 +73,29 @@ class PodcastPlayer extends React.Component<Props, State> {
           onDuration={dur => this.setDuration(dur)}
           ref={ref => this.audioEl = ref ? ref.audioEl : null}
         />
-        <button onClick={() => this.playPause()}>
-          {this.state.playStatus === PlayStatus.Playing ? 'pause' : 'play'}
-        </button>
-        <button onClick={() => this.changeTime(45)}>
-          Set to 45 seconds
-        </button>
+        <div className="slider">
+          <input
+            type="range" 
+            min="0"
+            max={this.state.duration}
+            value={this.state.time}
+            onChange={this.onSeek}
+          />
+        </div>
+        <div className="flex justify-center">
+          <button onClick={() => this.changeTime(this.state.time - 30)}>
+            back 30s
+          </button>
+          <button onClick={() => this.playPause()}>
+            {this.state.playStatus === PlayStatus.Playing ? 'pause' : 'play'}
+          </button>
+          <button onClick={() => this.changeTime(this.state.time + 30)}>
+            forward 30s
+          </button>
+        </div>
+        
         <div>
-          {this.state.time + '/' + this.state.duration}
+          {this.state.time.toFixed(0) + '/' + this.state.duration.toFixed(0) + 's'}
         </div>
       </div>
     );
