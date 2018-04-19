@@ -140,6 +140,10 @@ h6 {
   height: 2.5em;
 }
 
+.svg-primary {
+  fill: var(--color-primary);
+}
+
 .svg-bold {
   fill: var(--color-darkest);
 }

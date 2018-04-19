@@ -1,3 +1,17 @@
+.play-icon {
+  width: 5em;
+  fill: var(--color-secondary);
+}
+
+.seek-icon {
+  width: 3em;
+  fill: var(--color-dark);
+}
+
+.icon-disabled {
+  fill: var(--color-gray);
+}
+
 .rc-slider {
   position: relative;
   height: 14px;

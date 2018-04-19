@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Slider, { Range } from 'rc-slider';
-import './PodcastPlayer.css';
+import { Back5, Forward30, Pause, Play } from '../../icons';
 import { Episode, PlayStatus } from '../../types/index';
 import Audio from '../Audio/Audio';
+import Slider, { Range } from 'rc-slider';
 import './PodcastPlayer.css';
 
 interface Props {
@@ -63,6 +63,12 @@ class PodcastPlayer extends React.Component<Props, State> {
     this.setState({ duration });
   }
 
+  playPauseButton (playStatus: PlayStatus) {
+    return playStatus === PlayStatus.Playing 
+      ? <Pause className="play-icon mx2 clickable" onClick={() => this.playPause()} />
+      : <Play className="play-icon mx2 clickable" onClick={() => this.playPause()} />;
+  }
+
   render () {
     return (
       <div className="">
@@ -87,15 +93,9 @@ class PodcastPlayer extends React.Component<Props, State> {
           value={[this.state.time, this.state.time + 10]}
         />
         <div className="flex justify-center">
-          <button onClick={() => this.changeTime(this.state.time - 30)}>
-            back 30s
-          </button>
-          <button onClick={() => this.playPause()}>
-            {this.state.playStatus === PlayStatus.Playing ? 'pause' : 'play'}
-          </button>
-          <button onClick={() => this.changeTime(this.state.time + 30)}>
-            forward 30s
-          </button>
+          <Back5 className="seek-icon clickable"  onClick={() => this.changeTime(this.state.time - 5)} />
+          {this.playPauseButton(this.state.playStatus)}
+          <Forward30 className="seek-icon clickable" onClick={() => this.changeTime(this.state.time + 30)} />
         </div>
         
         <div>
