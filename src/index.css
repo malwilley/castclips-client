@@ -6,11 +6,13 @@
 
   /* --color-primary: #c3423f; */
   --color-primary: #2b303a;
-  --color-secondary: #9bc53d;
+  --color-secondary: rgb(155, 197, 61);
+  --color-secondary-light: rgb(155, 197, 61, .26);
   --color-tertiary: #fdca40;
   --color-light: #f7f7f7;
   --color-lightest: #ffffff;
-  --color-dark: #404e4d;  
+  --color-gray: #bebebe;
+  --color-dark: #404e4d;
   --color-darkest: #1f2423;
 
   --border-radius: 4px;

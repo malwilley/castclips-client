@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Slider, { Range } from 'rc-slider';
 import './PodcastPlayer.css';
 import { Episode, PlayStatus } from '../../types/index';
 import Audio from '../Audio/Audio';
@@ -49,8 +50,8 @@ class PodcastPlayer extends React.Component<Props, State> {
     this.setState({ time });
   }
 
-  onSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.seek(event.target.valueAsNumber);
+  onSeek = (time: number) => {
+    this.seek(time);
   }
 
   seek (time: number) {
@@ -73,15 +74,18 @@ class PodcastPlayer extends React.Component<Props, State> {
           onDuration={dur => this.setDuration(dur)}
           ref={ref => this.audioEl = ref ? ref.audioEl : null}
         />
-        <div className="slider">
-          <input
-            type="range" 
-            min="0"
-            max={this.state.duration}
-            value={this.state.time}
-            onChange={this.onSeek}
-          />
-        </div>
+        <Slider
+          min={0}
+          max={this.state.duration}
+          value={this.state.time}
+          onChange={this.onSeek}
+        />
+        <Range
+          min={0}
+          max={this.state.duration}
+          pushable={1}
+          value={[this.state.time, this.state.time + 10]}
+        />
         <div className="flex justify-center">
           <button onClick={() => this.changeTime(this.state.time - 30)}>
             back 30s
