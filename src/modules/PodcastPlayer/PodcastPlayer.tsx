@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Episode, PlayMode, PlayStatus } from '../../types/index';
-import Audio from '../Audio/Audio';
+import Audio from '../../components/Audio';
 import Slider, { Range } from 'rc-slider';
 import PlaybackControls from './PlaybackControls';
 import './PodcastPlayer.css';

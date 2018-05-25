@@ -3,8 +3,8 @@ import { parse } from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 import PodcastCard from './PodcastCard';
 import EpisodeList from './EpisodeList';
-import { parseFeed } from '../api/podcastFeed';
-import { HttpRequest, PodcastData } from '../types/index';
+import { parseFeed } from '../../api/podcastFeed';
+import { HttpRequest, PodcastData } from '../../types/index';
 import './PodcastPage.css';
 
 interface Props {

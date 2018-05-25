@@ -3,7 +3,7 @@ import { parse } from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 import EpisodeCard from './EpisodeCard';
 // import { getEpisodeData } from '../api/gpodder';
-import { HttpRequest, Episode } from '../types/index';
+import { HttpRequest, Episode } from '../../types/index';
 
 interface Props {
   

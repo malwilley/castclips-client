@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
-import SearchPage from './Search/SearchPage';
-import PodcastPage from './Podcast/PodcastPage';
-import EpisodePage from './Episode/EpisodePage';
+import SearchPage from './modules/Search/SearchPage';
+import PodcastPage from './modules/Podcast/PodcastPage';
+import EpisodePage from './modules/Episode/EpisodePage';
 
 class App extends React.Component {
   render() {

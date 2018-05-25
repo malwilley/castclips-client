@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './PodcastCard.css';
-import { HttpRequest, PodcastData } from '../types/index';
-import FeatureCard from '../Common/FeatureCard/FeatureCard';
+import { HttpRequest, PodcastData } from '../../types/index';
+import FeatureCard from '../../components/FeatureCard/FeatureCard';
 
 interface Props {
   podcast: HttpRequest<PodcastData>;
