@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Back5, Forward30, Pause, Play } from '../../icons';
-import { Episode, PlayStatus } from '../../types/index';
+import { Episode, PlayMode, PlayStatus } from '../../types/index';
 import Audio from '../Audio/Audio';
 import Slider, { Range } from 'rc-slider';
+import PlaybackControls from './PlaybackControls';
 import './PodcastPlayer.css';
 
 interface Props {
@@ -13,6 +13,7 @@ interface State {
   playStatus: PlayStatus;
   time: number;
   duration: number;
+  mode: PlayMode;
 }
 
 class PodcastPlayer extends React.Component<Props, State> {
@@ -25,7 +26,8 @@ class PodcastPlayer extends React.Component<Props, State> {
     this.state = {
       playStatus: PlayStatus.Paused,
       time: 0,
-      duration: 0
+      duration: 0,
+      mode: PlayMode.Share
     };
 
     this.audioEl = null;
@@ -63,46 +65,68 @@ class PodcastPlayer extends React.Component<Props, State> {
     this.setState({ duration });
   }
 
-  playPauseButton (playStatus: PlayStatus) {
-    return playStatus === PlayStatus.Playing 
-      ? <Pause className="play-icon mx2 clickable" onClick={() => this.playPause()} />
-      : <Play className="play-icon mx2 clickable" onClick={() => this.playPause()} />;
+  renderControls () {
+    return (
+      <PlaybackControls 
+        playStatus={this.state.playStatus}
+        handleBackClick={() => this.changeTime(this.state.time - 5)}
+        handleForwardClick={() => this.changeTime(this.state.time + 30)}
+        handlePlayPauseClick={() => this.playPause()}
+      />
+    );
+  }
+
+  renderAudio () {
+    return (
+      <Audio
+        src={this.props.episode.mediaUrl}
+        title={this.props.episode.title}
+        status={this.state.playStatus}
+        onTimeChange={time => this.setTime(time)}
+        onDuration={dur => this.setDuration(dur)}
+        ref={ref => this.audioEl = ref ? ref.audioEl : null}
+      />
+    );
+  }
+
+  renderPlayer (mode: PlayMode) {
+    return mode === PlayMode.Playback
+      ? (
+        <div className="">
+          {this.renderAudio()}
+          <Slider
+            min={0}
+            max={this.state.duration}
+            value={this.state.time}
+            onChange={this.onSeek}
+          />
+          <div className="flex justify-between">
+            <div>{this.state.time.toFixed(0)}</div>
+            <div>{this.state.duration.toFixed(0)}</div>
+          </div>
+          {this.renderControls()}
+        </div>
+      )
+      : (
+        <div className="">
+          {this.renderAudio()}
+          <Range
+            min={0}
+            max={this.state.duration}
+            pushable={1}
+            value={[this.state.time, this.state.time + 10]}
+          />
+          <div className="flex justify-between">
+            <div>{this.state.time.toFixed(0)}</div>
+            <div>{this.state.duration.toFixed(0)}</div>
+          </div>
+          {this.renderControls()}
+      </div>
+      );
   }
 
   render () {
-    return (
-      <div className="">
-        <Audio
-          src={this.props.episode.mediaUrl}
-          title={this.props.episode.title}
-          status={this.state.playStatus}
-          onTimeChange={time => this.setTime(time)}
-          onDuration={dur => this.setDuration(dur)}
-          ref={ref => this.audioEl = ref ? ref.audioEl : null}
-        />
-        <Slider
-          min={0}
-          max={this.state.duration}
-          value={this.state.time}
-          onChange={this.onSeek}
-        />
-        <Range
-          min={0}
-          max={this.state.duration}
-          pushable={1}
-          value={[this.state.time, this.state.time + 10]}
-        />
-        <div className="flex justify-center">
-          <Back5 className="seek-icon clickable"  onClick={() => this.changeTime(this.state.time - 5)} />
-          {this.playPauseButton(this.state.playStatus)}
-          <Forward30 className="seek-icon clickable" onClick={() => this.changeTime(this.state.time + 30)} />
-        </div>
-        
-        <div>
-          {this.state.time.toFixed(0) + '/' + this.state.duration.toFixed(0) + 's'}
-        </div>
-      </div>
-    );
+    return this.renderPlayer(this.state.mode);
   }
 }
 

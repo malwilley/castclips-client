@@ -2,12 +2,12 @@
 
 import * as React from 'react';
 
-const Play: React.SFC<React.SVGProps<SVGSVGElement>> = (props) => {
+const Pause: React.SFC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg {...props} x="0px" y="0px" viewBox="0 0 510 510">
-      <path d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M229.5,357h-51V153h51V357zM331.5,357h-51V153h51V357z"/>
+    <svg {...props} viewBox="0 0 48 48">
+      <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-2 28h-4V16h4v16zm8 0h-4V16h4v16z"/>
     </svg>
   );
 };
 
-export default Play;
+export default Pause;

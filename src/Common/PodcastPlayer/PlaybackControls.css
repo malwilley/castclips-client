@@ -1,0 +1,14 @@
+.play-icon {
+  width: 5em;
+  fill: var(--color-secondary);
+  filter: var(--svg-dropshadow);
+}
+
+.seek-icon {
+  width: 2.5em;
+  fill: var(--color-dark);
+}
+
+.icon-disabled {
+  fill: var(--color-gray);
+}

@@ -46,6 +46,11 @@ export enum PlayStatus {
   Playing = 'playing'
 }
 
+export enum PlayMode {
+  Playback,
+  Share
+}
+
 export type HttpRequest<T> = 
   NotAsked |
   Fetching |

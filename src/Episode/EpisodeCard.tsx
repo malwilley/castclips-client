@@ -34,7 +34,10 @@ class EpisodeCard extends React.Component<Props, State> {
 
   render () {
     return (
-      <FeatureCard content={this.props.episode} renderContent={e => this.renderEpisodeData(e)} />
+      <FeatureCard 
+        content={this.props.episode} 
+        renderContent={e => this.renderEpisodeData(e)} 
+      />
     );
   }
 }
