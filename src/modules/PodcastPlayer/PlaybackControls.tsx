@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { PlayStatus } from '../../types/index';
-import { Back5, Forward30, Play, Pause } from '../../icons';
+import { PlayStatus } from '~/types/index';
+import { Back5, Forward30, Play, Pause } from '~/icons';
 import './PlaybackControls.css';
 
 type PlaybackControlsProps = {

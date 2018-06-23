@@ -1,4 +1,4 @@
-import { HttpRequest } from '../types';
+import { HttpRequest } from '~/types';
 
 type HttpContentProps<T> = {
   renderError: (message: string) => JSX.Element

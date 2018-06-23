@@ -11,11 +11,11 @@ import {
 const Autosuggest = require('react-autosuggest') as new() => 
   React.Component<AutosuggestProps<types.PodcastSuggestion>, Object>;
 import PodcastSuggestion from './PodcastSuggestion';
-import { searchPodcasts } from '../../api/gpodder';
-import * as types from '../../types/index';
+import { searchPodcasts } from '~/api/gpodder';
+import * as types from '~/types/index';
 import './PodcastSearch.css';
-import IconSearch from '../../icons/Search';
-import IconSpinner from '../../icons/Spinner';
+import IconSearch from '~/icons/Search';
+import IconSpinner from '~/icons/Spinner';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 interface Props {

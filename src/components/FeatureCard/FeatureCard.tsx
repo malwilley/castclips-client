@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './FeatureCard.css';
-import Spinner from '../Spinner/Spinner';
-import { HttpRequest } from '../../types/index';
+import Spinner from '~/components/Spinner/Spinner';
+import { HttpRequest } from '~/types';
 
 interface Props<T> {
   content: HttpRequest<T>;
