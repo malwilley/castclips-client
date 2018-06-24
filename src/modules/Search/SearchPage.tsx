@@ -2,14 +2,11 @@ import * as React from 'react';
 import PodcastSearch from './PodcastSearch';
 import './SearchPage.css';
 
-interface Props {
-}
+interface Props {}
 
-interface State {
-}
+interface State {}
 
 class SearchPage extends React.Component<Props, State> {
-
   constructor(props: Props) {
     super(props);
   }

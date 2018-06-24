@@ -5,9 +5,7 @@ import EpisodeCard from './EpisodeCard';
 // import { getEpisodeData } from '../api/gpodder';
 import { HttpRequest, Episode } from '../../types/index';
 
-interface Props {
-  
-}
+interface Props {}
 
 interface State {
   episode: HttpRequest<Episode>;
@@ -16,8 +14,7 @@ interface State {
 type WithRouterProps = RouteComponentProps<Props>;
 
 class EpisodePage extends React.Component<WithRouterProps, State> {
-
-  constructor (props: WithRouterProps) {
+  constructor(props: WithRouterProps) {
     super(props);
 
     this.state = {
@@ -31,22 +28,22 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
     this.retrieveEpisodeData();
   }
 
-  podcastUrl () {
+  podcastUrl() {
     const query = parse(this.props.location.search);
     return query.podcasturl;
   }
 
-  episodeUrl () {
+  episodeUrl() {
     const query = parse(this.props.location.search);
     return query.episodeurl;
   }
 
-  episodeTitle () {
+  episodeTitle() {
     const query = parse(this.props.location.search);
     return query.episodetitle;
   }
 
-  retrieveEpisodeData () {
+  retrieveEpisodeData() {
     const episodeTitle = this.episodeTitle();
     const episodeUrl = this.episodeUrl();
 

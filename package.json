@@ -31,6 +31,8 @@
     "@types/react-autosuggest": "^9.3.2",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.3",
+    "prettier": "^1.13.5",
+    "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.6.2"
   }
 }

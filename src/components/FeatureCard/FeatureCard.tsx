@@ -9,11 +9,7 @@ interface Props<T> {
 }
 
 const renderNotAsked = () => {
-  return (
-    <div className="">
-      Not asked
-    </div>
-  );
+  return <div className="">Not asked</div>;
 };
 
 const renderLoading = () => {
@@ -25,14 +21,10 @@ const renderLoading = () => {
 };
 
 const renderError = (message: string) => {
-  return (
-    <div className="flex card p2 slide-in-fifty down-half">
-      Error! {message}
-    </div>
-  );
+  return <div className="flex card p2 slide-in-fifty down-half">Error! {message}</div>;
 };
 
-function FeatureCard<T> (props: Props<T>) {
+function FeatureCard<T>(props: Props<T>) {
   switch (props.content.type) {
     case 'fetching':
       return renderLoading();

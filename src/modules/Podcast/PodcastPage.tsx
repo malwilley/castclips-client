@@ -7,9 +7,7 @@ import { parseFeed } from '~/api/podcastFeed';
 import { HttpRequest, PodcastData } from '~/types/index';
 import './PodcastPage.css';
 
-interface Props {
-  
-}
+interface Props {}
 
 interface State {
   podcast: HttpRequest<PodcastData>;
@@ -18,8 +16,7 @@ interface State {
 type WithRouterProps = RouteComponentProps<Props>;
 
 class PodcastPage extends React.Component<WithRouterProps, State> {
-
-  constructor (props: WithRouterProps) {
+  constructor(props: WithRouterProps) {
     super(props);
 
     this.state = {
@@ -33,12 +30,12 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
     this.retrieveEpisodes();
   }
 
-  feedUrl () {
+  feedUrl() {
     const query = parse(this.props.location.search);
     return query.feed;
   }
 
-  async retrieveEpisodes () {
+  async retrieveEpisodes() {
     const feedUrl = this.feedUrl();
 
     try {
@@ -61,19 +58,17 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
   }
 
   render() {
-
-    const episodes = this.state.podcast.type === 'success'
-      ? <EpisodeList feedUrl={this.feedUrl()} episodes={this.state.podcast.data.episodes} /> 
-      : null;
+    const episodes =
+      this.state.podcast.type === 'success' ? (
+        <EpisodeList feedUrl={this.feedUrl()} episodes={this.state.podcast.data.episodes} />
+      ) : null;
 
     return (
       <React.Fragment>
         <section className="hero center bg-primary relative">
-          <PodcastCard podcast={this.state.podcast}/>
+          <PodcastCard podcast={this.state.podcast} />
         </section>
-        <section className="page-container pt-episodes">
-          {episodes}
-        </section>
+        <section className="page-container pt-episodes">{episodes}</section>
       </React.Fragment>
     );
   }

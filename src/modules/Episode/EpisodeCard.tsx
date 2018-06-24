@@ -8,19 +8,16 @@ interface Props {
   episode: HttpRequest<Episode>;
 }
 
-interface State {
-}
+interface State {}
 
 class EpisodeCard extends React.Component<Props, State> {
-
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
-  renderEpisodeData (episode: Episode) {
+  renderEpisodeData(episode: Episode) {
     return (
       <div className="flex card down-half slide-in-fifty">
         <div className="flex flex-column flex-auto left-align px3 py1">
@@ -31,14 +28,10 @@ class EpisodeCard extends React.Component<Props, State> {
     );
   }
 
-  render () {
+  render() {
     const { episode, ...rest } = this.props;
     return (
-      <FeatureCard 
-        content={episode} 
-        renderContent={e => this.renderEpisodeData(e)}
-        {...rest}
-      />
+      <FeatureCard content={episode} renderContent={e => this.renderEpisodeData(e)} {...rest} />
     );
   }
 }

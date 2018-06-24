@@ -7,12 +7,12 @@ interface Props {
   podcast: HttpRequest<PodcastData>;
 }
 
-const renderPodcastData = (podcast:  PodcastData) => {
+const renderPodcastData = (podcast: PodcastData) => {
   return (
     <div className="flex card down-half slide-in-fifty">
-      <img 
+      <img
         className="icon podcast-img"
-        src="http://static.libsyn.com/p/assets/6/d/7/d/6d7d36d6929db515/MBMBAM_Update.jpg" 
+        src="http://static.libsyn.com/p/assets/6/d/7/d/6d7d36d6929db515/MBMBAM_Update.jpg"
       />
       <div className="flex flex-column flex-auto left-align px3 py1">
         <h3 className="flex-none">{podcast.title}</h3>
@@ -23,10 +23,8 @@ const renderPodcastData = (podcast:  PodcastData) => {
   );
 };
 
-const PodcastCard  = (props: Props) => {
-  return (
-    <FeatureCard content={props.podcast} renderContent={renderPodcastData} />
-  );
+const PodcastCard = (props: Props) => {
+  return <FeatureCard content={props.podcast} renderContent={renderPodcastData} />;
 };
 
 export default PodcastCard;

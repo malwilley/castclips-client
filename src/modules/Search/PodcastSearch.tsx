@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { debounce, Cancelable } from 'lodash';
-import { 
-  AutosuggestProps, 
-  InputProps, 
-  ChangeEvent, 
+import {
+  AutosuggestProps,
+  InputProps,
+  ChangeEvent,
   RenderSuggestion,
   RenderInputComponent,
   SuggestionsFetchRequested,
-  OnSuggestionSelected } from 'react-autosuggest';
-const Autosuggest = require('react-autosuggest') as new() => 
-  React.Component<AutosuggestProps<types.PodcastSuggestion>, Object>;
+  OnSuggestionSelected
+} from 'react-autosuggest';
+const Autosuggest = require('react-autosuggest') as new () => React.Component<
+  AutosuggestProps<types.PodcastSuggestion>,
+  Object
+>;
 import PodcastSuggestion from './PodcastSuggestion';
 import { searchPodcasts } from '~/api/gpodder';
 import * as types from '~/types/index';
@@ -31,7 +34,6 @@ interface State {
 }
 
 class PodcastSearch extends React.Component<WithRouterProps, State> {
-
   constructor(props: WithRouterProps) {
     super(props);
     this.state = {
@@ -42,7 +44,7 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
     };
   }
 
-  updateSuggestions: SuggestionsFetchRequested = async ({value}) => {
+  updateSuggestions: SuggestionsFetchRequested = async ({ value }) => {
     this.setState({
       suggestions: {
         type: 'fetching'
@@ -71,9 +73,9 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
         }
       });
     }
-  }
+  };
 
-  updateSuggestionsDebounced: SuggestionsFetchRequested = (request) => {
+  updateSuggestionsDebounced: SuggestionsFetchRequested = request => {
     if (this.state.searchRequest) {
       this.state.searchRequest.cancel();
     }
@@ -83,7 +85,7 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
     });
 
     debounced(request);
-  }
+  };
 
   clear = () => {
     if (this.state.searchRequest) {
@@ -95,35 +97,34 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
       },
       searchRequest: undefined
     });
-  }
+  };
 
   onChange = (event: React.FormEvent<string>, { newValue }: ChangeEvent) => {
     this.setState({
       query: newValue
     });
-  }
+  };
 
   getSuggestionValue = (suggestion: types.PodcastSuggestion) => {
     return suggestion.title;
-  }
+  };
 
-  onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (event, {suggestion}) => {
+  onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (event, { suggestion }) => {
     this.props.history.push(`/podcast?feed=${suggestion.podcastUrl}`);
-  }
+  };
 
   getIcon = () => {
-      switch (this.state.suggestions.type) {
-        case 'fetching':
-          return <IconSpinner className="search-icon" />;
-        case 'error':
-          return <IconSearch className="search-icon" />;
-        default:
-          return <IconSearch className="search-icon" />;
-      }
-  }
+    switch (this.state.suggestions.type) {
+      case 'fetching':
+        return <IconSpinner className="search-icon" />;
+      case 'error':
+        return <IconSearch className="search-icon" />;
+      default:
+        return <IconSearch className="search-icon" />;
+    }
+  };
 
   render() {
-
     const renderInput: RenderInputComponent<types.PodcastSuggestion> = props => (
       <div className="search-container">
         <input {...props} />
@@ -141,9 +142,8 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
       value: this.state.query
     };
 
-    const suggestions = this.state.suggestions.type === 'success' 
-      ? this.state.suggestions.data 
-      : [];
+    const suggestions =
+      this.state.suggestions.type === 'success' ? this.state.suggestions.data : [];
 
     return (
       <Autosuggest

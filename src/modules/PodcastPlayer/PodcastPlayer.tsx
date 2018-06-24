@@ -18,10 +18,9 @@ interface State {
 }
 
 class PodcastPlayer extends React.Component<Props, State> {
-
   private audioEl: HTMLAudioElement | null;
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -34,19 +33,18 @@ class PodcastPlayer extends React.Component<Props, State> {
     this.audioEl = null;
   }
 
-  playPause () {
+  playPause() {
     this.setState({
-      playStatus: this.state.playStatus === PlayStatus.Playing
-        ? PlayStatus.Paused 
-        : PlayStatus.Playing
+      playStatus:
+        this.state.playStatus === PlayStatus.Playing ? PlayStatus.Paused : PlayStatus.Playing
     });
   }
 
-  changeTime (time: number) {
+  changeTime(time: number) {
     this.audioEl!.currentTime = time;
   }
 
-  setTime (time: number) {
+  setTime(time: number) {
     if (time === this.state.time) {
       return;
     }
@@ -55,20 +53,20 @@ class PodcastPlayer extends React.Component<Props, State> {
 
   onSeek = (time: number) => {
     this.seek(time);
-  }
+  };
 
-  seek (time: number) {
+  seek(time: number) {
     this.audioEl!.currentTime = time;
-    this.setState({time});
+    this.setState({ time });
   }
 
-  setDuration (duration: number) {
+  setDuration(duration: number) {
     this.setState({ duration });
   }
 
-  renderControls () {
+  renderControls() {
     return (
-      <PlaybackControls 
+      <PlaybackControls
         playStatus={this.state.playStatus}
         handleBackClick={() => this.changeTime(this.state.time - 5)}
         handleForwardClick={() => this.changeTime(this.state.time + 30)}
@@ -77,7 +75,7 @@ class PodcastPlayer extends React.Component<Props, State> {
     );
   }
 
-  renderAudio () {
+  renderAudio() {
     return (
       <Audio
         src={this.props.episode.mediaUrl}
@@ -85,50 +83,43 @@ class PodcastPlayer extends React.Component<Props, State> {
         status={this.state.playStatus}
         onTimeChange={time => this.setTime(time)}
         onDuration={dur => this.setDuration(dur)}
-        ref={ref => this.audioEl = ref ? ref.audioEl : null}
+        ref={ref => (this.audioEl = ref ? ref.audioEl : null)}
       />
     );
   }
 
-  renderPlayer (mode: PlayMode) {
-    return mode === PlayMode.Playback
-      ? (
-        <div className="flex flex-column justify-around">
-          {this.renderAudio()}
-          <ShareToggle mode={mode} handleToggle={(newMode) => this.setState({ mode: newMode })} />
-          <Slider
-            min={0}
-            max={this.state.duration}
-            value={this.state.time}
-            onChange={this.onSeek}
-          />
-          <div className="flex justify-between">
-            <div>{this.state.time.toFixed(0)}</div>
-            <div>{this.state.duration.toFixed(0)}</div>
-          </div>
-          {this.renderControls()}
+  renderPlayer(mode: PlayMode) {
+    return mode === PlayMode.Playback ? (
+      <div className="flex flex-column justify-around">
+        {this.renderAudio()}
+        <ShareToggle mode={mode} handleToggle={newMode => this.setState({ mode: newMode })} />
+        <Slider min={0} max={this.state.duration} value={this.state.time} onChange={this.onSeek} />
+        <div className="flex justify-between">
+          <div>{this.state.time.toFixed(0)}</div>
+          <div>{this.state.duration.toFixed(0)}</div>
         </div>
-      )
-      : (
-        <div className="flex flex-column justify-around">
-          {this.renderAudio()}
-          <ShareToggle mode={mode} handleToggle={(newMode) => this.setState({ mode: newMode })} />
-          <Range
-            min={0}
-            max={this.state.duration}
-            pushable={1}
-            value={[this.state.time, this.state.time + 10]}
-          />
-          <div className="flex justify-between">
-            <div>{this.state.time.toFixed(0)}</div>
-            <div>{this.state.duration.toFixed(0)}</div>
-          </div>
-          {this.renderControls()}
+        {this.renderControls()}
       </div>
-      );
+    ) : (
+      <div className="flex flex-column justify-around">
+        {this.renderAudio()}
+        <ShareToggle mode={mode} handleToggle={newMode => this.setState({ mode: newMode })} />
+        <Range
+          min={0}
+          max={this.state.duration}
+          pushable={1}
+          value={[this.state.time, this.state.time + 10]}
+        />
+        <div className="flex justify-between">
+          <div>{this.state.time.toFixed(0)}</div>
+          <div>{this.state.duration.toFixed(0)}</div>
+        </div>
+        {this.renderControls()}
+      </div>
+    );
   }
 
-  render () {
+  render() {
     return this.renderPlayer(this.state.mode);
   }
 }

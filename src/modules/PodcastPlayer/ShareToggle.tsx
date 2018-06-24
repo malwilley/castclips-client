@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PlayMode } from '~/types';
 
-type ShareToggleProps = { 
-  mode: PlayMode,
-  handleToggle: (newMode: PlayMode) => void
+type ShareToggleProps = {
+  mode: PlayMode;
+  handleToggle: (newMode: PlayMode) => void;
 };
 
 const toLabel = (mode: PlayMode) => {
@@ -16,9 +16,9 @@ const toLabel = (mode: PlayMode) => {
   }
 };
 
-const ShareToggle = ({ mode, handleToggle}: ShareToggleProps) => (
+const ShareToggle = ({ mode, handleToggle }: ShareToggleProps) => (
   <button
-    className="p1 m1" 
+    className="p1 m1"
     onClick={() => handleToggle(mode === PlayMode.Playback ? PlayMode.Share : PlayMode.Playback)}
   >
     {toLabel(mode)}
