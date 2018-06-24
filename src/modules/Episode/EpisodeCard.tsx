@@ -24,7 +24,6 @@ class EpisodeCard extends React.Component<Props, State> {
     return (
       <div className="flex card down-half slide-in-fifty">
         <div className="flex flex-column flex-auto left-align px3 py1">
-          <h3 className="flex-none">{episode.title}</h3>
           <p className="flex-auto overflow-ellipsis m0">{episode.description}</p>
           <PodcastPlayer episode={episode} />
         </div>
@@ -33,10 +32,12 @@ class EpisodeCard extends React.Component<Props, State> {
   }
 
   render () {
+    const { episode, ...rest } = this.props;
     return (
       <FeatureCard 
-        content={this.props.episode} 
-        renderContent={e => this.renderEpisodeData(e)} 
+        content={episode} 
+        renderContent={e => this.renderEpisodeData(e)}
+        {...rest}
       />
     );
   }

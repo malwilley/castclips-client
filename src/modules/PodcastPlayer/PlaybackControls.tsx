@@ -24,7 +24,7 @@ const PlaybackControls = (
     playStatus, handleBackClick, handleForwardClick, handlePlayPauseClick 
   }: PlaybackControlsProps
 ) => (
-  <div className="flex justify-center">
+  <div className="flex justify-center items-center">
     <Back5 className="seek-icon clickable"  onClick={handleBackClick} />
       {renderPlayPause(playStatus, handlePlayPauseClick)}
     <Forward30 className="seek-icon clickable" onClick={handleForwardClick} />

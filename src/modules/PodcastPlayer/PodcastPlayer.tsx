@@ -3,6 +3,7 @@ import { Episode, PlayMode, PlayStatus } from '~/types/index';
 import Audio from '~/components/Audio';
 import Slider, { Range } from 'rc-slider';
 import PlaybackControls from './PlaybackControls';
+import ShareToggle from './ShareToggle';
 import './PodcastPlayer.css';
 
 interface Props {
@@ -27,7 +28,7 @@ class PodcastPlayer extends React.Component<Props, State> {
       playStatus: PlayStatus.Paused,
       time: 0,
       duration: 0,
-      mode: PlayMode.Share
+      mode: PlayMode.Playback
     };
 
     this.audioEl = null;
@@ -92,8 +93,9 @@ class PodcastPlayer extends React.Component<Props, State> {
   renderPlayer (mode: PlayMode) {
     return mode === PlayMode.Playback
       ? (
-        <div className="">
+        <div className="flex flex-column justify-around">
           {this.renderAudio()}
+          <ShareToggle mode={mode} handleToggle={(newMode) => this.setState({ mode: newMode })} />
           <Slider
             min={0}
             max={this.state.duration}
@@ -108,8 +110,9 @@ class PodcastPlayer extends React.Component<Props, State> {
         </div>
       )
       : (
-        <div className="">
+        <div className="flex flex-column justify-around">
           {this.renderAudio()}
+          <ShareToggle mode={mode} handleToggle={(newMode) => this.setState({ mode: newMode })} />
           <Range
             min={0}
             max={this.state.duration}

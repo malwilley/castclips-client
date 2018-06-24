@@ -77,7 +77,8 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
   render() {
     return (
       <React.Fragment>
-        <section className="hero center bg-primary flex justify-center items-end">
+        <section className="hero center bg-primary flex flex-column pt2 relative">
+          <h1>{this.episodeTitle()}</h1>
           <EpisodeCard episode={this.state.episode} />
         </section>
         <section className="page-container pt-episodes">

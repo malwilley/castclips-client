@@ -1,5 +1,8 @@
 .down-half {
-  transform: translateY(50%);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
 }
 
 .podcast-img {
