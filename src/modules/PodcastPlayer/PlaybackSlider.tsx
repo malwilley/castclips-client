@@ -1,0 +1,15 @@
+import * as React from 'react';
+import Slider from 'rc-slider';
+import './PlaybackSlider.css';
+
+type PlaybackSliderProps = {
+  duration: number;
+  time: number;
+  onSeek: (time: number) => void;
+};
+
+const PlaybackSlider = ({ duration, time, onSeek }: PlaybackSliderProps) => (
+  <Slider className="playback-slider" min={0} max={duration} value={time} onChange={onSeek} />
+);
+
+export default PlaybackSlider;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Episode, PlayMode, PlayStatus } from '~/types/index';
 import Audio from '~/components/Audio';
-import Slider, { Range } from 'rc-slider';
+import PlaybackSlider from './PlaybackSlider';
+import { Range } from 'rc-slider';
 import PlaybackControls from './PlaybackControls';
 import ShareToggle from './ShareToggle';
-import './PodcastPlayer.css';
 
 interface Props {
   episode: Episode;
@@ -93,7 +93,11 @@ class PodcastPlayer extends React.Component<Props, State> {
       <div className="flex flex-column justify-around">
         {this.renderAudio()}
         <ShareToggle mode={mode} handleToggle={newMode => this.setState({ mode: newMode })} />
-        <Slider min={0} max={this.state.duration} value={this.state.time} onChange={this.onSeek} />
+        <PlaybackSlider
+          duration={this.state.duration}
+          time={this.state.time}
+          onSeek={this.onSeek}
+        />
         <div className="flex justify-between">
           <div>{this.state.time.toFixed(0)}</div>
           <div>{this.state.duration.toFixed(0)}</div>
