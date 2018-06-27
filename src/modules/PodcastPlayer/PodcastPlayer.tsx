@@ -2,32 +2,48 @@ import * as React from 'react';
 import { Episode, PlayMode, PlayStatus } from '~/types/index';
 import Audio from '~/components/Audio';
 import PlaybackSlider from './PlaybackSlider';
-import { Range } from 'rc-slider';
+import ShareRange from './ShareRange';
 import PlaybackControls from './PlaybackControls';
 import ShareToggle from './ShareToggle';
 
-interface Props {
+type PodcastPlayerProps = {
   episode: Episode;
-}
+};
 
-interface State {
+type PlayModeState = PlaybackState | ShareState;
+
+type PlaybackState = {
+  type: 'playback';
+};
+
+type ShareState = {
+  type: 'share';
+  min: number;
+  max: number;
+  start: number;
+  end: number;
+};
+
+type PodcastPlayerState = {
   playStatus: PlayStatus;
-  time: number;
   duration: number;
-  mode: PlayMode;
-}
+  modeState: PlayModeState;
+  time: number;
+};
 
-class PodcastPlayer extends React.Component<Props, State> {
+class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerState> {
   private audioEl: HTMLAudioElement | null;
 
-  constructor(props: Props) {
+  constructor(props: PodcastPlayerProps) {
     super(props);
 
     this.state = {
       playStatus: PlayStatus.Paused,
-      time: 0,
       duration: 0,
-      mode: PlayMode.Playback
+      modeState: {
+        type: 'playback',
+      },
+      time: 0,
     };
 
     this.audioEl = null;
@@ -36,20 +52,50 @@ class PodcastPlayer extends React.Component<Props, State> {
   playPause() {
     this.setState({
       playStatus:
-        this.state.playStatus === PlayStatus.Playing ? PlayStatus.Paused : PlayStatus.Playing
+        this.state.playStatus === PlayStatus.Playing ? PlayStatus.Paused : PlayStatus.Playing,
     });
   }
 
-  changeTime(time: number) {
-    this.audioEl!.currentTime = time;
+  changeTime(deltaTime: number) {
+    this.audioEl!.currentTime = this.state.time + deltaTime;
   }
 
   setTime(time: number) {
-    if (time === this.state.time) {
+    if (this.state.time === time) {
       return;
     }
-    this.setState({ time });
+    this.setState({
+      time,
+    });
   }
+
+  setMode = (mode: PlayMode) => {
+    switch (mode) {
+      case PlayMode.Playback: {
+        this.setState({
+          modeState: {
+            type: 'playback',
+          },
+          playStatus: PlayStatus.Paused,
+        });
+        break;
+      }
+      case PlayMode.Share:
+      default: {
+        this.setState({
+          modeState: {
+            type: 'share',
+            min: Math.max(this.state.time - 10, 0),
+            max: Math.min(this.state.time + 60, this.state.duration),
+            start: this.state.time,
+            end: this.state.time + 30,
+          },
+          playStatus: PlayStatus.Paused,
+        });
+        break;
+      }
+    }
+  };
 
   onSeek = (time: number) => {
     this.seek(time);
@@ -57,7 +103,9 @@ class PodcastPlayer extends React.Component<Props, State> {
 
   seek(time: number) {
     this.audioEl!.currentTime = time;
-    this.setState({ time });
+    this.setState({
+      time,
+    });
   }
 
   setDuration(duration: number) {
@@ -68,8 +116,8 @@ class PodcastPlayer extends React.Component<Props, State> {
     return (
       <PlaybackControls
         playStatus={this.state.playStatus}
-        handleBackClick={() => this.changeTime(this.state.time - 5)}
-        handleForwardClick={() => this.changeTime(this.state.time + 30)}
+        handleBackClick={() => this.changeTime(-5)}
+        handleForwardClick={() => this.changeTime(30)}
         handlePlayPauseClick={() => this.playPause()}
       />
     );
@@ -88,43 +136,43 @@ class PodcastPlayer extends React.Component<Props, State> {
     );
   }
 
-  renderPlayer(mode: PlayMode) {
-    return mode === PlayMode.Playback ? (
-      <div className="flex flex-column justify-around">
-        {this.renderAudio()}
-        <ShareToggle mode={mode} handleToggle={newMode => this.setState({ mode: newMode })} />
-        <PlaybackSlider
-          duration={this.state.duration}
-          time={this.state.time}
-          onSeek={this.onSeek}
-        />
-        <div className="flex justify-between">
-          <div>{this.state.time.toFixed(0)}</div>
-          <div>{this.state.duration.toFixed(0)}</div>
-        </div>
-        {this.renderControls()}
+  renderPlayerPlayback = () => (
+    <div className="flex flex-column justify-around">
+      {this.renderAudio()}
+      <ShareToggle mode={PlayMode.Playback} handleToggle={this.setMode} />
+      <PlaybackSlider duration={this.state.duration} time={this.state.time} onSeek={this.onSeek} />
+      <div className="flex justify-between">
+        <div>{this.state.time.toFixed(0)}</div>
+        <div>{this.state.duration.toFixed(0)}</div>
       </div>
-    ) : (
-      <div className="flex flex-column justify-around">
-        {this.renderAudio()}
-        <ShareToggle mode={mode} handleToggle={newMode => this.setState({ mode: newMode })} />
-        <Range
-          min={0}
-          max={this.state.duration}
-          pushable={1}
-          value={[this.state.time, this.state.time + 10]}
-        />
-        <div className="flex justify-between">
-          <div>{this.state.time.toFixed(0)}</div>
-          <div>{this.state.duration.toFixed(0)}</div>
-        </div>
-        {this.renderControls()}
+      {this.renderControls()}
+    </div>
+  );
+
+  renderPlayerShare = ({ min, max, start, end }: ShareState) => (
+    <div className="flex flex-column justify-around">
+      {this.renderAudio()}
+      <ShareToggle mode={PlayMode.Share} handleToggle={this.setMode} />
+      <ShareRange
+        {...{
+          min,
+          max,
+          start,
+          end,
+          onSeek: this.onSeek,
+        }}
+      />
+      <div className="flex justify-between">
+        <div>{min.toFixed(0)}</div>
+        <div>{max.toFixed(0)}</div>
       </div>
-    );
-  }
+    </div>
+  );
 
   render() {
-    return this.renderPlayer(this.state.mode);
+    return this.state.modeState.type === 'playback'
+      ? this.renderPlayerPlayback()
+      : this.renderPlayerShare(this.state.modeState);
   }
 }
 

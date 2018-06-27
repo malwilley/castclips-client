@@ -9,7 +9,13 @@ type PlaybackSliderProps = {
 };
 
 const PlaybackSlider = ({ duration, time, onSeek }: PlaybackSliderProps) => (
-  <Slider className="playback-slider" min={0} max={duration} value={time} onChange={onSeek} />
+  <Slider
+    className="playback-slider"
+    min={0}
+    max={Math.round(duration)}
+    value={time}
+    onChange={onSeek}
+  />
 );
 
 export default PlaybackSlider;
