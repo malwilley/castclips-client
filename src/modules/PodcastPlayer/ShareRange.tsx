@@ -15,7 +15,7 @@ const ShareRange = ({ min, max, start, end, onSeek }: ShareRangeProps) => (
     className="share-range"
     min={Math.round(min)}
     max={Math.round(max)}
-    pushable={1}
+    pushable={3}
     value={[Math.round(start), Math.round(end)]}
     onChange={(bounds: number[]) => onSeek(bounds[0], bounds[1])}
   />

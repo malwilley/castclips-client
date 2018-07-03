@@ -101,6 +101,22 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.seek(time);
   };
 
+  onSeekRange = (start: number, end: number) => {
+    this.setState({
+      modeState:
+        this.state.modeState.type === 'share'
+          ? {
+              ...this.state.modeState,
+              end,
+              start,
+              type: 'share',
+            }
+          : { type: 'playback' },
+      playStatus: PlayStatus.Paused,
+      time: start,
+    });
+  };
+
   seek(time: number) {
     this.audioEl!.currentTime = time;
     this.setState({
@@ -159,7 +175,7 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
           max,
           start,
           end,
-          onSeek: this.onSeek,
+          onSeek: this.onSeekRange,
         }}
       />
       <div className="flex justify-between">
