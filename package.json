@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ace-css": "^1.1.0",
+    "emotion": "^9.2.4",
     "lodash": "^4.17.4",
     "lodash.throttle": "^4.1.1",
     "query-string": "^5.1.0",

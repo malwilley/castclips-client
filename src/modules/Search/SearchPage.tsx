@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PodcastSearch from './PodcastSearch';
-import './SearchPage.css';
 
 interface Props {}
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { debounce, Cancelable } from 'lodash';
+import { css } from 'emotion';
 import {
   AutosuggestProps,
   InputProps,
@@ -7,7 +8,7 @@ import {
   RenderSuggestion,
   RenderInputComponent,
   SuggestionsFetchRequested,
-  OnSuggestionSelected
+  OnSuggestionSelected,
 } from 'react-autosuggest';
 const Autosuggest = require('react-autosuggest') as new () => React.Component<
   AutosuggestProps<types.PodcastSuggestion>,
@@ -21,34 +22,51 @@ import IconSearch from '~/icons/Search';
 import IconSpinner from '~/icons/Spinner';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-interface Props {
+type PodcastSearchProps = {
   searchDelay: number; // in ms
-}
+};
 
-type WithRouterProps = RouteComponentProps<Props>;
+type WithRouterProps = RouteComponentProps<PodcastSearchProps>;
 
-interface State {
+type PodcastSearchState = {
   query: string;
   suggestions: types.HttpRequest<types.PodcastSuggestion[]>;
   searchRequest?: SuggestionsFetchRequested & Cancelable;
-}
+};
 
-class PodcastSearch extends React.Component<WithRouterProps, State> {
+const styles = {
+  searchContainer: css({
+    position: 'relative',
+    width: '100%',
+    maxWidth: '380px',
+    height: '44px',
+  }),
+  searchIcon: css({
+    position: 'absolute',
+    right: '1em',
+    top: '0.65em',
+    width: '1.5em',
+    height: '1.5em',
+    fill: 'var(--color-dark)',
+  }),
+};
+
+class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState> {
   constructor(props: WithRouterProps) {
     super(props);
     this.state = {
       query: '',
       suggestions: {
-        type: 'not_asked'
-      }
+        type: 'not_asked',
+      },
     };
   }
 
   updateSuggestions: SuggestionsFetchRequested = async ({ value }) => {
     this.setState({
       suggestions: {
-        type: 'fetching'
-      }
+        type: 'fetching',
+      },
     });
     try {
       const response: types.GpodderPodcastResponse[] = await searchPodcasts(value);
@@ -60,17 +78,17 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
               title: r.title,
               description: r.description,
               logoUrl: r.logo_url,
-              podcastUrl: r.url
+              podcastUrl: r.url,
             };
-          })
-        }
+          }),
+        },
       });
     } catch (err) {
       this.setState({
         suggestions: {
           type: 'error',
-          message: err.message
-        }
+          message: err.message,
+        },
       });
     }
   };
@@ -81,7 +99,7 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
     }
     const debounced = debounce(this.updateSuggestions, 500);
     this.setState({
-      searchRequest: debounced
+      searchRequest: debounced,
     });
 
     debounced(request);
@@ -93,15 +111,15 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
     }
     this.setState({
       suggestions: {
-        type: 'not_asked'
+        type: 'not_asked',
       },
-      searchRequest: undefined
+      searchRequest: undefined,
     });
   };
 
   onChange = (event: React.FormEvent<string>, { newValue }: ChangeEvent) => {
     this.setState({
-      query: newValue
+      query: newValue,
     });
   };
 
@@ -116,17 +134,17 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
   getIcon = () => {
     switch (this.state.suggestions.type) {
       case 'fetching':
-        return <IconSpinner className="search-icon" />;
+        return <IconSpinner className={styles.searchIcon} />;
       case 'error':
-        return <IconSearch className="search-icon" />;
+        return <IconSpinner className={styles.searchIcon} />;
       default:
-        return <IconSearch className="search-icon" />;
+        return <IconSearch className={styles.searchIcon} />;
     }
   };
 
   render() {
     const renderInput: RenderInputComponent<types.PodcastSuggestion> = props => (
-      <div className="search-container">
+      <div className={styles.searchContainer}>
         <input {...props} />
         {this.getIcon()}
       </div>
@@ -139,7 +157,7 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
     const inputProps: InputProps<types.PodcastSuggestion> = {
       placeholder: 'Find a podcast',
       onChange: this.onChange,
-      value: this.state.query
+      value: this.state.query,
     };
 
     const suggestions =
@@ -162,4 +180,4 @@ class PodcastSearch extends React.Component<WithRouterProps, State> {
 
 const RouterComponent = withRouter<WithRouterProps>(PodcastSearch);
 
-export default (props: Props) => <RouterComponent {...props} />;
+export default (props: PodcastSearchProps) => <RouterComponent {...props} />;
