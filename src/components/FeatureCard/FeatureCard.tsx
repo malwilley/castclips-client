@@ -1,15 +1,11 @@
 import * as React from 'react';
-import './FeatureCard.css';
 import Spinner from '~/components/Spinner/Spinner';
 import { HttpRequest } from '~/types';
+import './FeatureCard.css';
 
-interface Props<T> {
+type Props<T> = {
   content: HttpRequest<T>;
   renderContent: (content: T) => JSX.Element;
-}
-
-const renderNotAsked = () => {
-  return <div className="">Not asked</div>;
 };
 
 const renderLoading = () => {
@@ -24,7 +20,7 @@ const renderError = (message: string) => {
   return <div className="flex card p2 slide-in-fifty down-half">Error! {message}</div>;
 };
 
-function FeatureCard<T>(props: Props<T>) {
+const FeatureCard = <T extends any>(props: Props<T>) => {
   switch (props.content.type) {
     case 'fetching':
       return renderLoading();
@@ -33,8 +29,8 @@ function FeatureCard<T>(props: Props<T>) {
     case 'success':
       return props.renderContent(props.content.data);
     default:
-      return renderNotAsked();
+      return null;
   }
-}
+};
 
 export default FeatureCard;

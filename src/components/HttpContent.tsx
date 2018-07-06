@@ -11,7 +11,7 @@ const HttpContent = <T extends object | number | string>({
   request,
   renderError,
   renderFetching,
-  renderSuccess
+  renderSuccess,
 }: HttpContentProps<T>) => {
   switch (request.type) {
     case 'success':

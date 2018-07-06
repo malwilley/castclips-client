@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Range } from 'rc-slider';
+import * as React from 'react';
 import './ShareRange.css';
 
 type ShareRangeProps = {

@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { parse } from 'query-string';
-import { withRouter, RouteComponentProps } from 'react-router';
-import EpisodeCard from './EpisodeCard';
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 // import { getEpisodeData } from '../api/gpodder';
-import { HttpRequest, Episode } from '../../types/index';
+import { Episode, HttpRequest } from '../../types/index';
+import EpisodeCard from './EpisodeCard';
 
 interface Props {}
 
@@ -19,8 +19,8 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
 
     this.state = {
       episode: {
-        type: 'fetching'
-      }
+        type: 'fetching',
+      },
     };
   }
 
@@ -57,16 +57,16 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
             title: episodeTitle,
             description: '',
             published: 0,
-            mediaUrl: episodeUrl
-          }
-        }
+            mediaUrl: episodeUrl,
+          },
+        },
       });
     } catch (err) {
       this.setState({
         episode: {
           type: 'error',
-          message: err.message
-        }
+          message: err.message,
+        },
       });
     }
   }

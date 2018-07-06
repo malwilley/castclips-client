@@ -1,6 +1,6 @@
 import * as React from 'react';
-import './Spinner.css';
 import IconSpinner from '~/icons/Spinner';
+import './Spinner.css';
 
 const Spinner: React.SFC = () => {
   return (

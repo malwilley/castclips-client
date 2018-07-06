@@ -1,5 +1,5 @@
-import * as React from 'react';
 import Slider from 'rc-slider';
+import * as React from 'react';
 import './PlaybackSlider.css';
 
 type PlaybackSliderProps = {

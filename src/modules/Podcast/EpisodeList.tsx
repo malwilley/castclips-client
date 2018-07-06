@@ -1,8 +1,8 @@
 import * as React from 'react';
-import './EpisodeList.css';
-import { Episode } from '../../types/index';
-import IconGoTo from '../../icons/GoTo';
 import { Link } from 'react-router-dom';
+import IconGoTo from '~/icons/GoTo';
+import { Episode } from '~/types/index';
+import './EpisodeList.css';
 
 interface Props {
   episodes: Episode[];
@@ -18,7 +18,7 @@ class EpisodeList extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      numShown: 20
+      numShown: 20,
     };
   }
 
@@ -28,7 +28,7 @@ class EpisodeList extends React.Component<Props, State> {
 
   showMoreEpisodes() {
     this.setState({
-      numShown: this.state.numShown + 20
+      numShown: this.state.numShown + 20,
     });
   }
 

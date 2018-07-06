@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { parse } from 'query-string';
-import { withRouter, RouteComponentProps } from 'react-router';
-import PodcastCard from './PodcastCard';
-import EpisodeList from './EpisodeList';
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { parseFeed } from '~/api/podcastFeed';
 import { HttpRequest, PodcastData } from '~/types/index';
+import EpisodeList from './EpisodeList';
+import PodcastCard from './PodcastCard';
 import './PodcastPage.css';
 
 interface Props {}
@@ -21,8 +21,8 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
 
     this.state = {
       podcast: {
-        type: 'fetching'
-      }
+        type: 'fetching',
+      },
     };
   }
 
@@ -44,15 +44,15 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
       await this.setState({
         podcast: {
           type: 'success',
-          data: podcast
-        }
+          data: podcast,
+        },
       });
     } catch (err) {
       await this.setState({
         podcast: {
           type: 'error',
-          message: err.message
-        }
+          message: err.message,
+        },
       });
     }
   }

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Episode, PlayMode, PlayStatus } from '~/types/index';
 import Audio from '~/components/Audio';
+import { Episode, PlayMode, PlayStatus } from '~/types/index';
+import PlaybackControls from './PlaybackControls';
 import PlaybackSlider from './PlaybackSlider';
 import ShareRange from './ShareRange';
-import PlaybackControls from './PlaybackControls';
 import ShareToggle from './ShareToggle';
 
 type PodcastPlayerProps = {

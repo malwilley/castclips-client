@@ -1,26 +1,26 @@
-import * as React from 'react';
-import { debounce, Cancelable } from 'lodash';
 import { css } from 'emotion';
+import { Cancelable, debounce } from 'lodash';
+import * as React from 'react';
 import {
   AutosuggestProps,
-  InputProps,
   ChangeEvent,
-  RenderSuggestion,
-  RenderInputComponent,
-  SuggestionsFetchRequested,
+  InputProps,
   OnSuggestionSelected,
+  RenderInputComponent,
+  RenderSuggestion,
+  SuggestionsFetchRequested,
 } from 'react-autosuggest';
 const Autosuggest = require('react-autosuggest') as new () => React.Component<
   AutosuggestProps<types.PodcastSuggestion>,
   Object
 >;
-import PodcastSuggestion from './PodcastSuggestion';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { searchPodcasts } from '~/api/gpodder';
-import * as types from '~/types/index';
-import './PodcastSearch.css';
 import IconSearch from '~/icons/Search';
 import IconSpinner from '~/icons/Spinner';
-import { withRouter, RouteComponentProps } from 'react-router';
+import * as types from '~/types/index';
+import './PodcastSearch.css';
+import PodcastSuggestion from './PodcastSuggestion';
 
 type PodcastSearchProps = {
   searchDelay: number; // in ms
