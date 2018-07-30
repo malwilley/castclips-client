@@ -18,12 +18,15 @@
   width: 100%;
   background-color: var(--color-gray);
   height: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .playback-slider .rc-slider-track {
   position: absolute;
   left: 0;
-  height: 2px;
+  height: 4px;
   background-color: var(--color-secondary);
+  border-top-left-radius: 4px;
 }
 .playback-slider .rc-slider-handle {
   position: absolute;

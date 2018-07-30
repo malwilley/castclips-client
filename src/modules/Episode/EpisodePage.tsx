@@ -73,7 +73,7 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <section className="hero center bg-primary flex flex-column pt2 relative">
           <h1>{this.episodeTitle()}</h1>
           <EpisodeCard episode={this.state.episode} />
@@ -81,7 +81,7 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
         <section className="page-container pt-episodes">
           <h6 className="ml1 mb1">other stuff</h6>
         </section>
-      </React.Fragment>
+      </>
     );
   }
 }

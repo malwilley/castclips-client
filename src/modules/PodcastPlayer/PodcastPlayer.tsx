@@ -1,23 +1,16 @@
+import { css } from 'emotion';
 import * as React from 'react';
 import Audio from '~/components/Audio';
-import { Episode, PlayMode, PlayStatus } from '~/types/index';
+import { Episode, PlayStatus } from '~/types/index';
 import PlaybackControls from './PlaybackControls';
 import PlaybackSlider from './PlaybackSlider';
 import ShareRange from './ShareRange';
-import ShareToggle from './ShareToggle';
 
 type PodcastPlayerProps = {
   episode: Episode;
 };
 
-type PlayModeState = PlaybackState | ShareState;
-
-type PlaybackState = {
-  type: 'playback';
-};
-
 type ShareState = {
-  type: 'share';
   min: number;
   max: number;
   start: number;
@@ -27,8 +20,21 @@ type ShareState = {
 type PodcastPlayerState = {
   playStatus: PlayStatus;
   duration: number;
-  modeState: PlayModeState;
+  share: ShareState | null;
   time: number;
+};
+
+const styles = {
+  main: css({
+    position: 'relative',
+    paddingTop: 50,
+  }),
+  playbackSlider: css({
+    position: 'absolute',
+    top: -7,
+    width: '100%',
+    borderTopLeftRadius: 4,
+  }),
 };
 
 class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerState> {
@@ -40,9 +46,7 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.state = {
       playStatus: PlayStatus.Paused,
       duration: 0,
-      modeState: {
-        type: 'playback',
-      },
+      share: null,
       time: 0,
     };
 
@@ -69,49 +73,12 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     });
   }
 
-  setMode = (mode: PlayMode) => {
-    switch (mode) {
-      case PlayMode.Playback: {
-        this.setState({
-          modeState: {
-            type: 'playback',
-          },
-          playStatus: PlayStatus.Paused,
-        });
-        break;
-      }
-      case PlayMode.Share:
-      default: {
-        this.setState({
-          modeState: {
-            type: 'share',
-            min: Math.max(this.state.time - 10, 0),
-            max: Math.min(this.state.time + 60, this.state.duration),
-            start: this.state.time,
-            end: this.state.time + 30,
-          },
-          playStatus: PlayStatus.Paused,
-        });
-        break;
-      }
-    }
-  };
-
   onSeek = (time: number) => {
     this.seek(time);
   };
 
   onSeekRange = (start: number, end: number) => {
     this.setState({
-      modeState:
-        this.state.modeState.type === 'share'
-          ? {
-              ...this.state.modeState,
-              end,
-              start,
-              type: 'share',
-            }
-          : { type: 'playback' },
       playStatus: PlayStatus.Paused,
       time: start,
     });
@@ -155,7 +122,6 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
   renderPlayerPlayback = () => (
     <div className="flex flex-column justify-around">
       {this.renderAudio()}
-      <ShareToggle mode={PlayMode.Playback} handleToggle={this.setMode} />
       <PlaybackSlider duration={this.state.duration} time={this.state.time} onSeek={this.onSeek} />
       <div className="flex justify-between">
         <div>{this.state.time.toFixed(0)}</div>
@@ -168,7 +134,6 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
   renderPlayerShare = ({ min, max, start, end }: ShareState) => (
     <div className="flex flex-column justify-around">
       {this.renderAudio()}
-      <ShareToggle mode={PlayMode.Share} handleToggle={this.setMode} />
       <ShareRange
         {...{
           min,
@@ -186,9 +151,18 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
   );
 
   render() {
-    return this.state.modeState.type === 'playback'
-      ? this.renderPlayerPlayback()
-      : this.renderPlayerShare(this.state.modeState);
+    return (
+      <div className={styles.main}>
+        {this.renderAudio()}
+        <PlaybackSlider
+          className={styles.playbackSlider}
+          duration={this.state.duration}
+          time={this.state.time}
+          onSeek={this.onSeek}
+        />
+        {this.renderControls()}
+      </div>
+    );
   }
 }
 

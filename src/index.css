@@ -5,10 +5,10 @@
   --bold-weight: 700;
 
   /* --color-primary: #c3423f; */
-  --color-primary: #2b303a;
-  --color-secondary: rgb(155, 197, 61);
-  --color-secondary-light: rgb(155, 197, 61, .26);
-  --color-tertiary: #fdca40;
+  --color-primary: #555B6E;
+  --color-secondary: #E4B363;
+  --color-secondary-light: rgb(228, 179, 99, .26);
+  --color-tertiary: #89B0AE;
   --color-light: #f7f7f7;
   --color-lightest: #ffffff;
   --color-gray: #bebebe;
