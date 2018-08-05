@@ -1,4 +1,5 @@
 import { css } from 'emotion';
+import colors from './colors';
 
 const card = css({
   backgroundColor: 'var(--color-lightest)',
@@ -28,4 +29,4 @@ const animateSlideToNormal = css({
   animation: 'slide-to-normal ease-out 300ms',
 });
 
-export { animateSlideToFifty, animateSlideToNormal, card, downHalf };
+export { animateSlideToFifty, animateSlideToNormal, card, colors, downHalf };

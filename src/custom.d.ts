@@ -31,6 +31,6 @@ declare module 'react-audio-player' {
   class ReactAudioPlayer extends React.Component<AudioPlayerProps, {}> {
     audioEl: HTMLAudioElement;
   }
-  
+
   export default ReactAudioPlayer;
 }

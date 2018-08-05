@@ -4,7 +4,6 @@ import Audio from '~/components/Audio';
 import { Episode, PlayStatus } from '~/types/index';
 import PlaybackControls from './PlaybackControls';
 import PlaybackSlider from './PlaybackSlider';
-import ShareRange from './ShareRange';
 
 type PodcastPlayerProps = {
   episode: Episode;
@@ -53,25 +52,25 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.audioEl = null;
   }
 
-  playPause() {
+  playPause = () => {
     this.setState({
       playStatus:
         this.state.playStatus === PlayStatus.Playing ? PlayStatus.Paused : PlayStatus.Playing,
     });
-  }
+  };
 
-  changeTime(deltaTime: number) {
+  changeTime = (deltaTime: number) => {
     this.audioEl!.currentTime = this.state.time + deltaTime;
-  }
+  };
 
-  setTime(time: number) {
+  setTime = (time: number) => {
     if (this.state.time === time) {
       return;
     }
     this.setState({
       time,
     });
-  }
+  };
 
   onSeek = (time: number) => {
     this.seek(time);
@@ -84,16 +83,16 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     });
   };
 
-  seek(time: number) {
+  seek = (time: number) => {
     this.audioEl!.currentTime = time;
     this.setState({
       time,
     });
-  }
+  };
 
-  setDuration(duration: number) {
+  setDuration = (duration: number) => {
     this.setState({ duration });
-  }
+  };
 
   renderControls() {
     return (
@@ -119,37 +118,6 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     );
   }
 
-  renderPlayerPlayback = () => (
-    <div className="flex flex-column justify-around">
-      {this.renderAudio()}
-      <PlaybackSlider duration={this.state.duration} time={this.state.time} onSeek={this.onSeek} />
-      <div className="flex justify-between">
-        <div>{this.state.time.toFixed(0)}</div>
-        <div>{this.state.duration.toFixed(0)}</div>
-      </div>
-      {this.renderControls()}
-    </div>
-  );
-
-  renderPlayerShare = ({ min, max, start, end }: ShareState) => (
-    <div className="flex flex-column justify-around">
-      {this.renderAudio()}
-      <ShareRange
-        {...{
-          min,
-          max,
-          start,
-          end,
-          onSeek: this.onSeekRange,
-        }}
-      />
-      <div className="flex justify-between">
-        <div>{min.toFixed(0)}</div>
-        <div>{max.toFixed(0)}</div>
-      </div>
-    </div>
-  );
-
   render() {
     return (
       <div className={styles.main}>
@@ -157,8 +125,12 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
         <PlaybackSlider
           className={styles.playbackSlider}
           duration={this.state.duration}
+          handleBackClick={() => this.changeTime(-5)}
+          handleForwardClick={() => this.changeTime(30)}
+          handlePlayPauseClick={this.playPause}
           time={this.state.time}
           onSeek={this.onSeek}
+          playStatus={this.state.playStatus}
         />
         {this.renderControls()}
       </div>
