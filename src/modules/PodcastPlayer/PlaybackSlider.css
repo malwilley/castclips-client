@@ -17,17 +17,20 @@
 .playback-slider .rc-slider-rail {
   position: absolute;
   width: 100%;
-  background-color: var(--color-gray);
   height: 4px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  transition: background-color 200ms ease-out;
+}
+.playback-slider:hover .rc-slider-rail {
+  background-color: var(--color-gray);
 }
 .playback-slider .rc-slider-track {
   position: absolute;
   left: 0;
   height: 4px;
   background-color: var(--color-secondary);
-  border-top-left-radius: 4px;
+  border-top-left-radius: 8px;
 }
 .playback-slider .rc-slider-handle {
   position: absolute;

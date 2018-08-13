@@ -1,7 +1,7 @@
 import { css } from 'emotion';
 import * as React from 'react';
 
-type ButtonProps = {
+export type ButtonProps = {
   active?: boolean;
   className?: string;
   onClick: () => void;

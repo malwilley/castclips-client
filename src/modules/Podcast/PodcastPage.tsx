@@ -65,7 +65,8 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
 
     return (
       <React.Fragment>
-        <section className="hero center bg-primary relative">
+        <section className="hero center bg-primary flex flex-column pt2 relative">
+          <h1>Podcast information</h1>
           <PodcastCard podcast={this.state.podcast} />
         </section>
         <section className="page-container pt-episodes">{episodes}</section>

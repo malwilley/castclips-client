@@ -1,6 +1,6 @@
 .share-range.rc-slider {
   position: relative;
-  height: 14px;
+  height: 100px;
   padding: 5px 0;
   width: 100%;
   border-radius: 6px;
@@ -17,25 +17,25 @@
   position: absolute;
   width: 100%;
   background-color: var(--color-gray);
-  height: 4px;
+  height: 90px;
 }
 .share-range .rc-slider-track {
   position: absolute;
   left: 0;
-  height: 2px;
-  background-color: var(--color-secondary);
+  height: 90px;
+  background-color: var(--color-primary-alpha-50);
 }
 .share-range .rc-slider-handle {
   position: absolute;
   margin-left: -7px;
   margin-top: -5px;
-  width: 14px;
-  height: 14px;
+  width: 8px;
+  height: 100px;
   cursor: pointer;
   cursor: -webkit-grab;
   cursor: grab;
-  border-radius: 50%;
-  background-color: var(--color-secondary);
+  border-radius: 4px;
+  background-color: var(--color-primary);
   -ms-touch-action: pan-x;
       touch-action: pan-x;
 }
@@ -43,12 +43,12 @@
   border-color: var(--color-primary);
 }
 .share-range .rc-slider-handle:active {
-  box-shadow: 0 0 0 10px var(--color-secondary-light);
+  box-shadow: 0 0 0 10px var(--color-primary-alpha-50);
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 .share-range .rc-slider-handle:focus {
-  box-shadow: 0 0 0 0 10px var(--color-secondary-light);
+  box-shadow: 0 0 0 0 10px var(--color-primary-alpha-50);
   outline: none;
 }
 .share-range .rc-slider-mark {

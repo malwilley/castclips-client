@@ -6,6 +6,7 @@ import Button from '~/components/Button';
 import { Back5, Forward30 } from '~/icons';
 import { colors } from '~/styles';
 import { PlayStatus } from '~/types';
+import formatHrMinSec from '~/utils/formatHrMinSec';
 import './PlaybackSlider.css';
 
 type PlaybackControlProps = {
@@ -17,6 +18,7 @@ type PlaybackControlProps = {
 
 type PlaybackSliderProps = PlaybackControlProps & {
   className?: string;
+  disabled: boolean;
   duration: number;
   time: number;
   onSeek: (time: number) => void;
@@ -33,10 +35,10 @@ const styles = {
     '& > svg': {
       height: 24,
       width: 24,
-      fill: colors.darkest,
-    },
-    '&:disabled > svg': {
       fill: colors.dark,
+    },
+    '&:disabled': {
+      opacity: 0.3,
     },
     marginRight: 10,
     padding: 8,
@@ -48,24 +50,22 @@ const styles = {
   main: css({}),
 };
 
-const formatNumber = (num: number) => (num < 10 ? `0${num}` : num);
-
-const formatHrMinSec = (seconds: number): string =>
-  [Math.floor(seconds / 3600), Math.floor((seconds % 3600) / 60), Math.floor((seconds % 3600) % 60)]
-    .map(formatNumber)
-    .join(':');
-
 const formatTime = (timeSeconds: number, durationSeconds: number): string =>
   `${formatHrMinSec(timeSeconds)} / ${formatHrMinSec(durationSeconds)}`;
 
-const Icon: React.SFC<{ onClick: () => void }> = ({ children, onClick }) => (
-  <Button className={styles.controlIcon} onClick={onClick}>
+const Icon: React.SFC<{ active?: boolean; onClick: () => void }> = ({
+  active,
+  children,
+  onClick,
+}) => (
+  <Button active={active} className={styles.controlIcon} onClick={onClick}>
     {children}
   </Button>
 );
 
 const PlaybackSlider: React.SFC<PlaybackSliderProps> = ({
   className,
+  disabled,
   duration,
   handleBackClick,
   handleForwardClick,
@@ -85,18 +85,18 @@ const PlaybackSlider: React.SFC<PlaybackSliderProps> = ({
     <div className={styles.controlsAndTimeContainer}>
       <div className={styles.controlsContainer}>
         {playStatus === PlayStatus.Paused ? (
-          <Icon onClick={handlePlayPauseClick}>
+          <Icon active={!disabled} onClick={handlePlayPauseClick}>
             <PlayArrowIcon />
           </Icon>
         ) : (
-          <Icon onClick={handlePlayPauseClick}>
+          <Icon active={!disabled} onClick={handlePlayPauseClick}>
             <PauseIcon />
           </Icon>
         )}
-        <Icon onClick={handleBackClick}>
+        <Icon active={!disabled} onClick={handleBackClick}>
           <Back5 />
         </Icon>
-        <Icon onClick={handleForwardClick}>
+        <Icon active={!disabled} onClick={handleForwardClick}>
           <Forward30 />
         </Icon>
       </div>

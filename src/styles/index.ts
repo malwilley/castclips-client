@@ -1,6 +1,8 @@
 import { css } from 'emotion';
 import colors from './colors';
 
+const borderRadius = 8;
+
 const card = css({
   backgroundColor: 'var(--color-lightest)',
   color: 'var(--color-dark)',
@@ -29,4 +31,4 @@ const animateSlideToNormal = css({
   animation: 'slide-to-normal ease-out 300ms',
 });
 
-export { animateSlideToFifty, animateSlideToNormal, card, colors, downHalf };
+export { animateSlideToFifty, animateSlideToNormal, borderRadius, card, colors, downHalf };

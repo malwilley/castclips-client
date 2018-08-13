@@ -4,18 +4,20 @@
   --normal-weight: 400;
   --bold-weight: 700;
 
-  /* --color-primary: #c3423f; */
-  --color-primary: #555B6E;
+  --color-primary: #555b6e;
+  --color-primary-dark: #555B6E;
+  --color-primary-alpha-50: rgba(85, 91, 110, .5);
   --color-secondary: #E4B363;
-  --color-secondary-light: rgb(228, 179, 99, .26);
+  --color-secondary-light: rgba(228, 179, 99, .26);
   --color-tertiary: #89B0AE;
+  --color-tertiary-light: rgba(137, 176, 174, 0.3);
   --color-light: #f7f7f7;
   --color-lightest: #ffffff;
-  --color-gray: #bebebe;
+  --color-gray: #dedede;
   --color-dark: #404e4d;
   --color-darkest: #1f2423;
 
-  --border-radius: 4px;
+  --border-radius: 8px;
   --card-dropshadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
   --card-height-large: 100px;
   --card-height-large: 250px;
@@ -41,8 +43,8 @@ body {
 }
 
 .hero, .hero-large {
-  height: 200px;
-  background-color: var(--color-primary);
+  height: 250px;
+  background-image: linear-gradient(var(--color-primary), var(--color-tertiary-light));
   color: var(--color-light);
 }
 

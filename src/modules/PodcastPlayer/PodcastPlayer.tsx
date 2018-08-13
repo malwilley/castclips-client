@@ -1,38 +1,43 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import Audio from '~/components/Audio';
+import PreviewOrRecord from '~/modules/PodcastPlayer/PreviewOrRecord';
+import ShareButton from '~/modules/PodcastPlayer/ShareButton';
+import ShareRange, { ShareRangeState } from '~/modules/PodcastPlayer/ShareRange';
 import { Episode, PlayStatus } from '~/types/index';
-import PlaybackControls from './PlaybackControls';
 import PlaybackSlider from './PlaybackSlider';
 
 type PodcastPlayerProps = {
   episode: Episode;
 };
 
-type ShareState = {
-  min: number;
-  max: number;
-  start: number;
-  end: number;
-};
-
 type PodcastPlayerState = {
   playStatus: PlayStatus;
   duration: number;
-  share: ShareState | null;
+  min: number;
+  max: number;
+  share: ShareRangeState;
   time: number;
+  previewing: number | null;
+  recording: number | null;
 };
 
 const styles = {
+  footerContainer: css({
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: 20,
+  }),
   main: css({
-    position: 'relative',
     paddingTop: 50,
+    position: 'relative',
   }),
   playbackSlider: css({
     position: 'absolute',
-    top: -7,
-    width: '100%',
-    borderTopLeftRadius: 4,
+    top: -5,
+    left: 2,
+    right: 2,
   }),
 };
 
@@ -45,6 +50,10 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.state = {
       playStatus: PlayStatus.Paused,
       duration: 0,
+      min: 0,
+      max: 0,
+      previewing: null,
+      recording: null,
       share: null,
       time: 0,
     };
@@ -59,17 +68,31 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     });
   };
 
+  pause = () => {
+    this.setState({
+      playStatus: PlayStatus.Paused,
+    });
+  };
+
   changeTime = (deltaTime: number) => {
     this.audioEl!.currentTime = this.state.time + deltaTime;
   };
 
   setTime = (time: number) => {
-    if (this.state.time === time) {
+    const { previewing: previewingState, share } = this.state;
+    if (share && previewingState && time >= share.end) {
+      this.setState({
+        playStatus: PlayStatus.Paused,
+        previewing: null,
+      });
+      this.seek(previewingState);
       return;
     }
-    this.setState({
+    this.setState(({ duration, previewing, min, max }) => ({
       time,
-    });
+      min: previewing ? min : Math.max(0, time - 60),
+      max: previewing ? max : Math.min(duration, time + 60),
+    }));
   };
 
   onSeek = (time: number) => {
@@ -94,37 +117,83 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.setState({ duration });
   };
 
-  renderControls() {
-    return (
-      <PlaybackControls
-        playStatus={this.state.playStatus}
-        handleBackClick={() => this.changeTime(-5)}
-        handleForwardClick={() => this.changeTime(30)}
-        handlePlayPauseClick={() => this.playPause()}
-      />
-    );
-  }
+  handleBoundsChange = (start: number, end: number) => {
+    this.pause();
 
-  renderAudio() {
-    return (
-      <Audio
-        src={this.props.episode.mediaUrl}
-        title={this.props.episode.title}
-        status={this.state.playStatus}
-        onTimeChange={time => this.setTime(time)}
-        onDuration={dur => this.setDuration(dur)}
-        ref={ref => (this.audioEl = ref ? ref.audioEl : null)}
-      />
-    );
-  }
+    this.setState({
+      share: {
+        start,
+        end,
+      },
+    });
+  };
+
+  handlePreviewStart = () => {
+    if (!this.state.share) {
+      return;
+    }
+    this.setState(({ time }: PodcastPlayerState) => ({
+      playStatus: PlayStatus.Playing,
+      previewing: time,
+    }));
+    this.seek(this.state.share.start);
+  };
+
+  handlePreviewStop = () => {
+    if (!this.state.previewing) {
+      return;
+    }
+    this.seek(this.state.previewing);
+    this.setState({
+      playStatus: PlayStatus.Paused,
+      previewing: null,
+    });
+  };
+
+  handleRecordStart = () => {
+    this.setState(({ time }: PodcastPlayerState) => ({
+      playStatus: PlayStatus.Playing,
+      recording: time,
+    }));
+  };
+
+  handleRecordStop = () => {
+    this.setState(({ recording, time }: PodcastPlayerState) => ({
+      playStatus: PlayStatus.Paused,
+      recording: null,
+      share: {
+        start: recording!,
+        end: time,
+      },
+    }));
+  };
+
+  handleShare = () => {
+    if (!this.state.share) {
+      return;
+    }
+    alert(`Shared clip from ${this.state.share.start} to ${this.state.share.end}!`);
+  };
 
   render() {
     return (
       <div className={styles.main}>
-        {this.renderAudio()}
+        <Audio
+          src={this.props.episode.mediaUrl}
+          title={this.props.episode.title}
+          status={this.state.playStatus}
+          onTimeChange={time => this.setTime(time)}
+          onDuration={dur => this.setDuration(dur)}
+          ref={ref => (this.audioEl = ref ? ref.audioEl : null)}
+        />
         <PlaybackSlider
           className={styles.playbackSlider}
           duration={this.state.duration}
+          disabled={
+            this.state.duration <= 0 ||
+            this.state.previewing !== null ||
+            this.state.recording !== null
+          }
           handleBackClick={() => this.changeTime(-5)}
           handleForwardClick={() => this.changeTime(30)}
           handlePlayPauseClick={this.playPause}
@@ -132,7 +201,27 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
           onSeek={this.onSeek}
           playStatus={this.state.playStatus}
         />
-        {this.renderControls()}
+        <ShareRange
+          min={this.state.min}
+          max={this.state.max}
+          range={this.state.share}
+          onChange={this.handleBoundsChange}
+          previewing={this.state.previewing !== null}
+          recording={this.state.recording !== null}
+          time={this.state.time}
+        />
+        <div className={styles.footerContainer}>
+          <PreviewOrRecord
+            canPreview={this.state.share !== null}
+            onPreviewStart={this.handlePreviewStart}
+            onPreviewStop={this.handlePreviewStop}
+            onRecordStart={this.handleRecordStart}
+            onRecordStop={this.handleRecordStop}
+            previewing={this.state.previewing !== null}
+            recording={this.state.recording !== null}
+          />
+          <ShareButton active={this.state.share !== null} onClick={this.handleShare} />
+        </div>
       </div>
     );
   }

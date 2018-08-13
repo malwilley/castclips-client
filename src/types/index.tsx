@@ -43,19 +43,16 @@ export interface Episode {
 
 export enum PlayStatus {
   Paused = 'paused',
-  Playing = 'playing'
+  Playing = 'playing',
+  Previewing = 'previewing',
 }
 
 export enum PlayMode {
   Playback,
-  Share
+  Share,
 }
 
-export type HttpRequest<T> = 
-  NotAsked |
-  Fetching |
-  Success<T> | 
-  Error;
+export type HttpRequest<T> = NotAsked | Fetching | Success<T> | Error;
 
 export interface NotAsked {
   type: 'not_asked';
