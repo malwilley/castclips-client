@@ -1,6 +1,7 @@
 import { css } from 'emotion';
 import { Range } from 'rc-slider';
 import * as React from 'react';
+import { colors } from '~/styles';
 import formatHrMinSec from '~/utils/formatHrMinSec';
 import './ShareRange.css';
 
@@ -21,6 +22,21 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
   }),
+  rangeContainer: css({
+    overflow: 'hidden',
+    position: 'relative',
+  }),
+  timeIndicator: ({ min, max, time }: ShareRangeProps) => {
+    const fraction = (time - min) / (max - min);
+    return css({
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: `${fraction * 100}%`,
+      background: colors.secondary,
+      width: 2,
+    });
+  },
 };
 
 const hiddenHandleStyles: React.CSSProperties[] = [0, 0].map(_ => ({
@@ -52,15 +68,18 @@ const ShareRange: React.SFC<ShareRangeProps> = props => {
   const { min, max, range } = props;
   return (
     <>
-      <Range
-        className="share-range"
-        min={min}
-        max={max}
-        pushable={3}
-        value={range ? [range.start, range.end] : [0, 0]}
-        onChange={makeHandleOnChange(props)}
-        handleStyle={range && range.start < max && range.end > min ? [] : hiddenHandleStyles}
-      />
+      <div className={styles.rangeContainer}>
+        <Range
+          className="share-range"
+          min={min}
+          max={max}
+          pushable={3}
+          value={range ? [range.start, range.end] : [0, 0]}
+          onChange={makeHandleOnChange(props)}
+          handleStyle={range && range.start < max && range.end > min ? [] : hiddenHandleStyles}
+        />
+        <div className={styles.timeIndicator(props)} />
+      </div>
       <div className={styles.labelContainer}>
         <small>{formatHrMinSec(min)}</small>
         <small>{formatHrMinSec(max)}</small>

@@ -1,5 +1,11 @@
 import { css } from 'emotion';
-import { MicrophoneIcon, MicrophoneOffIcon, PlayCircleFilledIcon, StopCircleIcon } from 'mdi-react';
+import {
+  DeleteIcon,
+  MicrophoneIcon,
+  MicrophoneOutlineIcon,
+  PlayCircleFilledIcon,
+  StopCircleIcon,
+} from 'mdi-react';
 import * as React from 'react';
 import Button from '~/components/Button';
 import { colors } from '~/styles';
@@ -47,15 +53,20 @@ const PreviewOrRecord: React.SFC<PreviewOrRecordProps> = ({
   if (recording) {
     return (
       <Button className={styles.button} onClick={onRecordStop}>
-        <MicrophoneOffIcon />
+        <MicrophoneOutlineIcon />
       </Button>
     );
   }
   if (canPreview) {
     return (
-      <Button className={styles.button} onClick={onPreviewStart}>
-        <PlayCircleFilledIcon />
-      </Button>
+      <div>
+        <Button className={styles.button} onClick={onPreviewStart}>
+          <PlayCircleFilledIcon />
+        </Button>
+        <Button className={styles.button} onClick={() => 1}>
+          <DeleteIcon />
+        </Button>
+      </div>
     );
   }
   return (

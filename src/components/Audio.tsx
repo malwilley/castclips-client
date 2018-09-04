@@ -52,12 +52,9 @@ interface DefaultProps {
 
 type PropsWithDefaults = Props & DefaultProps;
 
-interface State {
-
-}
+interface State {}
 
 class Audio extends React.Component<Props, State> {
-
   public static defaultProps: DefaultProps = {
     autoPlay: false,
     controls: false,
@@ -80,70 +77,74 @@ class Audio extends React.Component<Props, State> {
   public audioEl: HTMLAudioElement | null;
   private timer: NodeJS.Timer;
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props);
   }
 
   componentDidMount() {
     const audio = this.audioEl as HTMLAudioElement;
 
-    const { 
-      onError, onCanPlay, onCanPlayThrough, onEnded,
-      onLoadedMetadata, onTimeChange, onDuration
+    const {
+      onError,
+      onCanPlay,
+      onCanPlayThrough,
+      onEnded,
+      onLoadedMetadata,
+      onTimeChange,
+      onDuration,
     } = this.props as PropsWithDefaults;
 
-    this.timer = setInterval(
-      () => onTimeChange(audio.currentTime),
-      500
-    );
+    this.timer = setInterval(() => onTimeChange(audio.currentTime), 500);
 
-    audio.addEventListener('error', (e) => {
+    audio.addEventListener('error', e => {
       onError(e);
     });
 
     // When enough of the file has downloaded to start playing
-    audio.addEventListener('canplay', (e) => {
+    audio.addEventListener('canplay', e => {
       onCanPlay(e);
     });
 
     // When enough of the file has downloaded to play the entire file
-    audio.addEventListener('canplaythrough', (e) => {
+    audio.addEventListener('canplaythrough', e => {
       onCanPlayThrough(e);
     });
 
     // When the file has finished playing to the end
-    audio.addEventListener('ended', (e) => {
+    audio.addEventListener('ended', e => {
       onEnded(e);
     });
 
-    audio.addEventListener('loadedmetadata', (e) => {
+    audio.addEventListener('loadedmetadata', e => {
       onLoadedMetadata(e);
     });
 
-    audio.addEventListener('durationchange', (e) => {
+    audio.addEventListener('durationchange', e => {
       onDuration(audio.duration);
     });
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.timer);
   }
 
-  componentWillReceiveProps (nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props) {
     this.updateAudio(nextProps as PropsWithDefaults);
   }
 
-  updateAudio (props: PropsWithDefaults) {
+  updateAudio(props: PropsWithDefaults) {
     const audio = this.audioEl as HTMLAudioElement;
     const { status, volume } = props;
 
     if (volume !== audio.volume) {
       audio.volume = volume;
     }
-    
+
     if (audio.paused && status !== PlayStatus.Paused) {
+      console.log('play');
       audio.play();
     } else if (!audio.paused && status === PlayStatus.Paused) {
+      console.log('pause');
       audio.pause();
     }
   }
@@ -159,11 +160,13 @@ class Audio extends React.Component<Props, State> {
         muted={muted}
         onPlay={onPlay}
         preload={preload}
-        ref={ref => this.audioEl = ref}
+        ref={ref => (this.audioEl = ref)}
         src={this.props.src}
         title={this.props.title}
       >
-        <p>Your browser does not support the <code>audio</code> element.</p>
+        <p>
+          Your browser does not support the <code>audio</code> element.
+        </p>
       </audio>
     );
   }
