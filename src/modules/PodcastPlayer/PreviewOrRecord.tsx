@@ -16,6 +16,7 @@ type PreviewOrRecordProps = {
   onPreviewStop: () => void;
   onRecordStart: () => void;
   onRecordStop: () => void;
+  onReset: () => void;
   previewing: boolean;
   recording: boolean;
 };
@@ -40,6 +41,7 @@ const PreviewOrRecord: React.SFC<PreviewOrRecordProps> = ({
   onPreviewStop,
   onRecordStart,
   onRecordStop,
+  onReset,
   previewing,
   recording,
 }) => {
@@ -63,7 +65,7 @@ const PreviewOrRecord: React.SFC<PreviewOrRecordProps> = ({
         <Button className={styles.button} onClick={onPreviewStart}>
           <PlayCircleFilledIcon />
         </Button>
-        <Button className={styles.button} onClick={() => 1}>
+        <Button className={styles.button} onClick={onReset}>
           <DeleteIcon />
         </Button>
       </div>

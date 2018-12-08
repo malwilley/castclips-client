@@ -168,6 +168,12 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     }));
   };
 
+  handleReset = () => {
+    this.setState({
+      share: null,
+    });
+  };
+
   handleShare = () => {
     if (!this.state.share) {
       return;
@@ -217,6 +223,7 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
             onPreviewStop={this.handlePreviewStop}
             onRecordStart={this.handleRecordStart}
             onRecordStop={this.handleRecordStop}
+            onReset={this.handleReset}
             previewing={this.state.previewing !== null}
             recording={this.state.recording !== null}
           />
