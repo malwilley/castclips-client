@@ -15,7 +15,7 @@ const Autosuggest = require('react-autosuggest') as new () => React.Component<
   Object
 >;
 import { RouteComponentProps, withRouter } from 'react-router';
-import { searchPodcasts } from '~/api/gpodder';
+import { typeahead } from '~/api/listenNotes';
 import IconSearch from '~/icons/Search';
 import IconSpinner from '~/icons/Spinner';
 import * as types from '~/types/index';
@@ -69,16 +69,16 @@ class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState>
       },
     });
     try {
-      const response: types.GpodderPodcastResponse[] = await searchPodcasts(value);
+      const response = await typeahead(value);
       this.setState({
         suggestions: {
           type: 'success',
-          data: response.map(r => {
+          data: response.podcasts.map(r => {
             return {
-              title: r.title,
-              description: r.description,
-              logoUrl: r.logo_url,
-              podcastUrl: r.url,
+              title: r.title_original,
+              description: '',
+              logoUrl: r.thumbnail,
+              podcastUrl: r.id,
             };
           }),
         },
