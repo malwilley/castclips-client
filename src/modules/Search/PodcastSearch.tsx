@@ -75,8 +75,8 @@ class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState>
           type: 'success',
           data: response.podcasts.map(r => {
             return {
+              id: r.id,
               title: r.title_original,
-              description: '',
               logoUrl: r.thumbnail,
               podcastUrl: r.id,
             };
@@ -127,8 +127,8 @@ class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState>
     return suggestion.title;
   };
 
-  onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (event, { suggestion }) => {
-    this.props.history.push(`/podcast?feed=${suggestion.podcastUrl}`);
+  onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (_, { suggestion }) => {
+    this.props.history.push(`/podcast/${suggestion.id}`);
   };
 
   getIcon = () => {

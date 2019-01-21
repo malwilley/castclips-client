@@ -1,21 +1,22 @@
-import { parse } from 'query-string';
+import { last } from 'ramda';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { parseFeed } from '~/api/podcastFeed';
+import { getPodcastData } from '~/api/listenNotes';
 import { HttpRequest, PodcastData } from '~/types/index';
+import stripHtml from '~/utils/stripHtml';
 import EpisodeList from './EpisodeList';
 import PodcastCard from './PodcastCard';
 import './PodcastPage.css';
 
-interface Props {}
+interface PodcastPageProps {}
 
-interface State {
+interface PodcastPageState {
   podcast: HttpRequest<PodcastData>;
 }
 
-type WithRouterProps = RouteComponentProps<Props>;
+type WithRouterProps = RouteComponentProps<PodcastPageProps>;
 
-class PodcastPage extends React.Component<WithRouterProps, State> {
+class PodcastPage extends React.Component<WithRouterProps, PodcastPageState> {
   constructor(props: WithRouterProps) {
     super(props);
 
@@ -30,24 +31,47 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
     this.retrieveEpisodes();
   }
 
-  feedUrl() {
-    const query = parse(this.props.location.search);
-    return query.feed;
-  }
-
   async retrieveEpisodes() {
-    const feedUrl = this.feedUrl();
-
     try {
-      const podcast = await parseFeed(feedUrl);
+      const id = last(this.props.location.pathname.split('/'));
+      if (!id) {
+        throw new Error('ID not valid');
+      }
+
+      const { description, episodes, thumbnail, title, website } = await getPodcastData(id);
 
       await this.setState({
         podcast: {
           type: 'success',
-          data: podcast,
+          data: {
+            description: stripHtml(description),
+            episodes: episodes.map(
+              ({
+                audio,
+                audio_length,
+                description: episodeDescription,
+                id: episodeId,
+                pub_date_ms,
+                thumbnail: episodeThumbnail,
+              }) => ({
+                audio,
+                audioLength: audio_length,
+                description: stripHtml(episodeDescription),
+                id: episodeId,
+                published: new Date(pub_date_ms),
+                thumbnail: episodeThumbnail,
+                title,
+              })
+            ),
+            id,
+            thumbnail,
+            title,
+            website,
+          },
         },
       });
     } catch (err) {
+      console.log(err);
       await this.setState({
         podcast: {
           type: 'error',
@@ -60,7 +84,7 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
   render() {
     const episodes =
       this.state.podcast.type === 'success' ? (
-        <EpisodeList feedUrl={this.feedUrl()} episodes={this.state.podcast.data.episodes} />
+        <EpisodeList episodes={this.state.podcast.data.episodes} />
       ) : null;
 
     return (
@@ -77,4 +101,4 @@ class PodcastPage extends React.Component<WithRouterProps, State> {
 
 const PodcastPageWithRouter = withRouter<WithRouterProps>(PodcastPage);
 
-export default (props: Props) => <PodcastPageWithRouter {...props} />;
+export default (props: PodcastPageProps) => <PodcastPageWithRouter {...props} />;

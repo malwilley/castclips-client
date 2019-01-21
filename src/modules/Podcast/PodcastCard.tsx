@@ -7,17 +7,14 @@ interface Props {
   podcast: HttpRequest<PodcastData>;
 }
 
-const renderPodcastData = (podcast: PodcastData) => {
+const renderPodcastData = ({ description, thumbnail, title, website }: PodcastData) => {
   return (
     <div className="flex card down-half slide-in-fifty">
-      <img
-        className="icon podcast-img"
-        src="http://static.libsyn.com/p/assets/6/d/7/d/6d7d36d6929db515/MBMBAM_Update.jpg"
-      />
+      <img className="icon podcast-img" src={thumbnail} />
       <div className="flex flex-column flex-auto left-align px3 py1">
-        <h3 className="flex-none">{podcast.title}</h3>
-        <p className="flex-auto overflow-ellipsis m0">{podcast.description}</p>
-        <p className="flex-none m0">links? {podcast.link}</p>
+        <h3 className="flex-none">{title}</h3>
+        <p className="flex-auto overflow-ellipsis m0">{description}</p>
+        <p className="flex-none m0">links? {website}</p>
       </div>
     </div>
   );

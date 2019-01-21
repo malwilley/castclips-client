@@ -21,24 +21,29 @@ export interface GpodderEpisodeResponse {
 }
 
 export interface PodcastSuggestion {
+  id: string;
   title: string;
-  description: string;
   logoUrl: string;
   podcastUrl: string;
 }
 
 export interface PodcastData {
+  id: string;
+  thumbnail: string;
   title: string;
-  link: string;
   description: string;
   episodes: Episode[];
+  website: string;
 }
 
 export interface Episode {
+  audio: string;
+  audioLength: number;
+  id: string;
   title: string;
   description: string;
-  published: number;
-  mediaUrl: string;
+  published: Date;
+  thumbnail: string;
 }
 
 export enum PlayStatus {

@@ -6,7 +6,6 @@ import './EpisodeList.css';
 
 interface Props {
   episodes: Episode[];
-  feedUrl: string;
 }
 
 interface State {
@@ -33,17 +32,14 @@ class EpisodeList extends React.Component<Props, State> {
   }
 
   renderEpisode(episode: Episode) {
+    const { description, id, title } = episode;
+
     return (
-      <Link
-        to={`/episode?podcasturl=${this.props.feedUrl}&episodeurl=${
-          episode.mediaUrl
-        }&episodetitle=${episode.title}`}
-        key={episode.title}
-      >
+      <Link to={`/episode/${id}`} key={title}>
         <div className="flex episode-row left-align items-center clickable">
           <div className="flex flex-column flex-auto p2">
-            <h5 className="title flex-none overflow-ellipsis no-wrap">{episode.title}</h5>
-            <p className="h5 flex-auto overflow-ellipsis no-wrap">{episode.description}</p>
+            <h5 className="title flex-none overflow-ellipsis no-wrap">{title}</h5>
+            <p className="h5 flex-auto overflow-ellipsis no-wrap">{description}</p>
           </div>
           <div className="flex-none p1 icon-large">
             <IconGoTo className="svg-soft" />

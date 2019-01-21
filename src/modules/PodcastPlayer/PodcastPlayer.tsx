@@ -185,7 +185,7 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     return (
       <div className={styles.main}>
         <Audio
-          src={this.props.episode.mediaUrl}
+          src={this.props.episode.audio}
           title={this.props.episode.title}
           status={this.state.playStatus}
           onTimeChange={time => this.setTime(time)}

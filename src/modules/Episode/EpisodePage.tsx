@@ -1,7 +1,9 @@
-import { parse } from 'query-string';
+import { last } from 'ramda';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-// import { getEpisodeData } from '../api/gpodder';
+import { getEpisodeData } from '~/api/listenNotes';
+import HttpContent from '~/components/HttpContent';
+import stripHtml from '~/utils/stripHtml';
 import { Episode, HttpRequest } from '../../types/index';
 import EpisodeCard from './EpisodeCard';
 
@@ -28,36 +30,38 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
     this.retrieveEpisodeData();
   }
 
-  podcastUrl() {
-    const query = parse(this.props.location.search);
-    return query.podcasturl;
-  }
-
-  episodeUrl() {
-    const query = parse(this.props.location.search);
-    return query.episodeurl;
-  }
-
-  episodeTitle() {
-    const query = parse(this.props.location.search);
-    return query.episodetitle;
-  }
-
-  retrieveEpisodeData() {
-    const episodeTitle = this.episodeTitle();
-    const episodeUrl = this.episodeUrl();
-
+  retrieveEpisodeData = async () => {
     try {
-      // const episode = await getEpisodeData(podcastUrl, episodeUrl);
+      this.setState({
+        episode: {
+          type: 'fetching',
+        },
+      });
+      const id = last(this.props.location.pathname.split('/'));
+      if (!id) {
+        throw new Error('ID not valid');
+      }
+
+      const {
+        audio,
+        audio_length,
+        description,
+        pub_date_ms,
+        title,
+        thumbnail,
+      } = await getEpisodeData(id);
 
       this.setState({
         episode: {
           type: 'success',
           data: {
-            title: episodeTitle,
-            description: '',
-            published: 0,
-            mediaUrl: episodeUrl,
+            audio,
+            audioLength: audio_length,
+            description: stripHtml(description),
+            id,
+            published: new Date(pub_date_ms),
+            thumbnail,
+            title,
           },
         },
       });
@@ -69,13 +73,18 @@ class EpisodePage extends React.Component<WithRouterProps, State> {
         },
       });
     }
-  }
+  };
 
   render() {
     return (
       <>
         <section className="hero center bg-primary flex flex-column pt2 relative">
-          <h1>{this.episodeTitle()}</h1>
+          <HttpContent
+            renderError={() => <div>error!</div>}
+            renderFetching={() => <div>fetching...</div>}
+            renderSuccess={({ title }) => <h1>{title}</h1>}
+            request={this.state.episode}
+          />
           <EpisodeCard episode={this.state.episode} />
         </section>
         <section className="page-container pt-episodes">

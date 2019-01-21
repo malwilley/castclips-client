@@ -14,9 +14,12 @@ type ListenNotesTypeaheadResponse = {
 
 type ListenNotesPodcastDataResponse = {
   thumbnail: string;
+  description: string;
   id: string;
   next_episode_pub_date: number;
+  title: string;
   episodes: Array<{
+    description: string;
     thumbnail: string;
     title: string;
     pub_date_ms: number;
@@ -24,9 +27,11 @@ type ListenNotesPodcastDataResponse = {
     audio: string;
     id: string;
   }>;
+  website: string;
 };
 
 type ListenNotesEpisodeDataResponse = {
+  description: string;
   title: string;
   podcast: {
     title: string;
@@ -36,7 +41,7 @@ type ListenNotesEpisodeDataResponse = {
   };
   id: string;
   audio: string;
-  thumnail: string;
+  thumbnail: string;
   pub_date_ms: number;
   audio_length: number;
 };
