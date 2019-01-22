@@ -1,9 +1,9 @@
 export default {
-  primary: '#555B6E',
+  primary: '#07689f',
   primaryAlpha50: 'rgba(85, 91, 110, 0.5)',
-  secondary: '#E4B363',
+  secondary: '#a2d5f2',
   secondaryLight: 'rgba(228, 179, 99, .26)',
-  tertiary: '#89B0AE',
+  tertiary: '#ff7e67',
   teriaryAlpha30: 'rgba(137, 176, 174, 0.3)',
   light: '#f7f7f7',
   lightest: '#ffffff',

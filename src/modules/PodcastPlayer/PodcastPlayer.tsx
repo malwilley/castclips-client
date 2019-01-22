@@ -90,8 +90,8 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     }
     this.setState(({ duration, previewing, min, max }) => ({
       time,
-      min: previewing ? min : Math.max(0, time - 60),
-      max: previewing ? max : Math.min(duration, time + 60),
+      min: previewing ? min : Math.max(0, time - 120),
+      max: previewing ? max : Math.min(duration, time + 120),
     }));
   };
 

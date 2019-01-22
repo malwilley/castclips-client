@@ -18,7 +18,7 @@ const styles = {
     alignItems: 'center',
     borderRadius: 20,
     display: 'flex',
-    backgroundColor: colors.tertiary,
+    backgroundColor: colors.primary,
     color: colors.lightest,
     padding: '9px 18px',
   }),

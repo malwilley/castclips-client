@@ -33,7 +33,7 @@ const styles = {
       top: 0,
       bottom: 0,
       left: `${fraction * 100}%`,
-      background: colors.secondary,
+      background: colors.tertiary,
       width: 2,
     });
   },

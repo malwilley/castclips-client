@@ -4,13 +4,14 @@
   --normal-weight: 400;
   --bold-weight: 700;
 
-  --color-primary: #555b6e;
-  --color-primary-dark: #555B6E;
-  --color-primary-alpha-50: rgba(85, 91, 110, .5);
-  --color-secondary: #E4B363;
-  --color-secondary-light: rgba(228, 179, 99, .26);
-  --color-tertiary: #89B0AE;
-  --color-tertiary-light: rgba(137, 176, 174, 0.3);
+  --color-primary: #07689f;
+  --color-primary-dark: #49759c;
+  --color-primary-alpha-50: rgba(104, 147, 186, .5);
+  --color-secondary: #a2d5f2;
+  --color-secondary-light: rgba(225, 181, 60, .26);
+  --color-tertiary: #ff7e67;
+  --color-tertiary-light: #ffab9c;
+  --color-tertiary-alpha30: rgba(255, 126, 103, 0.3);
   --color-light: #f7f7f7;
   --color-lightest: #ffffff;
   --color-gray: #dedede;
@@ -44,7 +45,7 @@ body {
 
 .hero, .hero-large {
   height: 250px;
-  background-image: linear-gradient(var(--color-primary), var(--color-tertiary-light));
+  background-image: var(--color-primary);
   color: var(--color-light);
 }
 
@@ -86,6 +87,7 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: var(--h-font);
   font-weight: var(--bold-weight);
+  margin: 0;
 }
 
 h6 {

@@ -29,7 +29,7 @@
   position: absolute;
   left: 0;
   height: 4px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-tertiary);
   border-top-left-radius: 8px;
 }
 .playback-slider .rc-slider-handle {
@@ -42,7 +42,7 @@
   cursor: -webkit-grab;
   cursor: grab;
   border-radius: 50%;
-  background-color: var(--color-secondary);
+  background-color: var(--color-tertiary);
   -ms-touch-action: pan-x;
       touch-action: pan-x;
 }
@@ -50,12 +50,12 @@
   border-color: var(--color-primary);
 }
 .playback-slider .rc-slider-handle:active {
-  box-shadow: 0 0 0 10px var(--color-secondary-light);
+  box-shadow: 0 0 0 10px var(--color-tertiary-alpha30);
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 .playback-slider .rc-slider-handle:focus {
-  box-shadow: 0 0 0 0 10px var(--color-secondary-light);
+  box-shadow: 0 0 0 0 10px var(--color-tertiary-alpha30);
   outline: none;
 }
 .playback-slider .rc-slider-mark {
