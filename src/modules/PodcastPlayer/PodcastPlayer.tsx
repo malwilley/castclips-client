@@ -6,6 +6,7 @@ import ShareButton from '~/modules/PodcastPlayer/ShareButton';
 import ShareRange, { ShareRangeState } from '~/modules/PodcastPlayer/ShareRange';
 import { Episode, PlayStatus } from '~/types/index';
 import PlaybackSlider from './PlaybackSlider';
+import { addClip } from '~/api/firebase';
 
 type PodcastPlayerProps = {
   episode: Episode;
@@ -174,11 +175,20 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     });
   };
 
-  handleShare = () => {
+  handleShare = async () => {
     if (!this.state.share) {
       return;
     }
-    alert(`Shared clip from ${this.state.share.start} to ${this.state.share.end}!`);
+    const { id } = await addClip({
+      audio: this.props.episode.audio,
+      description: '',
+      title: '',
+      episodeId: this.props.episode.id,
+      podcastId: '',
+      start: this.state.share.start,
+      end: this.state.share.end,
+    });
+    alert(id);
   };
 
   render() {

@@ -1,4 +1,4 @@
-export interface GpodderPodcastResponse {
+export type GpodderPodcastResponse = {
   subscribers: number;
   logo_url: string;
   url: string;
@@ -8,9 +8,9 @@ export interface GpodderPodcastResponse {
   subscribers_last_week: number;
   website: string;
   scaled_logo_url: string;
-}
+};
 
-export interface GpodderEpisodeResponse {
+export type GpodderEpisodeResponse = {
   title: string;
   url: string;
   podcast_title: string;
@@ -18,25 +18,25 @@ export interface GpodderEpisodeResponse {
   description: string;
   website: string;
   released: string;
-}
+};
 
-export interface PodcastSuggestion {
+export type PodcastSuggestion = {
   id: string;
   title: string;
   logoUrl: string;
   podcastUrl: string;
-}
+};
 
-export interface PodcastData {
+export type PodcastData = {
   id: string;
   thumbnail: string;
   title: string;
   description: string;
   episodes: Episode[];
   website: string;
-}
+};
 
-export interface Episode {
+export type Episode = {
   audio: string;
   audioLength: number;
   id: string;
@@ -44,7 +44,19 @@ export interface Episode {
   description: string;
   published: Date;
   thumbnail: string;
-}
+};
+
+export type EpisodeClip = {
+  audio: string;
+  description: string;
+  end: number;
+  episodeId: string;
+  podcastId: string;
+  stars: number;
+  start: number;
+  title: string;
+  views: number;
+};
 
 export enum PlayStatus {
   Paused = 'paused',
@@ -59,20 +71,20 @@ export enum PlayMode {
 
 export type HttpRequest<T> = NotAsked | Fetching | Success<T> | Error;
 
-export interface NotAsked {
+export type NotAsked = {
   type: 'not_asked';
-}
+};
 
-export interface Success<T> {
+export type Success<T> = {
   type: 'success';
   data: T;
-}
+};
 
-export interface Fetching {
+export type Fetching = {
   type: 'fetching';
-}
+};
 
-export interface Error {
+export type Error = {
   type: 'error';
   message: string;
-}
+};

@@ -9,8 +9,10 @@ const styles = {
     '&:disabled': {
       opacity: 0.3,
     },
-    '&:not(:disabled)': {
-      boxShadow: '0 5px 10px rgba(0,0,0,0.1), 0 3px 3px rgba(0,0,0,0.12)',
+    '&:hover': {
+      '&:not(:disabled)': {
+        boxShadow: '0 5px 10px rgba(0,0,0,0.3)',
+      },
     },
     '& > svg': {
       marginLeft: 4,
@@ -21,6 +23,7 @@ const styles = {
     backgroundColor: colors.primary,
     color: colors.lightest,
     padding: '9px 18px',
+    transition: 'box-shadow 200ms ease-out, opacity 200ms ease-out',
   }),
 };
 

@@ -31,7 +31,12 @@ const styles = {
       height: 40,
       width: 40,
     },
-    marginRight: 20,
+  }),
+  container: css({
+    '& > :not(:last-child)': {
+      marginRight: 20,
+    },
+    display: 'flex',
   }),
 };
 
@@ -61,7 +66,7 @@ const PreviewOrRecord: React.SFC<PreviewOrRecordProps> = ({
   }
   if (canPreview) {
     return (
-      <div>
+      <div className={styles.container}>
         <Button className={styles.button} onClick={onPreviewStart}>
           <PlayCircleFilledIcon />
         </Button>

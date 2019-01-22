@@ -16,9 +16,12 @@ const styles = {
     '&:disabled': {
       cursor: 'not-allowed',
     },
+    alignItems: 'center',
     background: 'none',
     border: 0,
     cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
     outline: 0,
     padding: 0,
     userSelect: 'none',

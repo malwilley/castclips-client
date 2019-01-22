@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
+import ClipPage from '~/modules/Clip/ClipPage';
 import EpisodePage from './modules/Episode/EpisodePage';
 import PodcastPage from './modules/Podcast/PodcastPage';
 import SearchPage from './modules/Search/SearchPage';
@@ -37,6 +38,7 @@ class App extends React.Component {
           <Route exact={true} path="/" component={SearchPage} />
           <Route path="/podcast" component={PodcastPage} />
           <Route path="/episode" component={EpisodePage} />
+          <Route path="/clip" component={ClipPage} />
         </div>
       </BrowserRouter>
     );
