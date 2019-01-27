@@ -94,7 +94,7 @@ class Audio extends React.Component<Props, State> {
       onDuration,
     } = this.props as PropsWithDefaults;
 
-    this.timer = setInterval(() => onTimeChange(audio.currentTime), 500);
+    this.timer = setInterval(() => onTimeChange(audio.currentTime), 100);
 
     audio.addEventListener('error', e => {
       onError(e);
@@ -141,10 +141,8 @@ class Audio extends React.Component<Props, State> {
     }
 
     if (audio.paused && status !== PlayStatus.Paused) {
-      console.log('play');
       audio.play();
     } else if (!audio.paused && status === PlayStatus.Paused) {
-      console.log('pause');
       audio.pause();
     }
   }
@@ -161,9 +159,9 @@ class Audio extends React.Component<Props, State> {
         onPlay={onPlay}
         preload={preload}
         ref={ref => (this.audioEl = ref)}
-        src={this.props.src}
         title={this.props.title}
       >
+        <source src={this.props.src} type="audio/mp3" />
         <p>
           Your browser does not support the <code>audio</code> element.
         </p>

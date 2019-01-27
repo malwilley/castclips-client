@@ -4,7 +4,7 @@ import * as React from 'react';
 export type ButtonProps = {
   active?: boolean;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const styles = {

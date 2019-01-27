@@ -10,18 +10,19 @@ import formatHrMinSec from '~/utils/formatHrMinSec';
 import './PlaybackSlider.css';
 
 type PlaybackControlProps = {
-  playStatus: PlayStatus;
-  handlePlayPauseClick: () => void;
-  handleForwardClick: () => void;
-  handleBackClick: () => void;
+  playStatus?: PlayStatus;
+  handlePlayPauseClick?: () => void;
+  handleForwardClick?: () => void;
+  handleBackClick?: () => void;
 };
 
 type PlaybackSliderProps = PlaybackControlProps & {
   className?: string;
-  disabled: boolean;
-  duration: number;
-  time: number;
-  onSeek: (time: number) => void;
+  disabled?: boolean;
+  duration?: number;
+  start?: number;
+  time?: number;
+  onSeek?: (time: number) => void;
 };
 
 const styles = {
@@ -53,7 +54,7 @@ const styles = {
 const formatTime = (timeSeconds: number, durationSeconds: number): string =>
   `${formatHrMinSec(timeSeconds)} / ${formatHrMinSec(durationSeconds)}`;
 
-const Icon: React.SFC<{ active?: boolean; onClick: () => void }> = ({
+const Icon: React.SFC<{ active?: boolean; onClick?: () => void }> = ({
   active,
   children,
   onClick,
@@ -65,21 +66,22 @@ const Icon: React.SFC<{ active?: boolean; onClick: () => void }> = ({
 
 const PlaybackSlider: React.SFC<PlaybackSliderProps> = ({
   className,
-  disabled,
-  duration,
+  disabled = false,
+  duration = 0,
   handleBackClick,
   handleForwardClick,
   handlePlayPauseClick,
-  time,
+  start = 0,
+  time = 0,
   onSeek,
-  playStatus,
+  playStatus = PlayStatus.Paused,
 }) => (
   <div className={css(styles.main, className)}>
     <Slider
       className="playback-slider"
-      min={0}
+      min={start}
       max={Math.round(duration)}
-      value={time}
+      value={Math.floor(time)}
       onChange={onSeek}
     />
     <div className={styles.controlsAndTimeContainer}>
