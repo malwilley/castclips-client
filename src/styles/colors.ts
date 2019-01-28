@@ -1,6 +1,7 @@
 export default {
   primary: '#07689f',
-  primaryAlpha50: 'rgba(85, 91, 110, 0.5)',
+  primaryAlpha30: 'rgba(7, 104, 159, 0.3)',
+  primaryDark: '#004267',
   secondary: '#a2d5f2',
   secondaryLight: 'rgba(228, 179, 99, .26)',
   tertiary: '#ff7e67',
@@ -10,4 +11,5 @@ export default {
   gray: '#bebebe',
   dark: '#404e4d',
   darkest: '#1f2423',
+  darkestAlpha30: 'rgba(31,36,35,0.3)',
 };
