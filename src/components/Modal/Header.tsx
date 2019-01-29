@@ -53,7 +53,7 @@ const styles = {
   }),
   title: css({
     color: colors.dark,
-    fontSize: 16,
+    fontSize: 18,
   }),
 };
 

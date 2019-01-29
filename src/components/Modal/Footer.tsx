@@ -7,7 +7,7 @@ const styles = {
     '& > :not(:last-child)': {
       marginRight: 20,
     },
-    height: 60,
+    height: 70,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     backgroundColor: colors.light,

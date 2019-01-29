@@ -37,10 +37,8 @@ const Modal: React.SFC<ModalProps> = ({
       <Header {...{ handleClose, icon, title }} />
       <div className={styles.bodyContainer}>{children}</div>
       <Footer>
-        <>
-          {secondaryButtonProps && <ModalButton type="secondary" {...secondaryButtonProps} />}
-          {primaryButtonProps && <ModalButton type="primary" {...primaryButtonProps} />}
-        </>
+        {secondaryButtonProps && <ModalButton type="secondary" {...secondaryButtonProps} />}
+        {primaryButtonProps && <ModalButton type="primary" {...primaryButtonProps} />}
       </Footer>
     </div>
   </Background>

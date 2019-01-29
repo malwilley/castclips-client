@@ -1,12 +1,21 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from '~/styles';
+import { Portal } from 'react-portal';
+import zIndex from '~/styles/zIndex';
 
 type ModalBackgroundProps = {
   handleClose: () => void;
 };
 
 const styles = {
+  contentContainer: css({
+    position: 'absolute',
+    top: 260,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  }),
   main: css({
     position: 'fixed',
     top: 0,
@@ -17,13 +26,18 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: zIndex.modal,
   }),
 };
 
 const ModalBackground: React.SFC<ModalBackgroundProps> = ({ children, handleClose }) => (
-  <div className={styles.main} onClick={handleClose}>
-    {children}
-  </div>
+  <Portal>
+    <div className={styles.main} onClick={handleClose}>
+      <div className={styles.contentContainer} onClick={e => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  </Portal>
 );
 
 export default ModalBackground;

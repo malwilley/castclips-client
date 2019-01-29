@@ -21,9 +21,10 @@ const commonStyles: CSSObject = {
   },
   borderRadius: 4,
   padding: '10px 16px',
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: 'bold',
   fontFamily: fontFamily.titleFont,
+  minWidth: 90,
 };
 
 const makeStyles = (type: ModalButtonProps['type']) => {

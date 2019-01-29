@@ -7,6 +7,8 @@ import ShareRange, { ShareRangeState } from '~/modules/PodcastPlayer/ShareRange'
 import { Episode, PlayStatus } from '~/types/index';
 import PlaybackSlider from './PlaybackSlider';
 import { addClip } from '~/api/firebase';
+import Show from '~/components/Show';
+import ShareModal from '~/modules/PodcastPlayer/ShareModal';
 
 type PodcastPlayerProps = {
   episode: Episode;
@@ -237,7 +239,14 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
             previewing={this.state.previewing !== null}
             recording={this.state.recording !== null}
           />
-          <ShareButton active={this.state.share !== null} onClick={this.handleShare} />
+          <Show>
+            {({ isOpen, toggle }) => (
+              <>
+                <ShareButton active={this.state.share !== null} onClick={toggle} />
+                {isOpen && <ShareModal handleClose={toggle} />}
+              </>
+            )}
+          </Show>
         </div>
       </div>
     );

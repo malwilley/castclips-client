@@ -1,6 +1,7 @@
 import { css } from 'emotion';
 import { fontFamily } from './text';
 import colors from './colors';
+import zIndex from '~/styles/zIndex';
 
 const borderRadius = 8;
 
@@ -14,7 +15,7 @@ const card = css({
   maxHeight: '250px',
   overflow: 'hidden',
   transition: 'height 300ms ease-out',
-  zIndex: 1000,
+  zIndex: zIndex.card,
 });
 
 const downHalf = css({
