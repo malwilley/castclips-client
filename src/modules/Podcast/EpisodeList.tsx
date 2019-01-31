@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import IconGoTo from '~/icons/GoTo';
-import { Episode } from '~/types/index';
+import { Episode } from '~/types';
 import './EpisodeList.css';
 
 interface Props {

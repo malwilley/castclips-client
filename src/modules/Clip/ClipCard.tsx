@@ -1,8 +1,8 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import { animateSlideToFifty, card, downHalf } from '~/styles';
-import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import { HttpRequest, EpisodeClip } from '../../types/index';
+import FeatureCard from '~/components/FeatureCard/FeatureCard';
+import { HttpRequest, EpisodeClip } from '~/types';
 import { fontFamily } from '~/styles/text';
 import ClipPlayer from '~/modules/Clip/ClipPlayer';
 

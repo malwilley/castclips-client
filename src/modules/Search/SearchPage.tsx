@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PodcastSearch from './PodcastSearch';
+import PodcastSearch from '~/modules/Search/PodcastSearch';
 
 interface Props {}
 

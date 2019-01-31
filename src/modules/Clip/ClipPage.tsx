@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import HttpContent from '~/components/HttpContent';
 import { getClip } from '~/api/firebase';
 import { HttpRequest, EpisodeClip } from '~/types';
-import ClipCard from './ClipCard';
+import ClipCard from '~/modules/Clip/ClipCard';
 
 type ClipPageProps = {};
 

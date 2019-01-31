@@ -1,6 +1,6 @@
 import { css } from 'emotion';
-import { fontFamily } from './text';
-import colors from './colors';
+import { fontFamily } from '~/styles/text';
+import colors from '~/styles/colors';
 import zIndex from '~/styles/zIndex';
 
 const borderRadius = 8;

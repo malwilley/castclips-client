@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import ClipPage from '~/modules/Clip/ClipPage';
-import EpisodePage from './modules/Episode/EpisodePage';
-import PodcastPage from './modules/Podcast/PodcastPage';
-import SearchPage from './modules/Search/SearchPage';
+import EpisodePage from '~/modules/Episode/EpisodePage';
+import PodcastPage from '~/modules/Podcast/PodcastPage';
+import SearchPage from '~/modules/Search/SearchPage';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 

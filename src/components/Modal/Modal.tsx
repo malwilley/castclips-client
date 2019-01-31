@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Background from './Background';
+import Background from '~/components/Modal/Background';
 import { css } from 'emotion';
 import Header, { HeaderProps } from '~/components/Modal/Header';
 import Footer from '~/components/Modal/Footer';
-import ModalButton, { ModalButtonProps } from './ModalButton';
+import ModalButton, { ModalButtonProps } from '~/components/Modal/ModalButton';
 import { colors } from '~/styles';
 
 type ModalProps = HeaderProps & {

@@ -2,10 +2,10 @@ import { last } from 'ramda';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { getPodcastData } from '~/api/listenNotes';
-import { HttpRequest, PodcastData } from '~/types/index';
+import { HttpRequest, PodcastData } from '~/types';
 import stripHtml from '~/utils/stripHtml';
-import EpisodeList from './EpisodeList';
-import PodcastCard from './PodcastCard';
+import EpisodeList from '~/modules/Podcast/EpisodeList';
+import PodcastCard from '~/modules/Podcast/PodcastCard';
 import './PodcastPage.css';
 
 interface PodcastPageProps {}

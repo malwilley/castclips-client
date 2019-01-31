@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PlayStatus } from '~/types/index';
+import { PlayStatus } from '~/types';
 
 interface Props {
   status: PlayStatus;

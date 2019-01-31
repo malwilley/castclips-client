@@ -4,8 +4,8 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { getEpisodeData } from '~/api/listenNotes';
 import HttpContent from '~/components/HttpContent';
 import stripHtml from '~/utils/stripHtml';
-import { Episode, HttpRequest } from '../../types/index';
-import EpisodeCard from './EpisodeCard';
+import { Episode, HttpRequest } from '~/types';
+import EpisodeCard from '~/modules/Episode/EpisodeCard';
 
 interface Props {}
 

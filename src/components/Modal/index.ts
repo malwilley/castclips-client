@@ -1,6 +1,6 @@
-import Modal from './Modal';
+import Modal from '~/components/Modal/Modal';
 
-export { default as ModalButton } from './ModalButton';
-export { default as ModalFooter } from './Footer';
-export { default as ModalHeader } from './Header';
+export { default as ModalButton } from '~/components/Modal/ModalButton';
+export { default as ModalFooter } from '~/components/Modal/Footer';
+export { default as ModalHeader } from '~/components/Modal/Header';
 export default Modal;

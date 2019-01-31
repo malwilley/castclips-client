@@ -1,9 +1,9 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import { animateSlideToFifty, card, downHalf } from '~/styles';
-import FeatureCard from '../../components/FeatureCard/FeatureCard';
-import { Episode, HttpRequest } from '../../types/index';
-import PodcastPlayer from '../PodcastPlayer/PodcastPlayer';
+import FeatureCard from '~/components/FeatureCard/FeatureCard';
+import { Episode, HttpRequest } from '~/types';
+import PodcastPlayer from '~/modules/PodcastPlayer/PodcastPlayer';
 
 type EpisodeCardProps = {
   episode: HttpRequest<Episode>;

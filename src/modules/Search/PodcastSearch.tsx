@@ -18,9 +18,9 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { typeahead } from '~/api/listenNotes';
 import IconSearch from '~/icons/Search';
 import IconSpinner from '~/icons/Spinner';
-import * as types from '~/types/index';
+import * as types from '~/types';
 import './PodcastSearch.css';
-import PodcastSuggestion from './PodcastSuggestion';
+import PodcastSuggestion from '~/modules/Search/PodcastSuggestion';
 
 type PodcastSearchProps = {
   searchDelay: number; // in ms

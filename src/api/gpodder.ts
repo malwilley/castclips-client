@@ -1,5 +1,5 @@
-import { GpodderEpisodeResponse, GpodderPodcastResponse } from '../types';
-import { get } from './common';
+import { GpodderEpisodeResponse, GpodderPodcastResponse } from '~/types';
+import { get } from '~/api/common';
 
 const host = 'https://gpodder.net/';
 
