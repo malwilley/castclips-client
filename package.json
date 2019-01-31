@@ -18,7 +18,7 @@
     "react-portal": "^4.2.0",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "^2.17.0"
+    "react-scripts-ts": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -43,6 +43,6 @@
     "@types/react-router-dom": "^4.3.0",
     "prettier": "^1.13.5",
     "tslint-config-prettier": "^1.13.0",
-    "typescript": "2.9.2"
+    "typescript": "^3.2.4"
   }
 }

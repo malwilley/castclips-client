@@ -18,7 +18,7 @@ const styles = {
   }),
   main: css({
     borderRadius: 8,
-    boxShadow: 'var(--card-dropshadow)',
+    boxShadow: 'var(--modal-dropshadow)',
     maxWidth: 600,
     width: '100%',
   }),
