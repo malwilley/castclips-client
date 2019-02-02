@@ -1,10 +1,12 @@
 import { LazyLoadedData, HttpRequest } from '~/types';
 
 export type PodcastEpisode = {
+  audioLength: number;
   description: string;
   id: string;
-  name: string;
+  title: string;
   thumbnail: string;
+  published: Date;
 };
 
 export type LazyLoadedEpisodes =

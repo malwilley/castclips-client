@@ -12,7 +12,7 @@ export enum ActionTypes {
 export const actions = {
   addEpisodes: (episodes: PodcastEpisode[]) => createAction(ActionTypes.AddEpisodes, episodes),
   fetch: (id: string) => createAction(ActionTypes.FetchPodcast, id),
-  SetEpisodes: (episodes: PodcastState['episodes']) =>
+  setEpisodes: (episodes: PodcastState['episodes']) =>
     createAction(ActionTypes.SetEpisodes, episodes),
   setMetadata: (metadata: PodcastState['metadata']) =>
     createAction(ActionTypes.SetMetadata, metadata),

@@ -3,7 +3,7 @@ import config from '~/config';
 
 const host = 'https://listennotes.p.mashape.com/api/v1';
 
-type ListenNotesTypeaheadResponse = {
+export type ListenNotesTypeaheadResponse = {
   podcasts: Array<{
     id: string;
     thumbnail: string;
@@ -12,7 +12,7 @@ type ListenNotesTypeaheadResponse = {
   terms: string[];
 };
 
-type ListenNotesPodcastDataResponse = {
+export type ListenNotesPodcastDataResponse = {
   thumbnail: string;
   description: string;
   id: string;
@@ -30,7 +30,7 @@ type ListenNotesPodcastDataResponse = {
   website: string;
 };
 
-type ListenNotesEpisodeDataResponse = {
+export type ListenNotesEpisodeDataResponse = {
   description: string;
   title: string;
   podcast: {
