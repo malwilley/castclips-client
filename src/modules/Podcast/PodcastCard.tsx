@@ -1,14 +1,14 @@
 import * as React from 'react';
 import FeatureCard from '~/components/FeatureCard/FeatureCard';
-import { HttpRequest, PodcastData } from '~/types';
+import { HttpRequest } from '~/types';
 import './PodcastCard.css';
 import { PodcastMetadata } from './types';
 
-interface Props {
+type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;
-}
+};
 
-const renderPodcastData = ({ description, thumbnail, title, website }: PodcastData) => {
+const renderPodcastData = ({ description, thumbnail, title, website }: PodcastMetadata) => {
   return (
     <div className="flex card down-half slide-in-fifty">
       <img className="icon podcast-img" src={thumbnail} />
@@ -21,7 +21,7 @@ const renderPodcastData = ({ description, thumbnail, title, website }: PodcastDa
   );
 };
 
-const PodcastCard = (props: Props) => {
+const PodcastCard: React.SFC<PodcastCardProps> = props => {
   return <FeatureCard content={props.podcast} renderContent={renderPodcastData} />;
 };
 

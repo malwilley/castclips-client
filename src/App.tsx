@@ -44,7 +44,14 @@ class App extends React.Component {
               },
             }) => <PodcastPage id={id} />}
           />
-          <Route path="/episode" component={EpisodePage} />
+          <Route
+            path="/episode/:id"
+            render={({
+              match: {
+                params: { id },
+              },
+            }) => <EpisodePage id={id} />}
+          />
           <Route path="/clip" component={ClipPage} />
         </div>
       </BrowserRouter>

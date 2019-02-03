@@ -2,11 +2,11 @@ import { css } from 'emotion';
 import * as React from 'react';
 import { animateSlideToFifty, card, downHalf } from '~/styles';
 import FeatureCard from '~/components/FeatureCard/FeatureCard';
-import { Episode, HttpRequest } from '~/types';
 import PodcastPlayer from '~/modules/PodcastPlayer/PodcastPlayer';
+import { EpisodeState, EpisodeMetadata } from './types';
 
 type EpisodeCardProps = {
-  episode: HttpRequest<Episode>;
+  episode: EpisodeState['metadata'];
 };
 
 type EpisodeCardState = {};
@@ -25,7 +25,7 @@ class EpisodeCard extends React.Component<EpisodeCardProps, EpisodeCardState> {
     this.state = {};
   }
 
-  renderEpisodeData(episode: Episode) {
+  renderEpisodeData(episode: EpisodeMetadata) {
     return (
       <div className={styles.main}>
         <div className="flex flex-column flex-auto left-align">

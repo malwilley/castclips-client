@@ -6,7 +6,7 @@ import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode';
 import mapApiPodcast from '../utils/mapApiPodcast';
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
-  const currentlyLoadedPodcast = path(['podcast', 'data', 'id'], getState());
+  const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
   if (currentlyLoadedPodcast === id) {
     return;
   }

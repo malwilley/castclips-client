@@ -18,6 +18,7 @@ export type PodcastMetadata = {
   thumbnail: string;
   title: string;
   description: string;
+  totalEpisodes: number;
   website: string;
 };
 

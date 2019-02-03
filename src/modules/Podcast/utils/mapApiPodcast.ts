@@ -7,12 +7,14 @@ const mapApiPodcast = ({
   thumbnail,
   title,
   description,
+  total_episodes,
   website,
 }: ListenNotesPodcastDataResponse): PodcastMetadata => ({
   id,
   thumbnail,
   title,
   description: stripHtml(description),
+  totalEpisodes: total_episodes,
   website,
 });
 

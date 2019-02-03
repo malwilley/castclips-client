@@ -18,6 +18,7 @@ export type ListenNotesPodcastDataResponse = {
   id: string;
   next_episode_pub_date: number;
   title: string;
+  total_episodes: number;
   episodes: Array<{
     description: string;
     thumbnail: string;
@@ -36,8 +37,9 @@ export type ListenNotesEpisodeDataResponse = {
   podcast: {
     title: string;
     description: string;
-    thumnail: string;
+    thumbnail: string;
     id: string;
+    website: string;
   };
   id: string;
   audio: string;

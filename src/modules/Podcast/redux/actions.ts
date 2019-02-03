@@ -4,7 +4,6 @@ import { PodcastEpisode, PodcastState } from '../types';
 
 export enum ActionTypes {
   AddEpisodes = 'podcast/add_episodes',
-  FetchPodcast = 'podcast/fetch',
   SetEpisodes = 'podcast/set_episodes',
   SetMetadata = 'podcast/set_metadata',
 }
