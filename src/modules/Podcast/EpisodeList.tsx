@@ -1,70 +1,41 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import IconGoTo from '~/icons/GoTo';
-import { Episode } from '~/types';
 import './EpisodeList.css';
+import { PodcastEpisode } from './types';
 
-interface Props {
-  episodes: Episode[];
-}
+type EpisodeListProps = {
+  episodes: PodcastEpisode[];
+};
 
-interface State {
-  numShown: number;
-}
+const renderEpisode = (episode: PodcastEpisode) => {
+  const { description, id, title } = episode;
 
-class EpisodeList extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      numShown: 20,
-    };
-  }
-
-  shownEpisodes() {
-    return this.props.episodes.slice(0, this.state.numShown);
-  }
-
-  showMoreEpisodes() {
-    this.setState({
-      numShown: this.state.numShown + 20,
-    });
-  }
-
-  renderEpisode(episode: Episode) {
-    const { description, id, title } = episode;
-
-    return (
-      <Link to={`/episode/${id}`} key={title}>
-        <div className="flex episode-row left-align items-center clickable">
-          <div className="flex flex-column flex-auto p2">
-            <h5 className="title flex-none overflow-ellipsis no-wrap">{title}</h5>
-            <p className="h5 flex-auto overflow-ellipsis no-wrap">{description}</p>
-          </div>
-          <div className="flex-none p1 icon-large">
-            <IconGoTo className="svg-soft" />
-          </div>
+  return (
+    <Link to={`/episode/${id}`} key={title}>
+      <div className="flex episode-row left-align items-center clickable">
+        <div className="flex flex-column flex-auto p2">
+          <h5 className="title flex-none overflow-ellipsis no-wrap">{title}</h5>
+          <p className="h5 flex-auto overflow-ellipsis no-wrap">{description}</p>
         </div>
-      </Link>
-    );
-  }
-
-  render() {
-    return (
-      <div className="slide-in">
-        <h6 className="ml1 mb1">episodes</h6>
-        <div className="episode-card flex flex-column align-stretch mb3">
-          {this.shownEpisodes().map(e => this.renderEpisode(e))}
-          <div
-            className="episode-row flex justify-center clickable"
-            onClick={() => this.showMoreEpisodes()}
-          >
-            <h6 className="p2">show more</h6>
-          </div>
+        <div className="flex-none p1 icon-large">
+          <IconGoTo className="svg-soft" />
         </div>
       </div>
-    );
-  }
-}
+    </Link>
+  );
+};
+
+const EpisodeList: React.SFC<EpisodeListProps> = ({ episodes }) => (
+  <div className="slide-in">
+    <h6 className="ml1 mb1">episodes</h6>
+    <div className="episode-card flex flex-column align-stretch mb3">
+      {episodes.map(renderEpisode)}
+      <div className="episode-row flex justify-center clickable">
+        <h6 className="p2">show more</h6>
+      </div>
+    </div>
+  </div>
+);
 
 export default EpisodeList;

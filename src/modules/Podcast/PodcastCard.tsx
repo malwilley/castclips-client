@@ -2,9 +2,10 @@ import * as React from 'react';
 import FeatureCard from '~/components/FeatureCard/FeatureCard';
 import { HttpRequest, PodcastData } from '~/types';
 import './PodcastCard.css';
+import { PodcastMetadata } from './types';
 
 interface Props {
-  podcast: HttpRequest<PodcastData>;
+  podcast: HttpRequest<PodcastMetadata>;
 }
 
 const renderPodcastData = ({ description, thumbnail, title, website }: PodcastData) => {

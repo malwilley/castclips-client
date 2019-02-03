@@ -36,7 +36,14 @@ class App extends React.Component {
             </div>
           </header>
           <Route exact={true} path="/" component={SearchPage} />
-          <Route path="/podcast" component={PodcastPage} />
+          <Route
+            path="/podcast/:id"
+            render={({
+              match: {
+                params: { id },
+              },
+            }) => <PodcastPage id={id} />}
+          />
           <Route path="/episode" component={EpisodePage} />
           <Route path="/clip" component={ClipPage} />
         </div>

@@ -1,5 +1,6 @@
 import { ListenNotesPodcastDataResponse } from '~/api/listenNotes';
 import { PodcastMetadata } from '../types';
+import stripHtml from '~/utils/stripHtml';
 
 const mapApiPodcast = ({
   id,
@@ -11,7 +12,7 @@ const mapApiPodcast = ({
   id,
   thumbnail,
   title,
-  description,
+  description: stripHtml(description),
   website,
 });
 
