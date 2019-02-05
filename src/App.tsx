@@ -52,7 +52,14 @@ class App extends React.Component {
               },
             }) => <EpisodePage id={id} />}
           />
-          <Route path="/clip" component={ClipPage} />
+          <Route
+            path="/clip/:id"
+            render={({
+              match: {
+                params: { id },
+              },
+            }) => <ClipPage id={id} />}
+          />
         </div>
       </BrowserRouter>
     );

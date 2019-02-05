@@ -2,7 +2,7 @@ import * as qs from 'querystringify';
 
 const host = 'https://us-central1-castclips-7c579.cloudfunctions.net';
 
-type GetClipResponse = {
+export type GetClipResponse = {
   audio: string;
   description: string;
   end: number;
@@ -14,7 +14,7 @@ type GetClipResponse = {
   views: number;
 };
 
-type AddClipPayload = {
+export type AddClipPayload = {
   audio: string;
   description: string;
   end: number;
