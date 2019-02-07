@@ -17,6 +17,11 @@ export type EpisodeMetadata = {
   thumbnail: string;
 };
 
+export type EpisodeView = {
+  clipId: HttpRequest<string>;
+};
+
 export type EpisodeState = {
   metadata: HttpRequest<EpisodeMetadata>;
+  view: EpisodeView;
 };

@@ -53,14 +53,7 @@ const makeStyles = (type: ModalButtonProps['type']) => {
   }
 };
 
-const ModalButton: React.SFC<ModalButtonProps> = ({
-  children,
-  className,
-  onClick,
-  text,
-  type,
-  ...buttonProps
-}) => (
+const ModalButton: React.SFC<ModalButtonProps> = ({ className, text, type, ...buttonProps }) => (
   <Button className={css(className, makeStyles(type))} {...buttonProps}>
     {text}
   </Button>

@@ -8,7 +8,7 @@ import { Episode, PlayStatus } from '~/types';
 import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
 import { addClip } from '~/api/firebase';
 import Show from '~/components/Show';
-import ShareModal from '~/modules/PodcastPlayer/ShareModal';
+import CreateClipModal from '../Episode/components/CreateClipModal';
 
 type PodcastPlayerProps = {
   episode: Episode;
@@ -194,6 +194,8 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
   };
 
   render() {
+    const { share } = this.state;
+
     return (
       <div className={styles.main}>
         <Audio
@@ -243,7 +245,10 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
             {({ isOpen, toggle }) => (
               <>
                 <ShareButton active={this.state.share !== null} onClick={toggle} />
-                {isOpen && <ShareModal handleClose={toggle} />}
+                {isOpen &&
+                  share && (
+                    <CreateClipModal start={share.start} end={share.end} handleClose={toggle} />
+                  )}
               </>
             )}
           </Show>
