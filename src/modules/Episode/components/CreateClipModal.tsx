@@ -9,6 +9,7 @@ import { thunks } from '../redux';
 import { AppState } from '~/redux/types';
 import { EpisodeState } from '../types';
 import { AddClipPayload } from '~/api/firebase';
+import StyledTextArea from '~/components/StyledTextArea';
 
 type ShareModalProps = {
   start: number;
@@ -94,7 +95,7 @@ class CreateClipModal extends React.Component<ShareModalConnectedProps, ShareMod
           </div>
           <div className={styles.inputGroup}>
             <StyledInputLabel>Clip description</StyledInputLabel>
-            <StyledInput
+            <StyledTextArea
               handleTextChange={text => this.setState({ description: text })}
               placeholder="If the title isn't enough, say more here!"
               text={description}
