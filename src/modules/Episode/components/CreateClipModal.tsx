@@ -23,11 +23,6 @@ type ShareModalConnectedProps = ShareModalProps & {
   episode: EpisodeState['metadata'];
 };
 
-type ShareModalState = {
-  title: string;
-  description: string;
-};
-
 const styles = {
   bodyContainer: css({
     padding: 16,
@@ -37,21 +32,19 @@ const styles = {
   }),
 };
 
-class CreateClipModal extends React.Component<ShareModalConnectedProps, ShareModalState> {
-  state = {
-    title: '',
-    description: '',
-  };
+const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
+  clipId,
+  createClip,
+  episode,
+  handleClose,
+  start,
+  end,
+}) => {
+  const [title, setTitle] = React.useState('');
+  const [description, setDescription] = React.useState('');
 
-  createClip = () => {
-    const { createClip, episode, start, end } = this.props;
-    const { title, description } = this.state;
-
-    console.log('here');
-    console.log(episode);
-
+  const handleCreate = () => {
     if (episode.type !== 'success') {
-      console.error('Episode state not loaded in redux');
       return;
     }
 
@@ -66,46 +59,42 @@ class CreateClipModal extends React.Component<ShareModalConnectedProps, ShareMod
     });
   };
 
-  render() {
-    const { clipId, handleClose } = this.props;
-    const { title, description } = this.state;
-
-    return (
-      <Modal
-        handleClose={handleClose}
-        icon={<ScissorsIcon />}
-        primaryButtonProps={
-          clipId.type === 'fetching'
-            ? { active: false, text: 'Creating...' }
-            : { onClick: this.createClip, text: 'Create!' }
-        }
-        title="Create a clip"
-      >
-        <div className={styles.bodyContainer}>
-          {/* podcast/episode/clip info */}
-          <div className={styles.inputGroup}>
-            <StyledInputLabel>
-              Clip title <Asterisk />
-            </StyledInputLabel>
-            <StyledInput
-              handleTextChange={text => this.setState({ title: text })}
-              placeholder="A descriptive title for your clip"
-              text={title}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <StyledInputLabel>Clip description</StyledInputLabel>
-            <StyledTextArea
-              handleTextChange={text => this.setState({ description: text })}
-              placeholder="If the title isn't enough, say more here!"
-              text={description}
-            />
-          </div>
+  return (
+    <Modal
+      handleClose={handleClose}
+      icon={<ScissorsIcon />}
+      primaryButtonProps={
+        clipId.type === 'fetching'
+          ? { active: false, text: 'Creating...' }
+          : { onClick: handleCreate, text: 'Create' }
+      }
+      title="Create a clip"
+    >
+      <div className={styles.bodyContainer}>
+        {/* podcast/episode/clip info */}
+        <div className={styles.inputGroup}>
+          <StyledInputLabel>
+            Clip title <Asterisk />
+          </StyledInputLabel>
+          <StyledInput
+            focus
+            handleTextChange={setTitle}
+            placeholder="A descriptive title for your clip"
+            text={title}
+          />
         </div>
-      </Modal>
-    );
-  }
-}
+        <div className={styles.inputGroup}>
+          <StyledInputLabel>Clip description</StyledInputLabel>
+          <StyledTextArea
+            handleTextChange={setDescription}
+            placeholder="If the title isn't enough, say more here!"
+            text={description}
+          />
+        </div>
+      </div>
+    </Modal>
+  );
+};
 
 const mapStateToProps = (state: AppState) => ({
   clipId: state.episode.view.clipId,

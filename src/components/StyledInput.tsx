@@ -4,6 +4,7 @@ import { colors, fontFamily } from '~/styles';
 
 type StyledInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
+  focus?: boolean;
   handleTextChange: (text: string) => void;
   text: string;
 };
@@ -32,17 +33,26 @@ const StyledInputLabel: React.SFC = ({ children }) => (
 
 const StyledInput: React.SFC<StyledInputProps> = ({
   className,
+  focus = false,
   handleTextChange,
   text,
   ...inputProps
-}) => (
-  <input
-    className={css(styles.input, className)}
-    onChange={e => handleTextChange(e.target.value)}
-    value={text}
-    {...inputProps}
-  />
-);
+}) => {
+  const inputEl = React.useRef<HTMLInputElement>(null);
+  if (focus && inputEl.current) {
+    inputEl.current.focus();
+  }
+
+  return (
+    <input
+      className={css(styles.input, className)}
+      ref={inputEl}
+      onChange={e => handleTextChange(e.target.value)}
+      value={text}
+      {...inputProps}
+    />
+  );
+};
 
 export { StyledInputLabel };
 export default StyledInput;

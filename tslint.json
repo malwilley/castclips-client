@@ -12,6 +12,7 @@
         "forin": true,
         "interface-name": [true, "never-prefix"],
         "jsdoc-format": true,
+        "jsx-boolean-value": false,
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
