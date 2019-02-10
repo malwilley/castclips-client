@@ -5,6 +5,9 @@ import { EpisodeState } from './types';
 import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { thunks } from './redux';
+import { css } from 'emotion';
+import { colors } from '~/styles';
+import SectionHeader from '~/components/SectionHeader';
 
 type EpisodePageProps = {
   id: string;
@@ -13,6 +16,12 @@ type EpisodePageProps = {
 type EpisodePageConnectedProps = EpisodePageProps & {
   episodeMetadata: EpisodeState['metadata'];
   fetchEpisodeMetadata: (id: string) => void;
+};
+
+const styles = {
+  description: css({
+    color: colors.dark,
+  }),
 };
 
 class EpisodePage extends React.Component<EpisodePageConnectedProps> {
@@ -35,7 +44,17 @@ class EpisodePage extends React.Component<EpisodePageConnectedProps> {
           <EpisodeCard episode={episodeMetadata} />
         </section>
         <section className="page-container pt-episodes">
-          <h6 className="ml1 mb1">other stuff</h6>
+          <HttpContent
+            request={episodeMetadata}
+            renderSuccess={({ description, podcast, published }) => (
+              <>
+                <SectionHeader>description</SectionHeader>
+                <p className={styles.description}>{description}</p>
+                <p className={styles.description}>{`Published ${published.toLocaleString()}`}</p>
+                <SectionHeader>clips from the episode</SectionHeader>
+              </>
+            )}
+          />
         </section>
       </>
     );

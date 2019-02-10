@@ -14,19 +14,18 @@ const Autosuggest = require('react-autosuggest') as new () => React.Component<
   AutosuggestProps<types.PodcastSuggestion>,
   Object
 >;
-import { RouteComponentProps, withRouter } from 'react-router';
+import { Route } from 'react-router';
 import { typeahead } from '~/api/listenNotes';
 import IconSearch from '~/icons/Search';
 import IconSpinner from '~/icons/Spinner';
 import * as types from '~/types';
 import './PodcastSearch.css';
 import PodcastSuggestion from '~/modules/Search/PodcastSuggestion';
+import { History } from 'history';
 
 type PodcastSearchProps = {
   searchDelay: number; // in ms
 };
-
-type WithRouterProps = RouteComponentProps<PodcastSearchProps>;
 
 type PodcastSearchState = {
   query: string;
@@ -51,8 +50,8 @@ const styles = {
   }),
 };
 
-class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState> {
-  constructor(props: WithRouterProps) {
+class PodcastSearch extends React.Component<PodcastSearchProps, PodcastSearchState> {
+  constructor(props: PodcastSearchProps) {
     super(props);
     this.state = {
       query: '',
@@ -127,8 +126,11 @@ class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState>
     return suggestion.title;
   };
 
-  onSuggestionSelected: OnSuggestionSelected<types.PodcastSuggestion> = (_, { suggestion }) => {
-    this.props.history.push(`/podcast/${suggestion.id}`);
+  makeOnSuggestionSelected = (history: History): OnSuggestionSelected<types.PodcastSuggestion> => (
+    _,
+    { suggestion }
+  ) => {
+    history.push(`/podcast/${suggestion.id}`);
   };
 
   getIcon = () => {
@@ -143,8 +145,11 @@ class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState>
   };
 
   render() {
+    // @ts-ignore
     const renderInput: RenderInputComponent<types.PodcastSuggestion> = props => (
       <div className={styles.searchContainer}>
+        {/*
+        // @ts-ignore */}
         <input {...props} />
         {this.getIcon()}
       </div>
@@ -164,20 +169,22 @@ class PodcastSearch extends React.Component<WithRouterProps, PodcastSearchState>
       this.state.suggestions.type === 'success' ? this.state.suggestions.data : [];
 
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.updateSuggestionsDebounced}
-        onSuggestionsClearRequested={this.clear}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        renderInputComponent={renderInput}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected}
+      <Route
+        render={({ history }) => (
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.updateSuggestionsDebounced}
+            onSuggestionsClearRequested={this.clear}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            renderInputComponent={renderInput}
+            inputProps={inputProps}
+            onSuggestionSelected={this.makeOnSuggestionSelected(history)}
+          />
+        )}
       />
     );
   }
 }
 
-const RouterComponent = withRouter<WithRouterProps>(PodcastSearch);
-
-export default (props: PodcastSearchProps) => <RouterComponent {...props} />;
+export default PodcastSearch;

@@ -1,16 +1,16 @@
 import { HttpRequest } from '~/types';
 
 type HttpContentProps<T> = {
-  renderError: (message: string) => JSX.Element;
-  renderFetching: () => JSX.Element;
-  renderSuccess: (data: T) => JSX.Element;
+  renderError?: (message: string) => JSX.Element | null;
+  renderFetching?: () => JSX.Element | null;
+  renderSuccess: (data: T) => JSX.Element | null;
   request: HttpRequest<T>;
 };
 
-const HttpContent = <T extends object | number | string>({
+const HttpContent = <T extends any>({
   request,
-  renderError,
-  renderFetching,
+  renderError = () => null,
+  renderFetching = () => null,
   renderSuccess,
 }: HttpContentProps<T>) => {
   switch (request.type) {
