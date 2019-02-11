@@ -8,6 +8,8 @@ import { thunks } from './redux';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import SectionHeader from '~/components/SectionHeader';
+import EpisodeClips from './components/EpisodeClips';
+import { CalendarClockIcon } from 'mdi-react';
 
 type EpisodePageProps = {
   id: string;
@@ -21,6 +23,23 @@ type EpisodePageConnectedProps = EpisodePageProps & {
 const styles = {
   description: css({
     color: colors.dark,
+    maxHeight: 180,
+    overflow: 'hidden',
+  }),
+  published: css({
+    '& > svg': {
+      fill: colors.dark,
+      marginRight: 6,
+    },
+    color: colors.dark,
+    display: 'flex',
+    alignItems: 'center',
+  }),
+  section: css({
+    marginBottom: 50,
+  }),
+  sectionHeader: css({
+    marginBottom: 30,
   }),
 };
 
@@ -31,7 +50,7 @@ class EpisodePage extends React.Component<EpisodePageConnectedProps> {
   }
 
   render() {
-    const { episodeMetadata } = this.props;
+    const { episodeMetadata, id } = this.props;
     return (
       <>
         <section className="hero center bg-primary flex flex-column pt2 relative">
@@ -46,12 +65,22 @@ class EpisodePage extends React.Component<EpisodePageConnectedProps> {
         <section className="page-container pt-episodes">
           <HttpContent
             request={episodeMetadata}
-            renderSuccess={({ description, podcast, published }) => (
+            renderSuccess={({ audioLength, description, podcast, published }) => (
               <>
-                <SectionHeader>description</SectionHeader>
-                <p className={styles.description}>{description}</p>
-                <p className={styles.description}>{`Published ${published.toLocaleString()}`}</p>
-                <SectionHeader>clips from the episode</SectionHeader>
+                <section className={styles.section}>
+                  <SectionHeader>description</SectionHeader>
+                  <div
+                    className={styles.description}
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                  <p className={styles.published}>
+                    <CalendarClockIcon size={20} /> {`Published ${published.toLocaleString()}`}
+                  </p>
+                </section>
+                <SectionHeader className={styles.sectionHeader}>
+                  clips from the episode
+                </SectionHeader>
+                <EpisodeClips episodeId={id} episodeLength={audioLength} />
               </>
             )}
           />

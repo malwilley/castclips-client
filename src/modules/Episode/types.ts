@@ -1,5 +1,6 @@
 import { HttpRequest } from '~/types';
 import { PodcastMetadata } from '../Podcast/types';
+import { GetClipsForEpisodeResponse } from '~/api/firebase';
 
 type EpisodePodcast = Pick<
   PodcastMetadata,
@@ -22,6 +23,7 @@ export type EpisodeView = {
 };
 
 export type EpisodeState = {
+  clips: HttpRequest<GetClipsForEpisodeResponse>;
   metadata: HttpRequest<EpisodeMetadata>;
   view: EpisodeView;
 };

@@ -1,6 +1,9 @@
-import { Actions, ActionTypes } from './actions';
+import { Actions, ActionTypes, actions } from './actions';
 import { EpisodeState } from '../types';
 import { combineReducers } from 'redux';
+import makeHttpReducer from '~/redux/utils/setHttpStateReducer';
+
+const clips = makeHttpReducer(actions.setClips);
 
 const metadata = (state: EpisodeState['metadata'] = { type: 'not_asked' }, action: Actions) => {
   switch (action.type) {
@@ -24,6 +27,7 @@ const view = (state: EpisodeState['view'] = { clipId: { type: 'not_asked' } }, a
 };
 
 const reducer = combineReducers({
+  clips,
   metadata,
   view,
 });

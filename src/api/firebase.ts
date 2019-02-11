@@ -24,6 +24,8 @@ export type AddClipPayload = {
   title: string;
 };
 
+export type GetClipsForEpisodeResponse = Array<GetClipResponse & { id: string }>;
+
 type AddClipResponse = {
   id: string;
 };
@@ -51,6 +53,14 @@ export const addClip = async (clip: AddClipPayload) => {
     },
     method: 'post',
   });
+
+  return result;
+};
+
+export const getClipsForEpisode = async (episodeId: string) => {
+  const result = await fetchFirebase<GetClipsForEpisodeResponse>(
+    `/getClipsForEpisode?${qs.stringify({ id: episodeId })}`
+  );
 
   return result;
 };

@@ -15,10 +15,10 @@ const styles = {
 };
 
 const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className }) => (
-  <>
-    <h6 className={className}>{children}</h6>
+  <div className={className}>
+    <h6>{children}</h6>
     <div className={styles.underline} />
-  </>
+  </div>
 );
 
 export default SectionHeader;

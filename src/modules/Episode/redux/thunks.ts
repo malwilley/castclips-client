@@ -3,8 +3,24 @@ import { actions } from './actions';
 import { path } from 'ramda';
 import { getEpisodeData } from '~/api/listenNotes';
 import mapApiEpisode from '../utils/mapApiEpisode';
-import { AddClipPayload, addClip } from '~/api/firebase';
+import { AddClipPayload, addClip, getClipsForEpisode } from '~/api/firebase';
 import { push } from 'connected-react-router';
+
+const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
+  const currentlyLoadedClips = path(['episode', 'clips', 'data', 'id'], getState());
+  if (currentlyLoadedClips === id) {
+    return;
+  }
+
+  dispatch(actions.setClips({ type: 'fetching' }));
+
+  try {
+    const clips = await getClipsForEpisode(id);
+    dispatch(actions.setClips({ data: clips, type: 'success' }));
+  } catch {
+    dispatch(actions.setClips({ message: 'Error fetching clips', type: 'error' }));
+  }
+};
 
 const createClip: Thunk<AddClipPayload> = clip => async (dispatch, getState) => {
   dispatch(actions.setClipId({ type: 'fetching' }));
@@ -35,6 +51,7 @@ const fetchEpisodeMetadata: Thunk<string, Promise<void>> = id => async (dispatch
 };
 
 export default {
+  fetchClips,
   createClip,
   fetchEpisodeMetadata,
 };
