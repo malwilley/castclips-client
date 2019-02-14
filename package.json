@@ -6,6 +6,7 @@
     "ace-css": "^1.1.0",
     "connected-react-router": "^6.2.2",
     "emotion": "^9.2.6",
+    "firebase": "^5.8.2",
     "lodash": "^4.17.4",
     "lodash.throttle": "^4.1.1",
     "mdi-react": "^4.0.0",
