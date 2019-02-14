@@ -1,11 +1,12 @@
 import * as React from 'react';
 import EpisodeList from '~/modules/Podcast/EpisodeList';
 import PodcastCard from '~/modules/Podcast/PodcastCard';
-import './PodcastPage.css';
 import { thunks } from './redux';
 import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { PodcastState } from './types';
+import InfoPage from '~/components/InfoPage';
+import SectionHeader from '~/components/SectionHeader';
 
 type PodcastPageProps = {
   id: string;
@@ -32,13 +33,16 @@ class PodcastPage extends React.Component<PodcastPageConnectedProps> {
     const { podcastMetadata } = this.props;
 
     return (
-      <React.Fragment>
-        <section className="hero center bg-primary flex flex-column pt2 relative">
-          <h1>Podcast</h1>
-          <PodcastCard podcast={podcastMetadata} />
-        </section>
-        <section className="page-container pt-episodes">{this.renderEpisodes()}</section>
-      </React.Fragment>
+      <InfoPage
+        bodyContent={<section>{this.renderEpisodes()}</section>}
+        featuredContent={<PodcastCard podcast={podcastMetadata} />}
+        titleContent={
+          <>
+            <SectionHeader>podcast</SectionHeader>
+            <h1>{podcastMetadata.type === 'success' && podcastMetadata.data.title}</h1>
+          </>
+        }
+      />
     );
   }
 }

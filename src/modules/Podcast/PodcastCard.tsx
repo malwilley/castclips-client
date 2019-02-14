@@ -1,7 +1,6 @@
 import * as React from 'react';
 import FeatureCard from '~/components/FeatureCard/FeatureCard';
 import { HttpRequest } from '~/types';
-import './PodcastCard.css';
 import { PodcastMetadata } from './types';
 
 type PodcastCardProps = {

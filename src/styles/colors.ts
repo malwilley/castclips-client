@@ -12,4 +12,5 @@ export default {
   dark: '#404e4d',
   darkest: '#1f2423',
   darkestAlpha30: 'rgba(31,36,35,0.3)',
+  gradient: 'linear-gradient(to right top, #529dc8, #4390be, #3382b4, #2175a9, #07689f)',
 };
