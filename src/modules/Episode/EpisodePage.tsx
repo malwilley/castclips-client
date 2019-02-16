@@ -10,6 +10,8 @@ import { colors } from '~/styles';
 import SectionHeader from '~/components/SectionHeader';
 import EpisodeClips from './components/EpisodeClips';
 import { CalendarClockIcon } from 'mdi-react';
+import InfoPage from '~/components/InfoPage';
+import { Link } from 'react-router-dom';
 
 type EpisodePageProps = {
   id: string;
@@ -41,6 +43,15 @@ const styles = {
   sectionHeader: css({
     marginBottom: 30,
   }),
+  subTitle: css({
+    ' > a': {
+      color: colors.lightest,
+    },
+    color: colors.secondary,
+  }),
+  title: css({
+    marginBottom: 6,
+  }),
 };
 
 class EpisodePage extends React.Component<EpisodePageConnectedProps> {
@@ -52,17 +63,8 @@ class EpisodePage extends React.Component<EpisodePageConnectedProps> {
   render() {
     const { episodeMetadata, id } = this.props;
     return (
-      <>
-        <section className="hero center bg-primary flex flex-column pt2 relative">
-          <HttpContent
-            renderError={() => <div>error!</div>}
-            renderFetching={() => <div>fetching...</div>}
-            renderSuccess={({ title }) => <h1>{title}</h1>}
-            request={episodeMetadata}
-          />
-          <EpisodeCard episode={episodeMetadata} />
-        </section>
-        <section className="page-container pt-episodes">
+      <InfoPage
+        bodyContent={
           <HttpContent
             request={episodeMetadata}
             renderSuccess={({ audioLength, description, podcast, published }) => (
@@ -84,8 +86,27 @@ class EpisodePage extends React.Component<EpisodePageConnectedProps> {
               </>
             )}
           />
-        </section>
-      </>
+        }
+        featuredContent={<EpisodeCard episode={episodeMetadata} />}
+        titleContent={
+          <>
+            <SectionHeader>Episode</SectionHeader>
+            <h1 className={styles.title}>
+              {episodeMetadata.type === 'success' ? episodeMetadata.data.title : ''}
+            </h1>
+            {episodeMetadata.type === 'success' ? (
+              <h4 className={styles.subTitle}>
+                From the podcast{' '}
+                <Link to={`/podcast/${episodeMetadata.data.podcast.id}`}>
+                  <strong>{episodeMetadata.data.podcast.title}</strong>
+                </Link>
+              </h4>
+            ) : (
+              <p />
+            )}
+          </>
+        }
+      />
     );
   }
 }

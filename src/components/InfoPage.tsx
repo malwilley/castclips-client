@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from '~/styles';
+import { Link } from 'react-router-dom';
 
 type InfoPageProps = {
   bodyContent: React.ReactNode;
@@ -12,13 +13,14 @@ const styles = {
   main: css({
     display: 'grid',
     gridTemplateColumns: '1fr 1000px 1fr',
-    gridTemplateRows: '70px 180px 150px 50px auto',
+    gridTemplateRows: '70px 200px 3fr 1fr auto',
   }),
   body: css({
     gridColumnStart: 2,
     gridColumnEnd: 3,
     gridRowStart: 5,
     gridRowEnd: -1,
+    paddingTop: 40,
   }),
   feature: css({
     gridColumnStart: 2,
@@ -36,7 +38,7 @@ const styles = {
     textAlign: 'left',
     color: colors.lightest,
     backgroundColor: colors.possibleHeaderColor,
-    padding: 20,
+    padding: '20px 30px',
   }),
   hero: css({
     backgroundImage: colors.gradient,
@@ -50,7 +52,7 @@ const styles = {
     gridColumnStart: 2,
     gridColumnEnd: 3,
     color: colors.lightest,
-    paddingTop: 20,
+    paddingTop: 40,
   }),
 };
 
@@ -61,7 +63,9 @@ const InfoPage: React.FC<InfoPageProps> = ({ bodyContent, featuredContent, title
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
     <header className={styles.header}>
-      <h2>castclips</h2>
+      <Link to="/">
+        <h2>castclips</h2>
+      </Link>
     </header>
   </div>
 );

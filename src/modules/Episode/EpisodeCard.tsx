@@ -1,46 +1,33 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { animateSlideToFifty, card, downHalf } from '~/styles';
-import FeatureCard from '~/components/FeatureCard/FeatureCard';
 import PodcastPlayer from '~/modules/PodcastPlayer/PodcastPlayer';
-import { EpisodeState, EpisodeMetadata } from './types';
+import { EpisodeState } from './types';
+import Card from '~/components/Card';
+import HttpContent from '~/components/HttpContent';
 
 type EpisodeCardProps = {
   episode: EpisodeState['metadata'];
 };
 
-type EpisodeCardState = {};
-
 const styles = {
-  main: css(card, animateSlideToFifty, downHalf, {
+  main: css({
     display: 'flex',
     overflow: 'visible',
+    width: 700,
   }),
 };
 
-class EpisodeCard extends React.Component<EpisodeCardProps, EpisodeCardState> {
-  constructor(props: EpisodeCardProps) {
-    super(props);
-
-    this.state = {};
-  }
-
-  renderEpisodeData(episode: EpisodeMetadata) {
-    return (
-      <div className={styles.main}>
+const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => (
+  <Card className={styles.main}>
+    <HttpContent
+      request={episode}
+      renderSuccess={episodeData => (
         <div className="flex flex-column flex-auto left-align">
-          <PodcastPlayer episode={episode} />
+          <PodcastPlayer episode={episodeData} />
         </div>
-      </div>
-    );
-  }
-
-  render() {
-    const { episode, ...rest } = this.props;
-    return (
-      <FeatureCard content={episode} renderContent={e => this.renderEpisodeData(e)} {...rest} />
-    );
-  }
-}
+      )}
+    />
+  </Card>
+);
 
 export default EpisodeCard;
