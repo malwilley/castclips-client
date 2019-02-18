@@ -1,5 +1,4 @@
 import * as React from 'react';
-import EpisodeList from '~/modules/Podcast/EpisodeList';
 import PodcastCard from '~/modules/Podcast/PodcastCard';
 import { thunks } from './redux';
 import { connect } from 'react-redux';
@@ -7,6 +6,9 @@ import { AppState } from '~/redux/types';
 import { PodcastState } from './types';
 import InfoPage from '~/components/InfoPage';
 import SectionHeader from '~/components/SectionHeader';
+import { css } from 'emotion';
+import UnionContent from '~/components/UnionContent';
+import LatestEpisodes from './components/LatestEpisodes';
 
 type PodcastPageProps = {
   id: string;
@@ -18,34 +20,40 @@ type PodcastPageConnectedProps = PodcastPageProps & {
   podcastMetadata: PodcastState['metadata'];
 };
 
-class PodcastPage extends React.Component<PodcastPageConnectedProps> {
-  componentDidMount() {
-    const { fetchPodcastMetadata, id } = this.props;
+const styles = {
+  sectionHeader: css({
+    marginBottom: 20,
+  }),
+};
+
+const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
+  episodes,
+  fetchPodcastMetadata,
+  podcastMetadata,
+  id,
+}) => {
+  React.useEffect(() => {
     fetchPodcastMetadata(id);
-  }
+  }, [id]);
 
-  renderEpisodes = () =>
-    this.props.episodes.type === 'success' ? (
-      <EpisodeList episodes={this.props.episodes.data} />
-    ) : null;
-
-  render() {
-    const { podcastMetadata } = this.props;
-
-    return (
-      <InfoPage
-        bodyContent={<section>{this.renderEpisodes()}</section>}
-        featuredContent={<PodcastCard podcast={podcastMetadata} />}
-        titleContent={
-          <>
-            <SectionHeader>podcast</SectionHeader>
-            <h1>{podcastMetadata.type === 'success' && podcastMetadata.data.title}</h1>
-          </>
-        }
-      />
-    );
-  }
-}
+  return (
+    <InfoPage
+      bodyContent={
+        <section>
+          <SectionHeader className={styles.sectionHeader}>latest episodes</SectionHeader>
+          <LatestEpisodes episodes={episodes} />
+        </section>
+      }
+      featuredContent={<PodcastCard podcast={podcastMetadata} />}
+      titleContent={
+        <>
+          <SectionHeader>podcast</SectionHeader>
+          <h1>{podcastMetadata.type === 'success' && podcastMetadata.data.title}</h1>
+        </>
+      }
+    />
+  );
+};
 
 const mapDispatchToProps = {
   fetchPodcastMetadata: thunks.fetchPodcastMetadata,

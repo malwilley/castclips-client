@@ -70,6 +70,12 @@ export type Error = {
   message: string;
 };
 
+export type ErrorWithData<T> = {
+  data: T;
+  type: 'error';
+  message: string;
+};
+
 export type HttpRequest<T> = NotAsked | Fetching | Success<T> | Error;
 
-export type LazyLoadedData<T> = NotAsked | FetchingWithData<T> | Success<T> | Error;
+export type LazyLoadedData<T> = NotAsked | FetchingWithData<T> | Success<T> | ErrorWithData<T>;

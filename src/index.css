@@ -96,6 +96,7 @@ h6 {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: var(--bold-weight);
+  margin: 0;
 }
 
 /* Background utilities */

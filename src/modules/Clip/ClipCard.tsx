@@ -1,10 +1,10 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { animateSlideToFifty, card, downHalf } from '~/styles';
-import FeatureCard from '~/components/FeatureCard/FeatureCard';
 import { HttpRequest, EpisodeClip } from '~/types';
 import { fontFamily } from '~/styles/text';
 import ClipPlayer from '~/modules/Clip/ClipPlayer';
+import Card from '~/components/Card';
+import HttpContent from '~/components/HttpContent';
 
 type ClipCardProps = {
   clip: HttpRequest<EpisodeClip>;
@@ -24,9 +24,11 @@ const styles = {
     marginTop: 60,
     padding: 20,
   }),
-  main: css(card, animateSlideToFifty, downHalf, {
+  main: css({
     display: 'flex',
     overflow: 'visible',
+    position: 'relative',
+    width: 700,
   }),
   playbackSlider: css({
     position: 'absolute',
@@ -36,30 +38,27 @@ const styles = {
   }),
 };
 
-class ClipCard extends React.Component<ClipCardProps> {
-  renderClipData = (clip: EpisodeClip) => {
-    const { stars, views } = clip;
-    return (
-      <div className={styles.main}>
-        <ClipPlayer clip={clip} />
-        <div className={styles.bottomContainer}>
-          <div>
-            <span className={styles.bigText}>{views} </span>
-            <span className={styles.smallText}>views</span>
+const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
+  <Card className={styles.main}>
+    <HttpContent
+      request={clip}
+      renderSuccess={clipData => (
+        <>
+          <ClipPlayer clip={clipData} />
+          <div className={styles.bottomContainer}>
+            <div>
+              <span className={styles.bigText}>{clipData.views} </span>
+              <span className={styles.smallText}>views</span>
+            </div>
+            <div>
+              <span className={styles.bigText}>{clipData.stars} </span>
+              <span className={styles.smallText}>stars</span>
+            </div>
           </div>
-          <div>
-            <span className={styles.bigText}>{stars} </span>
-            <span className={styles.smallText}>stars</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  render() {
-    const { clip } = this.props;
-    return <FeatureCard content={clip} renderContent={this.renderClipData} />;
-  }
-}
+        </>
+      )}
+    />
+  </Card>
+);
 
 export default ClipCard;

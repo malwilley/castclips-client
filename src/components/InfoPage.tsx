@@ -20,7 +20,7 @@ const styles = {
     gridColumnEnd: 3,
     gridRowStart: 5,
     gridRowEnd: -1,
-    paddingTop: 40,
+    padding: '40px 0',
   }),
   feature: css({
     gridColumnStart: 2,

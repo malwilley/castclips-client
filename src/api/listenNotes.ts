@@ -86,3 +86,14 @@ export const getEpisodeData = async (id: string) => {
 
   return result;
 };
+
+export const getNextEpisodes = async (podcastId: string, lastEpisodePublished: number) => {
+  const result = await fetchListenNotes<ListenNotesPodcastDataResponse>(
+    `/podcasts/${podcastId}?${qs.stringify({
+      next_episode_pub_date: lastEpisodePublished,
+      sort: 'recent_first',
+    })}`
+  );
+
+  return result.episodes;
+};

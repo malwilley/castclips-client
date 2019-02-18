@@ -44,8 +44,9 @@ const styles = {
     marginBottom: 30,
   }),
   subTitle: css({
-    ' > a': {
+    '& > a': {
       color: colors.lightest,
+      marginLeft: 4,
     },
     color: colors.secondary,
   }),
@@ -54,62 +55,59 @@ const styles = {
   }),
 };
 
-class EpisodePage extends React.Component<EpisodePageConnectedProps> {
-  componentDidMount() {
-    const { fetchEpisodeMetadata, id } = this.props;
+const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
+  episodeMetadata,
+  fetchEpisodeMetadata,
+  id,
+}) => {
+  React.useEffect(() => {
     fetchEpisodeMetadata(id);
-  }
+  }, [id]);
 
-  render() {
-    const { episodeMetadata, id } = this.props;
-    return (
-      <InfoPage
-        bodyContent={
-          <HttpContent
-            request={episodeMetadata}
-            renderSuccess={({ audioLength, description, podcast, published }) => (
-              <>
-                <section className={styles.section}>
-                  <SectionHeader>description</SectionHeader>
-                  <div
-                    className={styles.description}
-                    dangerouslySetInnerHTML={{ __html: description }}
-                  />
-                  <p className={styles.published}>
-                    <CalendarClockIcon size={20} /> {`Published ${published.toLocaleString()}`}
-                  </p>
-                </section>
-                <SectionHeader className={styles.sectionHeader}>
-                  clips from the episode
-                </SectionHeader>
-                <EpisodeClips episodeId={id} episodeLength={audioLength} />
-              </>
-            )}
-          />
-        }
-        featuredContent={<EpisodeCard episode={episodeMetadata} />}
-        titleContent={
-          <>
-            <SectionHeader>Episode</SectionHeader>
-            <h1 className={styles.title}>
-              {episodeMetadata.type === 'success' ? episodeMetadata.data.title : ''}
-            </h1>
-            {episodeMetadata.type === 'success' ? (
+  return (
+    <InfoPage
+      bodyContent={
+        <HttpContent
+          request={episodeMetadata}
+          renderSuccess={({ audioLength, description, published }) => (
+            <>
+              <section className={styles.section}>
+                <SectionHeader>description</SectionHeader>
+                <div
+                  className={styles.description}
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
+                <p className={styles.published}>
+                  <CalendarClockIcon size={20} /> {`Published ${published.toLocaleString()}`}
+                </p>
+              </section>
+              <SectionHeader className={styles.sectionHeader}>clips from the episode</SectionHeader>
+              <EpisodeClips episodeId={id} episodeLength={audioLength} />
+            </>
+          )}
+        />
+      }
+      featuredContent={<EpisodeCard episode={episodeMetadata} />}
+      titleContent={
+        <HttpContent
+          request={episodeMetadata}
+          renderSuccess={({ title, podcast }) => (
+            <>
+              <SectionHeader>Episode</SectionHeader>
+              <h1 className={styles.title}>{title}</h1>
               <h4 className={styles.subTitle}>
                 From the podcast{' '}
-                <Link to={`/podcast/${episodeMetadata.data.podcast.id}`}>
-                  <strong>{episodeMetadata.data.podcast.title}</strong>
+                <Link to={`/podcast/${podcast.id}`}>
+                  <strong>{podcast.title}</strong>
                 </Link>
               </h4>
-            ) : (
-              <p />
-            )}
-          </>
-        }
-      />
-    );
-  }
-}
+            </>
+          )}
+        />
+      }
+    />
+  );
+};
 
 const mapStateToProps = (state: AppState) => ({
   episodeMetadata: state.episode.metadata,

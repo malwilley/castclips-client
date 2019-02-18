@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { thunks } from './redux';
 import { ClipState } from './types';
+import InfoPage from '~/components/InfoPage';
+import SectionHeader from '~/components/SectionHeader';
+import { Link } from 'react-router-dom';
+import { css } from 'emotion';
+import { colors } from '~/styles';
 
 type ClipPageProps = {
   id: string;
@@ -15,32 +20,56 @@ type ClipPageConnectedProps = ClipPageProps & {
   fetchClip: (id: string) => void;
 };
 
-class EpisodePage extends React.Component<ClipPageConnectedProps> {
-  componentDidMount() {
-    const { fetchClip, id } = this.props;
-    fetchClip(id);
-  }
+const styles = {
+  subTitle: css({
+    ' > a': {
+      color: colors.lightest,
+      marginLeft: 4,
+    },
+    color: colors.secondary,
+  }),
+  title: css({
+    marginBottom: 6,
+  }),
+};
 
-  render() {
-    const { clipMetadata } = this.props;
-    return (
-      <>
-        <section className="hero center bg-primary flex flex-column pt2 relative">
+const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip, id }) => {
+  React.useEffect(() => {
+    fetchClip(id);
+  }, [id]);
+
+  return (
+    <InfoPage
+      bodyContent={
+        <>
+          <SectionHeader>description</SectionHeader>
           <HttpContent
-            renderError={() => <div>error!</div>}
-            renderFetching={() => <div>fetching...</div>}
-            renderSuccess={({ title }) => <h1>{title}</h1>}
             request={clipMetadata}
+            renderSuccess={({ description }) => <p>{description}</p>}
           />
-          <ClipCard clip={clipMetadata} />
-        </section>
-        <section className="page-container pt-episodes">
-          <h6 className="ml1 mb1">other stuff</h6>
-        </section>
-      </>
-    );
-  }
-}
+        </>
+      }
+      featuredContent={<ClipCard clip={clipMetadata} />}
+      titleContent={
+        <HttpContent
+          request={clipMetadata}
+          renderSuccess={({ title, episodeId }) => (
+            <>
+              <SectionHeader>user clip</SectionHeader>
+              <h1 className={styles.title}>{title}</h1>
+              <h4 className={styles.subTitle}>
+                From the episode{' '}
+                <Link to={`/episode/${episodeId}`}>
+                  <strong>Episode title</strong>
+                </Link>
+              </h4>
+            </>
+          )}
+        />
+      }
+    />
+  );
+};
 
 const mapStateToProps = (state: AppState) => ({
   clipMetadata: state.clip.metadata,

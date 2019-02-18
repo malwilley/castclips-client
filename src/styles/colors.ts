@@ -9,6 +9,7 @@ export default {
   light: '#f7f7f7',
   lightest: '#ffffff',
   gray: '#bebebe',
+  grayLight: '#dedede',
   dark: '#404e4d',
   darkest: '#1f2423',
   darkestAlpha30: 'rgba(31,36,35,0.3)',
