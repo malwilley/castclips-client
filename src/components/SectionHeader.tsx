@@ -7,6 +7,9 @@ type SectionHeaderProps = {
 };
 
 const styles = {
+  main: css({
+    marginBottom: 10,
+  }),
   text: css({
     marginBottom: 4,
   }),
@@ -18,7 +21,7 @@ const styles = {
 };
 
 const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className }) => (
-  <div className={className}>
+  <div className={css(styles.main, className)}>
     <h6 className={styles.text}>{children}</h6>
     <div className={styles.underline} />
   </div>

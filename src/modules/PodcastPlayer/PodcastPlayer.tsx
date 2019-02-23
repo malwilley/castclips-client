@@ -4,14 +4,15 @@ import Audio from '~/components/Audio';
 import PreviewOrRecord from '~/modules/PodcastPlayer/PreviewOrRecord';
 import ShareButton from '~/modules/PodcastPlayer/ShareButton';
 import ShareRange, { ShareRangeState } from '~/modules/PodcastPlayer/ShareRange';
-import { Episode, PlayStatus } from '~/types';
+import { PlayStatus } from '~/types';
 import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
 import { addClip } from '~/api/firebase';
 import Show from '~/components/Show';
 import CreateClipModal from '../Episode/components/CreateClipModal';
+import { EpisodeMetadata } from '../Episode/types';
 
 type PodcastPlayerProps = {
-  episode: Episode;
+  episode: EpisodeMetadata;
 };
 
 type PodcastPlayerState = {
@@ -177,22 +178,6 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     });
   };
 
-  handleShare = async () => {
-    if (!this.state.share) {
-      return;
-    }
-    const { id } = await addClip({
-      audio: this.props.episode.audio,
-      description: '',
-      title: '',
-      episodeId: this.props.episode.id,
-      podcastId: '',
-      start: this.state.share.start,
-      end: this.state.share.end,
-    });
-    alert(id);
-  };
-
   render() {
     const { share } = this.state;
 
@@ -245,10 +230,9 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
             {({ isOpen, toggle }) => (
               <>
                 <ShareButton active={this.state.share !== null} onClick={toggle} />
-                {isOpen &&
-                  share && (
-                    <CreateClipModal start={share.start} end={share.end} handleClose={toggle} />
-                  )}
+                {isOpen && share && (
+                  <CreateClipModal start={share.start} end={share.end} handleClose={toggle} />
+                )}
               </>
             )}
           </Show>

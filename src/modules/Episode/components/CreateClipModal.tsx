@@ -10,6 +10,7 @@ import { AppState } from '~/redux/types';
 import { EpisodeState } from '../types';
 import { AddClipPayload } from '~/api/firebase';
 import StyledTextArea from '~/components/StyledTextArea';
+import pick from 'ramda/es/pick';
 
 type ShareModalProps = {
   start: number;
@@ -50,8 +51,8 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
 
     createClip({
       audio: episode.data.audio,
-      episodeId: episode.data.id,
-      podcastId: episode.data.podcast.id,
+      episode: pick(['id', 'title', 'description', 'published', 'audioLength'], episode.data),
+      podcast: pick(['id', 'title', 'description', 'thumbnail'], episode.data.podcast),
       title,
       description,
       start,

@@ -6,8 +6,8 @@ export type GetClipResponse = {
   audio: string;
   description: string;
   end: number;
-  episodeId: string;
-  podcastId: string;
+  episode: { id: string; title: string; description: string; audioLength: number; published: Date };
+  podcast: { id: string; title: string; description: string; thumbnail: string };
   stars: number;
   start: number;
   title: string;
@@ -18,8 +18,8 @@ export type AddClipPayload = {
   audio: string;
   description: string;
   end: number;
-  episodeId: string;
-  podcastId: string;
+  episode: { id: string; title: string; description: string; audioLength: number; published: Date };
+  podcast: { id: string; title: string; description: string; thumbnail: string };
   start: number;
   title: string;
 };

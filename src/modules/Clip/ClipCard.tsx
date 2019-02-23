@@ -1,13 +1,14 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { HttpRequest, EpisodeClip } from '~/types';
+import { HttpRequest } from '~/types';
 import { fontFamily } from '~/styles/text';
 import ClipPlayer from '~/modules/Clip/ClipPlayer';
 import Card from '~/components/Card';
 import HttpContent from '~/components/HttpContent';
+import { ClipMetadata } from './types';
 
 type ClipCardProps = {
-  clip: HttpRequest<EpisodeClip>;
+  clip: HttpRequest<ClipMetadata>;
 };
 
 const styles = {

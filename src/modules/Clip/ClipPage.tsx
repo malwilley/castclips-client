@@ -53,14 +53,18 @@ const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip
       titleContent={
         <HttpContent
           request={clipMetadata}
-          renderSuccess={({ title, episodeId }) => (
+          renderSuccess={({ title, episode, podcast }) => (
             <>
               <SectionHeader>user clip</SectionHeader>
               <h1 className={styles.title}>{title}</h1>
               <h4 className={styles.subTitle}>
                 From the episode{' '}
-                <Link to={`/episode/${episodeId}`}>
-                  <strong>Episode title</strong>
+                <Link to={`/episode/${episode.id}`}>
+                  <strong>{episode.title}</strong>
+                </Link>{' '}
+                of the podcast{' '}
+                <Link to={`/podcast/${podcast.id}`}>
+                  <strong>{podcast.title}</strong>
                 </Link>
               </h4>
             </>

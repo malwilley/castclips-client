@@ -4,7 +4,7 @@ export default {
   primaryDark: '#004267',
   secondary: '#a2d5f2',
   secondaryLight: 'rgba(228, 179, 99, .26)',
-  tertiary: '#ff7e67',
+  tertiary: '#ff9d5b',
   teriaryAlpha30: 'rgba(137, 176, 174, 0.3)',
   light: '#f7f7f7',
   lightest: '#ffffff',
@@ -17,4 +17,6 @@ export default {
   possibleHeaderColor: '#272838',
   possibleOrange: '#fcb07e',
   possibleBlue: '#3581b8',
+  possibleLight: '#EBE9E9',
+  possibleRed: '#F35B5B',
 };

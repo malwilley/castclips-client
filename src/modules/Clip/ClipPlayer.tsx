@@ -1,11 +1,12 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { EpisodeClip, PlayStatus } from '~/types';
+import { PlayStatus } from '~/types';
 import Audio from '~/components/Audio';
 import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
+import { ClipMetadata } from './types';
 
 type ClipPlayerProps = {
-  clip: EpisodeClip;
+  clip: ClipMetadata;
 };
 
 type ClipPlayerState = {
