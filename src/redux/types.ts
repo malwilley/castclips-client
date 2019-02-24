@@ -1,8 +1,11 @@
 import reducer from './reducer';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import store from './store';
 
 export type AppState = ReturnType<typeof reducer>;
+
+export type Store = typeof store;
 
 export type Action<T extends string> = {
   type: T;

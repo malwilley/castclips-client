@@ -4,6 +4,7 @@ import ClipPage from '~/modules/Clip/ClipPage';
 import EpisodePage from '~/modules/Episode/EpisodePage';
 import PodcastPage from '~/modules/Podcast/PodcastPage';
 import SearchPage from '~/modules/Search/SearchPage';
+import SigninPage from './modules/auth/components/SigninPage';
 
 /*
 const styles = {
@@ -22,6 +23,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route exact={true} path="/" component={SearchPage} />
+        <Route path="/signin" component={SigninPage} />
         <Route
           path="/podcast/:id"
           render={({

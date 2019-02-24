@@ -2918,6 +2918,11 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
+dialog-polyfill@^0.4.7:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/dialog-polyfill/-/dialog-polyfill-0.4.10.tgz#c4ea68a0deed4abb59a6a2a025c548b278cd532e"
+  integrity sha512-j5yGMkP8T00UFgyO+78OxiN5vC5dzRQF3BEio+LhNvDbyfxWBsi3sfPArDm54VloaJwy2hm3erEiDWqHRC8rzw==
+
 diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
@@ -3683,6 +3688,13 @@ firebase@^5.8.2:
     "@firebase/messaging" "0.3.10"
     "@firebase/polyfill" "0.3.5"
     "@firebase/storage" "0.2.7"
+
+firebaseui@^3.2.0:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-3.5.2.tgz#21e7598d3f63ca27970d328de7503e27214ddebe"
+  integrity sha512-KFKvTlJ9N1dQ1SsKTitVQ9wUQX2XMyySG20SbBs+r/FriAsPTYJ/6Hzkh5ebEiUaOcHx4DYG78Jce5XSQ+Ssrw==
+  dependencies:
+    dialog-polyfill "^0.4.7"
 
 flatten@^1.0.2:
   version "1.0.2"
@@ -7448,6 +7460,13 @@ react-error-overlay@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.1.tgz#417addb0814a90f3a7082eacba7cee588d00da89"
   integrity sha512-xXUbDAZkU08aAkjtUvldqbvI04ogv+a1XdHxvYuHPYKIVk/42BIOD0zSKTHAWV4+gDy3yGm283z2072rA2gdtw==
+
+react-firebaseui@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/react-firebaseui/-/react-firebaseui-3.1.2.tgz#a1651713a3dae989b2fb7ccb0c288afd8ae28f30"
+  integrity sha512-lpNvIPjy9rijSbaARElIooXUtFlyFZ2VUzAXi3AMximOUfLo1De0lBfoFjEiSJjC0ItNyTn4KoKIawACcElLjw==
+  dependencies:
+    firebaseui "^3.2.0"
 
 react-is@^16.6.3, react-is@^16.7.0:
   version "16.8.1"
