@@ -1,6 +1,6 @@
 import * as qs from 'querystringify';
 
-const host = 'https://us-central1-castclips-7c579.cloudfunctions.net';
+const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
 
 export type GetClipResponse = {
   audio: string;
@@ -40,13 +40,13 @@ const fetchFirebase = async <TResponse>(
 };
 
 export const getClip = async (id: string) => {
-  const result = await fetchFirebase<GetClipResponse>(`/getClip?${qs.stringify({ id })}`);
+  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}/`);
 
   return result;
 };
 
 export const addClip = async (clip: AddClipPayload) => {
-  const result = await fetchFirebase<AddClipResponse>('/addClip', {
+  const result = await fetchFirebase<AddClipResponse>('/clip/', {
     body: JSON.stringify(clip),
     headers: {
       'Content-Type': 'application/json',
@@ -58,9 +58,7 @@ export const addClip = async (clip: AddClipPayload) => {
 };
 
 export const getClipsForEpisode = async (episodeId: string) => {
-  const result = await fetchFirebase<GetClipsForEpisodeResponse>(
-    `/getClipsForEpisode?${qs.stringify({ id: episodeId })}`
-  );
+  const result = await fetchFirebase<GetClipsForEpisodeResponse>(`/episode/${episodeId}/clips/`);
 
   return result;
 };

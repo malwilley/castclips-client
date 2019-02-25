@@ -15,13 +15,14 @@ const attachAuthListener = (store: Store) => {
         return store.dispatch(
           actions.setUser({
             type: 'anonymous',
+            user,
           })
         );
       }
       return store.dispatch(
         actions.setUser({
           type: 'loggedin',
-          username: user.displayName || user.email || '',
+          user,
         })
       );
     }

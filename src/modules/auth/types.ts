@@ -1,14 +1,15 @@
-type UserLoggedIn = {
+export type UserLoggedIn = {
   type: 'loggedin';
-  username: string;
+  user: firebase.User;
 };
 
-type UserLoggedOut = {
+export type UserLoggedOut = {
   type: 'loggedout';
 };
 
-type AnonymousUser = {
+export type AnonymousUser = {
   type: 'anonymous';
+  user: firebase.User;
 };
 
 type UserState = UserLoggedIn | UserLoggedOut | AnonymousUser;

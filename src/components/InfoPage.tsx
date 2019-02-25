@@ -2,6 +2,7 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import { Link } from 'react-router-dom';
+import Header from '~/modules/header';
 
 type InfoPageProps = {
   bodyContent: React.ReactNode;
@@ -35,10 +36,6 @@ const styles = {
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumn: '1 / -1',
-    textAlign: 'left',
-    color: colors.lightest,
-    backgroundColor: colors.possibleHeaderColor,
-    padding: '20px 30px',
   }),
   hero: css({
     backgroundImage: colors.gradient,
@@ -62,11 +59,7 @@ const InfoPage: React.FC<InfoPageProps> = ({ bodyContent, featuredContent, title
     <div className={styles.titleContainer}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
-    <header className={styles.header}>
-      <Link to="/">
-        <h2>castclips</h2>
-      </Link>
-    </header>
+    <Header className={styles.header} />
   </div>
 );
 

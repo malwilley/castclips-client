@@ -5,6 +5,7 @@ import { getEpisodeData } from '~/api/listenNotes';
 import mapApiEpisode from '../utils/mapApiEpisode';
 import { AddClipPayload, addClip, getClipsForEpisode } from '~/api/firebase';
 import { push } from 'connected-react-router';
+import firebase from '~/modules/auth/firebase';
 
 const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedClips = path(['episode', 'clips', 'data', 'id'], getState());
@@ -23,6 +24,10 @@ const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState
 };
 
 const createClip: Thunk<AddClipPayload> = clip => async (dispatch, getState) => {
+  const user = getState().auth.user;
+  if (user.type === 'loggedout') {
+    await firebase.auth().signInAnonymously();
+  }
   dispatch(actions.setClipId({ type: 'fetching' }));
 
   try {
