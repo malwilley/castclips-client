@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from '~/styles';
-import { Link } from 'react-router-dom';
 import Header from '~/modules/header';
 
 type InfoPageProps = {
@@ -14,7 +13,7 @@ const styles = {
   main: css({
     display: 'grid',
     gridTemplateColumns: '1fr 1000px 1fr',
-    gridTemplateRows: '70px 200px 3fr 1fr auto',
+    gridTemplateRows: '70px auto auto 40px auto',
   }),
   body: css({
     gridColumnStart: 2,
@@ -49,7 +48,7 @@ const styles = {
     gridColumnStart: 2,
     gridColumnEnd: 3,
     color: colors.lightest,
-    paddingTop: 40,
+    padding: '40px 0',
   }),
 };
 

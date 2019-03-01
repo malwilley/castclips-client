@@ -5,6 +5,7 @@ import Card from '~/components/Card';
 import HttpContent from '~/components/HttpContent';
 import { css } from 'emotion';
 import { colors } from '~/styles';
+import { EarthIcon } from 'mdi-react';
 
 type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;
@@ -19,38 +20,52 @@ const styles = {
     height: 200,
     width: 700,
   }),
-  description: css({
-    gridRow: '1 / 2',
-    gridColumn: '2 / -1',
-    margin: 0,
-    padding: '20px 20px 20px 0',
+  infoContainer: css({
+    '& > :not(:last-child)': {
+      marginRight: 20,
+    },
+    display: 'flex',
+    alignItems: 'center',
+    color: colors.light,
+    fill: colors.light,
+    lineHeight: 1,
+  }),
+  link: css({
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: 200,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    textDecoration: 'underline',
+    whiteSpace: 'nowrap',
   }),
   thumbnail: css({
     gridRow: '1 / 2',
     gridColumn: '1 / 2',
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    border: `4px solid ${colors.secondary}`,
-    margin: '24px auto',
+    width: 120,
+    height: 120,
+    borderRadius: '50%',
+    border: `6px solid ${colors.light}`,
+    boxShadow: 'var(--card-dropshadow)',
   }),
 };
 
-const renderPodcastData = ({ description, thumbnail, title, website }: PodcastMetadata) => {
+const renderPodcastData = ({ thumbnail, website }: PodcastMetadata) => {
   return (
     <>
+      <div className={styles.infoContainer}>
+        <div className={styles.link}>
+          <EarthIcon size={20} />
+          <a href={website}>{website}</a>
+        </div>
+      </div>
       <img className={styles.thumbnail} src={thumbnail} />
-      <p className={styles.description}>{description}</p>
     </>
   );
 };
 
 const PodcastCard: React.FC<PodcastCardProps> = ({ podcast }) => {
-  return (
-    <Card className={styles.main}>
-      <HttpContent request={podcast} renderSuccess={renderPodcastData} />
-    </Card>
-  );
+  return <HttpContent request={podcast} renderSuccess={renderPodcastData} />;
 };
 
 export default PodcastCard;

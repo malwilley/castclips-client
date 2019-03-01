@@ -1,4 +1,5 @@
 import * as qs from 'querystringify';
+import firebase from '~/modules/auth/firebase';
 
 const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
 
@@ -32,21 +33,30 @@ type AddClipResponse = {
 
 const fetchFirebase = async <TResponse>(
   route: string,
+  token?: string,
   options: RequestInit = {}
 ): Promise<TResponse> => {
-  const response = await fetch(host + route, options);
+  const response = await fetch(host + route, {
+    ...options,
+    headers: token
+      ? {
+          ...options.headers,
+          Authorization: `Bearer ${token}`,
+        }
+      : options.headers,
+  });
 
   return response.json();
 };
 
 export const getClip = async (id: string) => {
-  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}/`);
+  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}`);
 
   return result;
 };
 
-export const addClip = async (clip: AddClipPayload) => {
-  const result = await fetchFirebase<AddClipResponse>('/clip/', {
+export const addClip = async (clip: AddClipPayload, token: string) => {
+  const result = await fetchFirebase<AddClipResponse>('/clip/', token, {
     body: JSON.stringify(clip),
     headers: {
       'Content-Type': 'application/json',
@@ -58,7 +68,19 @@ export const addClip = async (clip: AddClipPayload) => {
 };
 
 export const getClipsForEpisode = async (episodeId: string) => {
-  const result = await fetchFirebase<GetClipsForEpisodeResponse>(`/episode/${episodeId}/clips/`);
+  const result = await fetchFirebase<GetClipsForEpisodeResponse>(
+    `/episode/${episodeId}/clips/`,
+    ''
+  );
+
+  return result;
+};
+
+export const getClipsForPodcast = async (podcastId: string) => {
+  const result = await fetchFirebase<GetClipsForEpisodeResponse>(
+    `/podcast/${podcastId}/clips/`,
+    ''
+  );
 
   return result;
 };

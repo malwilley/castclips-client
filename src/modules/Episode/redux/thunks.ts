@@ -6,6 +6,7 @@ import mapApiEpisode from '../utils/mapApiEpisode';
 import { AddClipPayload, addClip, getClipsForEpisode } from '~/api/firebase';
 import { push } from 'connected-react-router';
 import firebase from '~/modules/auth/firebase';
+import { AuthState } from '~/modules/auth/types';
 
 const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedClips = path(['episode', 'clips', 'data', 'id'], getState());
@@ -23,15 +24,26 @@ const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState
   }
 };
 
-const createClip: Thunk<AddClipPayload> = clip => async (dispatch, getState) => {
-  const user = getState().auth.user;
-  if (user.type === 'loggedout') {
-    await firebase.auth().signInAnonymously();
+const signInAnonymouslyAndGetToken = async () => {
+  const { user } = await firebase.auth().signInAnonymouslyAndRetrieveData();
+  if (!user) {
+    throw new Error('Failed to login');
   }
+
+  const token = await user.getIdToken();
+  return token;
+};
+
+const createClip: Thunk<AddClipPayload> = clip => async (dispatch, getState) => {
   dispatch(actions.setClipId({ type: 'fetching' }));
 
   try {
-    const { id } = await addClip(clip);
+    const userState = getState().auth.user;
+    const token =
+      userState.type === 'loggedout'
+        ? await signInAnonymouslyAndGetToken()
+        : await userState.user.getIdToken();
+    const { id } = await addClip(clip, token);
     dispatch(actions.setClipId({ data: id, type: 'success' }));
     dispatch(push(`/clip/${id}`));
   } catch {

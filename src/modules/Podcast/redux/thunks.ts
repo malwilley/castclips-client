@@ -6,6 +6,7 @@ import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode';
 import mapApiPodcast from '../utils/mapApiPodcast';
 import { PodcastEpisode } from '../types';
 import path from 'ramda/es/path';
+import { getClipsForPodcast } from '~/api/firebase';
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
@@ -59,7 +60,24 @@ const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch
   }
 };
 
+const fetchClipsForPodcast: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
+  const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
+  if (currentlyLoadedPodcast === id && getState().podcast.clips.type === 'success') {
+    return;
+  }
+
+  dispatch(actions.setClips({ type: 'fetching' }));
+
+  try {
+    const clips = await getClipsForPodcast(id);
+    dispatch(actions.setClips({ type: 'success', data: clips }));
+  } catch {
+    dispatch(actions.setClips({ type: 'error', message: 'Error fetching podcast metadata' }));
+  }
+};
+
 export default {
+  fetchClipsForPodcast,
   fetchMoreEpisodes,
   fetchPodcastMetadata,
 };

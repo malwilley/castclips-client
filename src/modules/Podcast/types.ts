@@ -1,4 +1,5 @@
 import { LazyLoadedData, HttpRequest } from '~/types';
+import { GetClipsForEpisodeResponse } from '~/api/firebase';
 
 export type PodcastEpisode = {
   audioLength: number;
@@ -23,6 +24,7 @@ export type PodcastMetadata = {
 };
 
 export type PodcastState = {
+  clips: HttpRequest<GetClipsForEpisodeResponse>;
   episodes: LazyLoadedEpisodes;
   metadata: HttpRequest<PodcastMetadata>;
 };

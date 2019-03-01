@@ -3,6 +3,15 @@ import { PodcastState, PodcastEpisode } from '../types';
 import { combineReducers } from 'redux';
 import { propOr } from 'ramda';
 
+const clips = (state: PodcastState['clips'] = { type: 'not_asked' }, action: Actions) => {
+  switch (action.type) {
+    case ActionTypes.SetClips:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const episodes = (state: PodcastState['episodes'] = { type: 'not_asked' }, action: Actions) => {
   switch (action.type) {
     case ActionTypes.AddEpisodes: {
@@ -29,6 +38,7 @@ const metadata = (state: PodcastState['metadata'] = { type: 'not_asked' }, actio
 };
 
 const reducer = combineReducers({
+  clips,
   episodes,
   metadata,
 });
