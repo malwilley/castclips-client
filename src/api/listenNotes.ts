@@ -28,6 +28,7 @@ export type ListenNotesPodcastDataResponse = {
     audio: string;
     id: string;
   }>;
+  publisher: string;
   website: string;
 };
 

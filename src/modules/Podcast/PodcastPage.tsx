@@ -11,6 +11,7 @@ import LatestEpisodes from './components/LatestEpisodes';
 import PodcastClips from './components/PodcastClips';
 import HttpContent from '~/components/HttpContent';
 import { colors } from '~/styles';
+import PageTitleFetching from '~/components/PageTitleFetching';
 
 type PodcastPageProps = {
   id: string;
@@ -28,6 +29,14 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '[episodes] 2fr [clips] 1fr',
     gridColumnGap: 20,
+  }),
+  heading: css({
+    '& > :first-child': {
+      marginBottom: 6,
+    },
+    '& > h4': {
+      color: colors.secondary,
+    },
   }),
   description: css({
     color: colors.dark,
@@ -83,7 +92,16 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
       titleContent={
         <>
           <SectionHeader>podcast</SectionHeader>
-          <h1>{podcastMetadata.type === 'success' && podcastMetadata.data.title}</h1>
+          <HttpContent
+            request={podcastMetadata}
+            renderFetching={() => <PageTitleFetching />}
+            renderSuccess={({ publisher, title }) => (
+              <div className={styles.heading}>
+                <h1>{title}</h1>
+                <h4>{publisher}</h4>
+              </div>
+            )}
+          />
         </>
       }
     />

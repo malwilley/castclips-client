@@ -6,6 +6,7 @@ import { AppState } from '~/redux/types';
 import PodcastClipCard from './PodcastClipCard';
 import { css } from 'emotion';
 import PodcastClipCardFetching from './PodcastClipCardFetching';
+import PodcastClipsNoData from './PodcastClipsNoData';
 
 type PodcastClipsConnectedProps = {
   clipsRequest: PodcastState['clips'];
@@ -33,13 +34,17 @@ const PodcastClips: React.FC<PodcastClipsConnectedProps> = ({ clipsRequest }) =>
               ))}
           </>
         )}
-        renderSuccess={clips => (
-          <>
-            {clips.map(clip => (
-              <PodcastClipCard clip={clip} key={clip.id} />
-            ))}
-          </>
-        )}
+        renderSuccess={clips =>
+          clips.length > 0 ? (
+            <>
+              {clips.map(clip => (
+                <PodcastClipCard clip={clip} key={clip.id} />
+              ))}
+            </>
+          ) : (
+            <PodcastClipsNoData />
+          )
+        }
       />
     </div>
   );

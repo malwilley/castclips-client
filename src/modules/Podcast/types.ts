@@ -20,6 +20,7 @@ export type PodcastMetadata = {
   title: string;
   description: string;
   totalEpisodes: number;
+  publisher: string;
   website: string;
 };
 

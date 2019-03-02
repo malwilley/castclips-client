@@ -27,7 +27,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     color: colors.light,
-    fill: colors.light,
     lineHeight: 1,
   }),
   link: css({
@@ -49,6 +48,10 @@ const styles = {
     boxShadow: 'var(--card-dropshadow)',
   }),
 };
+
+// todo: get 'publisher' on types from podcast metadata
+// todo: sanitize url (https//www and listennotes crap)
+// pass in number of clips
 
 const renderPodcastData = ({ thumbnail, website }: PodcastMetadata) => {
   return (
