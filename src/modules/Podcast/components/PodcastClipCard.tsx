@@ -51,7 +51,7 @@ const styles = {
 
 const PodcastClipCard: React.FC<PodcastClipCardProps> = ({ clip }) => (
   <Card className={styles.main}>
-    <Link to={`/clips/${clip.id}`}>
+    <Link to={`/clip/${clip.id}`}>
       <h4>{clip.title}</h4>
     </Link>
     <h5 className={styles.episode}>{clip.episode.title}</h5>

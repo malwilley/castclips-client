@@ -10,6 +10,7 @@ import SectionHeader from '~/components/SectionHeader';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import { colors } from '~/styles';
+import PageTitleFetching from '~/components/PageTitleFetching';
 
 type ClipPageProps = {
   id: string;
@@ -49,10 +50,16 @@ const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip
           />
         </>
       }
-      featuredContent={<ClipCard clip={clipMetadata} />}
+      featuredContent={<ClipCard clip={clipMetadata} id={id} />}
       titleContent={
         <HttpContent
           request={clipMetadata}
+          renderFetching={() => (
+            <>
+              <SectionHeader>user clip</SectionHeader>
+              <PageTitleFetching />
+            </>
+          )}
           renderSuccess={({ title, episode, podcast }) => (
             <>
               <SectionHeader>user clip</SectionHeader>

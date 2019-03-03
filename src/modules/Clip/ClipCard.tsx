@@ -6,9 +6,11 @@ import ClipPlayer from '~/modules/Clip/ClipPlayer';
 import Card from '~/components/Card';
 import HttpContent from '~/components/HttpContent';
 import { ClipMetadata } from './types';
+import CopyLink from '~/components/CopyLink';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
+  id: string;
 };
 
 const styles = {
@@ -22,8 +24,11 @@ const styles = {
   }),
   bottomContainer: css({
     display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     marginTop: 60,
     padding: 20,
+    width: '100%',
   }),
   main: css({
     display: 'flex',
@@ -37,9 +42,23 @@ const styles = {
     left: 2,
     right: 2,
   }),
+  leftContainer: css({
+    '& > :not(:last-child)': {
+      marginRight: 20,
+    },
+    display: 'flex',
+    alignItems: 'center',
+  }),
+  shareContainer: css({
+    display: 'flex',
+    alignItems: 'center',
+  }),
+  linkCopy: css({
+    width: 200,
+  }),
 };
 
-const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
+const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
   <Card className={styles.main}>
     <HttpContent
       request={clip}
@@ -47,13 +66,18 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
         <>
           <ClipPlayer clip={clipData} />
           <div className={styles.bottomContainer}>
-            <div>
-              <span className={styles.bigText}>{clipData.views} </span>
-              <span className={styles.smallText}>views</span>
+            <div className={styles.leftContainer}>
+              <div>
+                <span className={styles.bigText}>{clipData.views} </span>
+                <span className={styles.smallText}>views</span>
+              </div>
+              <div>
+                <span className={styles.bigText}>{clipData.stars} </span>
+                <span className={styles.smallText}>stars</span>
+              </div>
             </div>
-            <div>
-              <span className={styles.bigText}>{clipData.stars} </span>
-              <span className={styles.smallText}>stars</span>
+            <div className={styles.shareContainer}>
+              <CopyLink className={styles.linkCopy} text={`https://castclips.com/clip/${id}`} />
             </div>
           </div>
         </>

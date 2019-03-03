@@ -6,6 +6,7 @@ import { EpisodeState } from '../types';
 import HttpContent from '~/components/HttpContent';
 import EpisodeClipCard from './EpisodeClipCard';
 import { css } from 'emotion';
+import NoData from '~/components/NoData';
 
 type EpisodeClipsProps = {
   episodeId: string;
@@ -39,13 +40,17 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
   return (
     <HttpContent
       request={clipsState}
-      renderSuccess={clips => (
-        <div className={styles.container}>
-          {clips.map(clip => (
-            <EpisodeClipCard clip={clip} key={clip.id} episodeLength={episodeLength} />
-          ))}
-        </div>
-      )}
+      renderSuccess={clips =>
+        clips.length > 0 ? (
+          <div className={styles.container}>
+            {clips.map(clip => (
+              <EpisodeClipCard clip={clip} key={clip.id} episodeLength={episodeLength} />
+            ))}
+          </div>
+        ) : (
+          <NoData message="No one has made any clips for the episode yet. Be the first!" />
+        )
+      }
     />
   );
 };
