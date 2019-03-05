@@ -8,6 +8,7 @@ type SectionHeaderProps = {
 
 const styles = {
   main: css({
+    color: colors.dark,
     marginBottom: 10,
   }),
   text: css({

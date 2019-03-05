@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import PageTitleFetching from '~/components/PageTitleFetching';
+import ClipPageBody from './components/ClipPageBody';
 
 type ClipPageProps = {
   id: string;
@@ -41,15 +42,7 @@ const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip
 
   return (
     <InfoPage
-      bodyContent={
-        <>
-          <SectionHeader>description</SectionHeader>
-          <HttpContent
-            request={clipMetadata}
-            renderSuccess={({ description }) => <p>{description}</p>}
-          />
-        </>
-      }
+      bodyContent={<ClipPageBody clipId={id} clipMetadata={clipMetadata} />}
       featuredContent={<ClipCard clip={clipMetadata} id={id} />}
       titleContent={
         <HttpContent

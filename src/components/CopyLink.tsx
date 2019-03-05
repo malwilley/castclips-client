@@ -2,7 +2,7 @@ import * as React from 'react';
 import { css } from 'emotion';
 import Button from './Button';
 import { colors } from '~/styles';
-import { ClipboardOutlineIcon } from 'mdi-react';
+import { ClipboardOutlineIcon, ClipboardTextIcon, ClipboardTextOutlineIcon } from 'mdi-react';
 
 type CopyLinkProps = {
   className?: string;
@@ -16,6 +16,8 @@ const styles = {
     width: '100%',
   }),
   inputContainer: css({
+    flexGrow: 1,
+    width: 0,
     backgroundColor: colors.lightest,
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
@@ -41,7 +43,7 @@ const styles = {
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
     border: `1px solid ${colors.gray}`,
-    color: colors.gray,
+    color: colors.dark,
     height: '100%',
     width: 50,
     padding: 8,
@@ -55,6 +57,7 @@ const styles = {
 const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
   const [copied, setCopied] = React.useState<null | 'copied' | 'error'>(null);
   const ref = React.useRef<HTMLInputElement>(null);
+
   const copyToClipboard = React.useCallback(() => {
     if (!ref.current) {
       return;
@@ -68,13 +71,20 @@ const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
     }
   }, [ref]);
 
+  const selectOnClick = React.useCallback(() => {
+    if (!ref.current) {
+      return;
+    }
+    ref.current.select();
+  }, [ref]);
+
   return (
     <div className={css(styles.main, className)}>
       <div className={styles.inputContainer}>
-        <input className={styles.input} ref={ref} value={text} />
+        <input className={styles.input} onClick={selectOnClick} ref={ref} value={text} />
       </div>
       <Button className={styles.clipboardButton} onClick={copyToClipboard}>
-        <ClipboardOutlineIcon />
+        <ClipboardTextOutlineIcon />
       </Button>
     </div>
   );

@@ -64,8 +64,8 @@ const styles = {
     width: 100,
   }),
   thumbnail: css({
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
     borderRadius: '50%',
     border: `6px solid ${colors.lightest}`,
     boxShadow: 'var(--card-dropshadow)',
