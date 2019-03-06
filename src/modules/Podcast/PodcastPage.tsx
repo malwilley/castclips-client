@@ -70,7 +70,9 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
       bodyContent={
         <div className={styles.main}>
           <section className={styles.episodes}>
-            <SectionHeader className={styles.sectionHeader}>description</SectionHeader>
+            <SectionHeader light className={styles.sectionHeader}>
+              description
+            </SectionHeader>
             <div className={styles.description}>
               <HttpContent
                 request={podcastMetadata}

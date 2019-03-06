@@ -9,6 +9,7 @@ import firebase from '~/modules/auth/firebase';
 import { AuthState } from '~/modules/auth/types';
 
 const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
+  // todo: wtf is this
   const currentlyLoadedClips = path(['episode', 'clips', 'data', 'id'], getState());
   if (currentlyLoadedClips === id) {
     return;
@@ -18,7 +19,12 @@ const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState
 
   try {
     const clips = await getClipsForEpisode(id);
-    dispatch(actions.setClips({ data: clips, type: 'success' }));
+    dispatch(
+      actions.setClips({
+        data: clips.map(clip => ({ ...clip, published: new Date(clip.published) })),
+        type: 'success',
+      })
+    );
   } catch {
     dispatch(actions.setClips({ message: 'Error fetching clips', type: 'error' }));
   }

@@ -49,13 +49,13 @@ const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip
           request={clipMetadata}
           renderFetching={() => (
             <>
-              <SectionHeader>user clip</SectionHeader>
+              <SectionHeader light>user clip</SectionHeader>
               <PageTitleFetching />
             </>
           )}
           renderSuccess={({ title, episode, podcast }) => (
             <>
-              <SectionHeader>user clip</SectionHeader>
+              <SectionHeader light>user clip</SectionHeader>
               <h1 className={styles.title}>{title}</h1>
               <h4 className={styles.subTitle}>
                 From the episode{' '}

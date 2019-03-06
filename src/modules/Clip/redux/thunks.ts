@@ -12,8 +12,16 @@ const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState)
   dispatch(actions.setMetadata({ type: 'fetching' }));
 
   try {
-    const data = await getClip(id);
-    dispatch(actions.setMetadata({ type: 'success', data }));
+    const clip = await getClip(id);
+    dispatch(
+      actions.setMetadata({
+        type: 'success',
+        data: {
+          ...clip,
+          published: new Date(clip.published),
+        },
+      })
+    );
   } catch {
     dispatch(actions.setMetadata({ type: 'error', message: 'Error fetching episode metadata' }));
   }

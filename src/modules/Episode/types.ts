@@ -1,11 +1,22 @@
 import { HttpRequest } from '~/types';
 import { PodcastMetadata } from '../Podcast/types';
-import { GetClipsForEpisodeResponse } from '~/api/firebase';
 
 type EpisodePodcast = Pick<
   PodcastMetadata,
   'id' | 'description' | 'title' | 'thumbnail' | 'website'
 >;
+
+export type EpisodeClip = {
+  audio: string;
+  description: string;
+  id: string;
+  end: number;
+  published: Date;
+  stars: number;
+  start: number;
+  title: string;
+  views: number;
+};
 
 export type EpisodeMetadata = {
   audio: string;
@@ -23,7 +34,7 @@ export type EpisodeView = {
 };
 
 export type EpisodeState = {
-  clips: HttpRequest<GetClipsForEpisodeResponse>;
+  clips: HttpRequest<EpisodeClip[]>;
   metadata: HttpRequest<EpisodeMetadata>;
   view: EpisodeView;
 };

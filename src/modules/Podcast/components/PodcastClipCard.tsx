@@ -5,9 +5,10 @@ import { css } from 'emotion';
 import { Link } from 'react-router-dom';
 import { ClockOutlineIcon, StarOutlineIcon, EyeOutlineIcon } from 'mdi-react';
 import { colors } from '~/styles';
+import { PodcastClip } from '../types';
 
 type PodcastClipCardProps = {
-  clip: ClipMetadata & { id: string };
+  clip: PodcastClip;
 };
 
 const styles = {

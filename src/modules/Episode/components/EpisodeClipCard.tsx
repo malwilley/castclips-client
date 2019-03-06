@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { ClipMetadata } from '~/modules/Clip/types';
 import { EyeOutlineIcon, StarOutlineIcon, ClockOutlineIcon } from 'mdi-react';
 import Card from '~/components/Card';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import { Link } from 'react-router-dom';
+import { EpisodeClip } from '../types';
 
 type EpisodeClipCardProps = {
   className?: string;
-  clip: ClipMetadata & { id: string };
+  clip: EpisodeClip;
   episodeLength: number;
 };
 

@@ -27,6 +27,11 @@ const styles = {
   }),
   userCard: css({
     padding: 20,
+    marginBottom: 30,
+  }),
+  userPicNameContainer: css({
+    display: 'flex',
+    alignItems: 'center',
   }),
   userPic: css({
     height: 50,
@@ -37,6 +42,12 @@ const styles = {
     background: colors.primaryAlpha30,
     color: colors.primary,
     borderRadius: '50%',
+    marginRight: 20,
+  }),
+  userPublished: css({
+    fontSize: 14,
+    color: colors.gray,
+    margin: 0,
   }),
   shareCard: css({
     '& > :not(:last-child)': {
@@ -88,8 +99,21 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
       <div className={styles.sideContainer}>
         <SectionHeader>clip creator</SectionHeader>
         <Card className={styles.userCard}>
-          <div className={styles.userPic}>
-            <UserOutlineIcon />
+          <div className={styles.userPicNameContainer}>
+            <div className={styles.userPic}>
+              <UserOutlineIcon />
+            </div>
+            <HttpContent
+              request={clipMetadata}
+              renderSuccess={data => (
+                <div>
+                  <h4>username</h4>
+                  <h5
+                    className={styles.userPublished}
+                  >{`Created ${data.published.toLocaleDateString()}`}</h5>
+                </div>
+              )}
+            />
           </div>
         </Card>
         <SectionHeader>tell the world</SectionHeader>

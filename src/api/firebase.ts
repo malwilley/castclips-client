@@ -7,8 +7,15 @@ export type GetClipResponse = {
   audio: string;
   description: string;
   end: number;
-  episode: { id: string; title: string; description: string; audioLength: number; published: Date };
+  episode: {
+    id: string;
+    title: string;
+    description: string;
+    audioLength: number;
+    published: string;
+  };
   podcast: { id: string; title: string; description: string; thumbnail: string };
+  published: string;
   stars: number;
   start: number;
   title: string;
@@ -25,7 +32,36 @@ export type AddClipPayload = {
   title: string;
 };
 
-export type GetClipsForEpisodeResponse = Array<GetClipResponse & { id: string }>;
+export type GetClipsForPodcastResponse = Array<{
+  audio: string;
+  description: string;
+  id: string;
+  end: number;
+  episode: {
+    id: string;
+    title: string;
+    description: string;
+    audioLength: number;
+    published: string;
+  };
+  published: string;
+  stars: number;
+  start: number;
+  title: string;
+  views: number;
+}>;
+
+export type GetClipsForEpisodeResponse = Array<{
+  audio: string;
+  description: string;
+  id: string;
+  end: number;
+  published: string;
+  stars: number;
+  start: number;
+  title: string;
+  views: number;
+}>;
 
 type AddClipResponse = {
   id: string;
@@ -77,7 +113,7 @@ export const getClipsForEpisode = async (episodeId: string) => {
 };
 
 export const getClipsForPodcast = async (podcastId: string) => {
-  const result = await fetchFirebase<GetClipsForEpisodeResponse>(
+  const result = await fetchFirebase<GetClipsForPodcastResponse>(
     `/podcast/${podcastId}/clips/`,
     ''
   );

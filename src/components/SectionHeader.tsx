@@ -4,6 +4,7 @@ import { colors } from '~/styles';
 
 type SectionHeaderProps = {
   className?: string;
+  light?: boolean;
 };
 
 const styles = {
@@ -19,10 +20,13 @@ const styles = {
     height: 4,
     width: 40,
   }),
+  light: css({
+    color: colors.light,
+  }),
 };
 
-const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className }) => (
-  <div className={css(styles.main, className)}>
+const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className, light }) => (
+  <div className={css(styles.main, light && styles.light, className)}>
     <h6 className={styles.text}>{children}</h6>
     <div className={styles.underline} />
   </div>

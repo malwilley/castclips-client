@@ -72,7 +72,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
           renderSuccess={({ audioLength, description, published }) => (
             <>
               <section className={styles.section}>
-                <SectionHeader>description</SectionHeader>
+                <SectionHeader light>description</SectionHeader>
                 <div
                   className={styles.description}
                   dangerouslySetInnerHTML={{ __html: description }}

@@ -24,8 +24,27 @@ export type PodcastMetadata = {
   website: string;
 };
 
+export type PodcastClip = {
+  audio: string;
+  description: string;
+  id: string;
+  end: number;
+  episode: {
+    id: string;
+    title: string;
+    description: string;
+    audioLength: number;
+    published: string;
+  };
+  published: string;
+  stars: number;
+  start: number;
+  title: string;
+  views: number;
+};
+
 export type PodcastState = {
-  clips: HttpRequest<GetClipsForEpisodeResponse>;
+  clips: HttpRequest<PodcastClip[]>;
   episodes: LazyLoadedEpisodes;
   metadata: HttpRequest<PodcastMetadata>;
 };

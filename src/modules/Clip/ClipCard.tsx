@@ -76,9 +76,7 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
                 <span className={styles.smallText}>stars</span>
               </div>
             </div>
-            <div className={styles.shareContainer}>
-              <CopyLink className={styles.linkCopy} text={`https://castclips.com/clip/${id}`} />
-            </div>
+            <div className={styles.shareContainer} />
           </div>
         </>
       )}
