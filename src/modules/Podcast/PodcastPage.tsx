@@ -70,9 +70,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
       bodyContent={
         <div className={styles.main}>
           <section className={styles.episodes}>
-            <SectionHeader light className={styles.sectionHeader}>
-              description
-            </SectionHeader>
+            <SectionHeader className={styles.sectionHeader}>description</SectionHeader>
             <div className={styles.description}>
               <HttpContent
                 request={podcastMetadata}
@@ -93,7 +91,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
       featuredContent={<PodcastCard podcast={podcastMetadata} />}
       titleContent={
         <>
-          <SectionHeader>podcast</SectionHeader>
+          <SectionHeader light>podcast</SectionHeader>
           <HttpContent
             request={podcastMetadata}
             renderFetching={() => <PageTitleFetching />}

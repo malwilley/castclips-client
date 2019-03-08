@@ -6,6 +6,8 @@ import Card from '~/components/Card';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
+import HttpContent from '~/components/HttpContent';
+import { ClockOutlineIcon } from 'mdi-react';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -22,26 +24,31 @@ const styles = {
       '&:hover': {
         backgroundColor: colors.light,
       },
-      height: 70,
+      height: 90,
       display: 'grid',
-      gridTemplateColumns: 'auto 50px',
+      gridTemplateColumns: '[thumbnail] auto [middle] 1fr',
+      gridColumnGap: 20,
       padding: '15px 20px',
     }),
-    titleDescriptionContainer: css({
-      gridColumn: '1 / 2',
-      overflow: 'hidden',
+    thumbnail: css({
+      gridTemplateAreas: 'thumbnail',
+      borderRadius: 8,
+      height: 59,
+      width: 59,
     }),
-    iconContainer: css({
+    textIcon: css({
       '& > svg': {
-        fill: colors.dark,
-        height: 24,
-        width: 24,
+        marginRight: 6,
       },
-      gridColumn: '2 / -1',
       display: 'flex',
-      justifyContent: 'flex-end',
       alignItems: 'center',
-      paddingLeft: 20,
+      fontSize: 12,
+      fontWeight: 'bold',
+      fontFamily: 'var(--h-font)',
+    }),
+    titleDescriptionContainer: css({
+      gridTemplateAreas: 'middle',
+      overflow: 'hidden',
     }),
     title: css({
       overflow: 'hidden',
@@ -58,22 +65,31 @@ const styles = {
 };
 
 const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
-  episode: { id, title, description },
+  episode: { id, title, description, published, thumbnail },
 }) => (
   <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
+    <img className={styles.episodeRow.thumbnail} src={thumbnail} />
     <div className={styles.episodeRow.titleDescriptionContainer}>
       <h4 className={styles.episodeRow.title}>{title}</h4>
       <p className={styles.episodeRow.description} title={description}>
+        <div className={styles.episodeRow.textIcon}>
+          <ClockOutlineIcon size={14} />
+          {published.toLocaleDateString()}
+        </div>
         {description}
       </p>
-    </div>
-    <div className={styles.episodeRow.iconContainer}>
-      <IconGoTo />
     </div>
   </Link>
 );
 
-const EpisodeRowLoading: React.FC = () => <div />;
+const EpisodeRowLoading: React.FC = () => (
+  <div className={styles.episodeRow.main}>
+    <div className={styles.episodeRow.titleDescriptionContainer}>
+      <h4 className={styles.episodeRow.title} />
+      <p className={styles.episodeRow.description} />
+    </div>
+  </div>
+);
 
 const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
   if (episodes.type === 'not_asked') {

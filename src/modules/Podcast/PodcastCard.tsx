@@ -66,7 +66,7 @@ const styles = {
   thumbnail: css({
     width: 150,
     height: 150,
-    borderRadius: '50%',
+    borderRadius: 16,
     border: `6px solid ${colors.lightest}`,
     boxShadow: 'var(--card-dropshadow)',
     backgroundColor: colors.lightest,

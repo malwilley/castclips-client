@@ -7,6 +7,7 @@ import { ClipState } from '../types';
 import { colors } from '~/styles';
 import { RedditIcon, FacebookIcon, TwitterIcon, UserOutlineIcon } from 'mdi-react';
 import SectionHeader from '~/components/SectionHeader';
+import ClipContext from './ClipContext';
 
 type ClipPageBodyProps = {
   clipId: string;
@@ -95,6 +96,7 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
           request={clipMetadata}
           renderSuccess={({ description }) => <p>{description}</p>}
         />
+        <ClipContext />
       </div>
       <div className={styles.sideContainer}>
         <SectionHeader>clip creator</SectionHeader>
