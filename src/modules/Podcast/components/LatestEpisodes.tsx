@@ -14,6 +14,7 @@ import {
   ArtistIcon,
 } from 'mdi-react';
 import formatPublishDate from '~/utils/formatPublishDate';
+import TextSkeleton from '~/components/TextSkeleton';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -111,9 +112,11 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
 
 const EpisodeRowLoading: React.FC = () => (
   <div className={styles.episodeRow.main}>
+    <TextSkeleton className={styles.episodeRow.thumbnail} />
     <div className={styles.episodeRow.titleDescriptionContainer}>
-      <h4 className={styles.episodeRow.title} />
-      <p className={styles.episodeRow.description} />
+      <TextSkeleton color={colors.gray200} height={13} marginBottom={2} width={150} />
+      <TextSkeleton height={20} marginBottom={2} width={200} />
+      <TextSkeleton height={15} marginBottom={0} />
     </div>
   </div>
 );
