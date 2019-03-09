@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { PodcastEpisode, PodcastState } from '../types';
 import { Link } from 'react-router-dom';
-import IconGoTo from '~/icons/GoTo';
 import Card from '~/components/Card';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
 import HttpContent from '~/components/HttpContent';
-import { ClockOutlineIcon } from 'mdi-react';
+import {
+  ClockOutlineIcon,
+  CalendarDayIcon,
+  AudioIcon,
+  ContentCutIcon,
+  ArtistIcon,
+} from 'mdi-react';
+import formatPublishDate from '~/utils/formatPublishDate';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -28,7 +34,8 @@ const styles = {
       display: 'grid',
       gridTemplateColumns: '[thumbnail] auto [middle] 1fr',
       gridColumnGap: 20,
-      padding: '15px 20px',
+      alignItems: 'center',
+      padding: '15px 18px',
     }),
     thumbnail: css({
       gridTemplateAreas: 'thumbnail',
@@ -36,15 +43,24 @@ const styles = {
       height: 59,
       width: 59,
     }),
+    textIconContainer: css({
+      display: 'flex',
+    }),
     textIcon: css({
       '& > svg': {
         marginRight: 6,
       },
       display: 'flex',
       alignItems: 'center',
-      fontSize: 12,
+      fontSize: 10,
       fontWeight: 'bold',
-      fontFamily: 'var(--h-font)',
+      textTransform: 'uppercase',
+      letterSpacing: 1,
+      color: colors.gray,
+      marginRight: 10,
+    }),
+    textIconGreen: css({
+      color: colors.green,
     }),
     titleDescriptionContainer: css({
       gridTemplateAreas: 'middle',
@@ -53,6 +69,7 @@ const styles = {
     title: css({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+      marginBottom: 2,
     }),
     description: css({
       overflow: 'hidden',
@@ -65,17 +82,27 @@ const styles = {
 };
 
 const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
-  episode: { id, title, description, published, thumbnail },
+  episode: { audioLength, id, title, description, published, thumbnail },
 }) => (
   <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
     <img className={styles.episodeRow.thumbnail} src={thumbnail} />
     <div className={styles.episodeRow.titleDescriptionContainer}>
-      <h4 className={styles.episodeRow.title}>{title}</h4>
-      <p className={styles.episodeRow.description} title={description}>
+      <div className={styles.episodeRow.textIconContainer}>
+        <div className={styles.episodeRow.textIcon}>
+          <CalendarDayIcon size={14} />
+          <div>{formatPublishDate(published)}</div>
+        </div>
         <div className={styles.episodeRow.textIcon}>
           <ClockOutlineIcon size={14} />
-          {published.toLocaleDateString()}
+          <div>{(audioLength / 60).toFixed(0)} min</div>
         </div>
+        <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
+          <ArtistIcon size={14} />
+          <div>6 clips</div>
+        </div>
+      </div>
+      <h4 className={styles.episodeRow.title}>{title}</h4>
+      <p className={styles.episodeRow.description} title={description}>
         {description}
       </p>
     </div>
