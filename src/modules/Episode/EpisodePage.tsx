@@ -72,7 +72,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
           renderSuccess={({ audioLength, description, published }) => (
             <>
               <section className={styles.section}>
-                <SectionHeader light>description</SectionHeader>
+                <SectionHeader>description</SectionHeader>
                 <div
                   className={styles.description}
                   dangerouslySetInnerHTML={{ __html: description }}
@@ -93,7 +93,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
           request={episodeMetadata}
           renderSuccess={({ title, podcast }) => (
             <>
-              <SectionHeader>Episode</SectionHeader>
+              <SectionHeader light>episode</SectionHeader>
               <h1 className={styles.title}>{title}</h1>
               <h4 className={styles.subTitle}>
                 From the podcast{' '}

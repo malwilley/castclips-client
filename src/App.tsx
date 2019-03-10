@@ -3,26 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import ClipPage from '~/modules/Clip/ClipPage';
 import EpisodePage from '~/modules/Episode/EpisodePage';
 import PodcastPage from '~/modules/Podcast/PodcastPage';
-import SearchPage from '~/modules/Search/SearchPage';
 import SigninPage from './modules/auth/components/SigninPage';
-
-/*
-const styles = {
-  logo: css({
-    borderBottom: `4px solid ${colors.tertiary}`,
-    color: colors.light,
-    display: 'inline-block',
-    fontSize: 28,
-    padding: '0 6px',
-  }),
-};
-*/
+import HomePage from './modules/home/components/HomePage';
 
 class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact={true} path="/" component={SearchPage} />
+        <Route exact={true} path="/" component={HomePage} />
         <Route path="/signin" component={SigninPage} />
         <Route
           path="/podcast/:id"
