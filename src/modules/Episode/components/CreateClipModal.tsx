@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 import { thunks } from '../redux';
 import { AppState } from '~/redux/types';
 import { EpisodeState } from '../types';
-import { AddClipPayload } from '~/api/firebase';
 import StyledTextArea from '~/components/StyledTextArea';
 import pick from 'ramda/es/pick';
+import { AddClipPayload } from '~/api/types';
 
 type ShareModalProps = {
   start: number;

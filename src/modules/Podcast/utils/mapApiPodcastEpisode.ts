@@ -1,17 +1,10 @@
-import { ListenNotesPodcastDataResponse } from '~/api/listenNotes';
 import { PodcastEpisode } from '../types';
-import stripHtml from '~/utils/stripHtml';
+import { PodcastEpisodeResponse } from '~/api/types';
 
-const mapApiPodcastEpisodes = (
-  listenNotesEpisodes: ListenNotesPodcastDataResponse['episodes']
-): PodcastEpisode[] =>
-  listenNotesEpisodes.map(({ description, thumbnail, title, pub_date_ms, audio_length, id }) => ({
-    description: stripHtml(description),
-    audioLength: audio_length,
-    id,
-    published: new Date(pub_date_ms),
-    thumbnail,
-    title,
+const mapApiPodcastEpisodes = (episodes: PodcastEpisodeResponse[]): PodcastEpisode[] =>
+  episodes.map(({ published, ...episode }) => ({
+    ...episode,
+    published: new Date(published),
   }));
 
 export default mapApiPodcastEpisodes;

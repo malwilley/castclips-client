@@ -1,71 +1,17 @@
 import * as qs from 'querystringify';
-import firebase from '~/modules/auth/firebase';
+import {
+  GetClipResponse,
+  AddClipResponse,
+  AddClipPayload,
+  GetClipsForEpisodeResponse,
+  GetClipsForPodcastResponse,
+  PodcastSuggestionResponse,
+  PodcastMetadataResponse,
+  EpisodeMetadataResponse,
+  PodcastEpisodeResponse,
+} from './types';
 
 const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
-
-export type GetClipResponse = {
-  audio: string;
-  description: string;
-  end: number;
-  episode: {
-    id: string;
-    title: string;
-    description: string;
-    audioLength: number;
-    published: string;
-  };
-  podcast: { id: string; title: string; description: string; thumbnail: string };
-  published: string;
-  stars: number;
-  start: number;
-  title: string;
-  views: number;
-};
-
-export type AddClipPayload = {
-  audio: string;
-  description: string;
-  end: number;
-  episode: { id: string; title: string; description: string; audioLength: number; published: Date };
-  podcast: { id: string; title: string; description: string; thumbnail: string };
-  start: number;
-  title: string;
-};
-
-export type GetClipsForPodcastResponse = Array<{
-  audio: string;
-  description: string;
-  id: string;
-  end: number;
-  episode: {
-    id: string;
-    title: string;
-    description: string;
-    audioLength: number;
-    published: string;
-  };
-  published: string;
-  stars: number;
-  start: number;
-  title: string;
-  views: number;
-}>;
-
-export type GetClipsForEpisodeResponse = Array<{
-  audio: string;
-  description: string;
-  id: string;
-  end: number;
-  published: string;
-  stars: number;
-  start: number;
-  title: string;
-  views: number;
-}>;
-
-type AddClipResponse = {
-  id: string;
-};
 
 const fetchFirebase = async <TResponse>(
   route: string,
@@ -113,9 +59,35 @@ export const getClipsForEpisode = async (episodeId: string) => {
 };
 
 export const getClipsForPodcast = async (podcastId: string) => {
-  const result = await fetchFirebase<GetClipsForPodcastResponse>(
+  const result = await fetchFirebase<GetClipsForPodcastResponse[]>(
     `/podcast/${podcastId}/clips/`,
     ''
+  );
+
+  return result;
+};
+
+export const typeahead = async (query: string) => {
+  const result = await fetchFirebase<PodcastSuggestionResponse>(`/typeahead`);
+
+  return result;
+};
+
+export const getPodcastData = async (id: string) => {
+  const result = await fetchFirebase<PodcastMetadataResponse>(`/podcasts/${id}`);
+
+  return result;
+};
+
+export const getEpisodeData = async (id: string) => {
+  const result = await fetchFirebase<EpisodeMetadataResponse>(`/episodes/${id}`);
+
+  return result;
+};
+
+export const getNextEpisodes = async (podcastId: string, lastEpisodePublished: number) => {
+  const result = await fetchFirebase<PodcastEpisodeResponse[]>(
+    `/podcast/${podcastId}/episodes?${qs.stringify({ lastPublished: lastEpisodePublished })}`
   );
 
   return result;

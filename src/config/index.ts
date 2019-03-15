@@ -1,9 +1,5 @@
-type AppConfig = {
-  listenNotesApiKey: string;
-};
+type AppConfig = {};
 
-const config: AppConfig = {
-  listenNotesApiKey: process.env.LISTEN_NOTES_API_KEY || require('./secrets').listenNotesApiKey,
-};
+const config: AppConfig = {};
 
 export default config;

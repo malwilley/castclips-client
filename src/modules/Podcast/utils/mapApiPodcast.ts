@@ -1,22 +1,7 @@
-import { ListenNotesPodcastDataResponse } from '~/api/listenNotes';
 import { PodcastMetadata } from '../types';
+import { PodcastMetadataResponse } from '~/api/types';
 
-const mapApiPodcast = ({
-  id,
-  thumbnail,
-  title,
-  description,
-  publisher,
-  total_episodes,
-  website,
-}: ListenNotesPodcastDataResponse): PodcastMetadata => ({
-  id,
-  thumbnail,
-  title,
-  description,
-  publisher,
-  totalEpisodes: total_episodes,
-  website,
-});
+const mapApiPodcast = ({ episodes, ...podcast }: PodcastMetadataResponse): PodcastMetadata =>
+  podcast;
 
 export default mapApiPodcast;

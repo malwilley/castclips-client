@@ -1,12 +1,11 @@
 import { Thunk } from '~/redux/types';
 import { actions } from './actions';
 import last from 'ramda/es/last';
-import { getPodcastData, getNextEpisodes } from '~/api/listenNotes';
 import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode';
 import mapApiPodcast from '../utils/mapApiPodcast';
 import { PodcastEpisode } from '../types';
 import path from 'ramda/es/path';
-import { getClipsForPodcast } from '~/api/firebase';
+import { getClipsForPodcast, getPodcastData, getNextEpisodes } from '~/api/firebase';
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
@@ -70,7 +69,21 @@ const fetchClipsForPodcast: Thunk<string, Promise<void>> = id => async (dispatch
 
   try {
     const clips = await getClipsForPodcast(id);
-    dispatch(actions.setClips({ type: 'success', data: clips }));
+    dispatch(
+      actions.setClips({
+        type: 'success',
+        data: clips.map(
+          ({ episode: { published: episodePublished, ...episode }, published, ...rest }) => ({
+            ...rest,
+            published: new Date(published),
+            episode: {
+              ...episode,
+              published: new Date(episodePublished),
+            },
+          })
+        ),
+      })
+    );
   } catch {
     dispatch(actions.setClips({ type: 'error', message: 'Error fetching podcast metadata' }));
   }

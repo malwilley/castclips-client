@@ -23,6 +23,23 @@ const styles = {
   }),
 };
 
+const styles2 = {
+  searchContainer: css({
+    position: 'relative',
+    width: '100%',
+    maxWidth: '380px',
+    height: 52,
+  }),
+  searchIcon: css({
+    position: 'absolute',
+    right: 16,
+    top: 14,
+    width: 24,
+    height: 24,
+    fill: 'var(--color-dark)',
+  }),
+};
+
 const HomePage: React.FC = () => (
   <div className={styles.main}>
     <div className={styles.gradientContainer}>

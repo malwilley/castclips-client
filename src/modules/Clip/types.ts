@@ -1,4 +1,3 @@
-import { GetClipResponse } from '~/api/firebase';
 import { HttpRequest } from '~/types';
 
 export type ClipMetadata = {
