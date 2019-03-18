@@ -37,7 +37,7 @@ const styles = {
     gridColumn: '1 / -1',
   }),
   hero: css({
-    backgroundImage: colors.gradient,
+    backgroundImage: colors.gradient2,
     gridRowStart: 2,
     gridRowEnd: 4,
     gridColumn: '1 / -1',

@@ -51,7 +51,8 @@ const fetchEpisodeMetadata: Thunk<string, Promise<void>> = id => async (dispatch
   dispatch(actions.setMetadata({ type: 'fetching' }));
 
   try {
-    const metadata = await getEpisodeData(id);
+    const token = await getAuthToken(getState());
+    const metadata = await getEpisodeData(token, id);
     dispatch(actions.setMetadata({ type: 'success', data: mapApiEpisode(metadata) }));
   } catch {
     dispatch(actions.setMetadata({ type: 'error', message: 'Error fetching episode metadata' }));

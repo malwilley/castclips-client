@@ -9,7 +9,7 @@ const styles = {
     gridTemplateRows: '[gradient] 500px',
   }),
   gradientContainer: css({
-    backgroundImage: colors.gradient,
+    backgroundImage: colors.gradient2,
     gridTemplateAreas: 'gradient',
     color: colors.lightest,
   }),

@@ -19,6 +19,7 @@ const styles = {
     backgroundColor: colors.tertiary,
     height: 4,
     width: 40,
+    borderRadius: 2,
   }),
   light: css({
     color: colors.light,

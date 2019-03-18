@@ -33,17 +33,16 @@ const styles = {
     width: '100%',
     height: '100%',
     padding: 10,
-    fontSize: 12,
   }),
   clipboardButton: css({
     ':hover': {
-      backgroundColor: colors.grayLight,
+      backgroundColor: colors.gray200,
     },
-    backgroundColor: colors.light,
+    backgroundColor: colors.gray100,
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
     border: `1px solid ${colors.gray}`,
-    color: colors.dark,
+    color: colors.gray700,
     height: '100%',
     width: 50,
     padding: 8,
@@ -55,7 +54,7 @@ const styles = {
 // animate?
 
 const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
-  const [copied, setCopied] = React.useState<null | 'copied' | 'error'>(null);
+  const [, setCopied] = React.useState<null | 'copied' | 'error'>(null);
   const ref = React.useRef<HTMLInputElement>(null);
 
   const copyToClipboard = React.useCallback(() => {

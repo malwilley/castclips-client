@@ -59,7 +59,7 @@ const styles = {
 };
 
 const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
-  <Card className={styles.main}>
+  <Card className={styles.main} feature>
     <HttpContent
       request={clip}
       renderSuccess={clipData => (

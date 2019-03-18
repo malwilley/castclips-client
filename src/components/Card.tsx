@@ -4,6 +4,7 @@ import { colors } from '~/styles';
 
 type CardProps = {
   className?: string;
+  feature?: boolean;
 };
 
 const styles = {
@@ -14,10 +15,13 @@ const styles = {
     borderRadius: 8,
     overflow: 'hidden',
   }),
+  feature: css({
+    boxShadow: 'var(--card-dropshadow-feature)',
+  }),
 };
 
-const Card: React.SFC<CardProps> = ({ children, className }) => (
-  <div className={css(styles.main, className)}>{children}</div>
+const Card: React.SFC<CardProps> = ({ children, className, feature = false }) => (
+  <div className={css(styles.main, feature && styles.feature, className)}>{children}</div>
 );
 
 export default Card;

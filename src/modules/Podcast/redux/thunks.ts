@@ -6,6 +6,7 @@ import mapApiPodcast from '../utils/mapApiPodcast';
 import { PodcastEpisode } from '../types';
 import path from 'ramda/es/path';
 import { getClipsForPodcast, getPodcastData, getNextEpisodes } from '~/api/firebase';
+import { getAuthToken } from '~/modules/auth/firebase';
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
@@ -17,7 +18,8 @@ const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch
   dispatch(actions.setEpisodes({ type: 'fetching', data: [] }));
 
   try {
-    const metadata = await getPodcastData(id);
+    const token = await getAuthToken(getState());
+    const metadata = await getPodcastData(token, id);
     dispatch(actions.setMetadata({ type: 'success', data: mapApiPodcast(metadata) }));
     dispatch(actions.addEpisodes(mapApiPodcastEpisodes(metadata.episodes)));
   } catch {
@@ -38,8 +40,10 @@ const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch
   dispatch(actions.setEpisodes({ type: 'fetching', data: currentlyLoadedEpisodes }));
 
   try {
+    const token = await getAuthToken(getState());
     const lastEpisode = last(currentlyLoadedEpisodes)!;
     const nextEpisodes = await getNextEpisodes(
+      token,
       currentlyLoadedPodcastId,
       lastEpisode.published.getTime()
     );

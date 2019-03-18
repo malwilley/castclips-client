@@ -18,7 +18,7 @@ const styles = {
 };
 
 const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => (
-  <Card className={styles.main}>
+  <Card className={styles.main} feature>
     <HttpContent
       request={episode}
       renderSuccess={episodeData => (

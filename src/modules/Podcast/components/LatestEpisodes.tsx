@@ -5,16 +5,10 @@ import Card from '~/components/Card';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
-import HttpContent from '~/components/HttpContent';
-import {
-  ClockOutlineIcon,
-  CalendarDayIcon,
-  AudioIcon,
-  ContentCutIcon,
-  ArtistIcon,
-} from 'mdi-react';
+import { ClockOutlineIcon, CalendarDayIcon, ArtistIcon } from 'mdi-react';
 import formatPublishDate from '~/utils/formatPublishDate';
 import TextSkeleton from '~/components/TextSkeleton';
+import stripHtml from '~/utils/stripHtml';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -29,7 +23,7 @@ const styles = {
   episodeRow: {
     main: css({
       '&:hover': {
-        backgroundColor: colors.light,
+        backgroundColor: colors.gray100,
       },
       height: 90,
       display: 'grid',
@@ -57,7 +51,7 @@ const styles = {
       fontWeight: 'bold',
       textTransform: 'uppercase',
       letterSpacing: 1,
-      color: colors.gray,
+      color: colors.gray700,
       marginRight: 10,
     }),
     textIconGreen: css({
@@ -70,13 +64,12 @@ const styles = {
     title: css({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      marginBottom: 2,
     }),
     description: css({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       margin: 0,
-      fontSize: 12,
+      fontSize: 14,
       whiteSpace: 'nowrap',
     }),
   },
@@ -84,31 +77,34 @@ const styles = {
 
 const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
   episode: { audioLength, id, title, description, published, thumbnail },
-}) => (
-  <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
-    <img className={styles.episodeRow.thumbnail} src={thumbnail} />
-    <div className={styles.episodeRow.titleDescriptionContainer}>
-      <div className={styles.episodeRow.textIconContainer}>
-        <div className={styles.episodeRow.textIcon}>
-          <CalendarDayIcon size={14} />
-          <div>{formatPublishDate(published)}</div>
+}) => {
+  const sanitizedDescription = stripHtml(description);
+  return (
+    <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
+      <img className={styles.episodeRow.thumbnail} src={thumbnail} />
+      <div className={styles.episodeRow.titleDescriptionContainer}>
+        <div className={styles.episodeRow.textIconContainer}>
+          <div className={styles.episodeRow.textIcon}>
+            <CalendarDayIcon size={14} />
+            <div>{formatPublishDate(published)}</div>
+          </div>
+          <div className={styles.episodeRow.textIcon}>
+            <ClockOutlineIcon size={14} />
+            <div>{(audioLength / 60).toFixed(0)} min</div>
+          </div>
+          <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
+            <ArtistIcon size={14} />
+            <div>6 clips</div>
+          </div>
         </div>
-        <div className={styles.episodeRow.textIcon}>
-          <ClockOutlineIcon size={14} />
-          <div>{(audioLength / 60).toFixed(0)} min</div>
-        </div>
-        <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
-          <ArtistIcon size={14} />
-          <div>6 clips</div>
-        </div>
+        <h4 className={styles.episodeRow.title}>{title}</h4>
+        <p className={styles.episodeRow.description} title={sanitizedDescription}>
+          {sanitizedDescription}
+        </p>
       </div>
-      <h4 className={styles.episodeRow.title}>{title}</h4>
-      <p className={styles.episodeRow.description} title={description}>
-        {description}
-      </p>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 const EpisodeRowLoading: React.FC = () => (
   <div className={styles.episodeRow.main}>

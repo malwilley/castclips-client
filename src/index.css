@@ -1,6 +1,6 @@
 :root {
-  --h-font: 'Lato', sans-serif;
-  --p-font: 'Roboto', sans-serif;
+  --h-font: 'Nunito', sans-serif;
+  --p-font: 'Nunito', sans-serif;
   --normal-weight: 400;
   --bold-weight: 700;
 
@@ -12,14 +12,16 @@
   --color-tertiary: #ff9d5b;
   --color-tertiary-light: #ffab9c;
   --color-tertiary-alpha30: rgba(255, 126, 103, 0.3);
-  --color-light: #f7f7f7;
+  --color-light: #F1F2F6;
   --color-lightest: #ffffff;
   --color-gray: #dedede;
   --color-dark: #404e4d;
   --color-darkest: #1f2423;
 
   --border-radius: 8px;
-  --card-dropshadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+  --card-dropshadow: 0 8px 80px 0 rgba(60,64,67,0.1);
+  --card-dropshadow-feature: 0 8px 80px 0 rgba(60,64,67,0.2);
+  --card-dropshadow-original: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
   --card-height-large: 100px;
   --card-height-large: 250px;
 
@@ -94,9 +96,15 @@ h1, h2, h3, h4, h5 {
 
 h6 {
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   font-weight: var(--bold-weight);
   margin: 0;
+}
+
+input {
+  font-family: var(--p-font);
+  color: var(--color-dark);
+  font-size: 14px;
 }
 
 /* Background utilities */

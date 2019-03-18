@@ -28,7 +28,7 @@ const styles = {
   }),
   userCard: css({
     padding: 20,
-    marginBottom: 30,
+    marginBottom: 40,
   }),
   userPicNameContainer: css({
     display: 'flex',
@@ -47,7 +47,7 @@ const styles = {
   }),
   userPublished: css({
     fontSize: 14,
-    color: colors.gray,
+    color: colors.gray700,
     margin: 0,
   }),
   shareCard: css({
@@ -94,7 +94,16 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
       <div className={styles.mainContainer}>
         <HttpContent
           request={clipMetadata}
-          renderSuccess={({ description }) => <p>{description}</p>}
+          renderSuccess={({ description }) => (
+            <div>
+              {description && (
+                <>
+                  <SectionHeader>description</SectionHeader>
+                  <p>{description}</p>
+                </>
+              )}
+            </div>
+          )}
         />
         <ClipContext />
       </div>

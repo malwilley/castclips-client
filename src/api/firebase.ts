@@ -73,21 +73,26 @@ export const typeahead = async (query: string) => {
   return result;
 };
 
-export const getPodcastData = async (id: string) => {
-  const result = await fetchFirebase<PodcastMetadataResponse>(`/podcasts/${id}`);
+export const getPodcastData = async (token: string, id: string) => {
+  const result = await fetchFirebase<PodcastMetadataResponse>(`/podcast/${id}`, token);
 
   return result;
 };
 
-export const getEpisodeData = async (id: string) => {
-  const result = await fetchFirebase<EpisodeMetadataResponse>(`/episodes/${id}`);
+export const getEpisodeData = async (token: string, id: string) => {
+  const result = await fetchFirebase<EpisodeMetadataResponse>(`/episode/${id}`, token);
 
   return result;
 };
 
-export const getNextEpisodes = async (podcastId: string, lastEpisodePublished: number) => {
+export const getNextEpisodes = async (
+  token: string,
+  podcastId: string,
+  lastEpisodePublished: number
+) => {
   const result = await fetchFirebase<PodcastEpisodeResponse[]>(
-    `/podcast/${podcastId}/episodes?${qs.stringify({ lastPublished: lastEpisodePublished })}`
+    `/podcast/${podcastId}/episodes?${qs.stringify({ lastPublished: lastEpisodePublished })}`,
+    token
   );
 
   return result;
