@@ -5,10 +5,10 @@ import {
   AddClipPayload,
   GetClipsForEpisodeResponse,
   GetClipsForPodcastResponse,
-  PodcastSuggestionResponse,
   PodcastMetadataResponse,
   EpisodeMetadataResponse,
   PodcastEpisodeResponse,
+  TypeaheadResponse,
 } from './types';
 
 const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
@@ -67,8 +67,11 @@ export const getClipsForPodcast = async (podcastId: string) => {
   return result;
 };
 
-export const typeahead = async (query: string) => {
-  const result = await fetchFirebase<PodcastSuggestionResponse>(`/typeahead`);
+export const typeahead = async (token: string, query: string) => {
+  const result = await fetchFirebase<TypeaheadResponse>(
+    `/typeahead?${qs.stringify({ q: query })}`,
+    token
+  );
 
   return result;
 };

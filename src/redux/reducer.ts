@@ -3,6 +3,7 @@ import auth from '~/modules/auth/redux';
 import clip from '~/modules/Clip/redux';
 import episode from '~/modules/Episode/redux';
 import podcast from '~/modules/Podcast/redux';
+import search from '~/modules/search/redux';
 import { connectRouter } from 'connected-react-router';
 import history from './history';
 
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   episode,
   podcast,
   router: connectRouter(history),
+  search,
 });
 
 export default reducer;

@@ -116,3 +116,7 @@ export type PodcastSuggestionResponse = {
   thumbnail: string;
   podcastUrl: string;
 };
+
+export type TypeaheadResponse = {
+  terms: string[];
+};

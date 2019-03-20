@@ -2,41 +2,33 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import Header from '~/modules/header';
+import Typeahead from '~/modules/search/components/Typeahead';
 
 const styles = {
   main: css({
     display: 'grid',
-    gridTemplateRows: '[gradient] 500px',
+    gridTemplateRows: '[gradient] 700px',
   }),
   gradientContainer: css({
+    display: 'grid',
+    gridTemplateRows: '[header] auto [title] 1fr [search] 1fr',
+    gridTemplateArea: 'gradient',
     backgroundImage: colors.gradient2,
-    gridTemplateAreas: 'gradient',
     color: colors.lightest,
   }),
   header: css({
+    gridTemplateArea: 'header',
     background: 'none',
   }),
   headerText: css({
-    marginTop: 100,
+    gridTemplateArea: 'title',
+    marginTop: 150,
     textAlign: 'center',
     letterSpacing: 1,
   }),
-};
-
-const styles2 = {
-  searchContainer: css({
-    position: 'relative',
-    width: '100%',
-    maxWidth: '380px',
-    height: 52,
-  }),
-  searchIcon: css({
-    position: 'absolute',
-    right: 16,
-    top: 14,
-    width: 24,
-    height: 24,
-    fill: 'var(--color-dark)',
+  search: css({
+    gridTemplateArea: 'search',
+    margin: '0 auto',
   }),
 };
 
@@ -45,6 +37,7 @@ const HomePage: React.FC = () => (
     <div className={styles.gradientContainer}>
       <Header className={styles.header} />
       <h1 className={styles.headerText}>Share your favorite podcast moments</h1>
+      <Typeahead className={styles.search} />
     </div>
   </div>
 );

@@ -105,6 +105,12 @@ input {
   font-family: var(--p-font);
   color: var(--color-dark);
   font-size: 14px;
+  outline: none;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
 }
 
 /* Background utilities */

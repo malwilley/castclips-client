@@ -17,7 +17,7 @@ const styles = {
   }),
   underline: css({
     backgroundColor: colors.tertiary,
-    height: 4,
+    height: 3,
     width: 40,
     borderRadius: 2,
   }),
