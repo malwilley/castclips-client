@@ -1,3 +1,4 @@
+import * as debounce from 'debounce';
 import * as React from 'react';
 import { SearchState } from '../types';
 import { connect } from 'react-redux';
@@ -78,6 +79,9 @@ const styles = {
   }),
 };
 
+const shouldBeOpen = (isOpen: boolean, suggestions: TypeaheadConnectedProps['suggestions']) =>
+  isOpen && suggestions.type === 'success' && suggestions.data.length > 0;
+
 const Typeahead: React.FC<TypeaheadConnectedProps> = ({
   className,
   clearSuggestions,
@@ -89,14 +93,21 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
     clearSuggestions();
   }, [clearSuggestions]);
 
+  const debouncedFetch = React.useCallback(debounce(fetchSuggestions, 300), [fetchSuggestions]);
+
   return (
     <Downshift
       onChange={suggestion => executeSearch(suggestion)}
-      onInputValueChange={fetchSuggestions}
+      onInputValueChange={debouncedFetch}
     >
       {({ getInputProps, getItemProps, getMenuProps, isOpen }) => (
         <div className={css(styles.main, className)}>
-          <div className={css(styles.searchContainer, isOpen && styles.searchContainerOpen)}>
+          <div
+            className={css(
+              styles.searchContainer,
+              shouldBeOpen(isOpen, suggestions) && styles.searchContainerOpen
+            )}
+          >
             <input
               {...getInputProps({
                 className: styles.input,
@@ -105,7 +116,7 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
             />
             <SearchIcon className={styles.searchIcon} size={24} />
           </div>
-          {isOpen && suggestions.type === 'success' && (
+          {shouldBeOpen(isOpen, suggestions) && suggestions.type === 'success' && (
             <ul
               {...getMenuProps({
                 className: styles.suggestionContainer,
