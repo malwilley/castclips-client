@@ -120,3 +120,28 @@ export type PodcastSuggestionResponse = {
 export type TypeaheadResponse = {
   terms: string[];
 };
+
+export type SearchResultsResponse<T> = {
+  count: number;
+  total: number;
+  results: T[];
+};
+
+export type SearchResultEpisodeResponse = {
+  description: string;
+  id: string;
+  podcast: {
+    id: string;
+    title: string;
+  };
+  thumbnail: string;
+  title: string;
+};
+
+export type SearchResultPodcastResponse = {
+  description: string;
+  id: string;
+  publisher: string;
+  thumbnail: string;
+  title: string;
+};

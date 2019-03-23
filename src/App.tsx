@@ -1,3 +1,4 @@
+import * as qs from 'querystringify';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ClipPage from '~/modules/Clip/ClipPage';
@@ -5,6 +6,8 @@ import EpisodePage from '~/modules/Episode/EpisodePage';
 import PodcastPage from '~/modules/Podcast/PodcastPage';
 import SigninPage from './modules/auth/components/SigninPage';
 import HomePage from './modules/home/components/HomePage';
+import SearchResultsPage from './modules/search/components/SearchResultsPage';
+import { path } from 'ramda';
 
 class App extends React.Component {
   render() {
@@ -35,6 +38,13 @@ class App extends React.Component {
               params: { id },
             },
           }) => <ClipPage id={id} />}
+        />
+        <Route
+          path="/search"
+          render={({ location: { search } }) => {
+            const { q } = qs.parse(search) as { q: string };
+            return <SearchResultsPage query={q} />;
+          }}
         />
       </Switch>
     );

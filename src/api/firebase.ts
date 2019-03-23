@@ -8,8 +8,12 @@ import {
   PodcastMetadataResponse,
   EpisodeMetadataResponse,
   PodcastEpisodeResponse,
+  SearchResultEpisodeResponse,
+  SearchResultPodcastResponse,
   TypeaheadResponse,
+  SearchResultsResponse,
 } from './types';
+import { SearchType } from '~/modules/search/types';
 
 const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
 
@@ -74,6 +78,15 @@ export const typeahead = async (token: string, query: string) => {
   );
 
   return result;
+};
+
+export const search = async (token: string, type: SearchType, query: string) => {
+  const results = await fetchFirebase<SearchResultsResponse<any>>(
+    `/search?${qs.stringify({ q: query, type })}`,
+    token
+  );
+
+  return results;
 };
 
 export const getPodcastData = async (token: string, id: string) => {
