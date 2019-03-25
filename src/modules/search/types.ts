@@ -36,3 +36,8 @@ export type SearchState = {
   suggestions: HttpRequest<string[]>;
   type: SearchType;
 };
+
+export type SearchParams = Partial<{
+  query: string;
+  type: SearchType;
+}>;

@@ -1,4 +1,5 @@
 import * as debounce from 'debounce';
+import * as qs from 'querystringify';
 import * as React from 'react';
 import { SearchState } from '../types';
 import { connect } from 'react-redux';
@@ -17,23 +18,26 @@ type TypeaheadConnectedProps = TypeaheadProps & {
   clearSuggestions: () => void;
   executeSearch: (query: string) => void;
   fetchSuggestions: (query: string) => void;
+  query?: string;
   suggestions: SearchState['suggestions'];
 };
 
 const styles = {
   main: css({
     position: 'relative',
+    width: 400,
+    height: 60,
   }),
   searchContainer: css({
     position: 'relative',
-    width: '400px',
-    height: 60,
     background: colors.lightest,
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     zIndex: 100,
+    width: '100%',
+    height: '100%',
   }),
   searchContainerOpen: css({
     borderBottomLeftRadius: 0,
@@ -87,6 +91,7 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
   clearSuggestions,
   executeSearch,
   fetchSuggestions,
+  query,
   suggestions,
 }) => {
   React.useEffect(() => {
@@ -94,9 +99,10 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
   }, [clearSuggestions]);
 
   const debouncedFetch = React.useCallback(debounce(fetchSuggestions, 300), [fetchSuggestions]);
-
+  console.log(query);
   return (
     <Downshift
+      initialInputValue={query}
       onChange={suggestion => executeSearch(suggestion)}
       onInputValueChange={debouncedFetch}
     >
@@ -144,6 +150,7 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
 
 const mapPropsToState = (state: AppState) => ({
   suggestions: state.search.suggestions,
+  query: (qs.parse(state.router.location.search) as { q: string }).q,
 });
 
 const mapDispatchToProps = {

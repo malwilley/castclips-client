@@ -12,15 +12,14 @@ type SearchResultCardProps = {
 const styles = {
   main: css({
     padding: 20,
-    width: 700,
-    margin: '20px auto',
+    marginBottom: 20,
   }),
   thumbnail: css({
     height: 150,
     width: 150,
     borderRadius: 8,
     marginRight: 20,
-    marginBottom: 20,
+    marginBottom: 15,
     float: 'left',
   }),
   description: css({
@@ -33,6 +32,7 @@ const SearchResultCard: React.FC<SearchResultCardProps> = ({ title, description,
   <Card className={styles.main}>
     <div>
       <img className={styles.thumbnail} src={thumbnail} />
+
       <h3>{title}</h3>
       <p className={styles.description}>{description}</p>
     </div>

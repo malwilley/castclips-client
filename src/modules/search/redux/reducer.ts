@@ -6,12 +6,10 @@ import { SearchType } from '../types';
 
 const results = makeHttpReducer(actions.setSearchResults);
 const suggestions = makeHttpReducer(actions.setSuggestions);
-const type = makeSimpleSetReducer(actions.setSearchType, SearchType.Podcasts);
 
 const reducer = combineReducers({
   results,
   suggestions,
-  type,
 });
 
 export default reducer;

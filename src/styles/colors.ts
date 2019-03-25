@@ -1,4 +1,5 @@
 export default {
+  background: '#F0F1F5',
   primary: '#07689f',
   primaryAlpha30: 'rgba(7, 104, 159, 0.3)',
   primaryDark: '#004267',
@@ -9,8 +10,8 @@ export default {
   green: '#72B01D',
   light: '#F1F2F6',
   lightest: '#ffffff',
-  gray100: '#FBFBFD',
-  gray200: '#e9e9e9',
+  gray100: '#F0F1F5',
+  gray200: '#E9EAF2',
   gray300: '#dedede',
   gray400: '#cecece',
   gray500: '#bebebe',

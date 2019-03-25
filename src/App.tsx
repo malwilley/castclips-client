@@ -8,6 +8,7 @@ import SigninPage from './modules/auth/components/SigninPage';
 import HomePage from './modules/home/components/HomePage';
 import SearchResultsPage from './modules/search/components/SearchResultsPage';
 import { path } from 'ramda';
+import { SearchType } from './modules/search/types';
 
 class App extends React.Component {
   render() {
@@ -42,8 +43,8 @@ class App extends React.Component {
         <Route
           path="/search"
           render={({ location: { search } }) => {
-            const { q } = qs.parse(search) as { q: string };
-            return <SearchResultsPage query={q} />;
+            const { q, type } = qs.parse(search) as { q: string; type: SearchType };
+            return <SearchResultsPage query={q} type={type} />;
           }}
         />
       </Switch>
