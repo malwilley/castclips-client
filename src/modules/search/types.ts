@@ -13,10 +13,12 @@ export type PodcastResult = {
   id: string;
   description: string;
   publisher: string;
+  numEpisodes: number;
 };
 
 export type EpisodeResult = {
   type: SearchType.Episodes;
+  audioLength: string;
   thumbnail: string;
   title: string;
   id: string;

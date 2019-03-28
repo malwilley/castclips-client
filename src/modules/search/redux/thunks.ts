@@ -5,6 +5,7 @@ import { push } from 'connected-react-router';
 import { getAuthToken } from '~/modules/auth/firebase';
 import { typeahead, search } from '~/api/firebase';
 import { SearchType, SearchParams } from '../types';
+import makeMapSearchResult from '../utils/mapSearchResult';
 
 const clearSuggestions: Thunk<void, void> = () => async dispatch => {
   dispatch(actions.setSuggestions({ type: 'not_asked' }));
@@ -51,7 +52,12 @@ const fetchSearchResults: Thunk<SearchParams, Promise<void>> = ({
     }
     const token = await getAuthToken(getState());
     const { results } = await search(token, type, query);
-    dispatch(actions.setSearchResults({ type: 'success', data: results }));
+    dispatch(
+      actions.setSearchResults({
+        type: 'success',
+        data: results.map(makeMapSearchResult(type)),
+      })
+    );
   } catch {
     dispatch(actions.setSearchResults({ type: 'error', message: 'Error fetching search results' }));
   }

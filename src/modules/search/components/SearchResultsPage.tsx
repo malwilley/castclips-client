@@ -63,8 +63,8 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
           request={results}
           renderSuccess={data => (
             <div>
-              {data.map(({ title, description, thumbnail }) => (
-                <SearchResultCard {...{ title, description, thumbnail }} />
+              {data.map(result => (
+                <SearchResultCard key={result.id} {...result} />
               ))}
             </div>
           )}
