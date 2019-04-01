@@ -1,7 +1,7 @@
 import * as debounce from 'debounce';
 import * as qs from 'querystringify';
 import * as React from 'react';
-import { SearchState } from '../types';
+import { SearchState, SearchType } from '../types';
 import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { thunks } from '../redux';
@@ -9,15 +9,19 @@ import Downshift from 'downshift';
 import { css } from 'emotion';
 import { SearchIcon } from 'mdi-react';
 import { colors } from '~/styles';
+import { push } from 'connected-react-router';
 
 type TypeaheadProps = {
   className?: string;
+  searchContainerClassName?: string;
+  suggestionContainerClassName?: string;
 };
 
 type TypeaheadConnectedProps = TypeaheadProps & {
   clearSuggestions: () => void;
   executeSearch: (query: string) => void;
   fetchSuggestions: (query: string) => void;
+  goto: (path: string) => void;
   query?: string;
   suggestions: SearchState['suggestions'];
 };
@@ -29,6 +33,25 @@ const styles = {
     height: 60,
   }),
   searchContainer: css({
+    '& > svg': {
+      position: 'absolute',
+      right: 20,
+      top: 18,
+      fill: 'var(--color-dark)',
+    },
+    '& > input': {
+      '&::placeholder': {
+        color: colors.gray700,
+      },
+      border: 'none',
+      background: 'none',
+      width: '100%',
+      height: '100%',
+      padding: '0 40px 0 24px',
+      fontFamily: 'var(--p-font)',
+      color: colors.dark,
+      fontSize: 16,
+    },
     position: 'relative',
     background: colors.lightest,
     borderTopRightRadius: 16,
@@ -68,19 +91,6 @@ const styles = {
     padding: '10px 0',
     boxShadow: 'var(--card-dropshadow-feature)',
   }),
-  input: css({
-    '&::placeholder': {
-      color: colors.gray700,
-    },
-    border: 'none',
-    background: 'none',
-    width: '100%',
-    height: '100%',
-    padding: '0 40px 0 24px',
-    fontFamily: 'var(--p-font)',
-    color: colors.dark,
-    fontSize: 16,
-  }),
 };
 
 const shouldBeOpen = (isOpen: boolean, suggestions: TypeaheadConnectedProps['suggestions']) =>
@@ -91,7 +101,10 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
   clearSuggestions,
   executeSearch,
   fetchSuggestions,
+  goto,
   query,
+  searchContainerClassName,
+  suggestionContainerClassName,
   suggestions,
 }) => {
   React.useEffect(() => {
@@ -99,33 +112,38 @@ const Typeahead: React.FC<TypeaheadConnectedProps> = ({
   }, [clearSuggestions]);
 
   const debouncedFetch = React.useCallback(debounce(fetchSuggestions, 300), [fetchSuggestions]);
-  console.log(query);
+
   return (
     <Downshift
       initialInputValue={query}
       onChange={suggestion => executeSearch(suggestion)}
       onInputValueChange={debouncedFetch}
     >
-      {({ getInputProps, getItemProps, getMenuProps, isOpen }) => (
+      {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue }) => (
         <div className={css(styles.main, className)}>
           <div
             className={css(
               styles.searchContainer,
+              searchContainerClassName,
               shouldBeOpen(isOpen, suggestions) && styles.searchContainerOpen
             )}
           >
             <input
               {...getInputProps({
-                className: styles.input,
+                onKeyDown: (event: any) => {
+                  if (event.key === 'Enter') {
+                    goto(`/search?${qs.stringify({ q: inputValue, type: SearchType.Podcasts })}`);
+                  }
+                },
                 placeholder: 'Search for podcasts, episodes, and clips',
               })}
             />
-            <SearchIcon className={styles.searchIcon} size={24} />
+            <SearchIcon size={24} />
           </div>
           {shouldBeOpen(isOpen, suggestions) && suggestions.type === 'success' && (
             <ul
               {...getMenuProps({
-                className: styles.suggestionContainer,
+                className: css(styles.suggestionContainer, suggestionContainerClassName),
               })}
             >
               {suggestions.data.map((suggestion, index) => (
@@ -157,6 +175,7 @@ const mapDispatchToProps = {
   clearSuggestions: thunks.clearSuggestions,
   executeSearch: thunks.executeSearch,
   fetchSuggestions: thunks.fetchSuggestions,
+  goto: push,
 };
 
 export default connect(

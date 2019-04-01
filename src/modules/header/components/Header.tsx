@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 import HeaderAccount from './HeaderAccount';
 import Typeahead from '~/modules/search/components/Typeahead';
+import HeaderTypeahead from './HeaderTypeahead';
 
 type HeaderProps = {
   className?: string;
@@ -11,23 +12,25 @@ type HeaderProps = {
 
 const styles = {
   main: css({
-    display: 'grid',
-    gridTemplateColumns: '[logo] auto [middle] 1fr [user] auto',
+    display: 'flex',
+    justifyContent: 'space-between',
     alignItems: 'center',
     color: colors.lightest,
     backgroundColor: colors.possibleHeaderColor,
-    padding: '20px 30px',
+    padding: '0 30px',
+    height: 70,
+    position: 'relative',
   }),
   logo: css({
     gridArea: 'logo',
   }),
-  header: css({
-    gridArea: 'user',
-  }),
   search: css({
     display: 'flex',
     justifyContent: 'center',
-    gridArea: 'middle',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    top: 15,
   }),
 };
 
@@ -36,10 +39,10 @@ const Header: React.FC<HeaderProps> = ({ className }) => (
     <Link className={styles.logo} to="/">
       <h2>castclips</h2>
     </Link>
+    <HeaderAccount />
     <div className={styles.search}>
-      <Typeahead />
+      <HeaderTypeahead />
     </div>
-    <HeaderAccount className={styles.header} />
   </header>
 );
 

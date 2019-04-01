@@ -10,8 +10,12 @@ type SearchResultCardProps = PodcastResult | EpisodeResult;
 
 const styles = {
   main: css({
+    '&:hover': {
+      boxShadow: 'var(--card-dropshadow-feature)',
+    },
     padding: 20,
     marginBottom: 20,
+    transition: 'box-shadow 300ms ease-out',
   }),
   thumbnail: css({
     height: 150,
@@ -29,6 +33,9 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     marginBottom: 4,
+  }),
+  subText: css({
+    color: colors.gray700,
   }),
   textIcon: css({
     '& > svg': {
@@ -67,6 +74,17 @@ const SearchResultPodcastAttributes: React.FC<PodcastResult> = ({ numEpisodes })
   </>
 );
 
+const SubText: React.FC<SearchResultCardProps> = props => {
+  switch (props.type) {
+    case SearchType.Episodes:
+      return <h4 className={styles.subText}>{props.podcast.title}</h4>;
+    case SearchType.Podcasts:
+      return <h4 className={styles.subText}>{props.publisher}</h4>;
+    default:
+      return null;
+  }
+};
+
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
   <a href={`/${props.type}/${props.id}`}>
     <Card className={styles.main}>
@@ -77,6 +95,7 @@ const SearchResultCard: React.FC<SearchResultCardProps> = props => (
           {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
         </div>
         <h3>{props.title}</h3>
+        <SubText {...props} />
         <p className={styles.description}>{props.description}</p>
       </div>
     </Card>
