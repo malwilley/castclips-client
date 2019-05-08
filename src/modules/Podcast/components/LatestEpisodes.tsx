@@ -23,7 +23,7 @@ const styles = {
   episodeRow: {
     main: css({
       '&:hover': {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: '#f8faff',
       },
       height: 90,
       display: 'grid',

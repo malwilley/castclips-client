@@ -35,7 +35,7 @@ const styles = {
 const HomePage: React.FC = () => (
   <div className={styles.main}>
     <div className={styles.gradientContainer}>
-      <Header className={styles.header} />
+      <Header className={styles.header} showSearch={false} />
       <h1 className={styles.headerText}>Share your favorite podcast moments</h1>
       <Typeahead className={styles.search} />
     </div>

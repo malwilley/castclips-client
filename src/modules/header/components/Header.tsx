@@ -8,6 +8,7 @@ import HeaderTypeahead from './HeaderTypeahead';
 
 type HeaderProps = {
   className?: string;
+  showSearch?: boolean;
 };
 
 const styles = {
@@ -34,15 +35,17 @@ const styles = {
   }),
 };
 
-const Header: React.FC<HeaderProps> = ({ className }) => (
+const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
   <header className={css(styles.main, className)}>
     <Link className={styles.logo} to="/">
       <h2>castclips</h2>
     </Link>
     <HeaderAccount />
-    <div className={styles.search}>
-      <HeaderTypeahead />
-    </div>
+    {showSearch ? (
+      <div className={styles.search}>
+        <HeaderTypeahead />
+      </div>
+    ) : null}
   </header>
 );
 

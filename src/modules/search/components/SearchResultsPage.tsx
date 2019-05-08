@@ -5,7 +5,7 @@ import { SearchState, SearchType, SearchParams } from '../types';
 import { thunks } from '../redux';
 import HttpContent from '~/components/HttpContent';
 import Header from '~/modules/header';
-import SearchResultCard from './SearchResultCard';
+import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
 import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
 import { colors } from '~/styles';
@@ -61,6 +61,15 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
         </h2>
         <HttpContent
           request={results}
+          renderFetching={() => (
+            <>
+              {Array(10)
+                .fill(0)
+                .map((_, index) => (
+                  <SearchResultCardFetching key={index} />
+                ))}
+            </>
+          )}
           renderSuccess={data => (
             <div>
               {data.map(result => (

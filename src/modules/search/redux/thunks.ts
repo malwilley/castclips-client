@@ -12,7 +12,7 @@ const clearSuggestions: Thunk<void, void> = () => async dispatch => {
 };
 
 const executeSearch: Thunk<string, Promise<void>> = query => async (dispatch, getState) => {
-  const type = (qs.parse(getState().router.location.search) as any).type;
+  const type = (qs.parse(getState().router.location.search) as any).type || SearchType.Podcasts;
   dispatch(push(`/search?${qs.stringify({ q: query, type })}`));
 };
 

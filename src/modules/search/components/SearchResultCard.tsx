@@ -5,6 +5,7 @@ import { colors } from '~/styles';
 import { ClockOutlineIcon, CalendarDayIcon, AnimationPlayOutlineIcon } from 'mdi-react';
 import formatPublishDate from '~/utils/formatPublishDate';
 import { PodcastResult, EpisodeResult, SearchType } from '../types';
+import TextSkeleton from '~/components/TextSkeleton';
 
 type SearchResultCardProps = PodcastResult | EpisodeResult;
 
@@ -52,6 +53,17 @@ const styles = {
   }),
 };
 
+const fetchingStyles = {
+  main: css({
+    display: 'flex',
+  }),
+  thumbnail: css({
+    backgroundColor: colors.gray100,
+    float: 'none',
+    border: 'none',
+  }),
+};
+
 const SearchResultEpisodeAttributes: React.FC<EpisodeResult> = ({ audioLength, published }) => (
   <>
     <div className={styles.textIcon}>
@@ -85,21 +97,34 @@ const SubText: React.FC<SearchResultCardProps> = props => {
   }
 };
 
+const SearchResultCardFetching: React.FC = () => (
+  <Card className={css(styles.main, fetchingStyles.main)}>
+    <div className={css(styles.thumbnail, fetchingStyles.thumbnail)} />
+    <div>
+      <TextSkeleton width={110} height={18} marginBottom={2} color={colors.gray100} />
+      <TextSkeleton width={200} height={23} marginBottom={2} color={colors.gray300} />
+      <TextSkeleton width={80} height={18} marginBottom={4} color={colors.gray200} />
+      <TextSkeleton width={250} height={16} marginBottom={2} color={colors.gray100} />
+      <TextSkeleton width={230} height={16} marginBottom={2} color={colors.gray100} />
+      <TextSkeleton width={280} height={16} marginBottom={2} color={colors.gray100} />
+    </div>
+  </Card>
+);
+
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
   <a href={`/${props.type}/${props.id}`}>
     <Card className={styles.main}>
-      <div>
-        <img className={styles.thumbnail} src={props.thumbnail} />
-        <div className={styles.attributesContainer}>
-          {props.type === SearchType.Episodes && <SearchResultEpisodeAttributes {...props} />}
-          {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
-        </div>
-        <h3>{props.title}</h3>
-        <SubText {...props} />
-        <p className={styles.description}>{props.description}</p>
+      <img className={styles.thumbnail} src={props.thumbnail} />
+      <div className={styles.attributesContainer}>
+        {props.type === SearchType.Episodes && <SearchResultEpisodeAttributes {...props} />}
+        {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
       </div>
+      <h3>{props.title}</h3>
+      <SubText {...props} />
+      <p className={styles.description}>{props.description}</p>
     </Card>
   </a>
 );
 
+export { SearchResultCardFetching };
 export default SearchResultCard;
