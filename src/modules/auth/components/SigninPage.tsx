@@ -31,6 +31,7 @@ const styles = {
   }),
   signin: css({
     fontSize: 48,
+    marginBottom: 6,
   }),
   textContainer: css({
     color: colors.lightest,
