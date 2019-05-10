@@ -4,10 +4,11 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 import { ClockOutlineIcon, CalendarDayIcon, AnimationPlayOutlineIcon } from 'mdi-react';
 import formatPublishDate from '~/utils/formatPublishDate';
-import { PodcastResult, EpisodeResult, SearchType } from '../types';
+import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
 import TextSkeleton from '~/components/TextSkeleton';
+import formatHrMinSec from '~/utils/formatHrMinSec';
 
-type SearchResultCardProps = PodcastResult | EpisodeResult;
+type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;
 
 const styles = {
   main: css({
@@ -64,7 +65,10 @@ const fetchingStyles = {
   }),
 };
 
-const SearchResultEpisodeAttributes: React.FC<EpisodeResult> = ({ audioLength, published }) => (
+const SearchResultEpisodeAttributes: React.FC<EpisodeResult | ClipResult> = ({
+  audioLength,
+  published,
+}) => (
   <>
     <div className={styles.textIcon}>
       <CalendarDayIcon size={16} />
@@ -72,7 +76,7 @@ const SearchResultEpisodeAttributes: React.FC<EpisodeResult> = ({ audioLength, p
     </div>
     <div className={styles.textIcon}>
       <ClockOutlineIcon size={16} />
-      {audioLength}
+      {typeof audioLength === 'number' ? formatHrMinSec(audioLength) : audioLength}
     </div>
   </>
 );
@@ -92,6 +96,13 @@ const SubText: React.FC<SearchResultCardProps> = props => {
       return <h4 className={styles.subText}>{props.podcast.title}</h4>;
     case SearchType.Podcasts:
       return <h4 className={styles.subText}>{props.publisher}</h4>;
+    case SearchType.Clips:
+      return (
+        <div>
+          <h4 className={styles.subText}>{props.podcast.title}</h4>
+          <h4 className={styles.subText}>{props.episode.title}</h4>
+        </div>
+      );
     default:
       return null;
   }
@@ -116,7 +127,9 @@ const SearchResultCard: React.FC<SearchResultCardProps> = props => (
     <Card className={styles.main}>
       <img className={styles.thumbnail} src={props.thumbnail} />
       <div className={styles.attributesContainer}>
-        {props.type === SearchType.Episodes && <SearchResultEpisodeAttributes {...props} />}
+        {(props.type === SearchType.Episodes || props.type === SearchType.Clips) && (
+          <SearchResultEpisodeAttributes {...props} />
+        )}
         {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
       </div>
       <h3>{props.title}</h3>

@@ -31,6 +31,23 @@ export type EpisodeResult = {
   publisher: string;
 };
 
+export type ClipResult = {
+  type: SearchType.Clips;
+  audioLength: number;
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  podcast: {
+    title: string;
+  };
+  episode: {
+    title: string;
+  };
+  publisher: string;
+  published: Date;
+};
+
 export type SearchResult = PodcastResult | EpisodeResult;
 
 export type SearchState = {

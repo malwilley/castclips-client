@@ -1,4 +1,4 @@
-import { SearchType, PodcastResult, EpisodeResult } from '../types';
+import { SearchType, PodcastResult, EpisodeResult, ClipResult } from '../types';
 
 const mapPodcastResult = (result: PodcastResult) => ({
   ...result,
@@ -11,12 +11,25 @@ const mapEpisodeResult = (result: EpisodeResult) => ({
   type: SearchType.Episodes,
 });
 
-const makeMapSearchResult = (type: SearchType) => (result: PodcastResult | EpisodeResult): any => {
-  if (type === SearchType.Episodes) {
-    return mapEpisodeResult(result as EpisodeResult);
-  }
+const mapClipResult = (result: ClipResult) => ({
+  ...result,
+  published: new Date(result.published),
+  type: SearchType.Clips,
+});
 
-  return mapPodcastResult(result as PodcastResult);
+const makeMapSearchResult = (type: SearchType) => (
+  result: PodcastResult | EpisodeResult | ClipResult
+): any => {
+  switch (type) {
+    case SearchType.Clips:
+      return mapClipResult(result as ClipResult);
+    case SearchType.Episodes:
+      return mapEpisodeResult(result as EpisodeResult);
+    case SearchType.Podcasts:
+      return mapPodcastResult(result as PodcastResult);
+    default:
+      return {};
+  }
 };
 
 export { mapPodcastResult, mapEpisodeResult };
