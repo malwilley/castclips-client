@@ -9,7 +9,7 @@ export type ClipMetadata = {
     title: string;
     description: string;
     audioLength: number;
-    published: string;
+    published: Date;
   };
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: Date;

@@ -18,6 +18,10 @@ const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState)
         type: 'success',
         data: {
           ...clip,
+          episode: {
+            ...clip.episode,
+            published: new Date(clip.episode.published),
+          },
           published: new Date(clip.published),
         },
       })

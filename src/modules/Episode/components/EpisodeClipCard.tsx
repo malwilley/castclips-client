@@ -5,6 +5,7 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 import { Link } from 'react-router-dom';
 import { EpisodeClip } from '../types';
+import ClipCardAccent from '~/components/ClipCardAccent';
 
 type EpisodeClipCardProps = {
   className?: string;
@@ -13,19 +14,6 @@ type EpisodeClipCardProps = {
 };
 
 const styles = {
-  accent: css({
-    backgroundColor: colors.light,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 4,
-  }),
-  accentClipSection: css({
-    backgroundColor: colors.tertiary,
-    position: 'absolute',
-    height: '100%',
-  }),
   description: css({
     height: 100,
     overflow: 'hidden',
@@ -67,15 +55,7 @@ const styles = {
 const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, episodeLength }) => (
   <Link to={`/clip/${clip.id}`}>
     <Card className={css(styles.main, className)}>
-      <div className={styles.accent}>
-        <div
-          className={styles.accentClipSection}
-          style={{
-            left: `${(clip.start / episodeLength) * 100}%`,
-            width: `${((clip.end - clip.start) / episodeLength) * 100}%`,
-          }}
-        />
-      </div>
+      <ClipCardAccent end={clip.end} length={episodeLength} start={clip.start} />
       <h3>{clip.title}</h3>
       <p className={styles.description}>{clip.description}</p>
       <div className={styles.footer}>

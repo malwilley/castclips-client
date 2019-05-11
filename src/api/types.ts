@@ -21,7 +21,14 @@ export type AddClipPayload = {
   audio: string;
   description: string;
   end: number;
-  episode: { id: string; title: string; description: string; audioLength: number; published: Date };
+  episode: {
+    id: string;
+    title: string;
+    description: string;
+    audioLength: number;
+    published: Date;
+    thumbnail: string;
+  };
   podcast: { id: string; title: string; description: string; thumbnail: string };
   start: number;
   title: string;

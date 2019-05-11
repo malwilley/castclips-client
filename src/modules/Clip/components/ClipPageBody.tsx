@@ -15,10 +15,13 @@ type ClipPageBodyProps = {
 };
 
 const styles = {
+  description: css({
+    margin: '10px 0 40px 0',
+  }),
   main: css({
     display: 'grid',
     gridTemplateColumns: '[main] 1fr [side] 300px',
-    gridColumnGap: 20,
+    gridColumnGap: 40,
   }),
   mainContainer: css({
     gridTemplateAreas: 'main',
@@ -94,18 +97,18 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
       <div className={styles.mainContainer}>
         <HttpContent
           request={clipMetadata}
-          renderSuccess={({ description }) => (
+          renderSuccess={clip => (
             <div>
-              {description && (
+              {clip.description && (
                 <>
                   <SectionHeader>description</SectionHeader>
-                  <p>{description}</p>
+                  <p className={styles.description}>{clip.description}</p>
                 </>
               )}
+              <ClipContext clip={clip} />
             </div>
           )}
         />
-        <ClipContext />
       </div>
       <div className={styles.sideContainer}>
         <SectionHeader>clip creator</SectionHeader>

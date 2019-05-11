@@ -41,11 +41,11 @@ const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
       <h2>castclips</h2>
     </Link>
     <HeaderAccount />
-    {showSearch ? (
+    {showSearch && (
       <div className={styles.search}>
         <HeaderTypeahead />
       </div>
-    ) : null}
+    )}
   </header>
 );
 

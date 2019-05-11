@@ -28,7 +28,7 @@ const styles = {
   main: css({
     display: 'grid',
     gridTemplateColumns: '[episodes] 2fr [clips] 1fr',
-    gridColumnGap: 20,
+    gridColumnGap: 40,
   }),
   heading: css({
     '& > :first-child': {

@@ -51,7 +51,10 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
 
     createClip({
       audio: episode.data.audio,
-      episode: pick(['id', 'title', 'description', 'published', 'audioLength'], episode.data),
+      episode: pick(
+        ['id', 'title', 'description', 'published', 'audioLength', 'thumbnail'],
+        episode.data
+      ),
       podcast: pick(['id', 'title', 'description', 'thumbnail'], episode.data.podcast),
       title,
       description,
