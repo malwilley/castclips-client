@@ -6,10 +6,11 @@ import ShareButton from '~/modules/PodcastPlayer/ShareButton';
 import ShareRange, { ShareRangeState } from '~/modules/PodcastPlayer/ShareRange';
 import { PlayStatus } from '~/types';
 import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
-import { addClip } from '~/api/firebase';
 import Show from '~/components/Show';
 import CreateClipModal from '../Episode/components/CreateClipModal';
 import { EpisodeMetadata } from '../Episode/types';
+import Button from '~/components/Button';
+import TimeRecorder from './TimeRecorder';
 
 type PodcastPlayerProps = {
   episode: EpisodeMetadata;
@@ -206,37 +207,33 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
           onSeek={this.onSeek}
           playStatus={this.state.playStatus}
         />
-        <ShareRange
-          min={this.state.min}
-          max={this.state.max}
-          range={this.state.share}
-          onChange={this.handleBoundsChange}
-          previewing={this.state.previewing !== null}
-          recording={this.state.recording !== null}
-          time={this.state.time}
-        />
-        <div className={styles.footerContainer}>
-          <PreviewOrRecord
-            canPreview={this.state.share !== null}
-            onPreviewStart={this.handlePreviewStart}
-            onPreviewStop={this.handlePreviewStop}
-            onRecordStart={this.handleRecordStart}
-            onRecordStop={this.handleRecordStop}
-            onReset={this.handleReset}
-            previewing={this.state.previewing !== null}
-            recording={this.state.recording !== null}
-          />
-          <Show>
-            {({ isOpen, toggle }) => (
-              <>
-                <ShareButton active={this.state.share !== null} onClick={toggle} />
-                {isOpen && share && (
-                  <CreateClipModal start={share.start} end={share.end} handleClose={toggle} />
-                )}
-              </>
-            )}
-          </Show>
-        </div>
+
+        <Show>
+          {({ isOpen, toggle }) => (
+            <>
+              {isOpen && (
+                <>
+                  <TimeRecorder />
+                  <Show>
+                    {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
+                      <>
+                        {modalIsOpen && share && (
+                          <CreateClipModal
+                            start={share.start}
+                            end={share.end}
+                            handleClose={toggle}
+                          />
+                        )}
+                        <ShareButton active={this.state.share !== null} onClick={toggleModal} />
+                      </>
+                    )}
+                  </Show>
+                </>
+              )}
+              <Button onClick={toggle}>Show Clip Options</Button>
+            </>
+          )}
+        </Show>
       </div>
     );
   }

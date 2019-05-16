@@ -40,6 +40,7 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
   return (
     <HttpContent
       request={clipsState}
+      renderFetching={() => null}
       renderSuccess={clips =>
         clips.length > 0 ? (
           <div className={styles.container}>
