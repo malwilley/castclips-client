@@ -6,15 +6,15 @@ import { CSSObject } from 'create-emotion';
 type TextSkeletonProps = {
   className?: string;
   color?: string;
-  height?: number;
-  width?: number;
+  height?: number | string;
+  width?: number | string;
   marginBottom?: number;
 };
 
 const styles = {
   main: (style: CSSObject) =>
     css({
-      borderRadius: 8,
+      borderRadius: 4,
       ...style,
     }),
 };

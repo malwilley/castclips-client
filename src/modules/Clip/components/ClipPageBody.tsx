@@ -8,6 +8,7 @@ import { colors } from '~/styles';
 import { RedditIcon, FacebookIcon, TwitterIcon, UserOutlineIcon } from 'mdi-react';
 import SectionHeader from '~/components/SectionHeader';
 import ClipContext from './ClipContext';
+import TextSkeleton from '~/components/TextSkeleton';
 
 type ClipPageBodyProps = {
   clipId: string;
@@ -97,6 +98,13 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
       <div className={styles.mainContainer}>
         <HttpContent
           request={clipMetadata}
+          renderFetching={() => (
+            <div>
+              <TextSkeleton height={20} width={100} color={colors.gray300} />
+              <TextSkeleton height={20} width={300} color={colors.gray300} />
+              <TextSkeleton height={20} width={200} color={colors.gray300} />
+            </div>
+          )}
           renderSuccess={clip => (
             <div>
               {clip.description && (

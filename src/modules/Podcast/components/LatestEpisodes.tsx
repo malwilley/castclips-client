@@ -111,7 +111,7 @@ const EpisodeRowLoading: React.FC = () => (
     <TextSkeleton className={styles.episodeRow.thumbnail} />
     <div className={styles.episodeRow.titleDescriptionContainer}>
       <TextSkeleton color={colors.gray200} height={13} marginBottom={2} width={150} />
-      <TextSkeleton height={20} marginBottom={2} width={200} />
+      <TextSkeleton color={colors.gray700} height={16} marginBottom={4} width={200} />
       <TextSkeleton height={15} marginBottom={0} />
     </div>
   </div>

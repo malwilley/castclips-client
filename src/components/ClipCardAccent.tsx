@@ -25,16 +25,22 @@ const styles = {
   }),
 };
 
-const ClipCardAccent: React.FC<ClipCardAccentProps> = ({ end, length, start }) => (
-  <div className={styles.accent}>
-    <div
-      className={styles.accentClipSection}
-      style={{
-        left: `${(start / length) * 100}%`,
-        width: `${((end - start) / length) * 100}%`,
-      }}
-    />
-  </div>
-);
+const ClipCardAccent: React.FC<ClipCardAccentProps> = ({ end, length, start }) => {
+  const left = (start / length) * 100;
+  const calculatedWidth = ((end - start) / length) * 100;
+  const width = Math.max(calculatedWidth, Math.min(1, 100 - left));
+
+  return (
+    <div className={styles.accent}>
+      <div
+        className={styles.accentClipSection}
+        style={{
+          left: `${left}%`,
+          width: `${width}%`,
+        }}
+      />
+    </div>
+  );
+};
 
 export default ClipCardAccent;

@@ -6,7 +6,7 @@ import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
 import { ClipMetadata } from './types';
 
 type ClipPlayerProps = {
-  clip: ClipMetadata;
+  clip: Pick<ClipMetadata, 'audio' | 'start' | 'end' | 'title'>;
 };
 
 type ClipPlayerState = {

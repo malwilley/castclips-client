@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, fontFamily } from '~/styles';
+import { colors } from '~/styles';
 import { CSSObject } from 'create-emotion';
 import Button, { ButtonProps } from '~/components/Button';
 
@@ -23,7 +23,6 @@ const commonStyles: CSSObject = {
   padding: '10px 16px',
   fontSize: 16,
   fontWeight: 'bold',
-  fontFamily: fontFamily.titleFont,
   minWidth: 90,
 };
 

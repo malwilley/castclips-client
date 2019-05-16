@@ -123,20 +123,18 @@ const SearchResultCardFetching: React.FC = () => (
 );
 
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
-  <a href={`/${props.type}/${props.id}`}>
-    <Card className={styles.main}>
-      <img className={styles.thumbnail} src={props.thumbnail} />
-      <div className={styles.attributesContainer}>
-        {(props.type === SearchType.Episodes || props.type === SearchType.Clips) && (
-          <SearchResultEpisodeAttributes {...props} />
-        )}
-        {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
-      </div>
-      <h3>{props.title}</h3>
-      <SubText {...props} />
-      <p className={styles.description}>{props.description}</p>
-    </Card>
-  </a>
+  <Card className={styles.main} to={`/${props.type}/${props.id}`}>
+    <img className={styles.thumbnail} src={props.thumbnail} />
+    <div className={styles.attributesContainer}>
+      {(props.type === SearchType.Episodes || props.type === SearchType.Clips) && (
+        <SearchResultEpisodeAttributes {...props} />
+      )}
+      {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
+    </div>
+    <h3>{props.title}</h3>
+    <SubText {...props} />
+    <p className={styles.description}>{props.description}</p>
+  </Card>
 );
 
 export { SearchResultCardFetching };

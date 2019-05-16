@@ -1,5 +1,4 @@
 import { css } from 'emotion';
-import { fontFamily } from '~/styles/text';
 import colors from '~/styles/colors';
 import zIndex from '~/styles/zIndex';
 
@@ -33,12 +32,4 @@ const animateSlideToNormal = css({
   animation: 'slide-to-normal ease-out 300ms',
 });
 
-export {
-  animateSlideToFifty,
-  animateSlideToNormal,
-  borderRadius,
-  card,
-  colors,
-  downHalf,
-  fontFamily,
-};
+export { animateSlideToFifty, animateSlideToNormal, borderRadius, card, colors, downHalf };

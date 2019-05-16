@@ -9,19 +9,13 @@ import stripHtml from '~/utils/stripHtml';
 import { CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
 import formatPublishDate from '~/utils/formatPublishDate';
 import ClipCardAccent from '~/components/ClipCardAccent';
+import { Link } from 'react-router-dom';
 
 type ClipContextProps = { clip: ClipMetadata };
 
 const styles = {
   card: css({
     position: 'relative',
-  }),
-  descriptionEpisode: css({
-    maxHeight: 24,
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    fontSize: 14,
-    color: colors.gray700,
   }),
   episodeTags: css({
     display: 'flex',
@@ -40,6 +34,15 @@ const styles = {
     display: 'flex',
   }),
   podcastTextContainer: css({
+    '& a': {
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: colors.dark,
+      lineHeight: 1,
+    },
     padding: '16px 16px 16px 0',
     overflow: 'hidden',
   }),
@@ -50,17 +53,9 @@ const styles = {
     borderRadius: 8,
   }),
   titleEpisode: css({
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.dark,
-    lineHeight: 1,
     marginBottom: 4,
   }),
   titlePodcast: css({
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.dark,
-    lineHeight: 1,
     marginBottom: 2,
   }),
   textIcon: css({
@@ -85,7 +80,7 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
       Clip starts at <a href="">{formatHrMinSec(clip.start)}</a> and ends at{' '}
       <a href="">{formatHrMinSec(clip.end)}</a>
     </p>
-    <Card className={styles.card}>
+    <Card className={styles.card} to={`/episode/${clip.episode.id}`}>
       <ClipCardAccent end={clip.end} length={clip.episode.audioLength} start={clip.start} />
       <div className={styles.podcastContainer}>
         <img className={styles.thumbnail} src={clip.podcast.thumbnail} />
@@ -100,9 +95,13 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
               <div>{(clip.episode.audioLength / 60).toFixed(0)} min</div>
             </div>
           </div>
-          <div className={styles.titlePodcast}>{clip.podcast.title}</div>
-          <div className={styles.titleEpisode}>{clip.episode.title}</div>
-          <div className={styles.descriptionEpisode}>{stripHtml(clip.episode.description)}</div>
+          <Link className={styles.titlePodcast} to={`/podcast/${clip.podcast.id}`}>
+            {clip.podcast.title}
+          </Link>
+          <br />
+          <Link className={styles.titleEpisode} to={`/episode/${clip.episode.id}`}>
+            {clip.episode.title}
+          </Link>
         </div>
       </div>
     </Card>

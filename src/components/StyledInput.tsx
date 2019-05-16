@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, fontFamily } from '~/styles';
+import { colors } from '~/styles';
 
 type StyledInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
@@ -22,7 +22,6 @@ const styles = {
   label: css({
     color: colors.dark,
     display: 'block',
-    fontFamily: fontFamily.titleFont,
     marginBottom: 10,
   }),
 };

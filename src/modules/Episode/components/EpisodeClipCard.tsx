@@ -6,6 +6,7 @@ import { colors } from '~/styles';
 import { Link } from 'react-router-dom';
 import { EpisodeClip } from '../types';
 import ClipCardAccent from '~/components/ClipCardAccent';
+import formatClipLength from '~/utils/formatClipLength';
 
 type EpisodeClipCardProps = {
   className?: string;
@@ -32,7 +33,7 @@ const styles = {
     '& > :last-child': {
       marginLeft: 6,
     },
-    color: colors.gray,
+    color: colors.gray500,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -40,7 +41,7 @@ const styles = {
     '& > :first-child': {
       marginRight: 6,
     },
-    color: colors.gray,
+    color: colors.gray500,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -53,29 +54,27 @@ const styles = {
 };
 
 const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, episodeLength }) => (
-  <Link to={`/clip/${clip.id}`}>
-    <Card className={css(styles.main, className)}>
-      <ClipCardAccent end={clip.end} length={episodeLength} start={clip.start} />
-      <h3>{clip.title}</h3>
-      <p className={styles.description}>{clip.description}</p>
-      <div className={styles.footer}>
-        <span className={styles.iconText}>
-          <ClockOutlineIcon size={20} />
-          {clip.end - clip.start}s
+  <Card className={css(styles.main, className)} to={`/clip/${clip.id}`}>
+    <ClipCardAccent end={clip.end} length={episodeLength} start={clip.start} />
+    <h3>{clip.title}</h3>
+    <p className={styles.description}>{clip.description}</p>
+    <div className={styles.footer}>
+      <span className={styles.iconText}>
+        <ClockOutlineIcon size={20} />
+        {formatClipLength(clip.end - clip.start)}
+      </span>
+      <div className={styles.viewStars}>
+        <span className={styles.textIcon}>
+          {clip.views}
+          <EyeOutlineIcon size={20} />
         </span>
-        <div className={styles.viewStars}>
-          <span className={styles.textIcon}>
-            {clip.views}
-            <EyeOutlineIcon size={20} />
-          </span>
-          <span className={styles.textIcon}>
-            {clip.stars}
-            <StarOutlineIcon size={20} />
-          </span>
-        </div>
+        <span className={styles.textIcon}>
+          {clip.stars}
+          <StarOutlineIcon size={20} />
+        </span>
       </div>
-    </Card>
-  </Link>
+    </div>
+  </Card>
 );
 
 export default EpisodeClipCard;

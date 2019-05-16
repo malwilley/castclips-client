@@ -1,12 +1,12 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import { HttpRequest } from '~/types';
-import { fontFamily } from '~/styles/text';
 import ClipPlayer from '~/modules/Clip/ClipPlayer';
 import Card from '~/components/Card';
 import HttpContent from '~/components/HttpContent';
 import { ClipMetadata } from './types';
-import CopyLink from '~/components/CopyLink';
+import TextSkeleton from '~/components/TextSkeleton';
+import { colors } from '~/styles';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
@@ -15,7 +15,6 @@ type ClipCardProps = {
 
 const styles = {
   bigText: css({
-    fontFamily: fontFamily.titleFont,
     fontSize: 28,
     fontWeight: 'bold',
   }),
@@ -62,8 +61,16 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
   <Card className={styles.main} feature>
     <HttpContent
       request={clip}
-      renderSuccess={clipData => (
+      renderFetching={() => (
         <>
+          <ClipPlayer clip={{ start: 0, end: 0, title: '', audio: '' }} />
+          <div className={styles.bottomContainer}>
+            <TextSkeleton height={38} width={200} color={colors.gray300} />
+          </div>
+        </>
+      )}
+      renderSuccess={clipData => (
+        <div>
           <ClipPlayer clip={clipData} />
           <div className={styles.bottomContainer}>
             <div className={styles.leftContainer}>
@@ -78,7 +85,7 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
             </div>
             <div className={styles.shareContainer} />
           </div>
-        </>
+        </div>
       )}
     />
   </Card>

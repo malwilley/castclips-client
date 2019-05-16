@@ -12,6 +12,8 @@ import EpisodeClips from './components/EpisodeClips';
 import { CalendarClockIcon } from 'mdi-react';
 import InfoPage from '~/components/InfoPage';
 import { Link } from 'react-router-dom';
+import ParagraphSkeleton from '~/components/ParagraphSkeleton';
+import PageTitleFetching from '~/components/PageTitleFetching';
 
 type EpisodePageProps = {
   id: string;
@@ -69,6 +71,16 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
       bodyContent={
         <HttpContent
           request={episodeMetadata}
+          renderFetching={() => (
+            <>
+              <section className={styles.section}>
+                <SectionHeader>description</SectionHeader>
+                <p>
+                  <ParagraphSkeleton />
+                </p>
+              </section>
+            </>
+          )}
           renderSuccess={({ audioLength, description, published }) => (
             <>
               <section className={styles.section}>
@@ -91,6 +103,12 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
       titleContent={
         <HttpContent
           request={episodeMetadata}
+          renderFetching={() => (
+            <>
+              <SectionHeader light>episode</SectionHeader>
+              <PageTitleFetching />
+            </>
+          )}
           renderSuccess={({ title, podcast }) => (
             <>
               <SectionHeader light>episode</SectionHeader>

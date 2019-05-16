@@ -16,7 +16,7 @@ const styles = {
     padding: 16,
   }),
   episode: css({
-    opacity: 0.7,
+    color: colors.gray700,
   }),
   footer: css({
     display: 'flex',
@@ -30,7 +30,7 @@ const styles = {
     '& > :last-child': {
       marginLeft: 6,
     },
-    color: colors.gray,
+    color: colors.gray500,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -38,7 +38,7 @@ const styles = {
     '& > :first-child': {
       marginRight: 6,
     },
-    color: colors.gray,
+    color: colors.gray500,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -51,10 +51,8 @@ const styles = {
 };
 
 const PodcastClipCard: React.FC<PodcastClipCardProps> = ({ clip }) => (
-  <Card className={styles.main}>
-    <Link to={`/clip/${clip.id}`}>
-      <h4>{clip.title}</h4>
-    </Link>
+  <Card className={styles.main} to={`/clip/${clip.id}`}>
+    <h4>{clip.title}</h4>
     <h5 className={styles.episode}>{clip.episode.title}</h5>
     <div className={styles.footer}>
       <span className={styles.iconText}>
