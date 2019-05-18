@@ -102,10 +102,13 @@ h6 {
 }
 
 input {
+  background: none;
   font-family: var(--p-font);
-  color: var(--color-dark);
   font-size: 14px;
   outline: none;
+  color: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
 }
 
 ul, li {

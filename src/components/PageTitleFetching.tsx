@@ -6,7 +6,7 @@ const styles = {
   main: css({
     '& > *': {
       backgroundColor: colors.light,
-      borderRadius: 8,
+      borderRadius: 4,
     },
   }),
   title: css({

@@ -11,6 +11,11 @@ import CreateClipModal from '../Episode/components/CreateClipModal';
 import { EpisodeMetadata } from '../Episode/types';
 import Button from '~/components/Button';
 import TimeRecorder from './TimeRecorder';
+import { ArrowRightIcon } from 'mdi-react';
+import { colors } from '~/styles';
+import ClipPreview from './ClipPreview';
+import { isNil } from 'ramda';
+import PreviewButton from './PreviewButton';
 
 type PodcastPlayerProps = {
   episode: EpisodeMetadata;
@@ -19,12 +24,10 @@ type PodcastPlayerProps = {
 type PodcastPlayerState = {
   playStatus: PlayStatus;
   duration: number;
-  min: number;
-  max: number;
-  share: ShareRangeState;
   time: number;
   previewing: number | null;
-  recording: number | null;
+  start: Maybe<number>;
+  end: Maybe<number>;
 };
 
 const styles = {
@@ -44,6 +47,24 @@ const styles = {
     left: 2,
     right: 2,
   }),
+  buttonsContainer: css({
+    '& > :not(:last-child)': {
+      marginRight: 16,
+    },
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: 16,
+  }),
+  timespanContainer: css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  }),
+  timespanRangeIcon: css({
+    color: colors.gray700,
+    margin: '0 20px',
+  }),
 };
 
 class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerState> {
@@ -55,12 +76,10 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.state = {
       playStatus: PlayStatus.Paused,
       duration: 0,
-      min: 0,
-      max: 0,
       previewing: null,
-      recording: null,
-      share: null,
       time: 0,
+      start: null,
+      end: null,
     };
 
     this.audioEl = null;
@@ -84,8 +103,8 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
   };
 
   setTime = (time: number) => {
-    const { previewing: previewingState, share } = this.state;
-    if (share && previewingState && time >= share.end) {
+    const { previewing: previewingState, start, end } = this.state;
+    if (end && previewingState && time >= end) {
       this.setState({
         playStatus: PlayStatus.Paused,
         previewing: null,
@@ -93,11 +112,9 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
       this.seek(previewingState);
       return;
     }
-    this.setState(({ duration, previewing, min, max }) => ({
+    this.setState({
       time,
-      min: previewing ? min : Math.max(0, time - 120),
-      max: previewing ? max : Math.min(duration, time + 120),
-    }));
+    });
   };
 
   onSeek = (time: number) => {
@@ -122,26 +139,15 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     this.setState({ duration });
   };
 
-  handleBoundsChange = (start: number, end: number) => {
-    this.pause();
-
-    this.setState({
-      share: {
-        start,
-        end,
-      },
-    });
-  };
-
   handlePreviewStart = () => {
-    if (!this.state.share) {
+    if (!this.state.start || !this.state.end) {
       return;
     }
     this.setState(({ time }: PodcastPlayerState) => ({
       playStatus: PlayStatus.Playing,
       previewing: time,
     }));
-    this.seek(this.state.share.start);
+    this.seek(this.state.start);
   };
 
   handlePreviewStop = () => {
@@ -155,33 +161,8 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
     });
   };
 
-  handleRecordStart = () => {
-    this.setState(({ time }: PodcastPlayerState) => ({
-      playStatus: PlayStatus.Playing,
-      recording: time,
-    }));
-  };
-
-  handleRecordStop = () => {
-    this.setState(({ recording, time }: PodcastPlayerState) => ({
-      playStatus: PlayStatus.Paused,
-      recording: null,
-      share: {
-        start: recording!,
-        end: time,
-      },
-    }));
-  };
-
-  handleReset = () => {
-    this.setState({
-      share: null,
-    });
-  };
-
   render() {
-    const { share } = this.state;
-
+    const { start, end } = this.state;
     return (
       <div className={styles.main}>
         <Audio
@@ -195,11 +176,7 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
         <PlaybackSlider
           className={styles.playbackSlider}
           duration={this.state.duration}
-          disabled={
-            this.state.duration <= 0 ||
-            this.state.previewing !== null ||
-            this.state.recording !== null
-          }
+          disabled={this.state.duration <= 0 || this.state.previewing !== null}
           handleBackClick={() => this.changeTime(-5)}
           handleForwardClick={() => this.changeTime(30)}
           handlePlayPauseClick={this.playPause}
@@ -213,21 +190,53 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
             <>
               {isOpen && (
                 <>
-                  <TimeRecorder />
-                  <Show>
-                    {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
-                      <>
-                        {modalIsOpen && share && (
-                          <CreateClipModal
-                            start={share.start}
-                            end={share.end}
-                            handleClose={toggle}
+                  <ClipPreview
+                    start={start}
+                    end={end}
+                    time={this.state.time}
+                    length={this.state.duration}
+                  />
+                  <div className={styles.timespanContainer}>
+                    <TimeRecorder
+                      time={start}
+                      handleRecordClick={() => {
+                        this.setState({
+                          start: this.state.time,
+                        });
+                      }}
+                      placeholder="Start time"
+                    />
+                    <ArrowRightIcon className={styles.timespanRangeIcon} size={16} />
+                    <TimeRecorder
+                      time={end}
+                      handleRecordClick={() => {
+                        this.setState({
+                          end: this.state.time,
+                        });
+                      }}
+                      placeholder="End time"
+                    />
+                  </div>
+                  <div className={styles.buttonsContainer}>
+                    <PreviewButton
+                      active={!isNil(this.state.start) && !isNil(this.state.end)}
+                      onClick={this.handlePreviewStart}
+                      previewing={!!this.state.previewing}
+                    />
+                    <Show>
+                      {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
+                        <>
+                          {modalIsOpen && !isNil(start) && !isNil(end) && (
+                            <CreateClipModal start={start} end={end} handleClose={toggle} />
+                          )}
+                          <ShareButton
+                            active={!isNil(start) && !isNil(end)}
+                            onClick={toggleModal}
                           />
-                        )}
-                        <ShareButton active={this.state.share !== null} onClick={toggleModal} />
-                      </>
-                    )}
-                  </Show>
+                        </>
+                      )}
+                    </Show>
+                  </div>
                 </>
               )}
               <Button onClick={toggle}>Show Clip Options</Button>

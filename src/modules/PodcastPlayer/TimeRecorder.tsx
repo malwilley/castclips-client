@@ -8,18 +8,28 @@ import { colors } from '~/styles';
 type TimeRecorderProps = {
   className?: string;
   handleRecordClick?: () => void;
-  time?: number; // seconds
+  placeholder?: string;
+  time: Maybe<number>; // seconds
 };
 
 const styles = {
   main: css({
+    boxShadow: '0 1px 6px 0 rgba(32,33,36,0.28)',
+    background: colors.lightest,
     display: 'flex',
     alignItems: 'center',
     height: 40,
-    width: 120,
+    width: 150,
     color: colors.dark,
-    border: `1px solid ${colors.gray500}`,
+    // border: `1px solid ${colors.gray500}`,
     borderRadius: 20,
+    transition: '300ms background ease-out, 300ms color ease-out',
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
+  }),
+  mainSet: css({
+    color: colors.lightest,
+    background: colors.gradient,
   }),
   input: css({
     flexGrow: 1,
@@ -29,19 +39,38 @@ const styles = {
     width: 0,
   }),
   recordButton: css({
+    '&:hover': {},
+    boxShadow: '0 1px 6px 0 rgba(32,33,36,0.28)',
     width: 30,
     height: 30,
     borderRadius: 20,
-    backgroundColor: colors.secondary,
+    background: colors.gradient,
     marginRight: 5,
     color: colors.lightest,
+    transition: '300ms background ease-out, 300ms color ease-out',
+  }),
+  recordButtonSet: css({
+    background: colors.lightest,
+    color: colors.dark,
   }),
 };
 
-const TimeRecorder: React.FC<TimeRecorderProps> = ({ className, handleRecordClick, time }) => (
-  <div className={css(styles.main, className)}>
-    <input className={styles.input} value={time ? formatHrMinSec(time) : ''} />
-    <Button className={styles.recordButton} onClick={handleRecordClick}>
+const TimeRecorder: React.FC<TimeRecorderProps> = ({
+  className,
+  handleRecordClick,
+  placeholder,
+  time,
+}) => (
+  <div className={css(styles.main, time && styles.mainSet, className)}>
+    <input
+      className={styles.input}
+      value={time ? formatHrMinSec(time) : ''}
+      placeholder={placeholder}
+    />
+    <Button
+      className={css(styles.recordButton, time && styles.recordButtonSet)}
+      onClick={handleRecordClick}
+    >
       <StopwatchIcon size={16} />
     </Button>
   </div>

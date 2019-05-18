@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import { ShareIcon } from 'mdi-react';
+import { ShareIcon, ContentCutIcon } from 'mdi-react';
 import * as React from 'react';
 import Button, { ButtonProps } from '~/components/Button';
 import { colors } from '~/styles';
@@ -15,22 +15,23 @@ const styles = {
       },
     },
     '& > svg': {
-      marginLeft: 4,
+      marginLeft: 8,
     },
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 8,
     display: 'flex',
     backgroundColor: colors.primary,
     color: colors.lightest,
-    padding: '9px 18px',
+    padding: '0 20px',
+    height: 42,
     transition: 'box-shadow 200ms ease-out, opacity 200ms ease-out',
   }),
 };
 
 const ShareButton: React.SFC<ButtonProps> = ({ className, ...props }) => (
   <Button {...props} className={css(styles.main, className)}>
-    Share!
-    <ShareIcon />
+    Create
+    <ContentCutIcon size={16} />
   </Button>
 );
 
