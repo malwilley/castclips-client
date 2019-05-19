@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { ClipMetadata } from '~/modules/Clip/types';
 import Card from '~/components/Card';
 import { css } from 'emotion';
-import { Link } from 'react-router-dom';
 import { ClockOutlineIcon, StarOutlineIcon, EyeOutlineIcon } from 'mdi-react';
 import { colors } from '~/styles';
 import { PodcastClip } from '../types';
+import formatClipLength from '~/utils/formatClipLength';
 
 type PodcastClipCardProps = {
   clip: PodcastClip;
@@ -30,7 +29,7 @@ const styles = {
     '& > :last-child': {
       marginLeft: 6,
     },
-    color: colors.gray100,
+    color: colors.gray200,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -38,7 +37,7 @@ const styles = {
     '& > :first-child': {
       marginRight: 6,
     },
-    color: colors.gray100,
+    color: colors.gray200,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -57,7 +56,7 @@ const PodcastClipCard: React.FC<PodcastClipCardProps> = ({ clip }) => (
     <div className={styles.footer}>
       <span className={styles.iconText}>
         <ClockOutlineIcon size={18} />
-        <div>{clip.end - clip.start}s</div>
+        <div>{formatClipLength(clip.end - clip.start)}</div>
       </span>
       <div className={styles.viewStars}>
         <span className={styles.textIcon}>

@@ -23,6 +23,7 @@ const styles = {
     color: colors.gray600,
     display: 'block',
     marginBottom: 10,
+    fontWeight: 'bold',
   }),
 };
 
@@ -38,9 +39,11 @@ const StyledInput: React.SFC<StyledInputProps> = ({
   ...inputProps
 }) => {
   const inputEl = React.useRef<HTMLInputElement>(null);
-  if (focus && inputEl.current) {
-    inputEl.current.focus();
-  }
+  React.useEffect(() => {
+    if (focus && inputEl.current) {
+      inputEl.current.focus();
+    }
+  }, [focus, inputEl]);
 
   return (
     <input

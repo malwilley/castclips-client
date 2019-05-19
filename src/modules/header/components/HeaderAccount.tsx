@@ -41,6 +41,10 @@ const styles = {
     '&:hover': {
       backgroundColor: colors.gray20,
     },
+    '& > button': {
+      fontWeight: 'normal',
+      color: colors.gray700,
+    },
     padding: '10px 20px',
     cursor: 'pointer',
   }),
