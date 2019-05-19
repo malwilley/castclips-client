@@ -12,8 +12,8 @@ type CardProps = {
 const styles = {
   main: css({
     backgroundColor: colors.lightest,
-    border: `1px solid ${colors.gray300}`,
-    color: colors.dark,
+    border: `1px solid ${colors.gray50}`,
+    color: colors.gray600,
     boxShadow: 'var(--card-dropshadow)',
     borderRadius: 8,
     overflow: 'hidden',

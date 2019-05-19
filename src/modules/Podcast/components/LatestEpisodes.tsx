@@ -17,7 +17,7 @@ type LatestEpisodesProps = {
 const styles = {
   main: css({
     '& > :not(:last-child)': {
-      borderBottom: `1px solid ${colors.grayLight}`,
+      borderBottom: `1px solid ${colors.gray50}`,
     },
   }),
   episodeRow: {
@@ -51,7 +51,7 @@ const styles = {
       fontWeight: 'bold',
       textTransform: 'uppercase',
       letterSpacing: 1,
-      color: colors.gray700,
+      color: colors.gray200,
       marginRight: 10,
     }),
     textIconGreen: css({
@@ -110,8 +110,8 @@ const EpisodeRowLoading: React.FC = () => (
   <div className={styles.episodeRow.main}>
     <TextSkeleton className={styles.episodeRow.thumbnail} />
     <div className={styles.episodeRow.titleDescriptionContainer}>
-      <TextSkeleton color={colors.gray200} height={13} marginBottom={2} width={150} />
-      <TextSkeleton color={colors.gray700} height={16} marginBottom={4} width={200} />
+      <TextSkeleton color={colors.gray50} height={13} marginBottom={2} width={150} />
+      <TextSkeleton color={colors.gray200} height={16} marginBottom={4} width={200} />
       <TextSkeleton height={15} marginBottom={0} />
     </div>
   </div>

@@ -16,7 +16,7 @@ const styles = {
     padding: 16,
   }),
   episode: css({
-    color: colors.gray700,
+    color: colors.gray200,
   }),
   footer: css({
     display: 'flex',
@@ -30,7 +30,7 @@ const styles = {
     '& > :last-child': {
       marginLeft: 6,
     },
-    color: colors.gray500,
+    color: colors.gray100,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -38,7 +38,7 @@ const styles = {
     '& > :first-child': {
       marginRight: 6,
     },
-    color: colors.gray500,
+    color: colors.gray100,
     display: 'flex',
     alignItems: 'center',
   }),

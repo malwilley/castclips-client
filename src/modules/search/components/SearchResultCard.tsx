@@ -28,7 +28,7 @@ const styles = {
     float: 'left',
   }),
   description: css({
-    color: colors.gray700,
+    color: colors.gray200,
     margin: '6px 0 0 0',
   }),
   attributesContainer: css({
@@ -37,7 +37,7 @@ const styles = {
     marginBottom: 4,
   }),
   subText: css({
-    color: colors.gray700,
+    color: colors.gray200,
   }),
   textIcon: css({
     '& > svg': {
@@ -49,7 +49,7 @@ const styles = {
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    color: colors.gray700,
+    color: colors.gray200,
     marginRight: 10,
   }),
 };
@@ -59,7 +59,7 @@ const fetchingStyles = {
     display: 'flex',
   }),
   thumbnail: css({
-    backgroundColor: colors.gray100,
+    backgroundColor: colors.gray20,
     float: 'none',
     border: 'none',
   }),
@@ -112,12 +112,12 @@ const SearchResultCardFetching: React.FC = () => (
   <Card className={css(styles.main, fetchingStyles.main)}>
     <div className={css(styles.thumbnail, fetchingStyles.thumbnail)} />
     <div>
-      <TextSkeleton width={110} height={18} marginBottom={2} color={colors.gray100} />
-      <TextSkeleton width={200} height={23} marginBottom={2} color={colors.gray300} />
-      <TextSkeleton width={80} height={18} marginBottom={4} color={colors.gray200} />
-      <TextSkeleton width={250} height={16} marginBottom={2} color={colors.gray100} />
-      <TextSkeleton width={230} height={16} marginBottom={2} color={colors.gray100} />
-      <TextSkeleton width={280} height={16} marginBottom={2} color={colors.gray100} />
+      <TextSkeleton width={110} height={18} marginBottom={2} color={colors.gray20} />
+      <TextSkeleton width={200} height={23} marginBottom={2} color={colors.gray50} />
+      <TextSkeleton width={80} height={18} marginBottom={4} color={colors.gray50} />
+      <TextSkeleton width={250} height={16} marginBottom={2} color={colors.gray20} />
+      <TextSkeleton width={230} height={16} marginBottom={2} color={colors.gray20} />
+      <TextSkeleton width={280} height={16} marginBottom={2} color={colors.gray20} />
     </div>
   </Card>
 );

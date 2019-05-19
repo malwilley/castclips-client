@@ -16,7 +16,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    color: colors.gray700,
+    color: colors.gray200,
     padding: 20,
     textAlign: 'center',
   }),

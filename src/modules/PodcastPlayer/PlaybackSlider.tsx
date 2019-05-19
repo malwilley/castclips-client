@@ -36,7 +36,7 @@ const styles = {
     '& > svg': {
       height: 24,
       width: 24,
-      fill: colors.dark,
+      fill: colors.gray600,
     },
     '&:disabled': {
       opacity: 0.3,

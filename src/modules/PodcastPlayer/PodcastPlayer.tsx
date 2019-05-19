@@ -80,7 +80,10 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
   };
 
   changeTime = (deltaTime: number) => {
-    this.audioEl!.currentTime = this.state.time + deltaTime;
+    if (!this.audioEl) {
+      return;
+    }
+    this.audioEl.currentTime = this.state.time + deltaTime;
   };
 
   setTime = (time: number) => {

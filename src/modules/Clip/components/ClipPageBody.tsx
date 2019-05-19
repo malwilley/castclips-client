@@ -45,13 +45,13 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     background: colors.primaryAlpha30,
-    color: colors.primary,
+    color: colors.primary500,
     borderRadius: '50%',
     marginRight: 20,
   }),
   userPublished: css({
     fontSize: 14,
-    color: colors.gray700,
+    color: colors.gray200,
     margin: 0,
   }),
   shareCard: css({
@@ -100,9 +100,9 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
           request={clipMetadata}
           renderFetching={() => (
             <div>
-              <TextSkeleton height={20} width={100} color={colors.gray300} />
-              <TextSkeleton height={20} width={300} color={colors.gray300} />
-              <TextSkeleton height={20} width={200} color={colors.gray300} />
+              <TextSkeleton height={20} width={100} color={colors.gray50} />
+              <TextSkeleton height={20} width={300} color={colors.gray50} />
+              <TextSkeleton height={20} width={200} color={colors.gray50} />
             </div>
           )}
           renderSuccess={clip => (

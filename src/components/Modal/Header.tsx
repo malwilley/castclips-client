@@ -13,7 +13,7 @@ type HeaderProps = {
 const styles = {
   closeButton: css({
     '& > svg': {
-      fill: colors.gray,
+      fill: colors.gray100,
       height: 16,
       width: 16,
     },
@@ -22,7 +22,7 @@ const styles = {
   }),
   icon: css({
     '& > svg': {
-      fill: colors.primary,
+      fill: colors.primary500,
       height: 12,
       width: 12,
     },
@@ -52,7 +52,7 @@ const styles = {
     padding: '0 12px 0px 16px',
   }),
   title: css({
-    color: colors.dark,
+    color: colors.gray600,
     fontSize: 18,
   }),
 };

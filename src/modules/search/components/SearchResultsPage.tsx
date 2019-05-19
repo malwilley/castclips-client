@@ -29,9 +29,9 @@ const styles = {
   }),
   resultsHeader: css({
     '& > strong': {
-      color: colors.dark,
+      color: colors.gray600,
     },
-    color: colors.gray700,
+    color: colors.gray200,
     marginBottom: 20,
     fontWeight: 'normal',
   }),

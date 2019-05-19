@@ -19,7 +19,7 @@ const styles = {
   loadMoreRow: css({
     height: 50,
     width: '100%',
-    color: colors.dark,
+    color: colors.gray600,
   }),
 };
 

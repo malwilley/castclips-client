@@ -33,7 +33,7 @@ const styles = {
     '& > :last-child': {
       marginLeft: 6,
     },
-    color: colors.gray500,
+    color: colors.gray100,
     display: 'flex',
     alignItems: 'center',
   }),
@@ -41,7 +41,7 @@ const styles = {
     '& > :first-child': {
       marginRight: 6,
     },
-    color: colors.gray500,
+    color: colors.gray100,
     display: 'flex',
     alignItems: 'center',
   }),

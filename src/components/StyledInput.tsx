@@ -13,14 +13,14 @@ const styles = {
   input: css({
     '&::placeholder': {},
     height: 42,
-    border: `1px solid ${colors.gray}`,
+    border: `1px solid ${colors.gray100}`,
     borderRadius: 4,
     fontSize: 14,
     width: '100%',
     padding: '0 12px',
   }),
   label: css({
-    color: colors.dark,
+    color: colors.gray600,
     display: 'block',
     marginBottom: 10,
   }),

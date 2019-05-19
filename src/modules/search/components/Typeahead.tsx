@@ -41,7 +41,7 @@ const styles = {
     },
     '& > input': {
       '&::placeholder': {
-        color: colors.gray700,
+        color: colors.gray200,
       },
       border: 'none',
       background: 'none',
@@ -49,7 +49,7 @@ const styles = {
       height: '100%',
       padding: '0 40px 0 24px',
       fontFamily: 'var(--p-font)',
-      color: colors.dark,
+      color: colors.gray600,
       fontSize: 16,
     },
     position: 'relative',
@@ -74,7 +74,7 @@ const styles = {
   }),
   suggestion: css({
     '&:hover': {
-      backgroundColor: colors.gray100,
+      backgroundColor: colors.gray20,
     },
     padding: '6px 24px',
     cursor: 'pointer',
@@ -87,7 +87,7 @@ const styles = {
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     background: colors.lightest,
-    color: colors.dark,
+    color: colors.gray600,
     padding: '10px 0',
     boxShadow: 'var(--card-dropshadow-feature)',
   }),

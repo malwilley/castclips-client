@@ -40,7 +40,7 @@ const styles = {
     },
   }),
   description: css({
-    color: colors.dark,
+    color: colors.gray600,
     marginBottom: 40,
   }),
   sectionHeader: css({

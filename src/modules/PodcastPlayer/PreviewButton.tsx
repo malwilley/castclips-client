@@ -13,9 +13,9 @@ const styles = {
     '&:disabled': {
       opacity: 0.5,
     },
-    border: `1px solid ${colors.dark}`,
+    border: `1px solid ${colors.gray600}`,
     fontWeight: 'bold',
-    color: colors.dark,
+    color: colors.gray600,
     height: 42,
     borderRadius: 8,
     padding: '0 20px',

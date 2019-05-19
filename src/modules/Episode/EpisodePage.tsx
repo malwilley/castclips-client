@@ -26,16 +26,16 @@ type EpisodePageConnectedProps = EpisodePageProps & {
 
 const styles = {
   description: css({
-    color: colors.dark,
+    color: colors.gray600,
     maxHeight: 180,
     overflow: 'hidden',
   }),
   published: css({
     '& > svg': {
-      fill: colors.dark,
+      fill: colors.gray600,
       marginRight: 6,
     },
-    color: colors.dark,
+    color: colors.gray600,
     display: 'flex',
     alignItems: 'center',
   }),

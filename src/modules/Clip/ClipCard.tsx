@@ -65,7 +65,7 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
         <>
           <ClipPlayer clip={{ start: 0, end: 0, title: '', audio: '' }} />
           <div className={styles.bottomContainer}>
-            <TextSkeleton height={38} width={200} color={colors.gray300} />
+            <TextSkeleton height={38} width={200} color={colors.gray50} />
           </div>
         </>
       )}

@@ -27,7 +27,7 @@ const styles = {
       opacity: 0.3,
     },
     '& > svg': {
-      fill: colors.dark,
+      fill: colors.gray600,
       height: 40,
       width: 40,
     },

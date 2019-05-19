@@ -12,7 +12,7 @@ const styles = {
   textArea: css({
     '&::placeholder': {},
     height: 120,
-    border: `1px solid ${colors.gray}`,
+    border: `1px solid ${colors.gray100}`,
     borderRadius: 4,
     fontSize: 14,
     resize: 'none',
@@ -20,7 +20,7 @@ const styles = {
     padding: 12,
   }),
   label: css({
-    color: colors.dark,
+    color: colors.gray600,
     display: 'block',
     marginBottom: 10,
   }),

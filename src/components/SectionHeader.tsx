@@ -9,7 +9,7 @@ type SectionHeaderProps = {
 
 const styles = {
   main: css({
-    color: colors.dark,
+    color: colors.gray600,
     marginBottom: 10,
   }),
   text: css({

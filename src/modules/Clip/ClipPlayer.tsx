@@ -67,6 +67,9 @@ class ClipPlayer extends React.Component<ClipPlayerProps, ClipPlayerState> {
 
   onLoadedMetadata = () => {
     const { start, end } = this.props.clip;
+    if (!this.audioEl) {
+      return;
+    }
 
     this.audioEl!.currentTime = start;
     this.setState({ duration: end - start });

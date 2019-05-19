@@ -17,14 +17,14 @@ const styles = {
     bottom: 0,
   }),
   main: css({
-    backgroundColor: colors.gray100,
+    backgroundColor: colors.gray20,
     height: 50,
     width: '100%',
     margin: '40px 0',
     position: 'relative',
   }),
   startEndNeedle: css({
-    backgroundColor: colors.gray700,
+    backgroundColor: colors.gray200,
     width: 1,
     position: 'absolute',
     top: 0,

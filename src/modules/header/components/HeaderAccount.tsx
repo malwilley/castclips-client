@@ -39,7 +39,7 @@ const styles = {
   }),
   dropdownItem: css({
     '&:hover': {
-      backgroundColor: colors.gray100,
+      backgroundColor: colors.gray20,
     },
     padding: '10px 20px',
     cursor: 'pointer',

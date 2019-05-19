@@ -40,7 +40,7 @@ const styles = {
       },
       fontSize: 16,
       fontWeight: 'bold',
-      color: colors.dark,
+      color: colors.gray600,
       lineHeight: 1,
     },
     padding: '16px 16px 16px 0',
@@ -68,7 +68,7 @@ const styles = {
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    color: colors.gray700,
+    color: colors.gray200,
     marginRight: 10,
   }),
 };

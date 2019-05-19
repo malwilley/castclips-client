@@ -38,7 +38,7 @@ const styles = {
     marginBottom: 20,
   }),
   timespanRangeIcon: css({
-    color: colors.gray700,
+    color: colors.gray200,
     margin: '0 20px',
   }),
 };

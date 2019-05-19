@@ -13,12 +13,12 @@ type SearchTypeSwitchProps = {
 const styles = {
   main: css({
     display: 'inline-flex',
-    backgroundColor: colors.gray200,
+    backgroundColor: colors.gray50,
     height: 50,
     borderRadius: 25,
   }),
   option: css({
-    color: colors.gray700,
+    color: colors.gray200,
     padding: '0 30px',
     textTransform: 'uppercase',
     fontWeight: 'bold',
@@ -27,7 +27,7 @@ const styles = {
     letterSpacing: 1,
   }),
   optionSelected: css({
-    color: colors.dark,
+    color: colors.gray600,
     backgroundColor: colors.lightest,
   }),
 };

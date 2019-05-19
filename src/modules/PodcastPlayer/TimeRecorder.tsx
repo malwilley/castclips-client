@@ -20,7 +20,7 @@ const styles = {
     alignItems: 'center',
     height: 40,
     width: 150,
-    color: colors.dark,
+    color: colors.gray600,
     // border: `1px solid ${colors.gray500}`,
     borderRadius: 20,
     transition: '300ms background ease-out, 300ms color ease-out, 300ms box-shadow ease-out',
@@ -52,7 +52,7 @@ const styles = {
   }),
   recordButtonSet: css({
     background: colors.lightest,
-    color: colors.dark,
+    color: colors.gray600,
   }),
 };
 

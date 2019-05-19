@@ -21,7 +21,7 @@ const styles = {
 
 const TextSkeleton: React.FC<TextSkeletonProps> = ({
   className,
-  color = colors.gray300,
+  color = colors.gray50,
   height = 12,
   marginBottom = 4,
   width,

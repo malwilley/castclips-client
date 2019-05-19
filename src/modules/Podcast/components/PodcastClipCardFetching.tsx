@@ -11,13 +11,13 @@ const styles = {
     padding: 16,
   }),
   title: css({
-    backgroundColor: colors.gray700,
+    backgroundColor: colors.gray200,
     width: 200,
     height: 16,
     marginBottom: 4,
   }),
   episode: css({
-    backgroundColor: colors.gray300,
+    backgroundColor: colors.gray50,
     width: 150,
     height: 14,
     marginBottom: 12,
@@ -27,12 +27,12 @@ const styles = {
     justifyContent: 'space-between',
   }),
   time: css({
-    backgroundColor: colors.gray200,
+    backgroundColor: colors.gray50,
     width: 50,
     height: 14,
   }),
   viewStars: css({
-    backgroundColor: colors.gray200,
+    backgroundColor: colors.gray50,
     width: 80,
     height: 15,
   }),

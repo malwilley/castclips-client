@@ -36,15 +36,15 @@ const makeStyles = (type: ModalButtonProps['type']) => {
             backgroundColor: colors.primaryDark,
           },
         },
-        backgroundColor: colors.primary,
+        backgroundColor: colors.primary500,
         color: colors.light,
       };
     case 'secondary': {
       return {
         ...commonStyles,
         backgroundColor: colors.lightest,
-        color: colors.gray,
-        border: `1px solid ${colors.gray}`,
+        color: colors.gray100,
+        border: `1px solid ${colors.gray100}`,
       };
     }
     default:
