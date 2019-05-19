@@ -1,21 +1,20 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import Audio from '~/components/Audio';
-import PreviewOrRecord from '~/modules/PodcastPlayer/PreviewOrRecord';
 import ShareButton from '~/modules/PodcastPlayer/ShareButton';
-import ShareRange, { ShareRangeState } from '~/modules/PodcastPlayer/ShareRange';
 import { PlayStatus } from '~/types';
 import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
 import Show from '~/components/Show';
 import CreateClipModal from '../Episode/components/CreateClipModal';
 import { EpisodeMetadata } from '../Episode/types';
-import Button from '~/components/Button';
 import TimeRecorder from './TimeRecorder';
 import { ArrowRightIcon } from 'mdi-react';
 import { colors } from '~/styles';
 import ClipPreview from './ClipPreview';
 import { isNil } from 'ramda';
 import PreviewButton from './PreviewButton';
+import ShowHideClipOptions from './ShowHideClipOptions';
+import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
 
 type PodcastPlayerProps = {
   episode: EpisodeMetadata;
@@ -46,24 +45,6 @@ const styles = {
     top: -5,
     left: 2,
     right: 2,
-  }),
-  buttonsContainer: css({
-    '& > :not(:last-child)': {
-      marginRight: 16,
-    },
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: 16,
-  }),
-  timespanContainer: css({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-  }),
-  timespanRangeIcon: css({
-    color: colors.gray700,
-    margin: '0 20px',
   }),
 };
 
@@ -184,65 +165,24 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
           onSeek={this.onSeek}
           playStatus={this.state.playStatus}
         />
-
-        <Show>
-          {({ isOpen, toggle }) => (
-            <>
-              {isOpen && (
-                <>
-                  <ClipPreview
-                    start={start}
-                    end={end}
-                    time={this.state.time}
-                    length={this.state.duration}
-                  />
-                  <div className={styles.timespanContainer}>
-                    <TimeRecorder
-                      time={start}
-                      handleRecordClick={() => {
-                        this.setState({
-                          start: this.state.time,
-                        });
-                      }}
-                      placeholder="Start time"
-                    />
-                    <ArrowRightIcon className={styles.timespanRangeIcon} size={16} />
-                    <TimeRecorder
-                      time={end}
-                      handleRecordClick={() => {
-                        this.setState({
-                          end: this.state.time,
-                        });
-                      }}
-                      placeholder="End time"
-                    />
-                  </div>
-                  <div className={styles.buttonsContainer}>
-                    <PreviewButton
-                      active={!isNil(this.state.start) && !isNil(this.state.end)}
-                      onClick={this.handlePreviewStart}
-                      previewing={!!this.state.previewing}
-                    />
-                    <Show>
-                      {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
-                        <>
-                          {modalIsOpen && !isNil(start) && !isNil(end) && (
-                            <CreateClipModal start={start} end={end} handleClose={toggle} />
-                          )}
-                          <ShareButton
-                            active={!isNil(start) && !isNil(end)}
-                            onClick={toggleModal}
-                          />
-                        </>
-                      )}
-                    </Show>
-                  </div>
-                </>
-              )}
-              <Button onClick={toggle}>Show Clip Options</Button>
-            </>
-          )}
-        </Show>
+        <EpisodePlayerClipOptions
+          start={start}
+          end={end}
+          time={this.state.time}
+          duration={this.state.duration}
+          handleSetEnd={() => {
+            this.setState({
+              end: this.state.time,
+            });
+          }}
+          handleSetStart={() => {
+            this.setState({
+              start: this.state.time,
+            });
+          }}
+          previewing={!!this.state.previewing}
+          handlePreviewClick={this.handlePreviewStart}
+        />
       </div>
     );
   }

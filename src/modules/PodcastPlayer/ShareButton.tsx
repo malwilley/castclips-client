@@ -9,11 +9,6 @@ const styles = {
     '&:disabled': {
       opacity: 0.3,
     },
-    '&:hover': {
-      '&:not(:disabled)': {
-        boxShadow: '0 5px 10px rgba(0,0,0,0.3)',
-      },
-    },
     '& > svg': {
       marginLeft: 8,
     },

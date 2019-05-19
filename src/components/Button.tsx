@@ -21,6 +21,7 @@ const styles = {
     border: 0,
     cursor: 'pointer',
     display: 'flex',
+    fontWeight: 'bold',
     justifyContent: 'center',
     outline: 0,
     padding: 0,

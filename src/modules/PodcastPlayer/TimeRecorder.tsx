@@ -23,11 +23,12 @@ const styles = {
     color: colors.dark,
     // border: `1px solid ${colors.gray500}`,
     borderRadius: 20,
-    transition: '300ms background ease-out, 300ms color ease-out',
+    transition: '300ms background ease-out, 300ms color ease-out, 300ms box-shadow ease-out',
     fontWeight: 'bold',
     letterSpacing: 0.5,
   }),
   mainSet: css({
+    boxShadow: 'none',
     color: colors.lightest,
     background: colors.gradient,
   }),
