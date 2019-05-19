@@ -13,7 +13,8 @@ const styles = {
   main: css({
     display: 'flex',
     overflow: 'visible',
-    width: 700,
+    width: '100%',
+    maxWidth: 700,
   }),
 };
 

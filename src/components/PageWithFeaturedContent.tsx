@@ -11,6 +11,9 @@ type PageWithFeaturedContentProps = {
 
 const styles = {
   main: css({
+    '@media (max-width: 1030px)': {
+      gridTemplateColumns: '15px 1fr 15px',
+    },
     display: 'grid',
     gridTemplateColumns: '1fr 1000px 1fr',
     gridTemplateRows: '70px auto auto 40px auto',

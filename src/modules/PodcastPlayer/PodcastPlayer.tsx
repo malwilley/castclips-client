@@ -1,19 +1,9 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import Audio from '~/components/Audio';
-import ShareButton from '~/modules/PodcastPlayer/ShareButton';
 import { PlayStatus } from '~/types';
 import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
-import Show from '~/components/Show';
-import CreateClipModal from '../Episode/components/CreateClipModal';
 import { EpisodeMetadata } from '../Episode/types';
-import TimeRecorder from './TimeRecorder';
-import { ArrowRightIcon } from 'mdi-react';
-import { colors } from '~/styles';
-import ClipPreview from './ClipPreview';
-import { isNil } from 'ramda';
-import PreviewButton from './PreviewButton';
-import ShowHideClipOptions from './ShowHideClipOptions';
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
 
 type PodcastPlayerProps = {

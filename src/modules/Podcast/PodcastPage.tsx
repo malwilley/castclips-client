@@ -27,9 +27,13 @@ type PodcastPageConnectedProps = PodcastPageProps & {
 
 const styles = {
   main: css({
+    '@media (max-width: 800px)': {
+      gridTemplateColumns: '[episodes] 1fr',
+    },
     display: 'grid',
     gridTemplateColumns: '[episodes] 2fr [clips] 1fr',
     gridColumnGap: 40,
+    gridRowGap: 40,
   }),
   heading: css({
     '& > :first-child': {

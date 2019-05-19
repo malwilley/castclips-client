@@ -20,6 +20,10 @@ const styles = {
     transition: 'box-shadow 300ms ease-out',
   }),
   thumbnail: css({
+    '@media (max-width: 600px)': {
+      height: 100,
+      width: 100,
+    },
     height: 150,
     width: 150,
     borderRadius: 8,
