@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 import Header from '~/modules/header';
 
-type InfoPageProps = {
+type PageWithFeaturedContentProps = {
   bodyContent: React.ReactNode;
   featuredContent: React.ReactNode;
   titleContent: React.ReactNode;
@@ -52,7 +52,11 @@ const styles = {
   }),
 };
 
-const InfoPage: React.FC<InfoPageProps> = ({ bodyContent, featuredContent, titleContent }) => (
+const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
+  bodyContent,
+  featuredContent,
+  titleContent,
+}) => (
   <div className={styles.main}>
     <div className={styles.hero} />
     <div className={styles.titleContainer}>{titleContent}</div>
@@ -62,4 +66,4 @@ const InfoPage: React.FC<InfoPageProps> = ({ bodyContent, featuredContent, title
   </div>
 );
 
-export default InfoPage;
+export default PageWithFeaturedContent;

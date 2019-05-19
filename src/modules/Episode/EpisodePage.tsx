@@ -10,7 +10,7 @@ import { colors } from '~/styles';
 import SectionHeader from '~/components/SectionHeader';
 import EpisodeClips from './components/EpisodeClips';
 import { CalendarClockIcon } from 'mdi-react';
-import InfoPage from '~/components/InfoPage';
+import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
 import { Link } from 'react-router-dom';
 import ParagraphSkeleton from '~/components/ParagraphSkeleton';
 import PageTitleFetching from '~/components/PageTitleFetching';
@@ -67,7 +67,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   }, [id]);
 
   return (
-    <InfoPage
+    <PageWithFeaturedContent
       bodyContent={
         <HttpContent
           request={episodeMetadata}

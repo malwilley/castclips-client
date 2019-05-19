@@ -4,7 +4,7 @@ import { thunks } from './redux';
 import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { PodcastState } from './types';
-import InfoPage from '~/components/InfoPage';
+import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
 import SectionHeader from '~/components/SectionHeader';
 import { css } from 'emotion';
 import LatestEpisodes from './components/LatestEpisodes';
@@ -67,7 +67,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
   }, [id]);
 
   return (
-    <InfoPage
+    <PageWithFeaturedContent
       bodyContent={
         <div className={styles.main}>
           <section className={styles.episodes}>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { thunks } from './redux';
 import { ClipState } from './types';
-import InfoPage from '~/components/InfoPage';
+import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
 import SectionHeader from '~/components/SectionHeader';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
@@ -41,7 +41,7 @@ const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip
   }, [id]);
 
   return (
-    <InfoPage
+    <PageWithFeaturedContent
       bodyContent={<ClipPageBody clipId={id} clipMetadata={clipMetadata} />}
       featuredContent={<ClipCard clip={clipMetadata} id={id} />}
       titleContent={
