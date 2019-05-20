@@ -36,14 +36,6 @@ const styles = {
     gridColumnGap: 40,
     gridRowGap: 40,
   }),
-  heading: css({
-    '& > :first-child': {
-      marginBottom: 6,
-    },
-    '& > h4': {
-      color: colors.secondary,
-    },
-  }),
   description: css({
     color: colors.gray600,
     marginBottom: 40,
@@ -96,21 +88,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
         </div>
       }
       featuredContent={<PodcastCard podcast={podcastMetadata} />}
-      titleContent={
-        <>
-          <SectionHeader light>podcast</SectionHeader>
-          <HttpContent
-            request={podcastMetadata}
-            renderFetching={() => <PageTitleFetching />}
-            renderSuccess={({ publisher, title }) => (
-              <div className={styles.heading}>
-                <h1>{title}</h1>
-                <h4>{publisher}</h4>
-              </div>
-            )}
-          />
-        </>
-      }
+      titleContent={<SectionHeader light>podcast</SectionHeader>}
     />
   );
 };

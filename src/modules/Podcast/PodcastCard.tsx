@@ -6,8 +6,8 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 import { EarthIcon } from 'mdi-react';
 import { dropLast, last } from 'ramda';
-import ParagraphSkeleton from '~/components/ParagraphSkeleton';
 import TextSkeleton from '~/components/TextSkeleton';
+import PageTitleFetching from '~/components/PageTitleFetching';
 
 type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;
@@ -17,12 +17,22 @@ const styles = {
   main: css({
     color: colors.light,
     width: '100%',
-    maxWidth: 600,
     display: 'flex',
     alignItems: 'flex-start',
   }),
+  heading: css({
+    '& > h1': {
+      marginBottom: 6,
+    },
+    '& > h4': {
+      color: colors.secondary,
+    },
+    marginBottom: 16,
+  }),
   infoContainer: css({
-    padding: 20,
+    flexGrow: 1,
+    width: 0,
+    padding: '10px 20px',
   }),
   link: css({
     '& > svg': {
@@ -31,7 +41,7 @@ const styles = {
     '& > a': {},
     display: 'flex',
     alignItems: 'center',
-    maxWidth: 300,
+    maxWidth: '100%',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     textDecoration: 'underline',
@@ -56,8 +66,12 @@ const styles = {
     backgroundColor: colors.gray20,
   }),
   thumbnail: css({
-    width: 150,
-    height: 150,
+    '@media (max-width: 800px)': {
+      width: 200,
+      height: 200,
+    },
+    width: 300,
+    height: 300,
     borderRadius: 16,
     border: `6px solid ${colors.lightest}`,
     boxShadow: 'var(--card-dropshadow-feature)',
@@ -81,6 +95,7 @@ const PodcastDataFetching: React.FC = () => (
   <div className={styles.main}>
     <div className={css(styles.thumbnail, styles.placeholder)} />
     <div className={styles.infoContainer}>
+      <PageTitleFetching className={styles.heading} />
       <TextSkeleton color={colors.secondary200} width={100} height={20} marginBottom={4} />
       <TextSkeleton color={colors.secondary200} width={100} height={20} marginBottom={4} />
       <TextSkeleton color={colors.secondary200} width={200} height={20} />
@@ -88,10 +103,20 @@ const PodcastDataFetching: React.FC = () => (
   </div>
 );
 
-const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ thumbnail, website, totalEpisodes }) => (
+const PodcastDataSuccess: React.FC<PodcastMetadata> = ({
+  publisher,
+  thumbnail,
+  website,
+  title,
+  totalEpisodes,
+}) => (
   <div className={styles.main}>
     <img className={styles.thumbnail} src={thumbnail} />
     <div className={styles.infoContainer}>
+      <div className={styles.heading}>
+        <h1>{title}</h1>
+        <h4>{publisher}</h4>
+      </div>
       <div className={styles.episodes}>
         <div className={styles.episodesNumber}>{totalEpisodes}</div>{' '}
         <div className={styles.episodesText}>episodes</div>

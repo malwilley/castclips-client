@@ -2,6 +2,10 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 
+type PageTitleFetchingProps = {
+  className?: string;
+};
+
 const styles = {
   main: css({
     '& > *': {
@@ -22,8 +26,8 @@ const styles = {
   }),
 };
 
-const PageTitleFetching: React.FC = () => (
-  <div className={styles.main}>
+const PageTitleFetching: React.FC<PageTitleFetchingProps> = ({ className }) => (
+  <div className={css(styles.main, className)}>
     <div className={styles.title} />
     <div className={styles.subTitle} />
   </div>
