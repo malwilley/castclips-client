@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { HttpRequest } from '~/types';
 import { PodcastMetadata } from './types';
-import Card from '~/components/Card';
 import HttpContent from '~/components/HttpContent';
 import { css } from 'emotion';
 import { colors } from '~/styles';
 import { EarthIcon } from 'mdi-react';
+import { dropLast, last } from 'ramda';
+import ParagraphSkeleton from '~/components/ParagraphSkeleton';
+import TextSkeleton from '~/components/TextSkeleton';
 
 type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;
@@ -13,62 +15,52 @@ type PodcastCardProps = {
 
 const styles = {
   main: css({
-    display: 'grid',
-    gridTemplateColumns: '[left] 1fr [middle] auto [right] 1fr',
-    gridColumnGap: 20,
-    alignItems: 'center',
     color: colors.light,
-  }),
-  left: css({
-    gridTemplateAreas: 'left',
-    justifySelf: 'end',
-  }),
-  middle: css({
-    gridTemplateAreas: 'middle',
-  }),
-  right: css({
-    gridTemplateAreas: 'right',
-    justifySelf: 'start',
+    width: '100%',
+    maxWidth: 600,
+    display: 'flex',
+    alignItems: 'flex-start',
   }),
   infoContainer: css({
-    '& > :not(:last-child)': {
-      marginRight: 20,
-    },
-    lineHeight: 1,
+    padding: 20,
   }),
   link: css({
-    maxWidth: 200,
+    '& > svg': {
+      marginRight: 4,
+    },
+    '& > a': {},
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: 300,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     textDecoration: 'underline',
     whiteSpace: 'nowrap',
-    fontFamily: 'var(--h-font)',
   }),
   episodes: css({
     display: 'flex',
     alignItems: 'flex-end',
-    fontFamily: 'var(--h-font)',
   }),
   episodesNumber: css({
-    fontSize: 20,
-    marginRight: 4,
+    fontSize: 28,
+    marginRight: 8,
+    fontWeight: 'bold',
   }),
   episodesText: css({
-    fontSize: 16,
+    fontSize: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 8,
   }),
   placeholder: css({
-    height: 20,
-    borderRadius: 8,
-    color: colors.light,
-    opacity: 0.6,
-    width: 100,
+    backgroundColor: colors.gray20,
   }),
   thumbnail: css({
     width: 150,
     height: 150,
     borderRadius: 16,
     border: `6px solid ${colors.lightest}`,
-    boxShadow: 'var(--card-dropshadow)',
+    boxShadow: 'var(--card-dropshadow-feature)',
     backgroundColor: colors.lightest,
   }),
 };
@@ -80,27 +72,30 @@ const sanitizeUrl = (url: string) => {
   if (!result || !result[1]) {
     return url;
   }
-  return result[1];
+
+  const formatted = result[1];
+  return last(formatted) === '/' ? dropLast(1, formatted) : formatted;
 };
 
 const PodcastDataFetching: React.FC = () => (
   <div className={styles.main}>
-    <div className={css(styles.left, styles.placeholder)} />
-    <div className={css(styles.middle, styles.thumbnail)} />
-    <div className={css(styles.right, styles.placeholder)} />
+    <div className={css(styles.thumbnail, styles.placeholder)} />
+    <div className={styles.infoContainer}>
+      <TextSkeleton color={colors.secondary200} width={100} height={20} marginBottom={4} />
+      <TextSkeleton color={colors.secondary200} width={100} height={20} marginBottom={4} />
+      <TextSkeleton color={colors.secondary200} width={200} height={20} />
+    </div>
   </div>
 );
 
 const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ thumbnail, website, totalEpisodes }) => (
   <div className={styles.main}>
-    <div className={styles.left}>
+    <img className={styles.thumbnail} src={thumbnail} />
+    <div className={styles.infoContainer}>
       <div className={styles.episodes}>
         <div className={styles.episodesNumber}>{totalEpisodes}</div>{' '}
         <div className={styles.episodesText}>episodes</div>
       </div>
-    </div>
-    <img className={css(styles.middle, styles.thumbnail)} src={thumbnail} />
-    <div className={styles.right}>
       <div className={styles.link}>
         <EarthIcon size={20} />
         <a href={website}>{sanitizeUrl(website)}</a>
