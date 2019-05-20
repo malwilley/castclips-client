@@ -19,7 +19,8 @@ type EpisodePlayerClipOptionsProps = {
   handleSetStart: () => void;
   handleSetEnd: () => void;
   previewing: boolean;
-  handlePreviewClick: () => void;
+  handlePreviewStart: () => void;
+  handlePreviewStop: () => void;
 };
 
 const styles = {
@@ -47,7 +48,8 @@ const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = ({
   end,
   start,
   duration,
-  handlePreviewClick,
+  handlePreviewStart,
+  handlePreviewStop,
   handleSetEnd,
   handleSetStart,
   previewing,
@@ -74,7 +76,7 @@ const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = ({
               <div className={styles.buttonsContainer}>
                 <PreviewButton
                   active={clipBoundsSet}
-                  onClick={handlePreviewClick}
+                  onClick={previewing ? handlePreviewStop : handlePreviewStart}
                   previewing={previewing}
                 />
                 <Show>

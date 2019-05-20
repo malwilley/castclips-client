@@ -174,7 +174,8 @@ class PodcastPlayer extends React.Component<PodcastPlayerProps, PodcastPlayerSta
             });
           }}
           previewing={!!this.state.previewing}
-          handlePreviewClick={this.handlePreviewStart}
+          handlePreviewStart={this.handlePreviewStart}
+          handlePreviewStop={this.handlePreviewStop}
         />
       </div>
     );
