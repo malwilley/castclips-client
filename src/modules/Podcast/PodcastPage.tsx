@@ -13,6 +13,7 @@ import HttpContent from '~/components/HttpContent';
 import { colors } from '~/styles';
 import PageTitleFetching from '~/components/PageTitleFetching';
 import TextSkeleton from '~/components/TextSkeleton';
+import ParagraphSkeleton from '~/components/ParagraphSkeleton';
 
 type PodcastPageProps = {
   id: string;
@@ -79,15 +80,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
             <div className={styles.description}>
               <HttpContent
                 request={podcastMetadata}
-                renderFetching={() => (
-                  <>
-                    <TextSkeleton height={20} marginBottom={2} width="90%" />
-                    <TextSkeleton height={20} marginBottom={2} width="95%" />
-                    <TextSkeleton height={20} marginBottom={2} width="20%" />
-                    <TextSkeleton height={20} marginBottom={2} width="90%" />
-                    <TextSkeleton height={20} marginBottom={2} width="40%" />
-                  </>
-                )}
+                renderFetching={() => <ParagraphSkeleton />}
                 renderSuccess={({ description }) => (
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 )}

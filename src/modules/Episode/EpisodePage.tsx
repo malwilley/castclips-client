@@ -14,6 +14,7 @@ import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
 import { Link } from 'react-router-dom';
 import ParagraphSkeleton from '~/components/ParagraphSkeleton';
 import PageTitleFetching from '~/components/PageTitleFetching';
+import formatPublishDate from '~/utils/formatPublishDate';
 
 type EpisodePageProps = {
   id: string;
@@ -33,11 +34,16 @@ const styles = {
   published: css({
     '& > svg': {
       fill: colors.gray600,
-      marginRight: 6,
+      marginRight: 8,
     },
-    color: colors.gray600,
+    color: colors.gray500,
     display: 'flex',
     alignItems: 'center',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    fontSize: 12,
+    fontWeight: 'bold',
+    margin: '20px 0 0 0',
   }),
   section: css({
     marginBottom: 50,
@@ -85,13 +91,13 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
             <>
               <section className={styles.section}>
                 <SectionHeader>description</SectionHeader>
+                <p className={styles.published}>
+                  <CalendarClockIcon size={20} /> {`Published ${formatPublishDate(published)}`}
+                </p>
                 <div
                   className={styles.description}
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
-                <p className={styles.published}>
-                  <CalendarClockIcon size={20} /> {`Published ${published.toLocaleString()}`}
-                </p>
               </section>
               <SectionHeader className={styles.sectionHeader}>clips from the episode</SectionHeader>
               <EpisodeClips episodeId={id} episodeLength={audioLength} />

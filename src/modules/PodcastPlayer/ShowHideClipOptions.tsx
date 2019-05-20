@@ -29,7 +29,7 @@ const styles = {
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     margin: '40px auto 0 auto',
-    transition: '200ms background-color ease-out',
+    transition: '100ms background-color ease-out',
   }),
   icon: css({
     marginLeft: 8,
@@ -42,14 +42,13 @@ const ShowClipOptions: React.FC<ButtonProps> = props => (
   </Button>
 );
 
+const HideClipOptions: React.FC<ButtonProps> = props => (
+  <Button className={styles.show} {...props}>
+    Hide clip options <ChevronUpIcon className={styles.icon} size={20} />
+  </Button>
+);
+
 const ShowHideClipOptions: React.FC<ShowHideClipOptionsProps> = ({ show, ...props }) =>
-  show ? (
-    <Button className={styles.main} {...props}>
-      Hide clip options
-      <ChevronUpIcon className={styles.icon} size={20} />
-    </Button>
-  ) : (
-    <ShowClipOptions {...props} />
-  );
+  show ? <HideClipOptions {...props} /> : <ShowClipOptions {...props} />;
 
 export default ShowHideClipOptions;
