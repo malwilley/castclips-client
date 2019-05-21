@@ -33,7 +33,8 @@ const styles = {
     display: 'flex',
     overflow: 'visible',
     position: 'relative',
-    width: 700,
+    width: '100%',
+    maxWidth: 700,
   }),
   playbackSlider: css({
     position: 'absolute',

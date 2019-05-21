@@ -36,6 +36,15 @@ const styles = {
     gridColumnGap: 40,
     gridRowGap: 40,
   }),
+  heading: css({
+    '& > h1': {
+      marginBottom: 6,
+    },
+    '& > h4': {
+      color: colors.secondary,
+    },
+    marginBottom: 16,
+  }),
   description: css({
     color: colors.gray600,
     marginBottom: 40,
@@ -48,6 +57,11 @@ const styles = {
   }),
   clips: css({
     gridTemplateAreas: 'clips',
+  }),
+  title: css({
+    '@media (min-width: 600px)': {
+      display: 'none',
+    },
   }),
 };
 
@@ -88,7 +102,23 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
         </div>
       }
       featuredContent={<PodcastCard podcast={podcastMetadata} />}
-      titleContent={<SectionHeader light>podcast</SectionHeader>}
+      titleContent={
+        <>
+          <SectionHeader light>podcast</SectionHeader>
+          <div className={styles.title}>
+            <HttpContent
+              request={podcastMetadata}
+              renderFetching={() => <PageTitleFetching />}
+              renderSuccess={({ title, publisher }) => (
+                <div className={styles.heading}>
+                  <h1>{title}</h1>
+                  <h4>{publisher}</h4>
+                </div>
+              )}
+            />
+          </div>
+        </>
+      }
     />
   );
 };

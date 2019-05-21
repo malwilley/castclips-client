@@ -30,6 +30,9 @@ const styles = {
     marginBottom: 16,
   }),
   infoContainer: css({
+    '@media (max-width: 600px)': {
+      display: 'none',
+    },
     flexGrow: 1,
     width: 0,
     padding: '10px 20px',
@@ -70,8 +73,13 @@ const styles = {
       width: 200,
       height: 200,
     },
-    width: 300,
-    height: 300,
+    '@media (max-width: 600px)': {
+      width: 260,
+      height: 260,
+      margin: '0 auto',
+    },
+    width: 260,
+    height: 260,
     borderRadius: 16,
     border: `6px solid ${colors.lightest}`,
     boxShadow: 'var(--card-dropshadow-feature)',

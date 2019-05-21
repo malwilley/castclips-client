@@ -20,9 +20,13 @@ const styles = {
     margin: '10px 0 40px 0',
   }),
   main: css({
+    '@media (max-width: 800px)': {
+      gridTemplateColumns: '[main] 1fr',
+    },
     display: 'grid',
     gridTemplateColumns: '[main] 1fr [side] 300px',
     gridColumnGap: 40,
+    gridRowGap: 40,
   }),
   mainContainer: css({
     gridTemplateAreas: 'main',
