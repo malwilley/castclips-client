@@ -13,6 +13,11 @@ type HeaderProps = {
 
 const styles = {
   main: css({
+    '@media (max-width: 800px)': {
+      height: 120,
+      alignItems: 'flex-start',
+      paddingTop: 20,
+    },
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -26,12 +31,18 @@ const styles = {
     gridArea: 'logo',
   }),
   search: css({
-    display: 'flex',
-    justifyContent: 'center',
+    '@media (max-width: 800px)': {
+      transform: 'none',
+      left: 0,
+      right: 0,
+      width: '100%',
+      padding: '0 20px',
+    },
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
-    top: 15,
+    bottom: 15,
+    width: 400,
   }),
 };
 

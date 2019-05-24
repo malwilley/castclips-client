@@ -29,7 +29,6 @@ type TypeaheadConnectedProps = TypeaheadProps & {
 const styles = {
   main: css({
     position: 'relative',
-    width: 400,
     height: 60,
   }),
   searchContainer: css({

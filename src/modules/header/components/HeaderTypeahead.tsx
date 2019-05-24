@@ -8,7 +8,6 @@ type HeaderTypeaheadProps = {};
 const styles = {
   main: css({
     position: 'relative',
-    maxWidth: 400,
     height: 40,
   }),
   searchContainer: css({

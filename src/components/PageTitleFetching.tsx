@@ -15,13 +15,13 @@ const styles = {
   }),
   title: css({
     height: 40,
-    width: 400,
+    width: 340,
     marginBottom: 6,
     opacity: 0.6,
   }),
   subTitle: css({
     height: 20,
-    width: 300,
+    width: 250,
     opacity: 0.4,
   }),
 };

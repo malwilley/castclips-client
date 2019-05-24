@@ -16,7 +16,7 @@ const styles = {
     },
     display: 'grid',
     gridTemplateColumns: '1fr 1000px 1fr',
-    gridTemplateRows: '70px auto auto 40px auto',
+    gridTemplateRows: 'auto auto auto 40px auto',
   }),
   body: css({
     gridColumnStart: 2,
