@@ -13,7 +13,8 @@ export type ClipMetadata = {
   };
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: Date;
-  stars: number;
+  likes: number;
+  stars: number; // delete this
   start: number;
   title: string;
   views: number;

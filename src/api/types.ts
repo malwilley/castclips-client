@@ -11,6 +11,7 @@ export type GetClipResponse = {
   };
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: string;
+  likes: number;
   stars: number;
   start: number;
   title: string;
@@ -33,6 +34,8 @@ export type AddClipPayload = {
   start: number;
   title: string;
 };
+
+export type GetHotClipsResponse = GetClipResponse[];
 
 export type GetClipsForPodcastResponse = {
   audio: string;

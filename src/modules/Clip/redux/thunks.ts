@@ -2,6 +2,7 @@ import { Thunk } from '~/redux/types';
 import { actions } from './actions';
 import { path } from 'ramda';
 import { getClip } from '~/api/firebase';
+import mapClipResponse from '../utils/mapClipResponse';
 
 const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedClip = path(['clip', 'metadata', 'data', 'id'], getState());
@@ -16,14 +17,7 @@ const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState)
     dispatch(
       actions.setMetadata({
         type: 'success',
-        data: {
-          ...clip,
-          episode: {
-            ...clip.episode,
-            published: new Date(clip.episode.published),
-          },
-          published: new Date(clip.published),
-        },
+        data: mapClipResponse(clip),
       })
     );
   } catch {

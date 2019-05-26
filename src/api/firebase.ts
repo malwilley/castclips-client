@@ -12,6 +12,7 @@ import {
   SearchResultPodcastResponse,
   TypeaheadResponse,
   SearchResultsResponse,
+  GetHotClipsResponse,
 } from './types';
 import { SearchType } from '~/modules/search/types';
 
@@ -49,6 +50,12 @@ export const addClip = async (clip: AddClipPayload, token: string) => {
     },
     method: 'post',
   });
+
+  return result;
+};
+
+export const getHotClips = async (page: number) => {
+  const result = await fetchFirebase<GetHotClipsResponse>(`/clip/hot?${qs.stringify({ page })}`);
 
   return result;
 };
