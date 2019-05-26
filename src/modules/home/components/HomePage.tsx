@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { AppState } from '~/redux/types';
 import { thunks } from '../redux';
 import { HomeState } from '../types';
+import HotClip from './HotClip';
+import HttpContent from '~/components/HttpContent';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;
@@ -24,6 +26,15 @@ const styles = {
     gridTemplateArea: 'gradient',
     backgroundImage: colors.gradient2,
     color: colors.lightest,
+  }),
+  clipsContainer: css({
+    marginTop: -150,
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    columnGap: 20,
+    rowGap: 20,
+    gridAutoRows: 200,
+    padding: '0 40px',
   }),
   header: css({
     gridTemplateArea: 'header',
@@ -52,6 +63,18 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
         <Header className={styles.header} showSearch={false} />
         <h1 className={styles.headerText}>Share your favorite podcast moments</h1>
         <Typeahead className={styles.search} />
+      </div>
+      <div className={styles.clipsContainer}>
+        <HttpContent
+          request={hotClips}
+          renderSuccess={clips => (
+            <>
+              {clips.map(clip => (
+                <HotClip clip={clip} />
+              ))}
+            </>
+          )}
+        />
       </div>
     </div>
   );
