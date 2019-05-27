@@ -13,6 +13,7 @@ export default {
   secondary50: '#c7e5f7',
   secondary80: '#a2d5f2',
   secondary200: '#7db1d0',
+  secondary400: '#4287ae',
   secondary500: '#32698b',
   secondary600: '#175073',
   secondaryLight: 'rgba(228, 179, 99, .26)',

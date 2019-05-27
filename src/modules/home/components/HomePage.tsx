@@ -9,6 +9,7 @@ import { thunks } from '../redux';
 import { HomeState } from '../types';
 import HotClip from './HotClip';
 import HttpContent from '~/components/HttpContent';
+import LayoutContainer from '~/components/LayoutContainer';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;
@@ -30,11 +31,11 @@ const styles = {
   clipsContainer: css({
     marginTop: -150,
     display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridTemplateColumns: 'repeat(3, 1fr)',
     columnGap: 20,
     rowGap: 20,
-    gridAutoRows: 200,
     padding: '0 40px',
+    maxWidth: 1400,
   }),
   header: css({
     gridTemplateArea: 'header',
@@ -64,7 +65,7 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
         <h1 className={styles.headerText}>Share your favorite podcast moments</h1>
         <Typeahead className={styles.search} />
       </div>
-      <div className={styles.clipsContainer}>
+      <LayoutContainer className={styles.clipsContainer}>
         <HttpContent
           request={hotClips}
           renderSuccess={clips => (
@@ -75,7 +76,7 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
             </>
           )}
         />
-      </div>
+      </LayoutContainer>
     </div>
   );
 };
