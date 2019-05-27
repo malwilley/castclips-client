@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ClipMetadata } from '~/modules/Clip/types';
 import Card from '~/components/Card';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors, boxShadow } from '~/styles';
 import ClipCardAccent from '~/components/ClipCardAccent';
 import { distanceInWords } from 'date-fns';
 import fonts from '~/styles/fonts';
@@ -15,7 +15,6 @@ type HotClipProps = {
 
 const styles = {
   main: css({
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
     position: 'relative',
   }),
   container: css({
@@ -67,7 +66,7 @@ const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
 );
 
 const HotClip: React.FC<HotClipProps> = ({ clip }) => (
-  <Card className={styles.main} feature>
+  <Card className={styles.main} to={`/clip/${clip.id}`}>
     <PodcastEpisodeSection clip={clip} />
     <div className={styles.container}>
       <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />

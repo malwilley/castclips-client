@@ -14,6 +14,7 @@ import { css } from 'emotion';
 const styles = {
   main: css({
     minHeight: '100vh',
+    paddingBottom: 100,
   }),
 };
 

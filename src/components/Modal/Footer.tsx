@@ -10,7 +10,7 @@ const styles = {
     height: 70,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
-    backgroundColor: colors.light,
+    backgroundColor: colors.secondary20,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',

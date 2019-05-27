@@ -11,11 +11,14 @@ type PageWithFeaturedContentProps = {
 
 const styles = {
   main: css({
+    '@media (max-width: 1800px)': {
+      gridTemplateColumns: '1fr 1000px 1fr',
+    },
     '@media (max-width: 1030px)': {
       gridTemplateColumns: '15px 1fr 15px',
     },
     display: 'grid',
-    gridTemplateColumns: '1fr 1000px 1fr',
+    gridTemplateColumns: '1fr 1200px 1fr',
     gridTemplateRows: 'auto auto auto 40px auto',
   }),
   body: css({

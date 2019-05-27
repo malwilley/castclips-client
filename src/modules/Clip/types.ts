@@ -11,6 +11,7 @@ export type ClipMetadata = {
     audioLength: number;
     published: Date;
   };
+  id: string;
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: Date;
   likes: number;

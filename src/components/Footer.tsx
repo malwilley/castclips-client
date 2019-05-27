@@ -3,9 +3,7 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 
 const styles = {
-  main: css({
-    marginTop: 100,
-  }),
+  main: css({}),
   content: css({
     display: 'flex',
     alignItems: 'center',

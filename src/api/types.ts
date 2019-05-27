@@ -9,6 +9,7 @@ export type GetClipResponse = {
     audioLength: number;
     published: string;
   };
+  id: string;
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: string;
   likes: number;

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors, boxShadow } from '~/styles';
 import { Link } from 'react-router-dom';
+import zIndex from '~/styles/zIndex';
 
 type CardProps = {
   className?: string;
@@ -12,21 +13,21 @@ type CardProps = {
 const styles = {
   main: css({
     backgroundColor: colors.lightest,
-    border: `1px solid ${colors.gray50}`,
     color: colors.gray600,
-    boxShadow: 'var(--card-dropshadow)',
+    boxShadow: boxShadow.normal2,
     borderRadius: 8,
     overflow: 'hidden',
   }),
   mainHoverable: css({
     '&:hover': {
-      boxShadow: 'var(--card-dropshadow-feature)',
+      boxShadow: boxShadow.prominent,
+      zIndex: zIndex.card,
     },
     position: 'relative',
     transition: 'box-shadow 300ms ease-out',
   }),
   feature: css({
-    boxShadow: 'var(--card-dropshadow-feature)',
+    boxShadow: boxShadow.prominent,
     border: 'none',
   }),
   link: css({
@@ -35,6 +36,7 @@ const styles = {
       width: '100%',
       height: '100%',
       content: '""',
+      zIndex: zIndex.card,
     },
   }),
 };
