@@ -20,11 +20,11 @@ const styles = {
   }),
   mainHoverable: css({
     '&:hover': {
-      boxShadow: boxShadow.prominent,
+      boxShadow: boxShadow.normalHover,
       zIndex: zIndex.card,
     },
     position: 'relative',
-    transition: 'box-shadow 300ms ease-out',
+    transition: 'box-shadow 200ms ease-out',
   }),
   feature: css({
     boxShadow: boxShadow.prominent,

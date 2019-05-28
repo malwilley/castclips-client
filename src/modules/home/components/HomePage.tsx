@@ -29,6 +29,13 @@ const styles = {
     color: colors.lightest,
   }),
   clipsContainer: css({
+    '@media (max-width: 1200px)': {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+    '@media (max-width: 800px)': {
+      gridTemplateColumns: 'repeat(1, 1fr)',
+      padding: '0 20px',
+    },
     marginTop: -150,
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -42,10 +49,13 @@ const styles = {
     background: 'none',
   }),
   headerText: css({
+    '@media (max-width: 800px)': {
+      marginTop: 40,
+    },
     gridTemplateArea: 'title',
     marginTop: 150,
     textAlign: 'center',
-    letterSpacing: 1,
+    fontSize: '3rem',
   }),
   search: css({
     gridTemplateArea: 'search',
