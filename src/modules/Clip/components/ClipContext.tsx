@@ -4,12 +4,13 @@ import Card from '~/components/Card';
 import { ClipMetadata } from '../types';
 import formatHrMinSec from '~/utils/formatHrMinSec';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors, fonts } from '~/styles';
 import stripHtml from '~/utils/stripHtml';
 import { CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
 import formatPublishDate from '~/utils/formatPublishDate';
 import ClipCardAccent from '~/components/ClipCardAccent';
 import { Link } from 'react-router-dom';
+import zIndex from '~/styles/zIndex';
 
 type ClipContextProps = { clip: ClipMetadata };
 
@@ -32,16 +33,13 @@ const styles = {
   podcastContainer: css({
     alignItems: 'flex-start',
     display: 'flex',
+    lineHeight: 1,
   }),
   podcastTextContainer: css({
     '& a': {
       '&:hover': {
         textDecoration: 'underline',
       },
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: colors.gray600,
-      lineHeight: 1,
     },
     padding: '16px 16px 16px 0',
     overflow: 'hidden',
@@ -52,11 +50,12 @@ const styles = {
     margin: 16,
     borderRadius: 8,
   }),
-  titleEpisode: css({
+  titleEpisode: css(fonts.heading300, {
     marginBottom: 4,
+    color: colors.gray300,
   }),
-  titlePodcast: css({
-    marginBottom: 2,
+  titlePodcast: css(fonts.heading300, {
+    marginBottom: 4,
   }),
   textIcon: css({
     '& > svg': {
@@ -95,13 +94,12 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
               <div>{(clip.episode.audioLength / 60).toFixed(0)} min</div>
             </div>
           </div>
-          <Link className={styles.titlePodcast} to={`/podcast/${clip.podcast.id}`}>
-            {clip.podcast.title}
-          </Link>
-          <br />
-          <Link className={styles.titleEpisode} to={`/episode/${clip.episode.id}`}>
-            {clip.episode.title}
-          </Link>
+          <div className={styles.titlePodcast}>
+            <Link to={`/podcast/${clip.podcast.id}`}>{clip.podcast.title}</Link>
+          </div>
+          <div className={styles.titleEpisode}>
+            <Link to={`/episode/${clip.episode.id}`}>{clip.episode.title}</Link>
+          </div>
         </div>
       </div>
     </Card>

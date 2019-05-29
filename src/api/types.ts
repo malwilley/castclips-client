@@ -1,5 +1,6 @@
 export type GetClipResponse = {
   audio: string;
+  createdAt: string;
   description: string;
   end: number;
   episode: {
@@ -12,7 +13,7 @@ export type GetClipResponse = {
   id: string;
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: string;
-  likes: number;
+  likesCount: number;
   stars: number;
   start: number;
   title: string;

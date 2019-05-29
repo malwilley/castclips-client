@@ -81,7 +81,7 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
           renderSuccess={clips => (
             <>
               {clips.map(clip => (
-                <HotClip clip={clip} />
+                <HotClip clip={clip} key={clip.id} />
               ))}
             </>
           )}

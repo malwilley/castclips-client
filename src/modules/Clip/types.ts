@@ -2,6 +2,7 @@ import { HttpRequest } from '~/types';
 
 export type ClipMetadata = {
   audio: string;
+  createdAt: string;
   description: string;
   end: number;
   episode: {
@@ -14,7 +15,7 @@ export type ClipMetadata = {
   id: string;
   podcast: { id: string; title: string; description: string; thumbnail: string };
   published: Date;
-  likes: number;
+  likesCount: number;
   stars: number; // delete this
   start: number;
   title: string;

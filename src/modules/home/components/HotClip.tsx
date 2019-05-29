@@ -74,7 +74,7 @@ const HotClip: React.FC<HotClipProps> = ({ clip }) => (
       <div className={styles.attributeContainer}>
         <div className={fonts.attribute300}>
           <ThumbUpOutlineIcon size={14} />
-          {clip.likes} points
+          {clip.likesCount} points
         </div>
         <div className={fonts.attribute300}>
           <ClockOutlineIcon size={14} />

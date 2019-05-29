@@ -6,7 +6,10 @@ import Card from '~/components/Card';
 import HttpContent from '~/components/HttpContent';
 import { ClipMetadata } from './types';
 import TextSkeleton from '~/components/TextSkeleton';
-import { colors } from '~/styles';
+import { colors, fonts } from '~/styles';
+import { ThumbUpOutlineIcon, ChevronRightIcon } from 'mdi-react';
+import Button from '~/components/Button';
+import { Link } from 'react-router-dom';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
@@ -14,18 +17,11 @@ type ClipCardProps = {
 };
 
 const styles = {
-  bigText: css({
-    fontSize: 28,
-    fontWeight: 'bold',
-  }),
-  smallText: css({
-    fontSize: 16,
-  }),
   bottomContainer: css({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    marginTop: 60,
+    marginTop: 80,
     padding: 20,
     width: '100%',
   }),
@@ -36,25 +32,29 @@ const styles = {
     width: '100%',
     maxWidth: 700,
   }),
-  playbackSlider: css({
-    position: 'absolute',
-    top: -5,
-    left: 2,
-    right: 2,
-  }),
-  leftContainer: css({
+  left: css(fonts.heading300, {
     '& > :not(:last-child)': {
-      marginRight: 20,
+      marginRight: 12,
     },
     display: 'flex',
     alignItems: 'center',
+    color: colors.secondary400,
+    backgroundColor: colors.secondary20,
+    borderRadius: 8,
+    padding: '12px 18px',
   }),
-  shareContainer: css({
+  right: css(fonts.heading300, {
+    '& > :not(:last-child)': {
+      marginRight: 6,
+    },
+    '&:hover': {
+      color: colors.gray700,
+    },
     display: 'flex',
     alignItems: 'center',
-  }),
-  linkCopy: css({
-    width: 200,
+    color: colors.gray500,
+    padding: '6px 8px',
+    transition: 'color 200ms ease-out',
   }),
 };
 
@@ -64,29 +64,25 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
       request={clip}
       renderFetching={() => (
         <>
-          <ClipPlayer clip={{ start: 0, end: 0, title: '', audio: '' }} />
+          {/*<ClipPlayer clip={{ start: 0, end: 0, title: '', audio: '' }} />*/}
           <div className={styles.bottomContainer}>
             <TextSkeleton height={38} width={200} color={colors.gray50} />
           </div>
         </>
       )}
       renderSuccess={clipData => (
-        <div>
+        <>
           <ClipPlayer clip={clipData} />
           <div className={styles.bottomContainer}>
-            <div className={styles.leftContainer}>
-              <div>
-                <span className={styles.bigText}>{clipData.views} </span>
-                <span className={styles.smallText}>views</span>
-              </div>
-              <div>
-                <span className={styles.bigText}>{clipData.stars} </span>
-                <span className={styles.smallText}>stars</span>
-              </div>
-            </div>
-            <div className={styles.shareContainer} />
+            <Button className={styles.left}>
+              <ThumbUpOutlineIcon size={18} />
+              <span>{clipData.likesCount || 0}</span>
+            </Button>
+            <Link className={styles.right} to={`/episode/${clipData.episode.id}`}>
+              <span>Jump to full episode</span> <ChevronRightIcon size={18} />
+            </Link>
           </div>
-        </div>
+        </>
       )}
     />
   </Card>
