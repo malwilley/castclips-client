@@ -18,7 +18,7 @@ const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch
   dispatch(actions.setEpisodes({ type: 'fetching', data: [] }));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const metadata = await getPodcastData(token, id);
     dispatch(actions.setMetadata({ type: 'success', data: mapApiPodcast(metadata) }));
     dispatch(actions.addEpisodes(mapApiPodcastEpisodes(metadata.episodes)));
@@ -40,7 +40,7 @@ const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch
   dispatch(actions.setEpisodes({ type: 'fetching', data: currentlyLoadedEpisodes }));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const lastEpisode = last(currentlyLoadedEpisodes)!;
     const nextEpisodes = await getNextEpisodes(
       token,

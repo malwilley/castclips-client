@@ -15,7 +15,7 @@ const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState)
   dispatch(actions.setMetadata({ type: 'fetching' }));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const clip = await getClip(id, token);
     dispatch(
       actions.setMetadata({
@@ -32,7 +32,7 @@ const likeClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) 
   dispatch(actions.setLikeState(true));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     await likeClipApi(id, token);
   } catch (e) {
     console.log(e);
@@ -45,7 +45,7 @@ const unlikeClip: Thunk<string, Promise<void>> = id => async (dispatch, getState
   dispatch(actions.setLikeState(false));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     await unlikeClipApi(id, token);
   } catch (e) {
     console.log(e);

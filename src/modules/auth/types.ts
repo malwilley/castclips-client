@@ -1,6 +1,17 @@
+export type UserData = {
+  displayName: string;
+  email: string;
+  emailVerified: boolean;
+  creationTime?: string;
+  lastSignInTime?: string;
+  photoUrl: string | null;
+  refreshToken: string;
+  uid: string;
+};
+
 export type UserLoggedIn = {
   type: 'loggedin';
-  user: firebase.User;
+  user: UserData;
 };
 
 export type UserLoggedOut = {
@@ -9,7 +20,7 @@ export type UserLoggedOut = {
 
 export type AnonymousUser = {
   type: 'anonymous';
-  user: firebase.User;
+  user: UserData;
 };
 
 type UserState = UserLoggedIn | UserLoggedOut | AnonymousUser;

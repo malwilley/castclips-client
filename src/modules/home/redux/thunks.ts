@@ -8,7 +8,7 @@ const fetchHotClips: Thunk<number, Promise<void>> = () => async (dispatch, getSt
   const page = getState().home.page;
 
   try {
-    // const token = await getAuthToken(getState());
+    // const token = await getAuthToken();
     const clips = await getHotClips(page);
     dispatch(actions.setPage(page + 1));
     dispatch(actions.addHotClips(clips.map(mapClipResponse)));

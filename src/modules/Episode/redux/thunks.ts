@@ -33,7 +33,7 @@ const createClip: Thunk<AddClipPayload> = clip => async (dispatch, getState) => 
   dispatch(actions.setClipId({ type: 'fetching' }));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const { id } = await addClip(clip, token);
     dispatch(actions.setClipId({ data: id, type: 'success' }));
     dispatch(push(`/clip/${id}`));
@@ -51,7 +51,7 @@ const fetchEpisodeMetadata: Thunk<string, Promise<void>> = id => async (dispatch
   dispatch(actions.setMetadata({ type: 'fetching' }));
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const metadata = await getEpisodeData(token, id);
     dispatch(actions.setMetadata({ type: 'success', data: mapApiEpisode(metadata) }));
   } catch {

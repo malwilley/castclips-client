@@ -31,7 +31,7 @@ const fetchSuggestions: Thunk<string, Promise<void>> = query => async (dispatch,
   }
 
   try {
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const { terms } = await typeahead(token, query);
     dispatch(actions.setSuggestions({ type: 'success', data: terms }));
   } catch {
@@ -50,7 +50,7 @@ const fetchSearchResults: Thunk<SearchParams, Promise<void>> = ({
       dispatch(actions.setSearchResults({ type: 'success', data: [] }));
       return;
     }
-    const token = await getAuthToken(getState());
+    const token = await getAuthToken();
     const { results } = await search(token, type, query);
     dispatch(
       actions.setSearchResults({

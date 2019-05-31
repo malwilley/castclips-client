@@ -3,7 +3,7 @@ import { HttpRequest } from '~/types';
 import { PodcastMetadata } from './types';
 import HttpContent from '~/components/HttpContent';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors, boxShadow } from '~/styles';
 import { EarthIcon } from 'mdi-react';
 import { dropLast, last } from 'ramda';
 import TextSkeleton from '~/components/TextSkeleton';
@@ -82,7 +82,7 @@ const styles = {
     height: 260,
     borderRadius: 16,
     border: `6px solid ${colors.lightest}`,
-    boxShadow: 'var(--card-dropshadow-feature)',
+    boxShadow: boxShadow.prominent,
     backgroundColor: colors.lightest,
   }),
 };

@@ -5,7 +5,7 @@ import firebaseApp from '../firebase';
 import Header from '~/modules/header';
 import LayoutContainer from '~/components/LayoutContainer';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors, boxShadow } from '~/styles';
 
 const styles = {
   authCenter: css({
@@ -22,7 +22,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
-    boxShadow: 'var(--card-dropshadow-feature)',
+    boxShadow: boxShadow.prominent,
   }),
   hero: css({
     background: colors.gradient2,
