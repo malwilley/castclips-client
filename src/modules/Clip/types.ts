@@ -19,6 +19,7 @@ export type ClipMetadata = {
   stars: number; // delete this
   start: number;
   title: string;
+  userHasLiked: boolean;
   views: number;
 };
 

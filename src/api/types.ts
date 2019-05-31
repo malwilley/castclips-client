@@ -17,6 +17,7 @@ export type GetClipResponse = {
   stars: number;
   start: number;
   title: string;
+  userHasLiked: boolean;
   views: number;
 };
 

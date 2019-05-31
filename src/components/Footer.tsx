@@ -3,7 +3,9 @@ import { css } from 'emotion';
 import { colors } from '~/styles';
 
 const styles = {
-  main: css({}),
+  main: css({
+    backgroundColor: colors.gray50,
+  }),
   content: css({
     display: 'flex',
     alignItems: 'center',
@@ -11,15 +13,10 @@ const styles = {
     height: 100,
     color: colors.gray300,
   }),
-  separator: css({
-    height: 1,
-    backgroundColor: colors.gray50,
-  }),
 };
 
 const Footer: React.FC = () => (
   <div className={styles.main}>
-    <div className={styles.separator} />
     <div className={styles.content}>Footer</div>
   </div>
 );

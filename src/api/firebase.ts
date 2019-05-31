@@ -8,8 +8,6 @@ import {
   PodcastMetadataResponse,
   EpisodeMetadataResponse,
   PodcastEpisodeResponse,
-  SearchResultEpisodeResponse,
-  SearchResultPodcastResponse,
   TypeaheadResponse,
   SearchResultsResponse,
   GetHotClipsResponse,
@@ -27,7 +25,7 @@ const fetchFirebase = async <TResponse>(
     ...options,
     headers: token
       ? {
-          ...options.headers,
+          ...(options.headers || {}),
           Authorization: `Bearer ${token}`,
         }
       : options.headers,
@@ -36,8 +34,8 @@ const fetchFirebase = async <TResponse>(
   return response.json();
 };
 
-export const getClip = async (id: string) => {
-  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}`);
+export const getClip = async (id: string, token: string) => {
+  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}`, token);
 
   return result;
 };
@@ -48,10 +46,18 @@ export const addClip = async (clip: AddClipPayload, token: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    method: 'post',
+    method: 'POST',
   });
 
   return result;
+};
+
+export const likeClip = async (clipId: string, token: string) => {
+  await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'POST' });
+};
+
+export const unlikeClip = async (clipId: string, token: string) => {
+  await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'DELETE' });
 };
 
 export const getHotClips = async (page: number) => {

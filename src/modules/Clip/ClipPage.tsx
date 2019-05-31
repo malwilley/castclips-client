@@ -20,6 +20,8 @@ type ClipPageProps = {
 type ClipPageConnectedProps = ClipPageProps & {
   clipMetadata: ClipState['metadata'];
   fetchClip: (id: string) => void;
+  likeClip: (id: string) => void;
+  unlikeClip: (id: string) => void;
 };
 
 const styles = {
@@ -35,7 +37,13 @@ const styles = {
   }),
 };
 
-const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip, id }) => {
+const EpisodePage: React.FC<ClipPageConnectedProps> = ({
+  clipMetadata,
+  fetchClip,
+  id,
+  likeClip,
+  unlikeClip,
+}) => {
   React.useEffect(() => {
     fetchClip(id);
   }, [id]);
@@ -43,7 +51,9 @@ const EpisodePage: React.FC<ClipPageConnectedProps> = ({ clipMetadata, fetchClip
   return (
     <PageWithFeaturedContent
       bodyContent={<ClipPageBody clipId={id} clipMetadata={clipMetadata} />}
-      featuredContent={<ClipCard clip={clipMetadata} id={id} />}
+      featuredContent={
+        <ClipCard clip={clipMetadata} id={id} likeClip={likeClip} unlikeClip={unlikeClip} />
+      }
       titleContent={
         <HttpContent
           request={clipMetadata}
@@ -81,6 +91,8 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = {
   fetchClip: thunks.fetchClip,
+  likeClip: thunks.likeClip,
+  unlikeClip: thunks.unlikeClip,
 };
 
 export default connect(

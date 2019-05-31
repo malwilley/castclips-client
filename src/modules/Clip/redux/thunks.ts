@@ -1,8 +1,10 @@
 import { Thunk } from '~/redux/types';
 import { actions } from './actions';
 import { path } from 'ramda';
-import { getClip } from '~/api/firebase';
+import { getClip, unlikeClip as unlikeClipApi, likeClip as likeClipApi } from '~/api/firebase';
 import mapClipResponse from '../utils/mapClipResponse';
+import { getAuthToken } from '~/modules/auth/firebase';
+import { ConsoleIcon } from 'mdi-react';
 
 const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedClip = path(['clip', 'metadata', 'data', 'id'], getState());
@@ -13,7 +15,8 @@ const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState)
   dispatch(actions.setMetadata({ type: 'fetching' }));
 
   try {
-    const clip = await getClip(id);
+    const token = await getAuthToken(getState());
+    const clip = await getClip(id, token);
     dispatch(
       actions.setMetadata({
         type: 'success',
@@ -25,6 +28,34 @@ const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState)
   }
 };
 
+const likeClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
+  dispatch(actions.setLikeState(true));
+
+  try {
+    const token = await getAuthToken(getState());
+    await likeClipApi(id, token);
+  } catch (e) {
+    console.log(e);
+    dispatch(actions.setLikeState(false));
+    // todo: show error notification
+  }
+};
+
+const unlikeClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
+  dispatch(actions.setLikeState(false));
+
+  try {
+    const token = await getAuthToken(getState());
+    await unlikeClipApi(id, token);
+  } catch (e) {
+    console.log(e);
+    dispatch(actions.setLikeState(true));
+    // todo: show error notification
+  }
+};
+
 export default {
   fetchClip,
+  likeClip,
+  unlikeClip,
 };

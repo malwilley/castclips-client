@@ -10,10 +10,13 @@ import { colors, fonts } from '~/styles';
 import { ThumbUpOutlineIcon, ChevronRightIcon } from 'mdi-react';
 import Button from '~/components/Button';
 import { Link } from 'react-router-dom';
+import LikeButton from './components/LikeButton';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
   id: string;
+  likeClip: (id: string) => void;
+  unlikeClip: (id: string) => void;
 };
 
 const styles = {
@@ -58,7 +61,7 @@ const styles = {
   }),
 };
 
-const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
+const ClipCard: React.FC<ClipCardProps> = ({ clip, id, likeClip, unlikeClip }) => (
   <Card className={styles.main} feature>
     <HttpContent
       request={clip}
@@ -74,10 +77,15 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id }) => (
         <>
           <ClipPlayer clip={clipData} />
           <div className={styles.bottomContainer}>
-            <Button className={styles.left}>
-              <ThumbUpOutlineIcon size={18} />
-              <span>{clipData.likesCount || 0}</span>
-            </Button>
+            <LikeButton
+              {...{
+                likeClip,
+                unlikeClip,
+                id,
+                hasLiked: clipData.userHasLiked,
+                numLikes: clipData.likesCount,
+              }}
+            />
             <Link className={styles.right} to={`/episode/${clipData.episode.id}`}>
               <span>Jump to full episode</span> <ChevronRightIcon size={18} />
             </Link>

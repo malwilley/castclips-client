@@ -49,12 +49,15 @@ const styles = {
     gridColumn: '1 / -1',
   }),
   titleContainer: css({
+    '@media (max-width: 800px)': {
+      padding: '40px 0',
+    },
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 2,
     gridColumnEnd: 3,
     color: colors.lightest,
-    padding: '40px 0',
+    padding: '60px 0',
   }),
 };
 
