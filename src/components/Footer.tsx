@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, fonts } from '~/styles';
+import { colors, fonts } from 'src/styles';
 import Logo from './Logo';
 import LayoutContainer from './LayoutContainer';
 

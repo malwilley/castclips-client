@@ -1,5 +1,5 @@
 import * as React from 'react';
-import IconSpinner from '~/icons/Spinner';
+import IconSpinner from 'src/icons/Spinner';
 import './Spinner.css';
 
 const Spinner: React.SFC = () => {

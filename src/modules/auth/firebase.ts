@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { Store, AppState } from '~/redux/types';
+import { Store, AppState } from 'src/redux/types';
 import { actions } from './redux/actions';
 import { UserData } from './types';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EmoticonSadIcon } from 'mdi-react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
 type NoDataProps = {
   icon?: React.ReactNode;

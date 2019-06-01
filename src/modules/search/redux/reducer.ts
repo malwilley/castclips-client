@@ -1,9 +1,10 @@
-import { actions } from './actions';
+import { ActionTypes } from './actions';
 import { combineReducers } from 'redux';
-import makeHttpReducer from '~/redux/utils/setHttpStateReducer';
+import makeHttpReducer from 'src/redux/utils/setHttpStateReducer';
+import { SearchState } from '../types';
 
-const results = makeHttpReducer(actions.setSearchResults);
-const suggestions = makeHttpReducer(actions.setSuggestions);
+const results = makeHttpReducer<SearchState['results']>(ActionTypes.SetSearchResults);
+const suggestions = makeHttpReducer<SearchState['suggestions']>(ActionTypes.SetSuggestions);
 
 const reducer = combineReducers({
   results,

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { CSSObject } from 'create-emotion';
-import Button, { ButtonProps } from '~/components/Button';
+import Button, { ButtonProps } from 'src/components/Button';
 
-type ModalButtonProps = ButtonProps & {
+export type ModalButtonProps = ButtonProps & {
   text: string;
   type: 'primary' | 'secondary';
 };
@@ -58,5 +58,4 @@ const ModalButton: React.SFC<ModalButtonProps> = ({ className, text, type, ...bu
   </Button>
 );
 
-export { ModalButtonProps };
 export default ModalButton;

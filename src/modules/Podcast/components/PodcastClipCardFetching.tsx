@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Card from '~/components/Card';
+import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
 const styles = {
   main: css({

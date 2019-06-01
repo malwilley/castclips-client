@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { Portal } from 'react-portal';
-import zIndex from '~/styles/zIndex';
+import zIndex from 'src/styles/zIndex';
 
 type ModalBackgroundProps = {
   handleClose: () => void;

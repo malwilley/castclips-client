@@ -1,14 +1,14 @@
-import * as debounce from 'debounce';
 import * as qs from 'querystringify';
 import * as React from 'react';
+import debounce from 'debounce';
 import { SearchState, SearchType } from '../types';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import Downshift from 'downshift';
 import { css } from 'emotion';
 import { SearchIcon } from 'mdi-react';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { push } from 'connected-react-router';
 
 type TypeaheadProps = {

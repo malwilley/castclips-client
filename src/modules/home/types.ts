@@ -1,4 +1,4 @@
-import { LazyLoadedData } from '~/types';
+import { LazyLoadedData } from 'src/types';
 import { ClipMetadata } from '../Clip/types';
 
 export type HomeState = {

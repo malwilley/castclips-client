@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { SearchState, SearchType, SearchParams } from '../types';
 import { thunks } from '../redux';
-import HttpContent from '~/components/HttpContent';
-import Header from '~/modules/header';
+import HttpContent from 'src/components/HttpContent';
+import Header from 'src/modules/header';
 import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
 import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
 type SearchResultsPageProps = {
   query: string;

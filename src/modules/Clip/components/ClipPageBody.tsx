@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import Card from '~/components/Card';
-import CopyLink from '~/components/CopyLink';
-import HttpContent from '~/components/HttpContent';
+import Card from 'src/components/Card';
+import CopyLink from 'src/components/CopyLink';
+import HttpContent from 'src/components/HttpContent';
 import { ClipState } from '../types';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { RedditIcon, FacebookIcon, TwitterIcon, UserOutlineIcon } from 'mdi-react';
-import SectionHeader from '~/components/SectionHeader';
+import SectionHeader from 'src/components/SectionHeader';
 import ClipContext from './ClipContext';
-import TextSkeleton from '~/components/TextSkeleton';
+import TextSkeleton from 'src/components/TextSkeleton';
 
 type ClipPageBodyProps = {
   clipId: string;

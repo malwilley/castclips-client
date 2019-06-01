@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button, { ButtonProps } from '~/components/Button';
+import Button, { ButtonProps } from 'src/components/Button';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { ChevronDownIcon, ChevronUpIcon } from 'mdi-react';
 
 type ShowHideClipOptionsProps = ButtonProps & {

@@ -1,20 +1,20 @@
 import * as React from 'react';
-import HttpContent from '~/components/HttpContent';
-import EpisodeCard from '~/modules/Episode/EpisodeCard';
+import HttpContent from 'src/components/HttpContent';
+import EpisodeCard from 'src/modules/Episode/EpisodeCard';
 import { EpisodeState } from './types';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { thunks } from './redux';
 import { css } from 'emotion';
-import { colors } from '~/styles';
-import SectionHeader from '~/components/SectionHeader';
+import { colors } from 'src/styles';
+import SectionHeader from 'src/components/SectionHeader';
 import EpisodeClips from './components/EpisodeClips';
 import { CalendarClockIcon } from 'mdi-react';
-import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
+import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import { Link } from 'react-router-dom';
-import ParagraphSkeleton from '~/components/ParagraphSkeleton';
-import PageTitleFetching from '~/components/PageTitleFetching';
-import formatPublishDate from '~/utils/formatPublishDate';
+import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
+import PageTitleFetching from 'src/components/PageTitleFetching';
+import formatPublishDate from 'src/utils/formatPublishDate';
 
 type EpisodePageProps = {
   id: string;

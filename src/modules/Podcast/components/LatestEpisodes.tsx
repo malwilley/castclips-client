@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { PodcastEpisode, PodcastState } from '../types';
 import { Link } from 'react-router-dom';
-import Card from '~/components/Card';
+import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
 import { ClockOutlineIcon, CalendarDayIcon, ArtistIcon } from 'mdi-react';
-import formatPublishDate from '~/utils/formatPublishDate';
-import TextSkeleton from '~/components/TextSkeleton';
-import stripHtml from '~/utils/stripHtml';
+import formatPublishDate from 'src/utils/formatPublishDate';
+import TextSkeleton from 'src/components/TextSkeleton';
+import stripHtml from 'src/utils/stripHtml';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -25,7 +25,6 @@ const styles = {
       '&:hover': {
         backgroundColor: '#f8faff',
       },
-      height: 90,
       display: 'grid',
       gridTemplateColumns: '[thumbnail] auto [middle] 1fr',
       gridColumnGap: 20,

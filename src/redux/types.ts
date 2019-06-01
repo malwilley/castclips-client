@@ -19,6 +19,6 @@ type ActionCreatorsMapObject = { [actionCreator: string]: FunctionType };
 
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>;
 
-export type Thunk<P = void, R = void> = (
-  payload: P
+export type Thunk<P = undefined, R = void> = (
+  ...args: OptionalSpread<P>
 ) => ThunkAction<R, AppState, undefined, AnyAction>;

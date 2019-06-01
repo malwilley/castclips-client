@@ -1,8 +1,8 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { PlayStatus } from '~/types';
-import Audio from '~/components/Audio';
-import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
+import { PlayStatus } from 'src/types';
+import Audio from 'src/components/Audio';
+import PlaybackSlider from 'src/modules/PodcastPlayer/PlaybackSlider';
 import { ClipMetadata } from './types';
 
 type ClipPlayerProps = {

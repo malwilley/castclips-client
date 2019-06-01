@@ -1,7 +1,7 @@
-import * as isThisWeek from 'date-fns/is_this_week';
-import * as isToday from 'date-fns/is_today';
-import * as isThisYear from 'date-fns/is_this_year';
-import * as format from 'date-fns/format';
+import isThisWeek from 'date-fns/is_this_week';
+import isToday from 'date-fns/is_today';
+import isThisYear from 'date-fns/is_this_year';
+import format from 'date-fns/format';
 
 const formatPublishDate = (date: Date) => {
   if (isToday(date)) {

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Typeahead from '~/modules/search/components/Typeahead';
+import Typeahead from 'src/modules/search/components/Typeahead';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
 type HeaderTypeaheadProps = {};
 

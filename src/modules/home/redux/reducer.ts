@@ -1,10 +1,13 @@
 import { Actions, ActionTypes } from './actions';
-import { combineReducers } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import { HomeState } from '../types';
 import { propOr } from 'ramda';
-import { ClipMetadata } from '~/modules/Clip/types';
+import { ClipMetadata } from 'src/modules/Clip/types';
 
-const hotClips = (state: HomeState['hotClips'] = { type: 'not_asked' }, action: Actions) => {
+const hotClips: Reducer<HomeState['hotClips']> = (
+  state = { type: 'not_asked' },
+  action: Actions
+) => {
   switch (action.type) {
     case ActionTypes.AddHotClips: {
       const loadedClips: ClipMetadata[] = propOr([], 'data', state);
@@ -25,7 +28,7 @@ const hotClips = (state: HomeState['hotClips'] = { type: 'not_asked' }, action: 
   }
 };
 
-const page = (state: HomeState['page'] = 1, action: Actions) => {
+const page: Reducer<HomeState['page']> = (state = 1, action: Actions) => {
   switch (action.type) {
     case ActionTypes.SetPage:
       return action.payload;

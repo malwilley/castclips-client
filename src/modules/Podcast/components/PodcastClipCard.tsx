@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Card from '~/components/Card';
+import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { ClockOutlineIcon, StarOutlineIcon, EyeOutlineIcon } from 'mdi-react';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { PodcastClip } from '../types';
-import formatClipLength from '~/utils/formatClipLength';
+import formatClipLength from 'src/utils/formatClipLength';
 
 type PodcastClipCardProps = {
   clip: PodcastClip;

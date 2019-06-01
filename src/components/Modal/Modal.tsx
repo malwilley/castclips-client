@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Background from '~/components/Modal/Background';
+import Background from 'src/components/Modal/Background';
 import { css } from 'emotion';
-import Header, { HeaderProps } from '~/components/Modal/Header';
-import Footer from '~/components/Modal/Footer';
-import ModalButton, { ModalButtonProps } from '~/components/Modal/ModalButton';
-import { colors } from '~/styles';
+import Header, { HeaderProps } from 'src/components/Modal/Header';
+import Footer from 'src/components/Modal/Footer';
+import ModalButton, { ModalButtonProps } from 'src/components/Modal/ModalButton';
+import { colors } from 'src/styles';
 
 type ModalProps = HeaderProps & {
   handleClose: () => void;

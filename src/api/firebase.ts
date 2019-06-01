@@ -12,7 +12,7 @@ import {
   SearchResultsResponse,
   GetHotClipsResponse,
 } from './types';
-import { SearchType } from '~/modules/search/types';
+import { SearchType } from 'src/modules/search/types';
 
 const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
 

@@ -26,6 +26,7 @@ export default {
   tertiary300: '#d0783f',
   teriaryAlpha30: 'rgba(137, 176, 174, 0.3)',
   green: '#72B01D',
+  red: '#F35B5B',
   light: '#F1F2F6',
   lightest: '#ffffff',
   gray20: '#f3f3f7',
@@ -46,5 +47,4 @@ export default {
   possibleOrange: '#fcb07e',
   possibleBlue: '#3581b8',
   possibleLight: '#EBE9E9',
-  possibleRed: '#F35B5B',
 };

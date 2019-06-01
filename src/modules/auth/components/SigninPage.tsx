@@ -2,10 +2,10 @@ import * as React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import * as firebase from 'firebase/app';
 import firebaseApp from '../firebase';
-import Header from '~/modules/header';
-import LayoutContainer from '~/components/LayoutContainer';
+import Header from 'src/modules/header';
+import LayoutContainer from 'src/components/LayoutContainer';
 import { css } from 'emotion';
-import { colors, boxShadow } from '~/styles';
+import { colors, boxShadow } from 'src/styles';
 
 const styles = {
   authCenter: css({

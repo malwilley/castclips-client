@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Downshift from 'downshift';
-import { HttpRequest } from '~/types';
+import { HttpRequest } from 'src/types';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 
 type HomeSearchConnectedProps = {
   suggestions: HttpRequest<string[]>;

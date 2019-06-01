@@ -1,9 +1,9 @@
-import { LazyLoadedData, HttpRequest } from '~/types';
+import { LazyLoadedData, HttpRequest } from 'src/types';
 import {
   GetClipsForPodcastResponse,
   PodcastMetadataResponse,
   PodcastEpisodeResponse,
-} from '~/api/types';
+} from 'src/api/types';
 
 export type PodcastEpisode = Merge<
   PodcastEpisodeResponse,

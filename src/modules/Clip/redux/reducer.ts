@@ -9,12 +9,12 @@ const metadata = (state: ClipState['metadata'] = { type: 'not_asked' }, action: 
     case ActionTypes.SetLikeState:
       return state.type === 'success'
         ? {
+            ...state,
             data: {
               ...state.data,
               likesCount: state.data.likesCount + (action.payload ? 1 : -1),
               userHasLiked: action.payload,
             },
-            type: 'success',
           }
         : state;
     default:

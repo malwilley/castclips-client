@@ -1,19 +1,19 @@
 import * as React from 'react';
-import PodcastCard from '~/modules/Podcast/PodcastCard';
+import PodcastCard from 'src/modules/Podcast/PodcastCard';
 import { thunks } from './redux';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { PodcastState } from './types';
-import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
-import SectionHeader from '~/components/SectionHeader';
+import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
+import SectionHeader from 'src/components/SectionHeader';
 import { css } from 'emotion';
 import LatestEpisodes from './components/LatestEpisodes';
 import PodcastClips from './components/PodcastClips';
-import HttpContent from '~/components/HttpContent';
-import { colors } from '~/styles';
-import PageTitleFetching from '~/components/PageTitleFetching';
-import TextSkeleton from '~/components/TextSkeleton';
-import ParagraphSkeleton from '~/components/ParagraphSkeleton';
+import HttpContent from 'src/components/HttpContent';
+import { colors } from 'src/styles';
+import PageTitleFetching from 'src/components/PageTitleFetching';
+import TextSkeleton from 'src/components/TextSkeleton';
+import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 
 type PodcastPageProps = {
   id: string;

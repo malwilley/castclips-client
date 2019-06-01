@@ -1,5 +1,5 @@
 import { PodcastEpisode } from '../types';
-import { PodcastEpisodeResponse } from '~/api/types';
+import { PodcastEpisodeResponse } from 'src/api/types';
 
 const mapApiPodcastEpisodes = (episodes: PodcastEpisodeResponse[]): PodcastEpisode[] =>
   episodes.map(({ published, ...episode }) => ({

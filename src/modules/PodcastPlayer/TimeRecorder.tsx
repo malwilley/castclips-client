@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import formatHrMinSec from '~/utils/formatHrMinSec';
-import Button from '~/components/Button';
+import formatHrMinSec from 'src/utils/formatHrMinSec';
+import Button from 'src/components/Button';
 import { StopwatchIcon } from 'mdi-react';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
 type TimeRecorderProps = {
   className?: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button, { ButtonProps } from '~/components/Button';
+import Button, { ButtonProps } from 'src/components/Button';
 import { css } from 'emotion';
-import { colors, borderRadius } from '~/styles';
+import { colors, borderRadius } from 'src/styles';
 import { PlayCircleIcon, CancelIcon, StopCircleIcon } from 'mdi-react';
 
 type PreviewButtonProps = ButtonProps & {

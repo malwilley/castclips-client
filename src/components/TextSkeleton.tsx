@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { css } from 'emotion';
 import { CSSObject } from 'create-emotion';
 

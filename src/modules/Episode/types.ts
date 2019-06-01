@@ -1,6 +1,6 @@
-import { HttpRequest } from '~/types';
+import { HttpRequest } from 'src/types';
 import { PodcastMetadata } from '../Podcast/types';
-import { EpisodeClipResponse, EpisodeMetadataResponse } from '~/api/types';
+import { EpisodeClipResponse, EpisodeMetadataResponse } from 'src/api/types';
 
 type EpisodePodcast = Pick<
   PodcastMetadata,

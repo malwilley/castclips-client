@@ -1,16 +1,16 @@
 import * as React from 'react';
-import SectionHeader from '~/components/SectionHeader';
-import Card from '~/components/Card';
+import SectionHeader from 'src/components/SectionHeader';
+import Card from 'src/components/Card';
 import { ClipMetadata } from '../types';
-import formatHrMinSec from '~/utils/formatHrMinSec';
+import formatHrMinSec from 'src/utils/formatHrMinSec';
 import { css } from 'emotion';
-import { colors, fonts } from '~/styles';
-import stripHtml from '~/utils/stripHtml';
+import { colors, fonts } from 'src/styles';
+import stripHtml from 'src/utils/stripHtml';
 import { CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
-import formatPublishDate from '~/utils/formatPublishDate';
-import ClipCardAccent from '~/components/ClipCardAccent';
+import formatPublishDate from 'src/utils/formatPublishDate';
+import ClipCardAccent from 'src/components/ClipCardAccent';
 import { Link } from 'react-router-dom';
-import zIndex from '~/styles/zIndex';
+import zIndex from 'src/styles/zIndex';
 
 type ClipContextProps = { clip: ClipMetadata };
 

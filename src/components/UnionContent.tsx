@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+/*
 type UnionType = {
   type: string;
 };
@@ -25,3 +25,4 @@ const UnionContent = <U extends UnionType>({ union, renderFunctions }: UnionCont
 };
 
 export default UnionContent;
+*/

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { thunks } from '../redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { EpisodeState } from '../types';
-import HttpContent from '~/components/HttpContent';
+import HttpContent from 'src/components/HttpContent';
 import EpisodeClipCard from './EpisodeClipCard';
 import { css } from 'emotion';
-import NoData from '~/components/NoData';
+import NoData from 'src/components/NoData';
 
 type EpisodeClipsProps = {
   episodeId: string;
@@ -35,7 +35,7 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
 }) => {
   React.useEffect(() => {
     fetchClips(episodeId);
-  }, [episodeId]);
+  }, [fetchClips, episodeId]);
 
   return (
     <HttpContent

@@ -1,8 +1,8 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import Audio from '~/components/Audio';
-import { PlayStatus } from '~/types';
-import PlaybackSlider from '~/modules/PodcastPlayer/PlaybackSlider';
+import Audio from 'src/components/Audio';
+import { PlayStatus } from 'src/types';
+import PlaybackSlider from 'src/modules/PodcastPlayer/PlaybackSlider';
 import { EpisodeMetadata } from '../Episode/types';
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
 

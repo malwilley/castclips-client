@@ -1,8 +1,8 @@
 import { css } from 'emotion';
 import { Range } from 'rc-slider';
 import * as React from 'react';
-import { colors } from '~/styles';
-import formatHrMinSec from '~/utils/formatHrMinSec';
+import { colors } from 'src/styles';
+import formatHrMinSec from 'src/utils/formatHrMinSec';
 import './ShareRange.css';
 
 export type ShareRangeState = { start: number; end: number } | null;

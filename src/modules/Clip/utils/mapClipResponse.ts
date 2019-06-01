@@ -1,4 +1,4 @@
-import { GetClipResponse } from '~/api/types';
+import { GetClipResponse } from 'src/api/types';
 
 const mapClipResponse = (clipResponse: GetClipResponse) => ({
   ...clipResponse,

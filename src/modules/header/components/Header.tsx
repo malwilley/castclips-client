@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import HeaderAccount from './HeaderAccount';
-import Typeahead from '~/modules/search/components/Typeahead';
+import Typeahead from 'src/modules/search/components/Typeahead';
 import HeaderTypeahead from './HeaderTypeahead';
 
 type HeaderProps = {

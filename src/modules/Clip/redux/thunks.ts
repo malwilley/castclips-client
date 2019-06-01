@@ -1,9 +1,9 @@
-import { Thunk } from '~/redux/types';
+import { Thunk } from 'src/redux/types';
 import { actions } from './actions';
 import { path } from 'ramda';
-import { getClip, unlikeClip as unlikeClipApi, likeClip as likeClipApi } from '~/api/firebase';
+import { getClip, unlikeClip as unlikeClipApi, likeClip as likeClipApi } from 'src/api/firebase';
 import mapClipResponse from '../utils/mapClipResponse';
-import { getAuthToken } from '~/modules/auth/firebase';
+import { getAuthToken } from 'src/modules/auth/firebase';
 import { ConsoleIcon } from 'mdi-react';
 
 const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {

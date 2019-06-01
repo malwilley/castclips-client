@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { ClipMetadata } from '~/modules/Clip/types';
-import Card from '~/components/Card';
+import { ClipMetadata } from 'src/modules/Clip/types';
+import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors, boxShadow } from '~/styles';
-import ClipCardAccent from '~/components/ClipCardAccent';
+import { colors, boxShadow } from 'src/styles';
+import ClipCardAccent from 'src/components/ClipCardAccent';
 import { distanceInWords } from 'date-fns';
-import fonts from '~/styles/fonts';
+import fonts from 'src/styles/fonts';
 import { CalendarDayIcon, ClockOutlineIcon, ThumbUpOutlineIcon } from 'mdi-react';
-import formatClipLength from '~/utils/formatClipLength';
+import formatClipLength from 'src/utils/formatClipLength';
 
 type HotClipProps = {
   clip: ClipMetadata;

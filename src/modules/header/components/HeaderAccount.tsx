@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { connect } from 'react-redux';
-import { AuthState, UserLoggedIn } from '~/modules/auth/types';
-import Button from '~/components/Button';
-import firebase from '~/modules/auth/firebase';
+import { AuthState, UserLoggedIn } from 'src/modules/auth/types';
+import Button from 'src/components/Button';
+import firebase from 'src/modules/auth/firebase';
 import Downshift from 'downshift';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { MenuDownIcon } from 'mdi-react';
 
 type HeaderAccountProps = {

@@ -2,11 +2,11 @@ import { css } from 'emotion';
 import { PauseIcon, PlayArrowIcon } from 'mdi-react';
 import Slider from 'rc-slider';
 import * as React from 'react';
-import Button from '~/components/Button';
-import { Back5, Forward30 } from '~/icons';
-import { colors } from '~/styles';
-import { PlayStatus } from '~/types';
-import formatHrMinSec from '~/utils/formatHrMinSec';
+import Button from 'src/components/Button';
+import { Back5, Forward30 } from 'src/icons';
+import { colors } from 'src/styles';
+import { PlayStatus } from 'src/types';
+import formatHrMinSec from 'src/utils/formatHrMinSec';
 import './PlaybackSlider.css';
 
 type PlaybackControlProps = {

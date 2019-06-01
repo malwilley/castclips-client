@@ -1,4 +1,4 @@
-import { LazyLoadedData } from '~/types';
+import { LazyLoadedData } from 'src/types';
 
 type LazyHttpContentProps<T> = {
   renderError?: (message: string) => React.ReactNode;

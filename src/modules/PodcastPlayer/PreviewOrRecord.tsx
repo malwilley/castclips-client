@@ -7,8 +7,8 @@ import {
   StopCircleIcon,
 } from 'mdi-react';
 import * as React from 'react';
-import Button from '~/components/Button';
-import { colors } from '~/styles';
+import Button from 'src/components/Button';
+import { colors } from 'src/styles';
 
 type PreviewOrRecordProps = {
   canPreview: boolean;

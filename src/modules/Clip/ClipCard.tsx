@@ -1,14 +1,14 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { HttpRequest } from '~/types';
-import ClipPlayer from '~/modules/Clip/ClipPlayer';
-import Card from '~/components/Card';
-import HttpContent from '~/components/HttpContent';
+import { HttpRequest } from 'src/types';
+import ClipPlayer from 'src/modules/Clip/ClipPlayer';
+import Card from 'src/components/Card';
+import HttpContent from 'src/components/HttpContent';
 import { ClipMetadata } from './types';
-import TextSkeleton from '~/components/TextSkeleton';
-import { colors, fonts } from '~/styles';
+import TextSkeleton from 'src/components/TextSkeleton';
+import { colors, fonts } from 'src/styles';
 import { ThumbUpOutlineIcon, ChevronRightIcon } from 'mdi-react';
-import Button from '~/components/Button';
+import Button from 'src/components/Button';
 import { Link } from 'react-router-dom';
 import LikeButton from './components/LikeButton';
 

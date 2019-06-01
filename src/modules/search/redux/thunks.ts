@@ -1,13 +1,13 @@
 import * as qs from 'querystringify';
-import { Thunk } from '~/redux/types';
+import { Thunk } from 'src/redux/types';
 import { actions } from './actions';
 import { push } from 'connected-react-router';
-import { getAuthToken } from '~/modules/auth/firebase';
-import { typeahead, search } from '~/api/firebase';
+import { getAuthToken } from 'src/modules/auth/firebase';
+import { typeahead, search } from 'src/api/firebase';
 import { SearchType, SearchParams } from '../types';
 import makeMapSearchResult from '../utils/mapSearchResult';
 
-const clearSuggestions: Thunk<void, void> = () => async dispatch => {
+const clearSuggestions: Thunk = () => async dispatch => {
   dispatch(actions.setSuggestions({ type: 'not_asked' }));
 };
 

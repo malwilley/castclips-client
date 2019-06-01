@@ -1,9 +1,9 @@
-import Back5 from '~/icons/Back5';
-import Forward30 from '~/icons/Forward30';
-import GoTo from '~/icons/GoTo';
-import Pause from '~/icons/Pause';
-import Play from '~/icons/Play';
-import Search from '~/icons/Search';
-import Spinner from '~/icons/Spinner';
+import Back5 from 'src/icons/Back5';
+import Forward30 from 'src/icons/Forward30';
+import GoTo from 'src/icons/GoTo';
+import Pause from 'src/icons/Pause';
+import Play from 'src/icons/Play';
+import Search from 'src/icons/Search';
+import Spinner from 'src/icons/Spinner';
 
 export { Back5, Forward30, GoTo, Pause, Play, Search, Spinner };

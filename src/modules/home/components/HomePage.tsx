@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
-import Header from '~/modules/header';
-import Typeahead from '~/modules/search/components/Typeahead';
+import { colors } from 'src/styles';
+import Header from 'src/modules/header';
+import Typeahead from 'src/modules/search/components/Typeahead';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { HomeState } from '../types';
 import HotClip from './HotClip';
-import HttpContent from '~/components/HttpContent';
-import LayoutContainer from '~/components/LayoutContainer';
+import HttpContent from 'src/components/HttpContent';
+import LayoutContainer from 'src/components/LayoutContainer';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;

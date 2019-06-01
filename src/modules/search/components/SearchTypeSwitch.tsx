@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { SearchType } from '../types';
 import { css } from 'emotion';
-import { colors } from '~/styles';
-import Button from '~/components/Button';
+import { colors } from 'src/styles';
+import Button from 'src/components/Button';
 
 type SearchTypeSwitchProps = {
   className?: string;

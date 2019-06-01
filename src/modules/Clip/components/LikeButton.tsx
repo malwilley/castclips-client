@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { css } from 'emotion';
-import { colors, boxShadow } from '~/styles';
-import Button from '~/components/Button';
+import { colors, boxShadow } from 'src/styles';
+import Button from 'src/components/Button';
 import { ThumbUpOutlineIcon, ThumbUpIcon } from 'mdi-react';
 
 type LikeButtonProps = {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PlayStatus } from '~/types';
+import { PlayStatus } from 'src/types';
 
 interface Props {
   status: PlayStatus;
@@ -74,8 +74,8 @@ class Audio extends React.Component<Props, State> {
     volume: 1.0,
   };
 
-  public audioEl: HTMLAudioElement | null;
-  private timer: NodeJS.Timer;
+  public audioEl: HTMLAudioElement | null = null;
+  private timer: NodeJS.Timeout | null = null;
 
   constructor(props: Props) {
     super(props);
@@ -125,7 +125,9 @@ class Audio extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   componentWillReceiveProps(nextProps: Props) {

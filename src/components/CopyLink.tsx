@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import Button from './Button';
-import { colors } from '~/styles';
-import { ClipboardOutlineIcon, ClipboardTextIcon, ClipboardTextOutlineIcon } from 'mdi-react';
+import { colors, fonts } from 'src/styles';
+import { ClipboardTextOutlineIcon } from 'mdi-react';
 
 type CopyLinkProps = {
   className?: string;
@@ -26,13 +26,13 @@ const styles = {
     borderTop: `1px solid ${colors.gray100}`,
     overflow: 'hidden',
   }),
-  input: css({
+  input: css(fonts.text200, {
     background: 'none',
     outline: 'none',
     border: 'none',
     width: '100%',
     height: '100%',
-    padding: 10,
+    padding: '0 0.6rem',
   }),
   clipboardButton: css({
     ':hover': {

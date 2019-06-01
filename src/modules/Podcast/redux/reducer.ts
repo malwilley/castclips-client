@@ -2,15 +2,9 @@ import { Actions, ActionTypes } from './actions';
 import { PodcastState, PodcastEpisode } from '../types';
 import { combineReducers } from 'redux';
 import { propOr } from 'ramda';
+import makeHttpReducer from 'src/redux/utils/setHttpStateReducer';
 
-const clips = (state: PodcastState['clips'] = { type: 'not_asked' }, action: Actions) => {
-  switch (action.type) {
-    case ActionTypes.SetClips:
-      return action.payload;
-    default:
-      return state;
-  }
-};
+const clips = makeHttpReducer<PodcastState['clips']>(ActionTypes.SetClips);
 
 const episodes = (state: PodcastState['episodes'] = { type: 'not_asked' }, action: Actions) => {
   switch (action.type) {
@@ -19,7 +13,7 @@ const episodes = (state: PodcastState['episodes'] = { type: 'not_asked' }, actio
       return {
         type: 'success',
         data: [...loadedEpisodes, ...action.payload],
-      };
+      } as PodcastState['episodes'];
     }
     case ActionTypes.SetEpisodes:
       return action.payload;
@@ -28,14 +22,7 @@ const episodes = (state: PodcastState['episodes'] = { type: 'not_asked' }, actio
   }
 };
 
-const metadata = (state: PodcastState['metadata'] = { type: 'not_asked' }, action: Actions) => {
-  switch (action.type) {
-    case ActionTypes.SetMetadata:
-      return action.payload;
-    default:
-      return state;
-  }
-};
+const metadata = makeHttpReducer<PodcastState['metadata']>(ActionTypes.SetMetadata);
 
 const reducer = combineReducers({
   clips,

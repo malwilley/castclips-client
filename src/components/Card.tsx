@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, boxShadow } from '~/styles';
+import { colors, boxShadow } from 'src/styles';
 import { Link } from 'react-router-dom';
-import zIndex from '~/styles/zIndex';
+import zIndex from 'src/styles/zIndex';
 
 type CardProps = {
   className?: string;

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { EyeOutlineIcon, StarOutlineIcon, ClockOutlineIcon } from 'mdi-react';
-import Card from '~/components/Card';
+import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { Link } from 'react-router-dom';
 import { EpisodeClip } from '../types';
-import ClipCardAccent from '~/components/ClipCardAccent';
-import formatClipLength from '~/utils/formatClipLength';
+import ClipCardAccent from 'src/components/ClipCardAccent';
+import formatClipLength from 'src/utils/formatClipLength';
 
 type EpisodeClipCardProps = {
   className?: string;

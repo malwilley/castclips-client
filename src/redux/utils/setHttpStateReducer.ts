@@ -1,11 +1,12 @@
 import { ActionWithPayload } from '../types';
-import { HttpRequest } from '~/types';
+import { HttpRequest } from 'src/types';
+import { Reducer } from 'redux';
 
-const makeHttpReducer = <T extends string, P extends HttpRequest<any>>(
-  actionCreator: (payload?: P) => ActionWithPayload<T, P>
-) => (state: P = { type: 'not_asked' } as P, action: ActionWithPayload<T, P>) => {
+const makeHttpReducer = <P extends HttpRequest<any>, A extends string = any>(
+  actionType: A
+): Reducer<P, ActionWithPayload<A, P>> => (state = { type: 'not_asked' } as P, action) => {
   switch (action.type) {
-    case actionCreator().type:
+    case actionType:
       return action.payload;
     default:
       return state;

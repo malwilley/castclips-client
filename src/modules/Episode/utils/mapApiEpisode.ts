@@ -1,6 +1,6 @@
 import { EpisodeMetadata } from '../types';
 import { pick } from 'ramda';
-import { EpisodeMetadataResponse } from '~/api/types';
+import { EpisodeMetadataResponse } from 'src/api/types';
 
 const mapApiEpisode = ({
   podcast,

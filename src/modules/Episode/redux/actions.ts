@@ -1,5 +1,5 @@
-import { createAction } from '~/redux/createAction';
-import { ActionsUnion } from '~/redux/types';
+import { createAction } from 'src/redux/createAction';
+import { ActionsUnion } from 'src/redux/types';
 import { EpisodeState } from '../types';
 
 export enum ActionTypes {
@@ -9,10 +9,10 @@ export enum ActionTypes {
 }
 
 export const actions = {
-  setClipId: (clipId: EpisodeState['view']['clipId']) =>
+  setClipId: (clipId?: EpisodeState['view']['clipId']) =>
     createAction(ActionTypes.SetClipId, clipId),
-  setClips: (clips: EpisodeState['clips']) => createAction(ActionTypes.SetClips, clips),
-  setMetadata: (metadata: EpisodeState['metadata']) =>
+  setClips: (clips?: EpisodeState['clips']) => createAction(ActionTypes.SetClips, clips),
+  setMetadata: (metadata?: EpisodeState['metadata']) =>
     createAction(ActionTypes.SetMetadata, metadata),
 };
 

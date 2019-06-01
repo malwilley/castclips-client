@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
-import Header from '~/modules/header';
+import { colors } from 'src/styles';
+import Header from 'src/modules/header';
 
 type PageWithFeaturedContentProps = {
   bodyContent: React.ReactNode;

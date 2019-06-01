@@ -1,8 +1,8 @@
 import { css } from 'emotion';
-import boxShadow from '~/styles/boxShadow';
-import colors from '~/styles/colors';
-import zIndex from '~/styles/zIndex';
-import fonts from '~/styles/fonts';
+import boxShadow from 'src/styles/boxShadow';
+import colors from 'src/styles/colors';
+import zIndex from 'src/styles/zIndex';
+import fonts from 'src/styles/fonts';
 
 const borderRadius = 8;
 

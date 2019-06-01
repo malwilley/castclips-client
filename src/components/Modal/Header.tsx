@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Button from '~/components/Button';
+import Button from 'src/components/Button';
 import { CloseIcon } from 'mdi-react';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
-type HeaderProps = {
+export type HeaderProps = {
   handleClose: () => void;
   icon: React.ReactNode;
   title: string;
@@ -69,5 +69,4 @@ const Header: React.SFC<HeaderProps> = ({ handleClose, icon, title }) => (
   </div>
 );
 
-export { HeaderProps };
 export default Header;

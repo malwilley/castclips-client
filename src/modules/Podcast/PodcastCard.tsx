@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { HttpRequest } from '~/types';
+import { HttpRequest } from 'src/types';
 import { PodcastMetadata } from './types';
-import HttpContent from '~/components/HttpContent';
+import HttpContent from 'src/components/HttpContent';
 import { css } from 'emotion';
-import { colors, boxShadow } from '~/styles';
+import { colors, boxShadow } from 'src/styles';
 import { EarthIcon } from 'mdi-react';
 import { dropLast, last } from 'ramda';
-import TextSkeleton from '~/components/TextSkeleton';
-import PageTitleFetching from '~/components/PageTitleFetching';
+import TextSkeleton from 'src/components/TextSkeleton';
+import PageTitleFetching from 'src/components/PageTitleFetching';
 
 type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;

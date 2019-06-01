@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextSkeleton from './TextSkeleton';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 
 type ParagraphSkeletonProps = {
   className?: string;

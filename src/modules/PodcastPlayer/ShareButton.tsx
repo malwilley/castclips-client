@@ -1,8 +1,8 @@
 import { css } from 'emotion';
 import { ShareIcon, ContentCutIcon } from 'mdi-react';
 import * as React from 'react';
-import Button, { ButtonProps } from '~/components/Button';
-import { colors } from '~/styles';
+import Button, { ButtonProps } from 'src/components/Button';
+import { colors } from 'src/styles';
 
 const styles = {
   main: css({

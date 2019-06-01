@@ -1,16 +1,16 @@
 import * as React from 'react';
-import HttpContent from '~/components/HttpContent';
-import ClipCard from '~/modules/Clip/ClipCard';
+import HttpContent from 'src/components/HttpContent';
+import ClipCard from 'src/modules/Clip/ClipCard';
 import { connect } from 'react-redux';
-import { AppState } from '~/redux/types';
+import { AppState } from 'src/redux/types';
 import { thunks } from './redux';
 import { ClipState } from './types';
-import PageWithFeaturedContent from '~/components/PageWithFeaturedContent';
-import SectionHeader from '~/components/SectionHeader';
+import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
+import SectionHeader from 'src/components/SectionHeader';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors } from '~/styles';
-import PageTitleFetching from '~/components/PageTitleFetching';
+import { colors } from 'src/styles';
+import PageTitleFetching from 'src/components/PageTitleFetching';
 import ClipPageBody from './components/ClipPageBody';
 
 type ClipPageProps = {
@@ -37,7 +37,7 @@ const styles = {
   }),
 };
 
-const EpisodePage: React.FC<ClipPageConnectedProps> = ({
+const ClipPage: React.FC<ClipPageConnectedProps> = ({
   clipMetadata,
   fetchClip,
   id,
@@ -98,4 +98,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EpisodePage);
+)(ClipPage);

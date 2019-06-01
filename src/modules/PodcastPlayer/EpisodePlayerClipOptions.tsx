@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Show from '~/components/Show';
+import Show from 'src/components/Show';
 import ClipPreview from './ClipPreview';
 import TimeRecorder from './TimeRecorder';
 import { css } from 'emotion';
-import { colors } from '~/styles';
+import { colors } from 'src/styles';
 import { isNil } from 'ramda';
 import PreviewButton from './PreviewButton';
 import { ArrowRightIcon } from 'mdi-react';

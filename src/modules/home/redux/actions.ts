@@ -1,7 +1,7 @@
-import { createAction } from '~/redux/createAction';
-import { ActionsUnion } from '~/redux/types';
+import { createAction } from 'src/redux/createAction';
+import { ActionsUnion } from 'src/redux/types';
 import { HomeState } from '../types';
-import { ClipMetadata } from '~/modules/Clip/types';
+import { ClipMetadata } from 'src/modules/Clip/types';
 
 export enum ActionTypes {
   AddHotClips = 'home/add_hot_clips',

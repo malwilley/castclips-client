@@ -1,12 +1,12 @@
-import { Thunk } from '~/redux/types';
+import { Thunk } from 'src/redux/types';
 import { actions } from './actions';
-import last from 'ramda/es/last';
+import { last } from 'ramda';
 import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode';
 import mapApiPodcast from '../utils/mapApiPodcast';
 import { PodcastEpisode } from '../types';
-import path from 'ramda/es/path';
-import { getClipsForPodcast, getPodcastData, getNextEpisodes } from '~/api/firebase';
-import { getAuthToken } from '~/modules/auth/firebase';
+import { path } from 'ramda';
+import { getClipsForPodcast, getPodcastData, getNextEpisodes } from 'src/api/firebase';
+import { getAuthToken } from 'src/modules/auth/firebase';
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
