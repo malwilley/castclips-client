@@ -14,13 +14,13 @@ const styles = {
   main: css({
     backgroundColor: colors.lightest,
     color: colors.gray600,
-    boxShadow: boxShadow.normal2,
+    boxShadow: boxShadow.normal3,
     borderRadius: 8,
     overflow: 'hidden',
   }),
   mainHoverable: css({
     '&:hover': {
-      boxShadow: boxShadow.normalHover,
+      boxShadow: boxShadow.normal3Hover,
       zIndex: zIndex.card,
     },
     position: 'relative',

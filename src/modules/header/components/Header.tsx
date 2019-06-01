@@ -22,7 +22,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     color: colors.lightest,
-    backgroundColor: colors.possibleHeaderColor,
+    backgroundColor: colors.gunmetal800,
     padding: '0 30px',
     height: 70,
     position: 'relative',
