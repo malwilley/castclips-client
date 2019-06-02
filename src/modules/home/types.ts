@@ -1,5 +1,5 @@
 import { LazyLoadedData } from 'src/types';
-import { ClipMetadata } from '../Clip/types';
+import { ClipMetadata } from '../clip/types';
 
 export type HomeState = {
   hotClips: LazyLoadedData<ClipMetadata[]>;

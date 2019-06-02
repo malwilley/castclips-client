@@ -1,8 +1,8 @@
 import * as qs from 'querystringify';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ClipPage from 'src/modules/Clip/ClipPage';
-import EpisodePage from 'src/modules/Episode/EpisodePage';
+import ClipPage from 'src/modules/clip/ClipPage';
+import EpisodePage from 'src/modules/episode/EpisodePage';
 import PodcastPage from 'src/modules/Podcast/PodcastPage';
 import SigninPage from './modules/auth/components/SigninPage';
 import HomePage from './modules/home/components/HomePage';

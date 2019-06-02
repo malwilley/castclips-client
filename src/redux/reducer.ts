@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import auth from 'src/modules/auth/redux';
-import clip from 'src/modules/Clip/redux';
-import episode from 'src/modules/Episode/redux';
+import clip from 'src/modules/clip/redux';
+import episode from 'src/modules/episode/redux';
 import podcast from 'src/modules/Podcast/redux';
 import home from 'src/modules/home/redux';
 import search from 'src/modules/search/redux';

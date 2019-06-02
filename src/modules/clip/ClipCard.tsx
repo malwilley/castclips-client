@@ -1,7 +1,7 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import { HttpRequest } from 'src/types';
-import ClipPlayer from 'src/modules/Clip/ClipPlayer';
+import ClipPlayer from 'src/modules/clip/ClipPlayer';
 import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
 import { ClipMetadata } from './types';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import HttpContent from 'src/components/HttpContent';
-import EpisodeCard from 'src/modules/Episode/EpisodeCard';
+import EpisodeCard from 'src/modules/episode/EpisodeCard';
 import { EpisodeState } from './types';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';

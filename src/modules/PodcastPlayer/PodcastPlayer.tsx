@@ -3,7 +3,7 @@ import * as React from 'react';
 import Audio from 'src/components/Audio';
 import { PlayStatus } from 'src/types';
 import PlaybackSlider from 'src/modules/PodcastPlayer/PlaybackSlider';
-import { EpisodeMetadata } from '../Episode/types';
+import { EpisodeMetadata } from '../episode/types';
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
 
 type PodcastPlayerProps = {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClipMetadata } from 'src/modules/Clip/types';
+import { ClipMetadata } from 'src/modules/clip/types';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { colors, boxShadow } from 'src/styles';

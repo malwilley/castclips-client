@@ -5,7 +5,7 @@ import { css } from 'emotion';
 import { colors } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
 import formatClipLength from 'src/utils/formatClipLength';
-import { ClipMetadata } from 'src/modules/Clip/types';
+import { ClipMetadata } from 'src/modules/clip/types';
 
 type EpisodeClipCardProps = {
   className?: string;

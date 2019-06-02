@@ -1,6 +1,6 @@
 import * as React from 'react';
 import HttpContent from 'src/components/HttpContent';
-import ClipCard from 'src/modules/Clip/ClipCard';
+import ClipCard from 'src/modules/clip/ClipCard';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from './redux';

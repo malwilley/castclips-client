@@ -6,7 +6,7 @@ import { addClip, getClipsForEpisode, getEpisodeData } from 'src/api/firebase';
 import { push } from 'connected-react-router';
 import { getAuthToken } from 'src/modules/auth/firebase';
 import { AddClipPayload } from 'src/api/types';
-import mapClipResponse from 'src/modules/Clip/utils/mapClipResponse';
+import mapClipResponse from 'src/modules/clip/utils/mapClipResponse';
 
 const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   // todo: wtf is this

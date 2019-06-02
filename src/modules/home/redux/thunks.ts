@@ -1,6 +1,6 @@
 import { Thunk } from 'src/redux/types';
 import { actions } from './actions';
-import mapClipResponse from 'src/modules/Clip/utils/mapClipResponse';
+import mapClipResponse from 'src/modules/clip/utils/mapClipResponse';
 import { getHotClips } from 'src/api/firebase';
 
 const fetchHotClips: Thunk<number, Promise<void>> = () => async (dispatch, getState) => {
