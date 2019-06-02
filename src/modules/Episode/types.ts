@@ -1,17 +1,11 @@
 import { HttpRequest } from 'src/types';
 import { PodcastMetadata } from '../Podcast/types';
-import { EpisodeClipResponse, EpisodeMetadataResponse } from 'src/api/types';
+import { EpisodeMetadataResponse } from 'src/api/types';
+import { ClipMetadata } from '../Clip/types';
 
 type EpisodePodcast = Pick<
   PodcastMetadata,
   'id' | 'description' | 'title' | 'thumbnail' | 'website'
->;
-
-export type EpisodeClip = Merge<
-  EpisodeClipResponse,
-  {
-    published: Date;
-  }
 >;
 
 export type EpisodeMetadata = Merge<
@@ -27,7 +21,7 @@ export type EpisodeView = {
 };
 
 export type EpisodeState = {
-  clips: HttpRequest<EpisodeClip[]>;
+  clips: HttpRequest<ClipMetadata[]>;
   metadata: HttpRequest<EpisodeMetadata>;
   view: EpisodeView;
 };

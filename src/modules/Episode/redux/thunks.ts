@@ -6,6 +6,7 @@ import { addClip, getClipsForEpisode, getEpisodeData } from 'src/api/firebase';
 import { push } from 'connected-react-router';
 import { getAuthToken } from 'src/modules/auth/firebase';
 import { AddClipPayload } from 'src/api/types';
+import mapClipResponse from 'src/modules/Clip/utils/mapClipResponse';
 
 const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   // todo: wtf is this
@@ -20,7 +21,7 @@ const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState
     const clips = await getClipsForEpisode(id);
     dispatch(
       actions.setClips({
-        data: clips.map(clip => ({ ...clip, published: new Date(clip.published) })),
+        data: clips.map(mapClipResponse),
         type: 'success',
       })
     );

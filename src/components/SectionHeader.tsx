@@ -5,12 +5,13 @@ import { colors } from 'src/styles';
 type SectionHeaderProps = {
   className?: string;
   light?: boolean;
+  top?: boolean;
 };
 
 const styles = {
   main: css({
     color: colors.gray600,
-    marginBottom: 10,
+    marginBottom: '1rem',
   }),
   text: css({
     marginBottom: 4,
@@ -24,10 +25,13 @@ const styles = {
   light: css({
     color: colors.light,
   }),
+  top: css({
+    marginTop: '2rem',
+  }),
 };
 
-const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className, light }) => (
-  <div className={css(styles.main, light && styles.light, className)}>
+const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className, light, top }) => (
+  <div className={css(styles.main, light && styles.light, top && styles.top, className)}>
     <h6 className={styles.text}>{children}</h6>
     <div className={styles.underline} />
   </div>

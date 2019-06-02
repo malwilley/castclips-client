@@ -10,7 +10,6 @@ import NoData from 'src/components/NoData';
 
 type EpisodeClipsProps = {
   episodeId: string;
-  episodeLength: number;
 };
 
 type EpisodeClipsConnectedProps = EpisodeClipsProps & {
@@ -19,18 +18,12 @@ type EpisodeClipsConnectedProps = EpisodeClipsProps & {
 };
 
 const styles = {
-  container: css({
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gridColumnGap: 20,
-    gridRowGap: 20,
-  }),
+  container: css({}),
 };
 
 const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
   clipsState,
   episodeId,
-  episodeLength,
   fetchClips,
 }) => {
   React.useEffect(() => {
@@ -45,7 +38,7 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
         clips.length > 0 ? (
           <div className={styles.container}>
             {clips.map(clip => (
-              <EpisodeClipCard clip={clip} key={clip.id} episodeLength={episodeLength} />
+              <EpisodeClipCard clip={clip} key={clip.id} episodeLength={clip.episode.audioLength} />
             ))}
           </div>
         ) : (

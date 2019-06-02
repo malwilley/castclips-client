@@ -1,6 +1,7 @@
 import { GetClipResponse } from 'src/api/types';
+import { ClipMetadata } from '../types';
 
-const mapClipResponse = (clipResponse: GetClipResponse) => ({
+const mapClipResponse = (clipResponse: GetClipResponse): ClipMetadata => ({
   ...clipResponse,
   episode: {
     ...clipResponse.episode,

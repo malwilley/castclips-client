@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import formatPublishDate from 'src/utils/formatPublishDate';
+import EpisodePageBody from './components/EpisodePageBody';
 
 type EpisodePageProps = {
   id: string;
@@ -74,37 +75,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
 
   return (
     <PageWithFeaturedContent
-      bodyContent={
-        <HttpContent
-          request={episodeMetadata}
-          renderFetching={() => (
-            <>
-              <section className={styles.section}>
-                <SectionHeader>description</SectionHeader>
-                <p>
-                  <ParagraphSkeleton />
-                </p>
-              </section>
-            </>
-          )}
-          renderSuccess={({ audioLength, description, published }) => (
-            <>
-              <section className={styles.section}>
-                <SectionHeader>description</SectionHeader>
-                <p className={styles.published}>
-                  <CalendarClockIcon size={20} /> {`Published ${formatPublishDate(published)}`}
-                </p>
-                <div
-                  className={styles.description}
-                  dangerouslySetInnerHTML={{ __html: description }}
-                />
-              </section>
-              <SectionHeader className={styles.sectionHeader}>clips from the episode</SectionHeader>
-              <EpisodeClips episodeId={id} episodeLength={audioLength} />
-            </>
-          )}
-        />
-      }
+      bodyContent={<EpisodePageBody episodeMetadata={episodeMetadata} id={id} />}
       featuredContent={<EpisodeCard episode={episodeMetadata} />}
       titleContent={
         <HttpContent

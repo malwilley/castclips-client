@@ -59,33 +59,13 @@ export type GetClipsForPodcastResponse = {
   views: number;
 };
 
-export type GetClipsForEpisodeResponse = Array<{
-  audio: string;
-  description: string;
-  id: string;
-  end: number;
-  published: string;
-  stars: number;
-  start: number;
-  title: string;
-  views: number;
-}>;
+export type GetClipsForEpisodeResponse = GetClipResponse[];
 
 export type AddClipResponse = {
   id: string;
 };
 
-export type EpisodeClipResponse = {
-  audio: string;
-  description: string;
-  id: string;
-  end: number;
-  published: string;
-  stars: number;
-  start: number;
-  title: string;
-  views: number;
-};
+export type EpisodeClipResponse = GetClipResponse;
 
 export type PodcastEpisodeResponse = {
   audioLength: number;
