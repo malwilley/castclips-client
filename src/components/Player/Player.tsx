@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { Slider, Rail, Handles, Tracks, TrackItem } from 'react-compound-slider';
+import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../AudioNew';
 import useAudioControls from 'src/hooks/useAudioControls';
-import { colors, boxShadow, fonts } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
 
@@ -17,7 +17,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '6px 20px 10px 4px',
+    padding: '6px 30px 10px 4px',
   }),
   timeLabel: css(fonts.text300, {}),
   slider: css({
@@ -59,6 +59,9 @@ const styles = {
   }),
 };
 
+// create 'convert' function instead ot * 100 / 100
+// forward/back doesn't update slider still
+
 const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
   const ref = React.useRef<HTMLAudioElement>(null);
   const {
@@ -66,22 +69,28 @@ const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
     controls,
   } = useAudioControls(ref);
   const values = useRef([time]);
-  values.current[0] = time;
+  values.current[0] = Math.round(time * 100);
+  console.log('time', time);
+  console.log(values);
 
   return (
     <div>
       <Audio src={audioUrl} title={title} audioRef={ref} />
       <Slider
         className={styles.slider}
-        domain={[0, duration]}
+        domain={[0, Math.round(duration * 100)]}
         step={1}
         values={values.current}
+        onChange={([value]) => {
+          console.log('seeking', value / 100);
+          controls.seek(value / 100);
+        }}
         onUpdate={([value]) => {
           if (!value) {
             return;
           }
-          setTime(value);
-          controls.seek(value);
+          console.log('value', value);
+          setTime(value / 100);
         }}
       >
         <Rail>{({ getRailProps }) => <div className={styles.rail} {...getRailProps()} />}</Rail>
@@ -117,8 +126,8 @@ const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
       <div className={styles.controlsContainer}>
         <PlayerControls
           canPlay={canPlay}
-          handleBackClick={() => controls.seek(time - 30)}
-          handleForwardClick={() => controls.seek(time + 5)}
+          handleBackClick={() => controls.seek(time - 5)}
+          handleForwardClick={() => controls.seek(time + 30)}
           handlePlayPauseClick={() => (isPlaying ? controls.pause() : controls.play())}
           isPlaying={isPlaying}
         />
