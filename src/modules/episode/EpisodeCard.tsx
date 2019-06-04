@@ -4,6 +4,7 @@ import PodcastPlayer from 'src/modules/PodcastPlayer/PodcastPlayer';
 import { EpisodeState } from './types';
 import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
+import Player from 'src/components/Player';
 
 type EpisodeCardProps = {
   episode: EpisodeState['metadata'];
@@ -30,7 +31,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => (
       request={episode}
       renderSuccess={episodeData => (
         <div className={styles.success}>
-          <PodcastPlayer episode={episodeData} />
+          <Player audioUrl={episodeData.audio} title={episodeData.title} />
         </div>
       )}
     />

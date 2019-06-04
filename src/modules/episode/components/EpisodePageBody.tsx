@@ -61,9 +61,7 @@ const EpisodePageBody: React.FC<EpisodePageBodyProps> = ({ episodeMetadata, id }
       renderFetching={() => (
         <section>
           <SectionHeader>description</SectionHeader>
-          <p>
-            <ParagraphSkeleton />
-          </p>
+          <ParagraphSkeleton />
         </section>
       )}
       renderSuccess={({ description }) => (

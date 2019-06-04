@@ -18,6 +18,7 @@
     "rc-slider": "^8.6.1",
     "react": "^16.8.1",
     "react-autosuggest": "^9.3.4",
+    "react-compound-slider": "^2.0.0",
     "react-dom": "^16.8.1",
     "react-firebaseui": "^3.1.2",
     "react-portal": "^4.2.0",
