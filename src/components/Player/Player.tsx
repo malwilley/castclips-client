@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../AudioNew';
@@ -10,6 +10,8 @@ import formatHrMinSec from 'src/utils/formatHrMinSec';
 type PlayerProps = {
   audioUrl: string;
   title: string;
+  start?: number;
+  end?: number;
 };
 
 const styles = {
@@ -65,13 +67,18 @@ const styles = {
 const toSliderValue = (seconds: number) => Math.round(seconds * 100);
 const toSeconds = (value: number) => value / 100;
 
-const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
+const Player: React.FC<PlayerProps> = ({ audioUrl, title, start = 0, end }) => {
   const ref = useRef<HTMLAudioElement>(null);
   const {
     state: { canPlay, duration, isPlaying, setTime, time },
     controls,
   } = useAudioControls(ref);
   const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
+  useEffect(() => {
+    if (time >= (end || duration)) {
+      controls.pause();
+    }
+  }, [time, end, duration]);
 
   return (
     <div>
@@ -79,7 +86,7 @@ const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
       {canPlay && (
         <Slider
           className={styles.slider}
-          domain={[0, toSliderValue(duration)]}
+          domain={[toSliderValue(start), toSliderValue(end || duration)]}
           step={1}
           values={[toSliderValue(time)]}
           onChange={([value]) => {
@@ -137,7 +144,7 @@ const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
           isPlaying={isPlaying}
         />
         <div className={styles.timeLabel}>
-          {formatHrMinSec(time)} / {formatHrMinSec(duration)}
+          {formatHrMinSec(time - start)} / {formatHrMinSec((end || duration) - start)}
         </div>
       </div>
     </div>

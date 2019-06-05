@@ -11,6 +11,7 @@ import { ThumbUpOutlineIcon, ChevronRightIcon } from 'mdi-react';
 import Button from 'src/components/Button';
 import { Link } from 'react-router-dom';
 import LikeButton from './components/LikeButton';
+import Player from 'src/components/Player';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
@@ -24,12 +25,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    marginTop: 80,
+    marginTop: 20,
     padding: 20,
     width: '100%',
   }),
   main: css({
-    display: 'flex',
     overflow: 'visible',
     position: 'relative',
     width: '100%',
@@ -75,7 +75,12 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id, likeClip, unlikeClip }) =
       )}
       renderSuccess={clipData => (
         <>
-          <ClipPlayer clip={clipData} />
+          <Player
+            audioUrl={`${clipData.audio}#time=${clipData.start},${clipData.end}`}
+            title={clipData.title}
+            start={clipData.start}
+            end={clipData.end}
+          />
           <div className={styles.bottomContainer}>
             <LikeButton
               {...{
