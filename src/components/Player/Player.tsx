@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../AudioNew';
@@ -17,7 +17,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '6px 30px 10px 4px',
+    padding: '12px 30px 10px 4px',
   }),
   timeLabel: css(fonts.text300, {}),
   slider: css({
@@ -25,9 +25,12 @@ const styles = {
       backgroundColor: colors.gray50,
     },
     cursor: 'pointer',
-    position: 'relative',
-    width: '100%',
+    position: 'absolute',
+    left: 2,
+    right: 2,
     height: 4,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
     transition: 'background-color 300ms ease-out',
   }),
   handle: css({
@@ -37,7 +40,7 @@ const styles = {
     height: 14,
     width: 14,
     borderRadius: 7,
-    top: -4,
+    top: -5,
     transform: 'translateX(-7px)',
   }),
   rail: css({
@@ -48,8 +51,8 @@ const styles = {
     width: '100%',
   }),
   track: css({
-    borderRadius: 8,
     backgroundColor: colors.tertiary100,
+    borderTopLeftRadius: 4,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -59,70 +62,72 @@ const styles = {
   }),
 };
 
-// create 'convert' function instead ot * 100 / 100
-// forward/back doesn't update slider still
+const toSliderValue = (seconds: number) => Math.round(seconds * 100);
+const toSeconds = (value: number) => value / 100;
 
 const Player: React.FC<PlayerProps> = ({ audioUrl, title }) => {
-  const ref = React.useRef<HTMLAudioElement>(null);
+  const ref = useRef<HTMLAudioElement>(null);
   const {
     state: { canPlay, duration, isPlaying, setTime, time },
     controls,
   } = useAudioControls(ref);
-  const values = useRef([time]);
-  values.current[0] = Math.round(time * 100);
-  console.log('time', time);
-  console.log(values);
+  const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
 
   return (
     <div>
       <Audio src={audioUrl} title={title} audioRef={ref} />
-      <Slider
-        className={styles.slider}
-        domain={[0, Math.round(duration * 100)]}
-        step={1}
-        values={values.current}
-        onChange={([value]) => {
-          console.log('seeking', value / 100);
-          controls.seek(value / 100);
-        }}
-        onUpdate={([value]) => {
-          if (!value) {
-            return;
-          }
-          console.log('value', value);
-          setTime(value / 100);
-        }}
-      >
-        <Rail>{({ getRailProps }) => <div className={styles.rail} {...getRailProps()} />}</Rail>
-        <Tracks right={false}>
-          {({ tracks, getTrackProps }) => (
-            <div>
-              {tracks.map(({ id, source, target }) => (
-                <div
-                  key={id}
-                  className={styles.track}
-                  style={{ width: `${target.percent}%` }}
-                  {...getTrackProps()}
-                />
-              ))}
-            </div>
-          )}
-        </Tracks>
-        <Handles>
-          {({ handles, getHandleProps }) => (
-            <div>
-              {handles.map(({ id, percent }) => (
-                <div
-                  className={styles.handle}
-                  key={id}
-                  style={{ left: `${percent}%` }}
-                  {...getHandleProps(id)}
-                />
-              ))}
-            </div>
-          )}
-        </Handles>
-      </Slider>
+      {canPlay && (
+        <Slider
+          className={styles.slider}
+          domain={[0, toSliderValue(duration)]}
+          step={1}
+          values={[toSliderValue(time)]}
+          onChange={([value]) => {
+            controls.seek(toSeconds(value));
+            if (isSeeking && isSeeking.isPlaying) {
+              controls.play();
+            }
+            setIsSeeking(null);
+          }}
+          onUpdate={([value]) => {
+            setTime(toSeconds(value));
+          }}
+          onSlideStart={() => {
+            setIsSeeking({ isPlaying });
+            controls.pause();
+          }}
+        >
+          <Rail>{({ getRailProps }) => <div className={styles.rail} {...getRailProps()} />}</Rail>
+          <Tracks right={false}>
+            {({ tracks, getTrackProps }) => (
+              <div>
+                {tracks.map(({ id, source, target }) => (
+                  <div
+                    key={id}
+                    className={styles.track}
+                    style={{ width: `${target.percent}%` }}
+                    {...getTrackProps()}
+                  />
+                ))}
+              </div>
+            )}
+          </Tracks>
+          <Handles>
+            {({ handles, getHandleProps }) => (
+              <div>
+                {handles.map(({ id, percent }) => (
+                  <div
+                    className={styles.handle}
+                    key={id}
+                    style={{ left: `${percent}%` }}
+                    {...getHandleProps(id)}
+                  />
+                ))}
+              </div>
+            )}
+          </Handles>
+        </Slider>
+      )}
       <div className={styles.controlsContainer}>
         <PlayerControls
           canPlay={canPlay}

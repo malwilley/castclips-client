@@ -16,6 +16,7 @@ const styles = {
     overflow: 'visible',
     width: '100%',
     maxWidth: 700,
+    position: 'relative',
   }),
   success: css({
     display: 'flex',

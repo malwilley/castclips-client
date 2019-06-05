@@ -1,4 +1,5 @@
 import React from 'react';
+import { isNil } from 'ramda';
 
 type AudioState = {
   time: number;
@@ -77,7 +78,9 @@ const useAudioControls = (ref: React.RefObject<HTMLAudioElement>) => {
       ref.current && ref.current.pause();
     },
     seek: (time: number) => {
-      ref.current && (ref.current.currentTime = Math.min(duration, Math.max(0, time)));
+      const truncated = Math.min(duration, Math.max(0, time));
+      setTime(truncated);
+      ref.current && (ref.current.currentTime = truncated);
     },
   };
 
