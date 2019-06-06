@@ -7,7 +7,7 @@ import { colors } from 'src/styles';
 import { isNil } from 'ramda';
 import PreviewButton from './PreviewButton';
 import { ArrowRightIcon } from 'mdi-react';
-import CreateClipModal from '../episode/components/CreateClipModal';
+import CreateClipModal from './CreateClipModal';
 import ShareButton from './ShareButton';
 import ShowHideClipOptions from './ShowHideClipOptions';
 

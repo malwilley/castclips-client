@@ -1,17 +1,15 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import { HttpRequest } from 'src/types';
-import ClipPlayer from 'src/modules/clip/ClipPlayer';
 import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
 import { ClipMetadata } from './types';
 import TextSkeleton from 'src/components/TextSkeleton';
 import { colors, fonts } from 'src/styles';
-import { ThumbUpOutlineIcon, ChevronRightIcon } from 'mdi-react';
-import Button from 'src/components/Button';
+import { ChevronRightIcon } from 'mdi-react';
 import { Link } from 'react-router-dom';
 import LikeButton from './components/LikeButton';
-import Player from 'src/components/Player';
+import PlayerWithState from 'src/components/Player/PlayerWithState';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
@@ -75,7 +73,7 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id, likeClip, unlikeClip }) =
       )}
       renderSuccess={clipData => (
         <>
-          <Player
+          <PlayerWithState
             audioUrl={`${clipData.audio}#time=${clipData.start},${clipData.end}`}
             title={clipData.title}
             start={clipData.start}

@@ -1,22 +1,27 @@
 import React from 'react';
 import { isNil } from 'ramda';
 
-type AudioState = {
+export type AudioState = {
   time: number;
   duration: number;
   isPlaying: boolean;
   canPlay: boolean;
+  setTime: (time: number) => void;
 };
 
-type AudioControls = {
+export type AudioControls = {
   play: () => void;
   pause: () => void;
   seek: (time: number) => void;
 };
 
+export type AudioControlsResult = { state: AudioState; controls: AudioControls };
+
 // https://github.com/streamich/react-use/blob/master/src/util/createHTMLMediaHook.ts
 
-const useAudioControls = (ref: React.RefObject<HTMLAudioElement>) => {
+const useAudioControls = (
+  ref: React.RefObject<HTMLAudioElement>
+): { state: AudioState; controls: AudioControls } => {
   const [time, setTime] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);

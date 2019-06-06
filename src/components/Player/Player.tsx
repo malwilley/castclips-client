@@ -2,12 +2,13 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../AudioNew';
-import useAudioControls from 'src/hooks/useAudioControls';
+import useAudioControls, { AudioControlsResult } from 'src/hooks/useAudioControls';
 import { colors, fonts } from 'src/styles';
 import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
 
-type PlayerProps = {
+type PlayerProps = AudioControlsResult & {
+  audioRef: React.RefObject<HTMLAudioElement>;
   audioUrl: string;
   title: string;
   start?: number;
@@ -67,12 +68,16 @@ const styles = {
 const toSliderValue = (seconds: number) => Math.round(seconds * 100);
 const toSeconds = (value: number) => value / 100;
 
-const Player: React.FC<PlayerProps> = ({ audioUrl, title, start = 0, end }) => {
-  const ref = useRef<HTMLAudioElement>(null);
-  const {
-    state: { canPlay, duration, isPlaying, setTime, time },
-    controls,
-  } = useAudioControls(ref);
+const Player: React.FC<PlayerProps> = ({
+  audioRef,
+  audioUrl,
+  title,
+  start = 0,
+  end,
+  state,
+  controls,
+}) => {
+  const { canPlay, duration, isPlaying, setTime, time } = state;
   const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
   useEffect(() => {
     if (time >= (end || duration)) {
@@ -82,7 +87,7 @@ const Player: React.FC<PlayerProps> = ({ audioUrl, title, start = 0, end }) => {
 
   return (
     <div>
-      <Audio src={audioUrl} title={title} audioRef={ref} />
+      <Audio src={audioUrl} title={title} audioRef={audioRef} />
       {canPlay && (
         <Slider
           className={styles.slider}
