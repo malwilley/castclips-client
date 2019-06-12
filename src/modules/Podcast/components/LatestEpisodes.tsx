@@ -54,7 +54,7 @@ const styles = {
       marginRight: 10,
     }),
     textIconGreen: css({
-      color: colors.green,
+      color: colors.green200,
     }),
     titleDescriptionContainer: css({
       gridTemplateAreas: 'middle',

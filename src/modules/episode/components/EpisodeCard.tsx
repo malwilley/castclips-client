@@ -60,14 +60,23 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
   return (
     <div className={styles.success}>
       <Player audioRef={ref} audioUrl={audio} title={title} {...audioStateControls} />
-      {/* todo: make sure start can't come before end and vice versa */}
       <EpisodePlayerClipOptions
         start={start}
         end={end}
         time={time}
         duration={duration}
-        handleSetStart={() => setStart(time)}
-        handleSetEnd={() => setEnd(time)}
+        handleSetStart={newTime => {
+          if (end && newTime > end) {
+            setEnd(null);
+          }
+          setStart(newTime);
+        }}
+        handleSetEnd={newTime => {
+          if (start && newTime < start) {
+            setStart(null);
+          }
+          setEnd(newTime);
+        }}
         previewing={previewing}
         handlePreviewStart={handlePreviewStart}
         handlePreviewStop={handlePreviewStop}

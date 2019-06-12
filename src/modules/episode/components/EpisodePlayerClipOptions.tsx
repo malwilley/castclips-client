@@ -16,8 +16,8 @@ type EpisodePlayerClipOptionsProps = {
   end: Maybe<number>;
   time: number;
   duration: number;
-  handleSetStart: () => void;
-  handleSetEnd: () => void;
+  handleSetStart: (time: number) => void;
+  handleSetEnd: (time: number) => void;
   previewing: boolean;
   handlePreviewStart: () => void;
   handlePreviewStop: () => void;
@@ -66,12 +66,18 @@ const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = ({
               <ClipPreview start={start} end={end} time={time} length={duration} />
               <div className={styles.timespanContainer}>
                 <TimeRecorder
+                  currentTime={time}
                   time={start}
                   handleRecordClick={handleSetStart}
                   placeholder="Start time"
                 />
                 <ArrowRightIcon className={styles.timespanRangeIcon} size={16} />
-                <TimeRecorder time={end} handleRecordClick={handleSetEnd} placeholder="End time" />
+                <TimeRecorder
+                  currentTime={time}
+                  time={end}
+                  handleRecordClick={handleSetEnd}
+                  placeholder="End time"
+                />
               </div>
               <div className={styles.buttonsContainer}>
                 <PreviewButton
@@ -83,7 +89,7 @@ const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = ({
                   {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
                     <>
                       {modalIsOpen && clipBoundsSet && (
-                        <CreateClipModal start={start!} end={end!} handleClose={toggle} />
+                        <CreateClipModal start={start!} end={end!} handleClose={toggleModal} />
                       )}
                       <ShareButton active={clipBoundsSet} onClick={toggleModal} />
                     </>
