@@ -69,13 +69,13 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
           if (end && newTime > end) {
             setEnd(null);
           }
-          setStart(newTime);
+          setStart(Math.max(0, newTime));
         }}
         handleSetEnd={newTime => {
           if (start && newTime < start) {
             setStart(null);
           }
-          setEnd(newTime);
+          setEnd(Math.min(duration, newTime));
         }}
         previewing={previewing}
         handlePreviewStart={handlePreviewStart}

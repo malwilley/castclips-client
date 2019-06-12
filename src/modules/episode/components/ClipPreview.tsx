@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
+import { isNil } from 'ramda';
 
 type ClipPreviewProps = {
   time: number;
@@ -41,11 +42,13 @@ const styles = {
 
 const ClipPreview: React.FC<ClipPreviewProps> = ({ end, length, start, time }) => (
   <div className={styles.main}>
-    {start && (
+    {!isNil(start) && (
       <div className={styles.startEndNeedle} style={{ left: `${(start / length) * 100}%` }} />
     )}
-    {end && <div className={styles.startEndNeedle} style={{ left: `${(end / length) * 100}%` }} />}
-    {start && end && (
+    {!isNil(end) && (
+      <div className={styles.startEndNeedle} style={{ left: `${(end / length) * 100}%` }} />
+    )}
+    {!isNil(start) && !isNil(end) && (
       <div
         className={styles.completedClip}
         style={{ left: `${(start / length) * 100}%`, right: `${(1 - end / length) * 100}%` }}
