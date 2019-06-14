@@ -1,12 +1,13 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { Store, AppState } from 'src/redux/types';
+import { Store } from 'src/redux/types';
 import { actions } from './redux/actions';
 import { UserData } from './types';
+import config from 'src/config';
 
 const app = firebase.initializeApp({
-  apiKey: 'AIzaSyCDNk16gnJo4FHVLfqD-l_vEYZH8MCkcJo',
-  authDomain: 'castclips-7c579.firebaseapp.com',
+  apiKey: config.firebase.apiKey,
+  authDomain: config.firebase.authHost,
 });
 
 const auth = app.auth();

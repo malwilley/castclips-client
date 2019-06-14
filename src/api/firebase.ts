@@ -13,14 +13,16 @@ import {
   GetHotClipsResponse,
 } from './types';
 import { SearchType } from 'src/modules/search/types';
+import config from 'src/config';
 
-const host = 'https://us-central1-castclips-7c579.cloudfunctions.net/api';
+const host = config.firebase.apiHost;
 
 const fetchFirebase = async <TResponse>(
   route: string,
   token?: string,
   options: RequestInit = {}
 ): Promise<TResponse> => {
+  await fetch(host + '/health');
   const response = await fetch(host + route, {
     ...options,
     headers: token
