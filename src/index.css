@@ -26,8 +26,6 @@
   --card-height-large: 250px;
 
   --modal-dropshadow: 0 2px 3px 0 rgba(60,64,67,0.3),0 6px 10px 4px rgba(60,64,67,0.15);
-
-  --svg-dropshadow: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.2))
 }
 
 html {
@@ -38,62 +36,20 @@ html {
   box-sizing: inherit;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: var(--color-light);
+  background-color: #fdfdff;
   color: var(--color-darkest);
   font-family: var(--p-font);
   font-weight: var(--normal-weight);
   overflow-x: hidden;
-}
-
-.page-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  clear: both;
-  position: relative;
-}
-
-.hero, .hero-large {
-  height: 250px;
-  background-image: var(--color-primary);
-  color: var(--color-light);
-}
-
-.hero-large {
-  height: 400px;
-}
-
-@media (max-width: 500px) {
-  .hero {
-    height: 120px;
-  }
-}
-
-.card {
-  background-color: var(--color-lightest);
-  color: var(--color-dark);
-  box-shadow: var(--card-dropshadow);
-  width: 95%;
-  max-width: 700px;
-  border-radius: var(--border-radius);
-  max-height: 250px;
-  overflow: hidden;
-}
-
-.card h3 {
-  color: var(--color-darkest);
-}
-
-@media (max-width: 500px) {
-  .card {
-    max-height: 150px;
-  }
-  .card h3, p {
-    font-size: 14px;
-  }
 }
 
 h1, h2, h3, h4, h5 {
@@ -121,107 +77,4 @@ input {
 ul, li {
   list-style: none;
   margin: 0;
-}
-
-/* Background utilities */
-
-.bg-primary {
-  background-color: var(--color-primary);
-}
-.bg-secondary {
-  background-color: var(--color-secondary);
-}
-.bg-tertiary {
-  background-color: var(--color-tertiary);
-}
-.bg-light {
-  background-color: var(--color-light);
-}
-.bg-lightest {
-  background-color: var(--color-lightest);
-}
-.bg-dark {
-  background-color: var(--color-dark);
-}
-.bg-darkest {
-  background-color: var(--color-darkest);
-}
-
-/* Text color utilites */
-
-.darkest {
-  color: var(--color-darkest)
-}
-.dark {
-  color: var(--color-dark)
-}
-.light {
-  color: var(--color-light)
-}
-.lightest {
-  color: var(--color-lightest)
-}
-
-/* image utilities */
-
-.icon {
-  object-fit: cover;
-}
-
-.icon-large {
-  width: 2.5em;
-  height: 2.5em;
-}
-
-.svg-primary {
-  fill: var(--color-primary);
-}
-
-.svg-bold {
-  fill: var(--color-darkest);
-}
-
-.svg-soft {
-  fill: var(--color-dark);
-}
-
-/* text utilities */
-
-.overflow-ellipsis {
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.no-wrap {
-  white-space: nowrap;
-}
-
-/* button utilities */
-
-.clickable {
-  cursor: pointer;
-}
-
-/* link utilities */
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* animations */
-
-.slide-in {
-  animation: slide-in ease-out 300ms;
-}
-
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(20%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

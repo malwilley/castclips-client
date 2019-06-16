@@ -14,18 +14,20 @@ const styles = {
   main: css({
     backgroundColor: colors.lightest,
     color: colors.gray600,
-    boxShadow: boxShadow.normal3,
+    border: `1px solid ${colors.gray50}`,
     borderRadius: 8,
     overflow: 'hidden',
   }),
-  mainHoverable: css({
-    '&:hover': {
-      boxShadow: boxShadow.normal3Hover,
-      zIndex: zIndex.card,
-    },
-    position: 'relative',
-    transition: 'box-shadow 200ms ease-out',
-  }),
+  mainHoverable: (border: boolean) =>
+    css({
+      '&:hover': {
+        border: border ? '1px solid transparent' : 'none',
+        boxShadow: boxShadow.normal3Hover,
+        zIndex: zIndex.card,
+      },
+      position: 'relative',
+      transition: 'all 250ms ease-out',
+    }),
   feature: css({
     boxShadow: boxShadow.prominent,
     border: 'none',
@@ -43,7 +45,12 @@ const styles = {
 
 const Card: React.SFC<CardProps> = ({ children, className, feature = false, to }) => (
   <div
-    className={css(styles.main, feature && styles.feature, to && styles.mainHoverable, className)}
+    className={css(
+      styles.main,
+      feature && styles.feature,
+      to && styles.mainHoverable(!feature),
+      className
+    )}
   >
     {to && <Link className={styles.link} to={to} />}
     {children}

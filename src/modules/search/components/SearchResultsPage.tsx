@@ -9,6 +9,7 @@ import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
 import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
+import LayoutContainer from 'src/components/LayoutContainer';
 
 type SearchResultsPageProps = {
   query: string;
@@ -22,10 +23,8 @@ type SearchResultsPageConnectedProps = SearchResultsPageProps & {
 };
 
 const styles = {
-  contentContainer: css({
-    maxWidth: 800,
-    margin: '0 auto',
-    padding: '30px 10px 20px 10px',
+  container: css({
+    marginTop: 40,
   }),
   resultsHeader: css({
     '& > strong': {
@@ -54,7 +53,7 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
   return (
     <div>
       <Header />
-      <div className={styles.contentContainer}>
+      <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} setSearch={setSearch} type={type} />
         <h2 className={styles.resultsHeader}>
           Search results for <strong>{query}</strong>
@@ -78,7 +77,7 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
             </div>
           )}
         />
-      </div>
+      </LayoutContainer>
     </div>
   );
 };

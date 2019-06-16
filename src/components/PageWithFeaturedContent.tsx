@@ -2,6 +2,8 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import Header from 'src/modules/header';
+import BoxContainer from './BoxContainer';
+import zIndex from 'src/styles/zIndex';
 
 type PageWithFeaturedContentProps = {
   bodyContent: React.ReactNode;
@@ -19,7 +21,7 @@ const styles = {
     },
     display: 'grid',
     gridTemplateColumns: '1fr 1200px 1fr',
-    gridTemplateRows: 'auto auto auto 40px auto',
+    gridTemplateRows: 'auto auto auto 6px auto',
   }),
   body: css({
     gridColumnStart: 2,
@@ -36,17 +38,19 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: zIndex.card,
   }),
   header: css({
     gridRowStart: 1,
     gridRowEnd: 2,
     gridColumn: '1 / -1',
   }),
-  hero: css({
-    backgroundImage: colors.gradient2,
+  heroContainer: css({
     gridRowStart: 2,
     gridRowEnd: 4,
     gridColumn: '1 / -1',
+    backgroundImage: colors.gradient2,
+    zIndex: zIndex.background,
   }),
   titleContainer: css({
     '@media (max-width: 800px)': {
@@ -58,6 +62,7 @@ const styles = {
     gridColumnEnd: 3,
     color: colors.lightest,
     padding: '60px 0',
+    zIndex: zIndex.card,
   }),
 };
 
@@ -67,7 +72,7 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
   titleContent,
 }) => (
   <div className={styles.main}>
-    <div className={styles.hero} />
+    <BoxContainer className={styles.heroContainer} bottom top />
     <div className={styles.titleContainer}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>

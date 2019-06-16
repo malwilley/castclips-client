@@ -44,17 +44,20 @@ const styles = {
     borderRadius: 8,
     padding: '12px 18px',
   }),
-  right: css(fonts.heading300, {
+  jumpToEpisode: css(fonts.heading300, {
     '& > :not(:last-child)': {
       marginRight: 6,
     },
     '&:hover': {
+      border: `1px solid ${colors.gray50}`,
       color: colors.gray700,
     },
+    border: '1px solid transparent',
+    borderRadius: 8,
     display: 'flex',
     alignItems: 'center',
     color: colors.gray500,
-    padding: '6px 8px',
+    padding: '10px 16px',
     transition: 'color 200ms ease-out',
   }),
 };
@@ -89,7 +92,7 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id, likeClip, unlikeClip }) =
                 numLikes: clipData.likesCount,
               }}
             />
-            <Link className={styles.right} to={`/episode/${clipData.episode.id}`}>
+            <Link className={styles.jumpToEpisode} to={`/episode/${clipData.episode.id}`}>
               <span>Jump to full episode</span> <ChevronRightIcon size={18} />
             </Link>
           </div>

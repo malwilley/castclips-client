@@ -21,9 +21,9 @@ const styles = {
     backgroundColor: colors.lightest,
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
-    borderBottom: `1px solid ${colors.gray100}`,
-    borderLeft: `1px solid ${colors.gray100}`,
-    borderTop: `1px solid ${colors.gray100}`,
+    borderBottom: `1px solid ${colors.gray50}`,
+    borderLeft: `1px solid ${colors.gray50}`,
+    borderTop: `1px solid ${colors.gray50}`,
     overflow: 'hidden',
   }),
   input: css(fonts.text200, {
@@ -36,16 +36,17 @@ const styles = {
   }),
   clipboardButton: css({
     ':hover': {
-      backgroundColor: colors.gray50,
+      backgroundColor: colors.secondary20,
     },
     backgroundColor: colors.gray20,
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
-    border: `1px solid ${colors.gray100}`,
-    color: colors.gray200,
+    border: `1px solid ${colors.gray50}`,
+    color: colors.gray500,
     height: '100%',
     width: 50,
     padding: 8,
+    transition: 'background-color 200ms ease-out',
   }),
 };
 
@@ -83,7 +84,7 @@ const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
         <input className={styles.input} onClick={selectOnClick} ref={ref} value={text} />
       </div>
       <Button className={styles.clipboardButton} onClick={copyToClipboard}>
-        <ClipboardTextOutlineIcon />
+        <ClipboardTextOutlineIcon size={20} />
       </Button>
     </div>
   );

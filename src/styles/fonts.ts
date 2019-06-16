@@ -33,6 +33,10 @@ const fonts = {
     ...heading,
     fontSize: '1rem',
   }),
+  heading200: css({
+    ...heading,
+    fontSize: '0.8rem',
+  }),
   text300: css({
     ...text,
     fontSize: '1rem',

@@ -23,32 +23,34 @@ const styles = {
   }),
   attributeContainer: css({
     display: 'flex',
+    flexWrap: 'wrap',
     marginTop: 8,
   }),
   podEpSection: {
     main: css({
-      backgroundColor: colors.secondary20,
+      // backgroundColor: colors.gray20,
+      borderTop: `1px solid ${colors.gray50}`,
     }),
     container: css({
       display: 'flex',
     }),
     thumbnail: css({
-      height: 100,
-      width: 100,
+      height: 80,
+      width: 80,
       flexShrink: 0,
     }),
     titlesContainer: css({
       flexGrow: 1,
       padding: '14px 20px',
     }),
-    podTitle: css(fonts.heading300, {
+    podTitle: css(fonts.heading200, {
       lineHeight: 1,
-      color: colors.secondary600,
+      color: colors.gray700,
       marginBottom: 6,
     }),
-    epTitle: css(fonts.heading300, {
+    epTitle: css(fonts.heading200, {
       lineHeight: 1,
-      color: colors.secondary400,
+      color: colors.gray300,
     }),
   },
 };
@@ -66,8 +68,7 @@ const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
 );
 
 const HotClip: React.FC<HotClipProps> = ({ clip }) => (
-  <Card className={styles.main} to={`/clip/${clip.id}`}>
-    <PodcastEpisodeSection clip={clip} />
+  <Card className={styles.main} feature to={`/clip/${clip.id}`}>
     <div className={styles.container}>
       <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
       <h3>{clip.title}</h3>
@@ -86,6 +87,7 @@ const HotClip: React.FC<HotClipProps> = ({ clip }) => (
         </div>
       </div>
     </div>
+    <PodcastEpisodeSection clip={clip} />
   </Card>
 );
 

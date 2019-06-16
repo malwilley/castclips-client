@@ -73,7 +73,7 @@ const styles = {
   }),
   shareButton: css({
     '&:hover': {
-      boxShadow: 'var(--modal-dropshadow)',
+      transform: 'scale(1.2)',
     },
     alignItems: 'center',
     borderRadius: '50%',
@@ -82,7 +82,7 @@ const styles = {
     height: 30,
     justifyContent: 'center',
     width: 30,
-    transition: 'box-shadow 300ms ease-out',
+    transition: 'transform 200ms ease-out',
   }),
   shareButtonFacebook: css({
     backgroundColor: '#3C5A99',

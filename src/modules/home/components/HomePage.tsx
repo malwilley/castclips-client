@@ -2,14 +2,13 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import Header from 'src/modules/header';
-import Typeahead from 'src/modules/search/components/Typeahead';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { HomeState } from '../types';
-import HotClip from './HotClip';
-import HttpContent from 'src/components/HttpContent';
-import LayoutContainer from 'src/components/LayoutContainer';
+import BoxContainer from 'src/components/BoxContainer';
+import TextPointer from './TextPointer';
+import HotClips from './HotClips';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;
@@ -17,45 +16,35 @@ type HomePageConnectedProps = {
 };
 
 const styles = {
-  main: css({
-    display: 'grid',
-    gridTemplateRows: '[gradient] 700px',
-  }),
   gradientContainer: css({
-    display: 'grid',
-    gridTemplateRows: '[header] auto [title] 1fr [search] 1fr',
-    gridTemplateArea: 'gradient',
     backgroundImage: colors.gradient2,
+    height: 500,
+  }),
+  shareContainer: css({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+  }),
+  shareText: css({
+    fontSize: '2.5rem',
     color: colors.lightest,
-  }),
-  clipsContainer: css({
-    '@media (max-width: 1200px)': {
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
-    '@media (max-width: 800px)': {
-      gridTemplateColumns: 'repeat(1, 1fr)',
-      padding: '0 20px',
-    },
-    marginTop: -150,
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    columnGap: 20,
-    rowGap: 20,
-    padding: '0 40px',
-    maxWidth: 1400,
-  }),
-  header: css({
-    gridTemplateArea: 'header',
-    background: 'none',
-  }),
-  headerText: css({
-    '@media (max-width: 800px)': {
-      marginTop: 40,
-    },
-    gridTemplateArea: 'title',
-    marginTop: 150,
     textAlign: 'center',
-    fontSize: '3rem',
+    letterSpacing: '0.05em',
+  }),
+  hotClipsBox: css({
+    backgroundImage:
+      'radial-gradient( circle farthest-corner at 36.4% 18.8%,  rgba(243,149,94,1) 1.3%, rgba(236,173,7,1) 100.2% )',
+    height: 500,
+  }),
+  hotClipsContainer: css({
+    paddingTop: 60,
+  }),
+  hotClipsText: css({
+    textAlign: 'center',
+    color: colors.gray500,
+    fontSize: '2.5rem',
   }),
   search: css({
     gridTemplateArea: 'search',
@@ -69,24 +58,25 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
   }, [fetchHotClips]);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.gradientContainer}>
-        <Header className={styles.header} showSearch={false} />
-        <h1 className={styles.headerText}>Share your favorite podcast moments</h1>
-        <Typeahead className={styles.search} />
-      </div>
-      <LayoutContainer className={styles.clipsContainer}>
-        <HttpContent
-          request={hotClips}
-          renderSuccess={clips => (
-            <>
-              {clips.map(clip => (
-                <HotClip clip={clip} key={clip.id} />
-              ))}
-            </>
-          )}
-        />
-      </LayoutContainer>
+    <div>
+      <Header />
+      <BoxContainer
+        className={styles.gradientContainer}
+        containerClassName={styles.shareContainer}
+        top
+      >
+        <TextPointer direction="up">Try searching for a podcast you like</TextPointer>
+        <h1 className={styles.shareText}>Share your favorite podcast moments</h1>
+        <TextPointer direction="down">Or see what's popular</TextPointer>
+      </BoxContainer>
+      <BoxContainer
+        className={styles.hotClipsBox}
+        containerClassName={styles.hotClipsContainer}
+        bottom
+      >
+        <h2 className={styles.hotClipsText}>🔥 Hot clips</h2>
+      </BoxContainer>
+      <HotClips hotClips={hotClips} />
     </div>
   );
 };

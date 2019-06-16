@@ -10,14 +10,14 @@ type SectionHeaderProps = {
 
 const styles = {
   main: css({
-    color: colors.gray600,
+    color: colors.gray800,
     marginBottom: '1rem',
   }),
   text: css({
     marginBottom: 4,
   }),
   underline: css({
-    backgroundColor: colors.tertiary,
+    backgroundColor: colors.tertiary100,
     height: 3,
     width: 40,
     borderRadius: 2,
