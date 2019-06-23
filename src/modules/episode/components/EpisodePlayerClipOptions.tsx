@@ -37,10 +37,13 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+    padding: '0 16px',
   }),
   timespanRangeIcon: css({
     color: colors.gray200,
-    margin: '0 20px',
+    flexBasis: 50,
+    textAlign: 'center',
+    flexShrink: 1,
   }),
 };
 

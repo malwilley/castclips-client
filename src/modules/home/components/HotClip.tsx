@@ -2,12 +2,13 @@ import * as React from 'react';
 import { ClipMetadata } from 'src/modules/clip/types';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors, boxShadow } from 'src/styles';
+import { colors } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
-import { distanceInWords } from 'date-fns';
+import distanceInWords from 'date-fns/distance_in_words';
 import fonts from 'src/styles/fonts';
-import { CalendarDayIcon, ClockOutlineIcon, ThumbUpOutlineIcon } from 'mdi-react';
-import formatClipLength from 'src/utils/formatClipLength';
+import { CalendarDayIcon, ThumbUpOutlineIcon, HeartIcon } from 'mdi-react';
+import Timestamp from 'src/components/Timestamp';
+import formatClipAge from 'src/utils/formatClipAge';
 
 type HotClipProps = {
   clip: ClipMetadata;
@@ -21,27 +22,33 @@ const styles = {
     padding: 20,
     position: 'relative',
   }),
+  footerContainer: css({
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    marginTop: 8,
+  }),
   attributeContainer: css({
     display: 'flex',
     flexWrap: 'wrap',
-    marginTop: 8,
   }),
   podEpSection: {
     main: css({
-      // backgroundColor: colors.gray20,
       borderTop: `1px solid ${colors.gray50}`,
     }),
     container: css({
       display: 'flex',
     }),
     thumbnail: css({
-      height: 80,
-      width: 80,
+      borderRadius: 4,
+      height: 60,
+      width: 60,
       flexShrink: 0,
+      margin: 10,
     }),
     titlesContainer: css({
       flexGrow: 1,
-      padding: '14px 20px',
+      padding: '14px 20px 14px 0',
     }),
     podTitle: css(fonts.heading200, {
       lineHeight: 1,
@@ -72,19 +79,18 @@ const HotClip: React.FC<HotClipProps> = ({ clip }) => (
     <div className={styles.container}>
       <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
       <h3>{clip.title}</h3>
-      <div className={styles.attributeContainer}>
-        <div className={fonts.attribute300}>
-          <ThumbUpOutlineIcon size={14} />
-          {clip.likesCount} points
+      <div className={styles.footerContainer}>
+        <div className={styles.attributeContainer}>
+          <div className={fonts.attribute300}>
+            <HeartIcon size={14} />
+            {clip.likesCount}
+          </div>
+          <div className={fonts.attribute300}>
+            <CalendarDayIcon size={14} />
+            {formatClipAge(clip.published)}
+          </div>
         </div>
-        <div className={fonts.attribute300}>
-          <ClockOutlineIcon size={14} />
-          {formatClipLength(clip.end - clip.start)}
-        </div>
-        <div className={fonts.attribute300}>
-          <CalendarDayIcon size={14} />
-          {distanceInWords(clip.published, Date.now())} ago
-        </div>
+        <Timestamp seconds={clip.end - clip.start} />
       </div>
     </div>
     <PodcastEpisodeSection clip={clip} />

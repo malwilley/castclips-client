@@ -40,24 +40,7 @@ export type AddClipPayload = {
 
 export type GetHotClipsResponse = GetClipResponse[];
 
-export type GetClipsForPodcastResponse = {
-  audio: string;
-  description: string;
-  id: string;
-  end: number;
-  episode: {
-    id: string;
-    title: string;
-    description: string;
-    audioLength: number;
-    published: string;
-  };
-  published: string;
-  stars: number;
-  start: number;
-  title: string;
-  views: number;
-};
+export type GetClipsForPodcastResponse = GetClipResponse[];
 
 export type GetClipsForEpisodeResponse = GetClipResponse[];
 

@@ -14,16 +14,11 @@ type EpisodeCardProps = {
 const styles = {
   main: css({
     display: 'flex',
+    flexDirection: 'column',
     overflow: 'visible',
     width: '100%',
     maxWidth: 700,
     position: 'relative',
-  }),
-  success: css({
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    textAlign: 'left',
   }),
 };
 
@@ -58,7 +53,7 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
   };
 
   return (
-    <div className={styles.success}>
+    <React.Fragment>
       <Player audioRef={ref} audioUrl={audio} title={title} {...audioStateControls} />
       <EpisodePlayerClipOptions
         start={start}
@@ -81,7 +76,7 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
         handlePreviewStart={handlePreviewStart}
         handlePreviewStop={handlePreviewStop}
       />
-    </div>
+    </React.Fragment>
   );
 };
 

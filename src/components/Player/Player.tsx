@@ -22,7 +22,9 @@ const styles = {
     justifyContent: 'space-between',
     padding: '12px 30px 10px 4px',
   }),
-  timeLabel: css(fonts.text300, {}),
+  timeLabel: css(fonts.text300, {
+    color: colors.gray700,
+  }),
   slider: css({
     '&:hover': {
       backgroundColor: colors.gray50,

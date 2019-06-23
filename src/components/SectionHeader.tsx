@@ -23,7 +23,7 @@ const styles = {
     borderRadius: 2,
   }),
   light: css({
-    color: colors.light,
+    color: colors.lightest,
   }),
   top: css({
     marginTop: '2rem',

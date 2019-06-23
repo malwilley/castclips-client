@@ -25,8 +25,6 @@ const styles = {
   }),
   description: css({
     color: colors.gray600,
-    maxHeight: 180,
-    overflow: 'hidden',
   }),
   published: css({
     '& > svg': {

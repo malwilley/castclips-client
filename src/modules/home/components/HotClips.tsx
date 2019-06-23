@@ -13,7 +13,6 @@ const styles = {
     '@media (max-width: 800px)': {
       padding: '0 10px',
     },
-    marginTop: -350,
     display: 'grid',
     alignItems: 'start',
     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',

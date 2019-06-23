@@ -9,6 +9,7 @@ export default {
   primaryAlpha30: 'rgba(7, 104, 159, 0.3)',
   primaryDark: '#004267',
   secondary: '#a2d5f2',
+  secondary10: '#eff9ff',
   secondary20: '#ecf6fc',
   secondary50: '#c7e5f7',
   secondary80: '#a2d5f2',

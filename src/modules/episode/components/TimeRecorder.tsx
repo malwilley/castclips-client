@@ -15,16 +15,16 @@ type TimeRecorderProps = {
 
 const styles = {
   main: css({
-    '& > :not(:last-child)': {
-      borderBottom: `1px solid ${colors.gray80}`,
-    },
-    height: 150,
-    width: 150,
+    flexBasis: 150,
     color: colors.gray600,
     border: `1px solid ${colors.gray80}`,
     borderRadius: 8,
     fontWeight: 'bold',
     overflow: 'hidden',
+  }),
+  inputContainer: css({
+    borderBottom: `1px solid ${colors.gray80}`,
+    borderTop: `1px solid ${colors.gray80}`,
   }),
   input: css({
     '&::placeholder': {
@@ -42,9 +42,9 @@ const styles = {
     background: colors.green20,
     color: colors.green500,
   }),
-  recordButton: css({
+  recordButton: css(fonts.heading300, {
     '&:hover': {
-      backgroundColor: colors.secondary20,
+      backgroundColor: colors.secondary10,
     },
     height: 50,
     color: colors.primary500,
@@ -58,9 +58,11 @@ const styles = {
     display: 'flex',
     height: 50,
   }),
-  setTimeText: css(fonts.attribute300, {
+  setTimeText: css({
     color: colors.primary500,
     margin: 0,
+    fontWeight: 'bold',
+    fontSize: '0.9rem',
   }),
 };
 
@@ -73,7 +75,6 @@ const makeAdjustTimeHandler = ({
   timeModifier: number;
 }) => () => {
   const newTime = time ? time + timeModifier : currentTime + timeModifier;
-  console.log(newTime);
   handleRecordClick(newTime);
 };
 
@@ -123,17 +124,19 @@ const TimeRecorder: React.FC<TimeRecorderProps> = ({
           +1
         </Button>
       </div>
-      <input
-        className={css(styles.input, !isNil(time) && styles.inputSet)}
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        onBlur={() => {
-          handleRecordClick(parseInput(value));
-        }}
-        placeholder={placeholder}
-      />
+      <div className={styles.inputContainer}>
+        <input
+          className={css(styles.input, !isNil(time) && styles.inputSet)}
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          onBlur={() => {
+            handleRecordClick(parseInput(value));
+          }}
+          placeholder={placeholder}
+        />
+      </div>
       <Button className={styles.recordButton} onClick={() => handleRecordClick(currentTime)}>
-        <div className={styles.setTimeText}>set current time</div>
+        <div className={styles.setTimeText}>Set current time</div>
       </Button>
     </div>
   );

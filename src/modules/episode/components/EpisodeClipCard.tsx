@@ -1,11 +1,21 @@
 import * as React from 'react';
-import { EyeOutlineIcon, StarOutlineIcon, ClockOutlineIcon, ThumbUpOutlineIcon } from 'mdi-react';
+import {
+  EyeOutlineIcon,
+  StarOutlineIcon,
+  ClockOutlineIcon,
+  ThumbUpOutlineIcon,
+  HeartIcon,
+  CalendarDayIcon,
+} from 'mdi-react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
 import formatClipLength from 'src/utils/formatClipLength';
 import { ClipMetadata } from 'src/modules/clip/types';
+import Timestamp from 'src/components/Timestamp';
+import formatPublishDate from 'src/utils/formatPublishDate';
+import formatClipAge from 'src/utils/formatClipAge';
 
 type EpisodeClipCardProps = {
   className?: string;
@@ -28,22 +38,7 @@ const styles = {
     padding: 20,
     position: 'relative',
   }),
-  textIcon: css({
-    '& > :last-child': {
-      marginLeft: 6,
-    },
-    color: colors.gray100,
-    display: 'flex',
-    alignItems: 'center',
-  }),
-  iconText: css({
-    '& > :first-child': {
-      marginRight: 6,
-    },
-    color: colors.gray100,
-    display: 'flex',
-    alignItems: 'center',
-  }),
+  iconText: css(fonts.attribute300),
   likeViews: css({
     '> :not(:last-child)': {
       marginRight: 16,
@@ -60,18 +55,15 @@ const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, epi
     <div className={styles.footer}>
       <div className={styles.likeViews}>
         <span className={styles.iconText}>
-          <ThumbUpOutlineIcon size="1.2em" />
+          <HeartIcon />
           {clip.likesCount}
         </span>
         <span className={styles.iconText}>
-          <EyeOutlineIcon size="1.2em" />
-          {clip.views}
+          <CalendarDayIcon />
+          {formatClipAge(clip.published)}
         </span>
       </div>
-      <span className={styles.iconText}>
-        <ClockOutlineIcon size="1.2em" />
-        {formatClipLength(clip.end - clip.start)}
-      </span>
+      <Timestamp seconds={clip.end - clip.start} />
     </div>
   </Card>
 );

@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { colors, boxShadow } from 'src/styles';
 import Button from 'src/components/Button';
 import { ThumbUpOutlineIcon, ThumbUpIcon, HeartIcon } from 'mdi-react';
+import SecondaryButton from 'src/components/SecondaryButton';
 
 type LikeButtonProps = {
   id: string;
@@ -15,14 +16,8 @@ type LikeButtonProps = {
 
 const styles = {
   main: css({
-    '&:hover': {
-      backgroundColor: colors.secondary20,
-    },
-    color: colors.gray700,
-    border: `1px solid ${colors.gray50}`,
-    borderRadius: 8,
-    padding: '10px 18px',
     transition: '200ms background-color ease-out',
+    padding: '0 14px 0 8px',
   }),
   icon: css({
     color: colors.gray50,
@@ -48,10 +43,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({
   ]);
 
   return (
-    <Button className={styles.main} onClick={onClick}>
+    <SecondaryButton className={styles.main} onClick={onClick}>
       <HeartIcon className={css(styles.icon, hasLiked && styles.iconSelected)} size={20} />
       <span>{numLikes || 0}</span>
-    </Button>
+    </SecondaryButton>
   );
 };
 

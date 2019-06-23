@@ -10,12 +10,14 @@ const text: CSSObject = {
 };
 const attribute: CSSObject = {
   '& > svg': {
+    height: '1.2em',
+    width: '1.2em',
     marginRight: '0.5em',
   },
   display: 'flex',
   alignItems: 'center',
   fontWeight: 'bold',
-  textTransform: 'uppercase',
+  // textTransform: 'uppercase',
   color: colors.gray200,
   marginRight: '1em',
 };
@@ -47,7 +49,7 @@ const fonts = {
   }),
   attribute300: css({
     ...attribute,
-    fontSize: '0.7rem',
+    fontSize: '0.8rem',
     letterSpacing: '0.05rem',
   }),
 };

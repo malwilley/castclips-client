@@ -1,39 +1,17 @@
 import * as React from 'react';
-import Button, { ButtonProps } from 'src/components/Button';
-import { css } from 'emotion';
-import { colors, borderRadius } from 'src/styles';
-import { PlayCircleIcon, CancelIcon, StopCircleIcon } from 'mdi-react';
+import { ButtonProps } from 'src/components/Button';
+import { PlayCircleIcon, StopCircleIcon } from 'mdi-react';
+import SecondaryButton from 'src/components/SecondaryButton';
 
 type PreviewButtonProps = ButtonProps & {
   previewing: boolean;
 };
 
-const styles = {
-  main: css({
-    '&:disabled': {
-      opacity: 0.5,
-    },
-    border: `1px solid ${colors.gray600}`,
-    fontWeight: 'bold',
-    color: colors.gray600,
-    height: 42,
-    borderRadius: 8,
-    padding: '0 20px',
-  }),
-  icon: css({
-    marginLeft: 8,
-  }),
-};
-
 const PreviewButton: React.FC<PreviewButtonProps> = ({ previewing, ...props }) => (
-  <Button className={styles.main} {...props}>
+  <SecondaryButton {...props}>
     {previewing ? 'Previewing...' : 'Preview'}
-    {previewing ? (
-      <StopCircleIcon className={styles.icon} size={20} />
-    ) : (
-      <PlayCircleIcon className={styles.icon} size={20} />
-    )}
-  </Button>
+    {previewing ? <StopCircleIcon size={20} /> : <PlayCircleIcon size={20} />}
+  </SecondaryButton>
 );
 
 export default PreviewButton;

@@ -78,7 +78,7 @@ export const getClipsForEpisode = async (episodeId: string) => {
 };
 
 export const getClipsForPodcast = async (podcastId: string) => {
-  const result = await fetchFirebase<GetClipsForPodcastResponse[]>(
+  const result = await fetchFirebase<GetClipsForPodcastResponse>(
     `/podcast/${podcastId}/clips/`,
     ''
   );

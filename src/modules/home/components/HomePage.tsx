@@ -9,6 +9,7 @@ import { HomeState } from '../types';
 import BoxContainer from 'src/components/BoxContainer';
 import TextPointer from './TextPointer';
 import HotClips from './HotClips';
+import { FireIcon } from 'mdi-react';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;
@@ -18,7 +19,7 @@ type HomePageConnectedProps = {
 const styles = {
   gradientContainer: css({
     backgroundImage: colors.gradient2,
-    height: 500,
+    height: 300,
   }),
   shareContainer: css({
     display: 'flex',
@@ -33,18 +34,23 @@ const styles = {
     textAlign: 'center',
     letterSpacing: '0.05em',
   }),
-  hotClipsBox: css({
-    backgroundImage:
-      'radial-gradient( circle farthest-corner at 36.4% 18.8%,  rgba(243,149,94,1) 1.3%, rgba(236,173,7,1) 100.2% )',
-    height: 500,
-  }),
   hotClipsContainer: css({
+    backgroundImage:
+      'linear-gradient( 200deg, rgba(196,214,252,1) 1%, rgba(196,214,252,.1) 70.9% )',
     paddingTop: 60,
+    paddingBottom: 60,
   }),
   hotClipsText: css({
+    '& > svg': {
+      marginRight: 12,
+    },
     textAlign: 'center',
-    color: colors.gray500,
-    fontSize: '2.5rem',
+    color: colors.gray600,
+    fontSize: '2rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 40,
   }),
   search: css({
     gridTemplateArea: 'search',
@@ -69,14 +75,12 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
         <h1 className={styles.shareText}>Share your favorite podcast moments</h1>
         <TextPointer direction="down">Or see what's popular</TextPointer>
       </BoxContainer>
-      <BoxContainer
-        className={styles.hotClipsBox}
-        containerClassName={styles.hotClipsContainer}
-        bottom
-      >
-        <h2 className={styles.hotClipsText}>🔥 Hot clips</h2>
-      </BoxContainer>
-      <HotClips hotClips={hotClips} />
+      <div className={styles.hotClipsContainer}>
+        <h2 className={styles.hotClipsText}>
+          <FireIcon size={30} /> Hot clips
+        </h2>
+        <HotClips hotClips={hotClips} />
+      </div>
     </div>
   );
 };
