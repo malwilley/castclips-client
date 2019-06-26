@@ -30,7 +30,7 @@ const styles = {
     },
     display: 'flex',
     justifyContent: 'flex-end',
-    padding: 16,
+    padding: '20px 30px',
   }),
   timespanContainer: css({
     display: 'flex',

@@ -7,14 +7,14 @@ const styles = {
     '& > :not(:last-child)': {
       marginRight: 20,
     },
-    height: 70,
+    height: 80,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
-    backgroundColor: colors.secondary20,
+    backgroundColor: colors.gray20,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: '0 16px',
+    padding: '0 20px',
   }),
 };
 

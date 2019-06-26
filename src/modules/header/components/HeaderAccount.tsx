@@ -43,14 +43,14 @@ const styles = {
     transition: '250ms color ease-out',
   }),
   dropdown: css({
-    backgroundColor: colors.lightest,
+    backgroundColor: colors.white,
     borderRadius: 8,
     padding: '10px 0',
     position: 'absolute',
     top: 54,
     right: 0,
     width: 200,
-    boxShadow: boxShadow.prominent,
+    boxShadow: boxShadow.card,
   }),
   dropdownItem: css({
     '&:hover': {
@@ -79,7 +79,7 @@ const styles = {
     width: 34,
     borderRadius: '50%',
     backgroundColor: colors.primary500,
-    color: colors.lightest,
+    color: colors.white,
     lineHeight: 1,
     display: 'flex',
     justifyContent: 'center',

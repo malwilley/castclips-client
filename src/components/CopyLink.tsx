@@ -18,7 +18,7 @@ const styles = {
   inputContainer: css({
     flexGrow: 1,
     width: 0,
-    backgroundColor: colors.lightest,
+    backgroundColor: colors.white,
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
     borderBottom: `1px solid ${colors.gray50}`,

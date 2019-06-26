@@ -42,7 +42,7 @@ const styles = {
   }),
   subTitle: css({
     '& > a': {
-      color: colors.lightest,
+      color: colors.white,
       marginLeft: 4,
     },
     color: colors.secondary,

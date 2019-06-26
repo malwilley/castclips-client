@@ -22,7 +22,7 @@ const styles = {
     margin: '0.2rem 0 0 0',
   }),
   link: css({
-    color: colors.lightest,
+    color: colors.white,
     textDecoration: 'underline',
     fontWeight: 'bold',
   }),
@@ -33,7 +33,7 @@ const Footer: React.FC = () => (
     <BoxContainer className={styles.main} top>
       <LayoutContainer className={styles.content}>
         <div>
-          <Logo color={colors.lightest} height={23} width={100} />
+          <Logo color={colors.white} height={23} width={100} />
           <p className={styles.text}>
             Create, edit, and share clips from your favorite podcasts
             <br />

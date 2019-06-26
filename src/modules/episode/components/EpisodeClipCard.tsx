@@ -1,21 +1,10 @@
 import * as React from 'react';
-import {
-  EyeOutlineIcon,
-  StarOutlineIcon,
-  ClockOutlineIcon,
-  ThumbUpOutlineIcon,
-  HeartIcon,
-  CalendarDayIcon,
-} from 'mdi-react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { fonts, colors } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
-import formatClipLength from 'src/utils/formatClipLength';
 import { ClipMetadata } from 'src/modules/clip/types';
-import Timestamp from 'src/components/Timestamp';
-import formatPublishDate from 'src/utils/formatPublishDate';
-import formatClipAge from 'src/utils/formatClipAge';
+import ClipCardAttributes from 'src/components/ClipCardAttributes';
 
 type EpisodeClipCardProps = {
   className?: string;
@@ -24,14 +13,11 @@ type EpisodeClipCardProps = {
 };
 
 const styles = {
-  description: css({
+  description: css(fonts.text200, {
     maxHeight: 100,
     overflow: 'hidden',
-  }),
-  footer: css({
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'space-between',
+    color: colors.gray300,
+    margin: '0.8em 0',
   }),
   main: css({
     height: 'auto',
@@ -45,26 +31,17 @@ const styles = {
     },
     display: 'flex',
   }),
+  title: css(fonts.heading300, {
+    color: colors.gray700,
+  }),
 };
 
 const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, episodeLength }) => (
   <Card className={css(styles.main, className)} to={`/clip/${clip.id}`}>
     <ClipCardAccent end={clip.end} length={episodeLength} start={clip.start} />
-    <h3>{clip.title}</h3>
+    <h3 className={styles.title}>{clip.title}</h3>
     <p className={styles.description}>{clip.description}</p>
-    <div className={styles.footer}>
-      <div className={styles.likeViews}>
-        <span className={styles.iconText}>
-          <HeartIcon />
-          {clip.likesCount}
-        </span>
-        <span className={styles.iconText}>
-          <CalendarDayIcon />
-          {formatClipAge(clip.published)}
-        </span>
-      </div>
-      <Timestamp seconds={clip.end - clip.start} />
-    </div>
+    <ClipCardAttributes clip={clip} />
   </Card>
 );
 

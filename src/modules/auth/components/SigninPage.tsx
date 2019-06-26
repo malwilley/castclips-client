@@ -27,7 +27,7 @@ const styles = {
     zIndex: zIndex.card,
   }),
   hero: css({
-    background: colors.gradient2,
+    background: colors.gradient,
     height: 400,
   }),
   heroContainer: css({
@@ -38,7 +38,7 @@ const styles = {
     marginBottom: 6,
   }),
   textContainer: css({
-    color: colors.lightest,
+    color: colors.white,
     textAlign: 'center',
   }),
 };

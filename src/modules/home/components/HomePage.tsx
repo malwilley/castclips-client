@@ -18,7 +18,7 @@ type HomePageConnectedProps = {
 
 const styles = {
   gradientContainer: css({
-    backgroundImage: colors.gradient2,
+    backgroundImage: colors.gradient,
     height: 300,
   }),
   shareContainer: css({
@@ -29,14 +29,17 @@ const styles = {
     padding: 20,
   }),
   shareText: css({
+    '@media (max-width: 800px)': {
+      fontSize: '2rem',
+    },
     fontSize: '2.5rem',
-    color: colors.lightest,
+    color: colors.white,
     textAlign: 'center',
     letterSpacing: '0.05em',
+    lineHeight: 1,
   }),
   hotClipsContainer: css({
-    backgroundImage:
-      'linear-gradient( 200deg, rgba(196,214,252,1) 1%, rgba(196,214,252,.1) 70.9% )',
+    backgroundImage: 'linear-gradient(190deg, rgba(196,214,252,1) 1%, rgba(196,214,252,0) 70.9% )',
     paddingTop: 60,
     paddingBottom: 60,
   }),

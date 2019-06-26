@@ -69,8 +69,8 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
       icon={<ScissorsIcon />}
       primaryButtonProps={
         clipId.type === 'fetching'
-          ? { active: false, text: 'Creating...' }
-          : { onClick: handleCreate, text: 'Create' }
+          ? { active: false, children: 'Creating...' }
+          : { onClick: handleCreate, children: 'Create' }
       }
       title="Create a clip"
     >

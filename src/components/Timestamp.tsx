@@ -10,7 +10,7 @@ type TimestampProps = {
 
 const styles = {
   main: css(fonts.heading200, {
-    color: colors.gray500,
+    color: colors.gray700,
     border: `1px solid ${colors.gray50}`,
     padding: '4px 8px',
     borderRadius: 4,

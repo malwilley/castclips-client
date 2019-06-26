@@ -4,11 +4,8 @@ import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
-import distanceInWords from 'date-fns/distance_in_words';
 import fonts from 'src/styles/fonts';
-import { CalendarDayIcon, ThumbUpOutlineIcon, HeartIcon } from 'mdi-react';
-import Timestamp from 'src/components/Timestamp';
-import formatClipAge from 'src/utils/formatClipAge';
+import ClipCardAttributes from 'src/components/ClipCardAttributes';
 
 type HotClipProps = {
   clip: ClipMetadata;
@@ -20,12 +17,8 @@ const styles = {
   }),
   container: css({
     padding: 20,
-    position: 'relative',
   }),
   footerContainer: css({
-    display: 'flex',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
     marginTop: 8,
   }),
   attributeContainer: css({
@@ -35,6 +28,7 @@ const styles = {
   podEpSection: {
     main: css({
       borderTop: `1px solid ${colors.gray50}`,
+      position: 'relative',
     }),
     container: css({
       display: 'flex',
@@ -64,6 +58,7 @@ const styles = {
 
 const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
   <div className={styles.podEpSection.main}>
+    <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
     <div className={styles.podEpSection.container}>
       <img className={styles.podEpSection.thumbnail} src={clip.podcast.thumbnail} />
       <div className={styles.podEpSection.titlesContainer}>
@@ -77,21 +72,8 @@ const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
 const HotClip: React.FC<HotClipProps> = ({ clip }) => (
   <Card className={styles.main} feature to={`/clip/${clip.id}`}>
     <div className={styles.container}>
-      <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
       <h3>{clip.title}</h3>
-      <div className={styles.footerContainer}>
-        <div className={styles.attributeContainer}>
-          <div className={fonts.attribute300}>
-            <HeartIcon size={14} />
-            {clip.likesCount}
-          </div>
-          <div className={fonts.attribute300}>
-            <CalendarDayIcon size={14} />
-            {formatClipAge(clip.published)}
-          </div>
-        </div>
-        <Timestamp seconds={clip.end - clip.start} />
-      </div>
+      <ClipCardAttributes className={styles.footerContainer} clip={clip} />
     </div>
     <PodcastEpisodeSection clip={clip} />
   </Card>

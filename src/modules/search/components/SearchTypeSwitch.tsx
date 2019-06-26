@@ -27,8 +27,8 @@ const styles = {
     letterSpacing: 1,
   }),
   optionSelected: css({
-    background: colors.gradient2,
-    color: colors.lightest,
+    background: colors.gradient,
+    color: colors.white,
   }),
 };
 

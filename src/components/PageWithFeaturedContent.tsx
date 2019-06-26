@@ -50,7 +50,7 @@ const styles = {
     gridRowStart: 2,
     gridRowEnd: 4,
     gridColumn: '1 / -1',
-    backgroundImage: colors.gradient2,
+    backgroundImage: colors.gradient,
     zIndex: zIndex.background,
   }),
   titleContainer: css({
@@ -61,7 +61,7 @@ const styles = {
     gridRowEnd: 3,
     gridColumnStart: 2,
     gridColumnEnd: 3,
-    color: colors.lightest,
+    color: colors.white,
     padding: '60px 0',
     zIndex: zIndex.card,
   }),

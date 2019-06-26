@@ -20,7 +20,7 @@ const styles = {
     borderRadius: 8,
     display: 'flex',
     background: colors.primary500,
-    color: colors.lightest,
+    color: colors.white,
     padding: '0 20px',
     height: 42,
     transition: 'background-color 200ms ease-out, opacity 200ms ease-out',

@@ -6,6 +6,7 @@ import Player from 'src/components/Player';
 import React, { useState, useRef, useEffect } from 'react';
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
 import useAudioControls from 'src/hooks/useAudioControls';
+import { clamp } from 'ramda';
 
 type EpisodeCardProps = {
   episode: EpisodeState['metadata'];
@@ -64,13 +65,13 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
           if (end && newTime > end) {
             setEnd(null);
           }
-          setStart(Math.max(0, newTime));
+          setStart(clamp(0, duration, newTime));
         }}
         handleSetEnd={newTime => {
           if (start && newTime < start) {
             setStart(null);
           }
-          setEnd(Math.min(duration, newTime));
+          setEnd(clamp(0, duration, newTime));
         }}
         previewing={previewing}
         handlePreviewStart={handlePreviewStart}

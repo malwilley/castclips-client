@@ -45,20 +45,23 @@ const styles = {
     padding: '12px 18px',
   }),
   jumpToEpisode: css(fonts.heading300, {
+    '& > svg': {
+      transition: 'transform 250ms ease-out',
+    },
     '& > :not(:last-child)': {
       marginRight: 6,
     },
     '&:hover': {
-      border: `1px solid ${colors.gray50}`,
+      '& > svg': {
+        transform: 'translateX(4px)',
+      },
       color: colors.gray700,
     },
-    border: '1px solid transparent',
-    borderRadius: 8,
     display: 'flex',
     alignItems: 'center',
-    color: colors.gray500,
-    padding: '10px 16px',
-    transition: 'color 200ms ease-out',
+    color: colors.gray300,
+    padding: '8px 4px',
+    transition: 'color 250ms ease-out',
   }),
 };
 

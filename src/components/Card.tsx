@@ -12,7 +12,7 @@ type CardProps = {
 
 const styles = {
   main: css({
-    backgroundColor: colors.lightest,
+    backgroundColor: colors.white,
     color: colors.gray600,
     border: `1px solid ${colors.gray50}`,
     borderRadius: 8,
@@ -22,14 +22,14 @@ const styles = {
     css({
       '&:hover': {
         border: border ? '1px solid transparent' : 'none',
-        boxShadow: boxShadow.normal3Hover,
+        boxShadow: border ? boxShadow.card : boxShadow.cardHover,
         zIndex: zIndex.card,
       },
       position: 'relative',
       transition: 'all 250ms ease-out',
     }),
   feature: css({
-    boxShadow: boxShadow.prominent,
+    boxShadow: boxShadow.card,
     border: 'none',
   }),
   link: css({

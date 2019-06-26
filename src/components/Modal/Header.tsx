@@ -22,7 +22,7 @@ const styles = {
   }),
   icon: css({
     '& > svg': {
-      fill: colors.primary500,
+      fill: colors.secondary500,
       height: 12,
       width: 12,
     },
@@ -32,7 +32,7 @@ const styles = {
     height: 28,
     width: 28,
     borderRadius: '50%',
-    backgroundColor: colors.primaryAlpha30,
+    backgroundColor: colors.secondary50,
   }),
   iconTitleContainer: css({
     '& > :not(:last-child)': {
@@ -45,7 +45,7 @@ const styles = {
     height: 60,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    backgroundColor: colors.lightest,
+    backgroundColor: colors.white,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
