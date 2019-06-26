@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { ClockOutlineIcon, StarOutlineIcon, EyeOutlineIcon } from 'mdi-react';
-import { colors } from 'src/styles';
-import { PodcastClip } from '../types';
-import formatClipLength from 'src/utils/formatClipLength';
+import { colors, fonts } from 'src/styles';
+import { ClipMetadata } from 'src/modules/clip/types';
+import ClipCardAttributes from 'src/components/ClipCardAttributes';
+import ClipCardAccent from 'src/components/ClipCardAccent';
 
 type PodcastClipCardProps = {
-  clip: PodcastClip;
+  clip: ClipMetadata;
 };
 
 const styles = {
@@ -18,11 +18,6 @@ const styles = {
     color: colors.gray200,
   }),
   footer: css({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    fontSize: 14,
-    lineHeight: 1,
     marginTop: 12,
   }),
   textIcon: css({
@@ -33,13 +28,9 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
   }),
-  iconText: css({
-    '& > :first-child': {
-      marginRight: 6,
-    },
-    color: colors.gray200,
-    display: 'flex',
-    alignItems: 'center',
+  iconText: css(fonts.attribute300),
+  title: css({
+    marginBottom: 4,
   }),
   viewStars: css({
     '> :not(:last-child)': {
@@ -51,24 +42,10 @@ const styles = {
 
 const PodcastClipCard: React.FC<PodcastClipCardProps> = ({ clip }) => (
   <Card className={styles.main} to={`/clip/${clip.id}`}>
-    <h4>{clip.title}</h4>
+    <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
+    <h4 className={styles.title}>{clip.title}</h4>
     <h5 className={styles.episode}>{clip.episode.title}</h5>
-    <div className={styles.footer}>
-      <span className={styles.iconText}>
-        <ClockOutlineIcon size={18} />
-        <div>{formatClipLength(clip.end - clip.start)}</div>
-      </span>
-      <div className={styles.viewStars}>
-        <span className={styles.textIcon}>
-          <div>{clip.views}</div>
-          <EyeOutlineIcon size={18} />
-        </span>
-        <span className={styles.textIcon}>
-          <div>{clip.stars}</div>
-          <StarOutlineIcon size={18} />
-        </span>
-      </div>
-    </div>
+    <ClipCardAttributes className={styles.footer} clip={clip} />
   </Card>
 );
 

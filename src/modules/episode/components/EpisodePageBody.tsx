@@ -25,8 +25,6 @@ const styles = {
   }),
   description: css({
     color: colors.gray600,
-    maxHeight: 180,
-    overflow: 'hidden',
   }),
   published: css({
     '& > svg': {
@@ -44,7 +42,7 @@ const styles = {
   }),
   subTitle: css({
     '& > a': {
-      color: colors.lightest,
+      color: colors.white,
       marginLeft: 4,
     },
     color: colors.secondary,

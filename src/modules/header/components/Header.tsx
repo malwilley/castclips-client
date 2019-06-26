@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import HeaderAccount from './HeaderAccount';
-import Typeahead from 'src/modules/search/components/Typeahead';
 import HeaderTypeahead from './HeaderTypeahead';
+import Logo from 'src/icons/Logo';
+import zIndex from 'src/styles/zIndex';
 
 type HeaderProps = {
   className?: string;
@@ -13,22 +14,32 @@ type HeaderProps = {
 
 const styles = {
   main: css({
+    '@media (min-width: 1800px)': {
+      maxWidth: 1400,
+    },
     '@media (max-width: 800px)': {
-      height: 120,
-      alignItems: 'flex-start',
+      height: 140,
       paddingTop: 20,
+    },
+    height: 110,
+    position: 'relative',
+    maxWidth: 1200,
+    margin: '0 auto',
+    width: '100%',
+    zIndex: zIndex.card,
+  }),
+  logo: css({
+    gridArea: 'logo',
+  }),
+  logoAccountContainer: css({
+    '@media (max-width: 800px)': {
+      height: 40,
     },
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: colors.lightest,
-    backgroundColor: colors.gunmetal800,
     padding: '0 30px',
-    height: 70,
-    position: 'relative',
-  }),
-  logo: css({
-    gridArea: 'logo',
+    height: '100%',
   }),
   search: css({
     '@media (max-width: 800px)': {
@@ -37,21 +48,24 @@ const styles = {
       right: 0,
       width: '100%',
       padding: '0 20px',
+      bottom: 20,
     },
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
-    bottom: 15,
+    bottom: 30,
     width: 400,
   }),
 };
 
 const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
   <header className={css(styles.main, className)}>
-    <Link className={styles.logo} to="/">
-      <h2>castclips</h2>
-    </Link>
-    <HeaderAccount />
+    <div className={styles.logoAccountContainer}>
+      <Link className={styles.logo} to="/">
+        <Logo height={30} width={130} />
+      </Link>
+      <HeaderAccount />
+    </div>
     {showSearch && (
       <div className={styles.search}>
         <HeaderTypeahead />

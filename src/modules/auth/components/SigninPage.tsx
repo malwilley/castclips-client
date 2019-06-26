@@ -6,6 +6,9 @@ import Header from 'src/modules/header';
 import LayoutContainer from 'src/components/LayoutContainer';
 import { css } from 'emotion';
 import { colors, boxShadow } from 'src/styles';
+import BoxContainer from 'src/components/BoxContainer';
+import Card from 'src/components/Card';
+import zIndex from 'src/styles/zIndex';
 
 const styles = {
   authCenter: css({
@@ -15,26 +18,27 @@ const styles = {
     marginTop: -150,
   }),
   authContainer: css({
-    backgroundColor: colors.lightest,
     height: 300,
     width: 300,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
-    boxShadow: boxShadow.prominent,
+    zIndex: zIndex.card,
   }),
   hero: css({
-    background: colors.gradient2,
+    background: colors.gradient,
     height: 400,
-    paddingTop: 100,
+  }),
+  heroContainer: css({
+    paddingTop: 80,
   }),
   signin: css({
     fontSize: 48,
     marginBottom: 6,
   }),
   textContainer: css({
-    color: colors.lightest,
+    color: colors.white,
     textAlign: 'center',
   }),
 };
@@ -54,16 +58,16 @@ const SigninPage: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className={styles.hero}>
+      <BoxContainer className={styles.hero} containerClassName={styles.heroContainer} top bottom>
         <LayoutContainer className={styles.textContainer}>
           <h2 className={styles.signin}>Sign in</h2>
           <h3>or create an account</h3>
         </LayoutContainer>
-      </div>
+      </BoxContainer>
       <div className={styles.authCenter}>
-        <div className={styles.authContainer}>
+        <Card className={styles.authContainer} feature>
           <StyledFirebaseAuth firebaseAuth={firebaseApp.auth()} uiConfig={uiConfig} />
-        </div>
+        </Card>
       </div>
     </div>
   );

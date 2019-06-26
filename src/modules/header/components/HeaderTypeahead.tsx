@@ -8,28 +8,28 @@ type HeaderTypeaheadProps = {};
 const styles = {
   main: css({
     position: 'relative',
-    height: 40,
+    height: 50,
   }),
   searchContainer: css({
     '& > svg': {
       position: 'absolute',
       right: 20,
-      top: 8,
-      fill: colors.lightest,
+      top: 12,
+      fill: colors.gray300,
     },
     '& > input': {
       '&::placeholder': {
-        color: '#ffffffaa',
+        color: colors.gray300,
       },
       padding: '0 40px 0 24px',
-      color: colors.lightest,
+      color: colors.gray500,
     },
     position: 'relative',
-    backgroundColor: '#ffffff33',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    backgroundColor: colors.gray20,
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
     width: '100%',
     height: '100%',
     transiton: 'background-color 300ms ease-out',

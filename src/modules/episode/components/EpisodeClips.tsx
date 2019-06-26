@@ -18,7 +18,11 @@ type EpisodeClipsConnectedProps = EpisodeClipsProps & {
 };
 
 const styles = {
-  container: css({}),
+  container: css({
+    '& > :not(:last-child)': {
+      marginBottom: 20,
+    },
+  }),
 };
 
 const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({

@@ -81,9 +81,9 @@ const styles = {
     width: 260,
     height: 260,
     borderRadius: 16,
-    border: `6px solid ${colors.lightest}`,
-    boxShadow: boxShadow.prominent,
-    backgroundColor: colors.lightest,
+    border: `6px solid ${colors.white}`,
+    boxShadow: boxShadow.card,
+    backgroundColor: colors.white,
   }),
 };
 

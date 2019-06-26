@@ -2,12 +2,10 @@ import * as React from 'react';
 import { ClipMetadata } from 'src/modules/clip/types';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors, boxShadow } from 'src/styles';
+import { colors } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
-import { distanceInWords } from 'date-fns';
 import fonts from 'src/styles/fonts';
-import { CalendarDayIcon, ClockOutlineIcon, ThumbUpOutlineIcon } from 'mdi-react';
-import formatClipLength from 'src/utils/formatClipLength';
+import ClipCardAttributes from 'src/components/ClipCardAttributes';
 
 type HotClipProps = {
   clip: ClipMetadata;
@@ -19,42 +17,48 @@ const styles = {
   }),
   container: css({
     padding: 20,
-    position: 'relative',
+  }),
+  footerContainer: css({
+    marginTop: 8,
   }),
   attributeContainer: css({
     display: 'flex',
-    marginTop: 8,
+    flexWrap: 'wrap',
   }),
   podEpSection: {
     main: css({
-      backgroundColor: colors.secondary20,
+      borderTop: `1px solid ${colors.gray50}`,
+      position: 'relative',
     }),
     container: css({
       display: 'flex',
     }),
     thumbnail: css({
-      height: 100,
-      width: 100,
+      borderRadius: 4,
+      height: 60,
+      width: 60,
       flexShrink: 0,
+      margin: 10,
     }),
     titlesContainer: css({
       flexGrow: 1,
-      padding: '14px 20px',
+      padding: '14px 20px 14px 0',
     }),
-    podTitle: css(fonts.heading300, {
+    podTitle: css(fonts.heading200, {
       lineHeight: 1,
-      color: colors.secondary600,
+      color: colors.gray700,
       marginBottom: 6,
     }),
-    epTitle: css(fonts.heading300, {
+    epTitle: css(fonts.heading200, {
       lineHeight: 1,
-      color: colors.secondary400,
+      color: colors.gray300,
     }),
   },
 };
 
 const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
   <div className={styles.podEpSection.main}>
+    <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
     <div className={styles.podEpSection.container}>
       <img className={styles.podEpSection.thumbnail} src={clip.podcast.thumbnail} />
       <div className={styles.podEpSection.titlesContainer}>
@@ -66,26 +70,12 @@ const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
 );
 
 const HotClip: React.FC<HotClipProps> = ({ clip }) => (
-  <Card className={styles.main} to={`/clip/${clip.id}`}>
-    <PodcastEpisodeSection clip={clip} />
+  <Card className={styles.main} feature to={`/clip/${clip.id}`}>
     <div className={styles.container}>
-      <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
       <h3>{clip.title}</h3>
-      <div className={styles.attributeContainer}>
-        <div className={fonts.attribute300}>
-          <ThumbUpOutlineIcon size={14} />
-          {clip.likesCount} points
-        </div>
-        <div className={fonts.attribute300}>
-          <ClockOutlineIcon size={14} />
-          {formatClipLength(clip.end - clip.start)}
-        </div>
-        <div className={fonts.attribute300}>
-          <CalendarDayIcon size={14} />
-          {distanceInWords(clip.published, Date.now())} ago
-        </div>
-      </div>
+      <ClipCardAttributes className={styles.footerContainer} clip={clip} />
     </div>
+    <PodcastEpisodeSection clip={clip} />
   </Card>
 );
 

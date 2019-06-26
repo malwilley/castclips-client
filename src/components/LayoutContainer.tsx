@@ -7,8 +7,11 @@ type LayoutContainerProps = {
 
 const styles = {
   main: css({
+    '@media (max-width: 1800px)': {
+      maxWidth: 1040,
+    },
     margin: '0 auto',
-    maxWidth: 1120,
+    maxWidth: 1240,
     padding: '0 20px',
     width: '100%',
   }),

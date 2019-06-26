@@ -3,7 +3,8 @@ import { AppState } from 'src/redux/types';
 import { css } from 'emotion';
 import { colors, boxShadow } from 'src/styles';
 import Button from 'src/components/Button';
-import { ThumbUpOutlineIcon, ThumbUpIcon } from 'mdi-react';
+import { ThumbUpOutlineIcon, ThumbUpIcon, HeartIcon } from 'mdi-react';
+import SecondaryButton from 'src/components/SecondaryButton';
 
 type LikeButtonProps = {
   id: string;
@@ -15,17 +16,15 @@ type LikeButtonProps = {
 
 const styles = {
   main: css({
-    '&:hover': {
-      boxShadow: boxShadow.normal,
-    },
-    color: colors.secondary400,
-    background: colors.secondary20,
-    borderRadius: 8,
-    padding: '12px 18px',
-    transition: '200ms box-shadow ease-out',
+    transition: '200ms background-color ease-out',
+    padding: '0 14px 0 8px',
   }),
   icon: css({
-    marginRight: 12,
+    color: colors.gray50,
+    marginRight: 10,
+  }),
+  iconSelected: css({
+    color: colors.red,
   }),
 };
 
@@ -44,14 +43,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({
   ]);
 
   return (
-    <Button className={styles.main} onClick={onClick}>
-      {hasLiked ? (
-        <ThumbUpIcon className={styles.icon} size={18} />
-      ) : (
-        <ThumbUpOutlineIcon className={styles.icon} size={18} />
-      )}
+    <SecondaryButton className={styles.main} onClick={onClick}>
+      <HeartIcon className={css(styles.icon, hasLiked && styles.iconSelected)} size={20} />
       <span>{numLikes || 0}</span>
-    </Button>
+    </SecondaryButton>
   );
 };
 

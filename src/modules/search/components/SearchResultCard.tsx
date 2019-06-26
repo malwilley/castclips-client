@@ -12,12 +12,8 @@ type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;
 
 const styles = {
   main: css({
-    '&:hover': {
-      boxShadow: 'var(--card-dropshadow-feature)',
-    },
     padding: 20,
     marginBottom: 20,
-    transition: 'box-shadow 300ms ease-out',
   }),
   thumbnail: css({
     '@media (max-width: 600px)': {

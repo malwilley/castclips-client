@@ -33,7 +33,6 @@ const styles = {
       opacity: 0.3,
     },
     padding: 12,
-    color: colors.gray600,
     borderRadius: '50%',
     transition: 'all 200ms ease-out',
   }),
@@ -41,6 +40,7 @@ const styles = {
     '&:not(:last-child)': {
       marginRight: 4,
     },
+    color: colors.gray700,
     display: 'flex',
     marginLeft: -8,
   }),

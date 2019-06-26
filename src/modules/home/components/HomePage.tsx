@@ -2,14 +2,14 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import Header from 'src/modules/header';
-import Typeahead from 'src/modules/search/components/Typeahead';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { HomeState } from '../types';
-import HotClip from './HotClip';
-import HttpContent from 'src/components/HttpContent';
-import LayoutContainer from 'src/components/LayoutContainer';
+import BoxContainer from 'src/components/BoxContainer';
+import TextPointer from './TextPointer';
+import HotClips from './HotClips';
+import { FireIcon } from 'mdi-react';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;
@@ -17,45 +17,43 @@ type HomePageConnectedProps = {
 };
 
 const styles = {
-  main: css({
-    display: 'grid',
-    gridTemplateRows: '[gradient] 700px',
-  }),
   gradientContainer: css({
-    display: 'grid',
-    gridTemplateRows: '[header] auto [title] 1fr [search] 1fr',
-    gridTemplateArea: 'gradient',
-    backgroundImage: colors.gradient2,
-    color: colors.lightest,
+    backgroundImage: colors.gradient,
+    height: 300,
   }),
-  clipsContainer: css({
-    '@media (max-width: 1200px)': {
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
+  shareContainer: css({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+  }),
+  shareText: css({
     '@media (max-width: 800px)': {
-      gridTemplateColumns: 'repeat(1, 1fr)',
-      padding: '0 20px',
+      fontSize: '2rem',
     },
-    marginTop: -150,
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    columnGap: 20,
-    rowGap: 20,
-    padding: '0 40px',
-    maxWidth: 1400,
-  }),
-  header: css({
-    gridTemplateArea: 'header',
-    background: 'none',
-  }),
-  headerText: css({
-    '@media (max-width: 800px)': {
-      marginTop: 40,
-    },
-    gridTemplateArea: 'title',
-    marginTop: 150,
+    fontSize: '2.5rem',
+    color: colors.white,
     textAlign: 'center',
-    fontSize: '3rem',
+    letterSpacing: '0.05em',
+    lineHeight: 1,
+  }),
+  hotClipsContainer: css({
+    backgroundImage: 'linear-gradient(190deg, rgba(196,214,252,1) 1%, rgba(196,214,252,0) 70.9% )',
+    paddingTop: 60,
+    paddingBottom: 60,
+  }),
+  hotClipsText: css({
+    '& > svg': {
+      marginRight: 12,
+    },
+    textAlign: 'center',
+    color: colors.gray600,
+    fontSize: '2rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 40,
   }),
   search: css({
     gridTemplateArea: 'search',
@@ -69,24 +67,23 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
   }, [fetchHotClips]);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.gradientContainer}>
-        <Header className={styles.header} showSearch={false} />
-        <h1 className={styles.headerText}>Share your favorite podcast moments</h1>
-        <Typeahead className={styles.search} />
+    <div>
+      <Header />
+      <BoxContainer
+        className={styles.gradientContainer}
+        containerClassName={styles.shareContainer}
+        top
+      >
+        <TextPointer direction="up">Try searching for a podcast you like</TextPointer>
+        <h1 className={styles.shareText}>Share your favorite podcast moments</h1>
+        <TextPointer direction="down">Or see what's popular</TextPointer>
+      </BoxContainer>
+      <div className={styles.hotClipsContainer}>
+        <h2 className={styles.hotClipsText}>
+          <FireIcon size={30} /> Hot clips
+        </h2>
+        <HotClips hotClips={hotClips} />
       </div>
-      <LayoutContainer className={styles.clipsContainer}>
-        <HttpContent
-          request={hotClips}
-          renderSuccess={clips => (
-            <>
-              {clips.map(clip => (
-                <HotClip clip={clip} key={clip.id} />
-              ))}
-            </>
-          )}
-        />
-      </LayoutContainer>
     </div>
   );
 };

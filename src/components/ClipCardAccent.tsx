@@ -10,7 +10,7 @@ type ClipCardAccentProps = {
 
 const styles = {
   accent: css({
-    backgroundColor: colors.lightest,
+    backgroundColor: colors.white,
     position: 'absolute',
     top: 0,
     left: 0,

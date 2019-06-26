@@ -1,9 +1,6 @@
 import { LazyLoadedData, HttpRequest } from 'src/types';
-import {
-  GetClipsForPodcastResponse,
-  PodcastMetadataResponse,
-  PodcastEpisodeResponse,
-} from 'src/api/types';
+import { PodcastMetadataResponse, PodcastEpisodeResponse } from 'src/api/types';
+import { ClipMetadata } from '../clip/types';
 
 export type PodcastEpisode = Merge<
   PodcastEpisodeResponse,
@@ -18,22 +15,8 @@ export type LazyLoadedEpisodes =
 
 export type PodcastMetadata = Omit<PodcastMetadataResponse, 'episodes'>;
 
-export type PodcastClip = Merge<
-  GetClipsForPodcastResponse,
-  {
-    episode: {
-      id: string;
-      title: string;
-      description: string;
-      audioLength: number;
-      published: Date;
-    };
-    published: Date;
-  }
->;
-
 export type PodcastState = {
-  clips: HttpRequest<PodcastClip[]>;
+  clips: HttpRequest<ClipMetadata[]>;
   episodes: LazyLoadedEpisodes;
   metadata: HttpRequest<PodcastMetadata>;
 };

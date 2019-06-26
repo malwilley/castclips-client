@@ -1,7 +1,7 @@
 import { css } from 'emotion';
 import * as React from 'react';
 
-export type ButtonProps = {
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   active?: boolean;
   className?: string;
   onClick?: () => void;
@@ -29,8 +29,14 @@ const styles = {
   }),
 };
 
-const Button: React.SFC<ButtonProps> = ({ active = true, className, children, onClick }) => (
-  <button className={css(styles.main, className)} disabled={!active} onClick={onClick}>
+const Button: React.SFC<ButtonProps> = ({
+  active = true,
+  className,
+  children,
+  onClick,
+  ...props
+}) => (
+  <button className={css(styles.main, className)} disabled={!active} onClick={onClick} {...props}>
     {children}
   </button>
 );
