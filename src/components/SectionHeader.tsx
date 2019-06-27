@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 
 type SectionHeaderProps = {
   className?: string;
@@ -10,11 +10,13 @@ type SectionHeaderProps = {
 
 const styles = {
   main: css({
-    color: colors.gray800,
+    color: colors.gray700,
     marginBottom: '1rem',
   }),
-  text: css({
+  text: css(fonts.heading100, {
+    letterSpacing: '0.1em',
     marginBottom: 4,
+    textTransform: 'uppercase',
   }),
   underline: css({
     backgroundColor: colors.tertiary100,
@@ -32,7 +34,7 @@ const styles = {
 
 const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className, light, top }) => (
   <div className={css(styles.main, light && styles.light, top && styles.top, className)}>
-    <h6 className={styles.text}>{children}</h6>
+    <h2 className={styles.text}>{children}</h2>
     <div className={styles.underline} />
   </div>
 );

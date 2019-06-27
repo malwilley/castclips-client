@@ -5,7 +5,7 @@ import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
 import { ClipMetadata } from './types';
 import TextSkeleton from 'src/components/TextSkeleton';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts, clickable } from 'src/styles';
 import { ChevronRightIcon } from 'mdi-react';
 import { Link } from 'react-router-dom';
 import LikeButton from './components/LikeButton';
@@ -44,7 +44,7 @@ const styles = {
     borderRadius: 8,
     padding: '12px 18px',
   }),
-  jumpToEpisode: css(fonts.heading300, {
+  jumpToEpisode: css(fonts.heading300, clickable, {
     '& > svg': {
       transition: 'transform 250ms ease-out',
     },
@@ -59,9 +59,9 @@ const styles = {
     },
     display: 'flex',
     alignItems: 'center',
-    color: colors.gray300,
+    color: colors.gray500,
     padding: '8px 4px',
-    transition: 'color 250ms ease-out',
+    transition: 'all 300ms ease-out',
   }),
 };
 

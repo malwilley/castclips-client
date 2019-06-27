@@ -17,14 +17,14 @@ const styles = {
   main: css({
     flexBasis: 150,
     color: colors.gray600,
-    border: `1px solid ${colors.gray80}`,
+    border: `1px solid ${colors.gray50}`,
     borderRadius: 8,
     fontWeight: 'bold',
     overflow: 'hidden',
   }),
   inputContainer: css({
-    borderBottom: `1px solid ${colors.gray80}`,
-    borderTop: `1px solid ${colors.gray80}`,
+    borderBottom: `1px solid ${colors.gray50}`,
+    borderTop: `1px solid ${colors.gray50}`,
   }),
   input: css({
     '&::placeholder': {
@@ -47,19 +47,19 @@ const styles = {
       backgroundColor: colors.secondary10,
     },
     height: 50,
-    color: colors.primary500,
+    color: colors.secondary500,
     transition: '200ms background-color ease-out',
     width: '100%',
   }),
   plusMinusContainer: css({
     '& > :not(:last-child)': {
-      borderRight: `1px solid ${colors.gray80}`,
+      borderRight: `1px solid ${colors.gray50}`,
     },
     display: 'flex',
     height: 50,
   }),
   setTimeText: css({
-    color: colors.primary500,
+    color: colors.secondary500,
     margin: 0,
     fontWeight: 'bold',
     fontSize: '0.9rem',

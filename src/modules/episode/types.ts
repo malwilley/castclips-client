@@ -1,5 +1,5 @@
 import { HttpRequest } from 'src/types';
-import { PodcastMetadata } from '../Podcast/types';
+import { PodcastMetadata } from '../podcast/types';
 import { EpisodeMetadataResponse } from 'src/api/types';
 import { ClipMetadata } from '../clip/types';
 

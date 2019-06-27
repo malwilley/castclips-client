@@ -4,7 +4,7 @@ import Card from 'src/components/Card';
 import CopyLink from 'src/components/CopyLink';
 import HttpContent from 'src/components/HttpContent';
 import { ClipState } from '../types';
-import { colors } from 'src/styles';
+import { colors, clickable } from 'src/styles';
 import { RedditIcon, FacebookIcon, TwitterIcon, UserOutlineIcon } from 'mdi-react';
 import SectionHeader from 'src/components/SectionHeader';
 import ClipContext from './ClipContext';
@@ -71,10 +71,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
   }),
-  shareButton: css({
-    '&:hover': {
-      transform: 'scale(1.2)',
-    },
+  shareButton: css(clickable, {
     alignItems: 'center',
     borderRadius: '50%',
     color: colors.white,
@@ -82,7 +79,6 @@ const styles = {
     height: 30,
     justifyContent: 'center',
     width: 30,
-    transition: 'transform 200ms ease-out',
   }),
   shareButtonFacebook: css({
     backgroundColor: '#3C5A99',

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
-import Audio from '../AudioNew';
+import Audio from '../Audio';
 import useAudioControls, { AudioControlsResult } from 'src/hooks/useAudioControls';
 import { colors, fonts } from 'src/styles';
 import PlayerControls from './PlayerControls';

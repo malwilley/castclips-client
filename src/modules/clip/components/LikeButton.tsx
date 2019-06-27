@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppState } from 'src/redux/types';
 import { css } from 'emotion';
-import { colors, boxShadow } from 'src/styles';
+import { colors, boxShadow, clickable } from 'src/styles';
 import Button from 'src/components/Button';
 import { ThumbUpOutlineIcon, ThumbUpIcon, HeartIcon } from 'mdi-react';
 import SecondaryButton from 'src/components/SecondaryButton';
@@ -15,9 +15,9 @@ type LikeButtonProps = {
 };
 
 const styles = {
-  main: css({
-    transition: '200ms background-color ease-out',
-    padding: '0 14px 0 8px',
+  main: css(clickable, {
+    color: colors.gray700,
+    padding: '6px 10px',
   }),
   icon: css({
     color: colors.gray50,
@@ -43,10 +43,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({
   ]);
 
   return (
-    <SecondaryButton className={styles.main} onClick={onClick}>
-      <HeartIcon className={css(styles.icon, hasLiked && styles.iconSelected)} size={20} />
+    <Button className={styles.main} onClick={onClick}>
+      <HeartIcon className={css(styles.icon, hasLiked && styles.iconSelected)} size={24} />
       <span>{numLikes || 0}</span>
-    </SecondaryButton>
+    </Button>
   );
 };
 

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
 import HeaderAccount from './HeaderAccount';
-import HeaderTypeahead from './HeaderTypeahead';
 import Logo from 'src/icons/Logo';
 import zIndex from 'src/styles/zIndex';
+import SearchBar from 'src/modules/search/components/SearchBar';
+import { clickable } from 'src/styles';
 
 type HeaderProps = {
   className?: string;
@@ -28,7 +28,7 @@ const styles = {
     width: '100%',
     zIndex: zIndex.card,
   }),
-  logo: css({
+  logo: css(clickable, {
     gridArea: 'logo',
   }),
   logoAccountContainer: css({
@@ -53,7 +53,7 @@ const styles = {
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
-    bottom: 30,
+    bottom: 34,
     width: 400,
   }),
 };
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
     </div>
     {showSearch && (
       <div className={styles.search}>
-        <HeaderTypeahead />
+        <SearchBar />
       </div>
     )}
   </header>

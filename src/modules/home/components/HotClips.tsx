@@ -19,6 +19,8 @@ const styles = {
     columnGap: 20,
     rowGap: 20,
     padding: '0 40px',
+    margin: '0 auto',
+    maxWidth: 1400,
   }),
 };
 

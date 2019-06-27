@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 
 type TextPointerProps = {
+  className?: string;
   direction: 'up' | 'down';
 };
 
@@ -14,8 +15,8 @@ const styles = {
   }),
 };
 
-const TextPointer: React.FC<TextPointerProps> = ({ direction, children }) => (
-  <div className={styles.main}>
+const TextPointer: React.FC<TextPointerProps> = ({ className, direction, children }) => (
+  <div className={css(styles.main, className)}>
     {direction === 'up' && (
       <div>
         <ArrowUpIcon size={20} />

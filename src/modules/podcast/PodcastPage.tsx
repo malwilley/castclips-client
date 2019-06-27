@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PodcastCard from 'src/modules/Podcast/PodcastCard';
+import PodcastCard from 'src/modules/podcast/PodcastCard';
 import { thunks } from './redux';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
