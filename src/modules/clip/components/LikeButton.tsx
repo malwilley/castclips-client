@@ -16,6 +16,7 @@ type LikeButtonProps = {
 
 const styles = {
   main: css(clickable, {
+    display: 'flex',
     color: colors.gray700,
     padding: '6px 10px',
   }),

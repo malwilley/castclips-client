@@ -2,7 +2,7 @@ import * as React from 'react';
 import { EpisodeState } from '../types';
 import HttpContent from 'src/components/HttpContent';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, fonts, clickable } from 'src/styles';
 import SectionHeader from 'src/components/SectionHeader';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import EpisodeClips from './EpisodeClips';
@@ -23,7 +23,11 @@ const styles = {
     gridColumnGap: 40,
     gridRowGap: 40,
   }),
-  description: css({
+  description: css(fonts.text300, {
+    '& a': {
+      ...clickable,
+      textDecoration: 'underline',
+    },
     color: colors.gray600,
   }),
   published: css({
