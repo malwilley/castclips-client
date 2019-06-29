@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
+import Input from './Input';
 
 type StyledInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
@@ -38,18 +39,10 @@ const StyledInput: React.SFC<StyledInputProps> = ({
   text,
   ...inputProps
 }) => {
-  const inputEl = React.useRef<HTMLInputElement>(null);
-  React.useEffect(() => {
-    if (focus && inputEl.current) {
-      inputEl.current.focus();
-    }
-  }, [focus, inputEl]);
-
   return (
-    <input
+    <Input
       className={css(styles.input, className)}
-      ref={inputEl}
-      onChange={e => handleTextChange(e.target.value)}
+      handleTextChange={handleTextChange}
       value={text}
       {...inputProps}
     />

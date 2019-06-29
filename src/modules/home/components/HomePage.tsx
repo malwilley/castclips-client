@@ -9,7 +9,6 @@ import { HomeState } from '../types';
 import BoxContainer from 'src/components/BoxContainer';
 import TextPointer from './TextPointer';
 import HotClips from './HotClips';
-import { FireIcon } from 'mdi-react';
 
 type HomePageConnectedProps = {
   fetchHotClips: (num: number) => void;
@@ -19,7 +18,7 @@ type HomePageConnectedProps = {
 const styles = {
   gradientContainer: css({
     backgroundImage: colors.gradient,
-    height: 300,
+    height: 400,
   }),
   shareContainer: css({
     display: 'flex',
@@ -32,28 +31,17 @@ const styles = {
     '@media (max-width: 800px)': {
       fontSize: '2rem',
     },
-    fontSize: '2.5rem',
+    fontSize: '3rem',
     color: colors.white,
     textAlign: 'center',
-    letterSpacing: '0.05em',
     lineHeight: 1,
   }),
-  hotClipsContainer: css({
-    backgroundImage: 'linear-gradient(190deg, rgba(196,214,252,1) 1%, rgba(196,214,252,0) 70.9% )',
-    paddingTop: 60,
-    paddingBottom: 60,
-  }),
-  hotClipsText: css({
-    '& > svg': {
-      marginRight: 12,
-    },
-    textAlign: 'center',
-    color: colors.gray600,
-    fontSize: '2rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  downPointer: css({
     marginBottom: 40,
+  }),
+  hotClipsContainer: css({
+    marginTop: -70,
+    paddingBottom: 60,
   }),
   search: css({
     gridTemplateArea: 'search',
@@ -73,15 +61,15 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
         className={styles.gradientContainer}
         containerClassName={styles.shareContainer}
         top
+        bottom
       >
         <TextPointer direction="up">Try searching for a podcast you like</TextPointer>
-        <h1 className={styles.shareText}>Share your favorite podcast moments</h1>
-        <TextPointer direction="down">Or see what's popular</TextPointer>
+        <h1 className={styles.shareText}>Share your favorite podcast moments.</h1>
+        <TextPointer className={styles.downPointer} direction="down">
+          Or see what's popular
+        </TextPointer>
       </BoxContainer>
       <div className={styles.hotClipsContainer}>
-        <h2 className={styles.hotClipsText}>
-          <FireIcon size={30} /> Hot clips
-        </h2>
         <HotClips hotClips={hotClips} />
       </div>
     </div>

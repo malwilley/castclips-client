@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ClipPage from 'src/modules/clip/ClipPage';
 import EpisodePage from 'src/modules/episode/EpisodePage';
-import PodcastPage from 'src/modules/Podcast/PodcastPage';
+import PodcastPage from 'src/modules/podcast/PodcastPage';
 import SigninPage from './modules/auth/components/SigninPage';
 import HomePage from './modules/home/components/HomePage';
 import SearchResultsPage from './modules/search/components/SearchResultsPage';

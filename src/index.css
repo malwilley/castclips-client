@@ -2,7 +2,7 @@
   --h-font: 'Nunito', sans-serif;
   --p-font: 'Nunito', sans-serif;
   --normal-weight: 400;
-  --bold-weight: 700;
+  --bold-weight: 800;
 
   --color-primary: #07689f;
   --color-primary-dark: #49759c;
@@ -67,6 +67,7 @@ h6 {
 
 input {
   background: none;
+  border: none;
   font-family: var(--p-font);
   outline: none;
   color: inherit;

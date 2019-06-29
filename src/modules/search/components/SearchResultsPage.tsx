@@ -52,7 +52,7 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
 
   return (
     <div>
-      <Header />
+      <Header searchText={query} />
       <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} setSearch={setSearch} type={type} />
         <h2 className={styles.resultsHeader}>

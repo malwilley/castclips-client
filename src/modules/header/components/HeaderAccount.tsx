@@ -10,6 +10,7 @@ import Downshift from 'downshift';
 import { colors, fonts, boxShadow } from 'src/styles';
 import { MenuDownIcon, UserIcon } from 'mdi-react';
 import zIndex from 'src/styles/zIndex';
+import { secondaryButtonStyles } from 'src/components/SecondaryButton';
 
 type HeaderAccountProps = {
   className?: string;
@@ -119,7 +120,7 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
 
 const HeaderAccountLoggedOut: React.FC = () => (
   <>
-    <Link className={styles.signin} to={'/signin'}>
+    <Link className={secondaryButtonStyles} to={'/signin'}>
       Sign in
     </Link>
   </>

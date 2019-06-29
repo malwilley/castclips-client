@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import { colors } from 'src/styles';
 
 type ClipCardAccentProps = {
+  className?: string;
   end: number;
   length: number;
   start: number;
@@ -25,13 +26,13 @@ const styles = {
   }),
 };
 
-const ClipCardAccent: React.FC<ClipCardAccentProps> = ({ end, length, start }) => {
+const ClipCardAccent: React.FC<ClipCardAccentProps> = ({ className, end, length, start }) => {
   const left = (start / length) * 100;
   const calculatedWidth = ((end - start) / length) * 100;
   const width = Math.max(calculatedWidth, Math.min(1, 100 - left));
 
   return (
-    <div className={styles.accent}>
+    <div className={css(styles.accent, className)}>
       <div
         className={styles.accentClipSection}
         style={{

@@ -26,6 +26,10 @@ const styles = {
     flexWrap: 'wrap',
   }),
   podEpSection: {
+    accent: css({
+      top: -1,
+      background: 'none',
+    }),
     main: css({
       borderTop: `1px solid ${colors.gray50}`,
       position: 'relative',
@@ -58,7 +62,12 @@ const styles = {
 
 const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
   <div className={styles.podEpSection.main}>
-    <ClipCardAccent start={clip.start} end={clip.end} length={clip.episode.audioLength} />
+    <ClipCardAccent
+      className={styles.podEpSection.accent}
+      start={clip.start}
+      end={clip.end}
+      length={clip.episode.audioLength}
+    />
     <div className={styles.podEpSection.container}>
       <img className={styles.podEpSection.thumbnail} src={clip.podcast.thumbnail} />
       <div className={styles.podEpSection.titlesContainer}>

@@ -1,5 +1,6 @@
 import { css } from 'emotion';
 import * as React from 'react';
+import { fonts } from 'src/styles';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   active?: boolean;
@@ -8,7 +9,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const styles = {
-  main: css({
+  main: css(fonts.heading300, {
     '&::-moz-focus-inner': {
       border: 0,
       name,
@@ -21,7 +22,6 @@ const styles = {
     border: 0,
     cursor: 'pointer',
     display: 'flex',
-    fontWeight: 'bold',
     justifyContent: 'center',
     outline: 0,
     padding: 0,

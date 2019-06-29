@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
 import HeaderAccount from './HeaderAccount';
-import HeaderTypeahead from './HeaderTypeahead';
 import Logo from 'src/icons/Logo';
 import zIndex from 'src/styles/zIndex';
+import SearchBar from 'src/modules/search/components/SearchBar';
+import { clickable } from 'src/styles';
 
 type HeaderProps = {
   className?: string;
-  showSearch?: boolean;
+  searchText?: string;
 };
 
 const styles = {
@@ -28,7 +28,7 @@ const styles = {
     width: '100%',
     zIndex: zIndex.card,
   }),
-  logo: css({
+  logo: css(clickable, {
     gridArea: 'logo',
   }),
   logoAccountContainer: css({
@@ -53,12 +53,12 @@ const styles = {
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
-    bottom: 30,
+    bottom: 34,
     width: 400,
   }),
 };
 
-const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
+const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
   <header className={css(styles.main, className)}>
     <div className={styles.logoAccountContainer}>
       <Link className={styles.logo} to="/">
@@ -66,11 +66,9 @@ const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
       </Link>
       <HeaderAccount />
     </div>
-    {showSearch && (
-      <div className={styles.search}>
-        <HeaderTypeahead />
-      </div>
-    )}
+    <div className={styles.search}>
+      <SearchBar initialText={searchText} />
+    </div>
   </header>
 );
 

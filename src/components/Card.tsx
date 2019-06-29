@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, boxShadow } from 'src/styles';
+import { colors, boxShadow, clickable } from 'src/styles';
 import { Link } from 'react-router-dom';
 import zIndex from 'src/styles/zIndex';
 
@@ -18,15 +18,15 @@ const styles = {
     borderRadius: 8,
     overflow: 'hidden',
   }),
-  mainHoverable: (border: boolean) =>
-    css({
+  mainHoverable: (feature: boolean) =>
+    css(feature && clickable, {
       '&:hover': {
-        border: border ? '1px solid transparent' : 'none',
-        boxShadow: border ? boxShadow.card : boxShadow.cardHover,
+        border: feature ? 'none' : '1px solid transparent',
+        boxShadow: feature ? boxShadow.cardHover : boxShadow.card,
         zIndex: zIndex.card,
       },
       position: 'relative',
-      transition: 'all 250ms ease-out',
+      transition: 'all 300ms ease-out',
     }),
   feature: css({
     boxShadow: boxShadow.card,
@@ -48,7 +48,7 @@ const Card: React.SFC<CardProps> = ({ children, className, feature = false, to }
     className={css(
       styles.main,
       feature && styles.feature,
-      to && styles.mainHoverable(!feature),
+      to && styles.mainHoverable(feature),
       className
     )}
   >
