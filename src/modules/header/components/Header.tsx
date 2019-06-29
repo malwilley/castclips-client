@@ -9,7 +9,7 @@ import { clickable } from 'src/styles';
 
 type HeaderProps = {
   className?: string;
-  showSearch?: boolean;
+  searchText?: string;
 };
 
 const styles = {
@@ -58,7 +58,7 @@ const styles = {
   }),
 };
 
-const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
+const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
   <header className={css(styles.main, className)}>
     <div className={styles.logoAccountContainer}>
       <Link className={styles.logo} to="/">
@@ -66,11 +66,9 @@ const Header: React.FC<HeaderProps> = ({ className, showSearch = true }) => (
       </Link>
       <HeaderAccount />
     </div>
-    {showSearch && (
-      <div className={styles.search}>
-        <SearchBar />
-      </div>
-    )}
+    <div className={styles.search}>
+      <SearchBar initialText={searchText} />
+    </div>
   </header>
 );
 

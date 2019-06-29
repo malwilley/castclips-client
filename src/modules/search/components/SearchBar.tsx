@@ -10,7 +10,7 @@ import zIndex from 'src/styles/zIndex';
 import { SearchIcon } from 'mdi-react';
 import Button from 'src/components/Button';
 
-type SearchBarProps = { className?: string; initalText?: string };
+type SearchBarProps = { className?: string; initialText?: string };
 
 const styles = {
   main: css(fonts.text300, {
@@ -56,14 +56,14 @@ const styles = {
   }),
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ className, initalText }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
   const dispatch = useDispatch();
-  const [text, setText] = useState('');
+  const [text, setText] = useState(initialText || '');
   useEffect(() => {
-    if (initalText) {
-      setText(initalText);
+    if (initialText) {
+      setText(initialText);
     }
-  }, [initalText]);
+  }, [initialText]);
 
   const canSearch = text.length > 0;
   const search = useCallback(() => {

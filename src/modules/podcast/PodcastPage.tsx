@@ -12,7 +12,6 @@ import PodcastClips from './components/PodcastClips';
 import HttpContent from 'src/components/HttpContent';
 import { colors } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
-import TextSkeleton from 'src/components/TextSkeleton';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 
 type PodcastPageProps = {
