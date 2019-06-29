@@ -8,16 +8,13 @@ const styles = {
       marginRight: 20,
     },
     height: 80,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-    backgroundColor: colors.gray20,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: '0 20px',
+    padding: '0 24px',
   }),
 };
 
-const Footer: React.SFC = ({ children }) => <div className={styles.main}>{children}</div>;
+const ModalFooter: React.SFC = ({ children }) => <div className={styles.main}>{children}</div>;
 
-export default Footer;
+export default ModalFooter;

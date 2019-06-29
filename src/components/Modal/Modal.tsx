@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Background from 'src/components/Modal/Background';
 import { css } from 'emotion';
-import Header, { HeaderProps } from 'src/components/Modal/Header';
-import Footer from 'src/components/Modal/Footer';
-import { colors } from 'src/styles';
+import ModalHeader, { ModalHeaderProps } from 'src/components/Modal/ModalHeader';
+import ModalFooter from 'src/components/Modal/ModalFooter';
+import { colors, boxShadow } from 'src/styles';
 import { ButtonProps } from '../Button';
 import PrimaryButton from '../PrimaryButton';
 import SecondaryButton from '../SecondaryButton';
 
-type ModalProps = HeaderProps & {
+type ModalProps = ModalHeaderProps & {
   handleClose: () => void;
   primaryButtonProps?: ButtonProps;
   secondaryButtonProps?: ButtonProps;
@@ -16,12 +16,12 @@ type ModalProps = HeaderProps & {
 
 const styles = {
   bodyContainer: css({
-    backgroundColor: colors.white,
+    padding: '0 24px',
   }),
   main: css({
     borderRadius: 8,
-    boxShadow: 'var(--modal-dropshadow)',
-    maxWidth: 600,
+    background: colors.white,
+    boxShadow: boxShadow.card,
     width: '100%',
   }),
 };
@@ -36,12 +36,12 @@ const Modal: React.SFC<ModalProps> = ({
 }) => (
   <Background handleClose={handleClose}>
     <div className={styles.main}>
-      <Header {...{ handleClose, icon, title }} />
+      <ModalHeader {...{ handleClose, icon, title }} />
       <div className={styles.bodyContainer}>{children}</div>
-      <Footer>
+      <ModalFooter>
         {secondaryButtonProps && <SecondaryButton {...secondaryButtonProps} />}
         {primaryButtonProps && <PrimaryButton {...primaryButtonProps} />}
-      </Footer>
+      </ModalFooter>
     </div>
   </Background>
 );

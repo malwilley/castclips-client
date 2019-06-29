@@ -25,11 +25,10 @@ type ShareModalConnectedProps = ShareModalProps & {
 };
 
 const styles = {
-  bodyContainer: css({
-    padding: 16,
-  }),
-  inputGroup: css({
-    marginBottom: 16,
+  container: css({
+    '& > :not(:last-child)': {
+      marginBottom: 24,
+    },
   }),
 };
 
@@ -70,13 +69,13 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
       primaryButtonProps={
         clipId.type === 'fetching'
           ? { active: false, children: 'Creating...' }
-          : { onClick: handleCreate, children: 'Create' }
+          : { active: title.length > 0, onClick: handleCreate, children: 'Create' }
       }
       title="Create a clip"
     >
-      <div className={styles.bodyContainer}>
+      <div className={styles.container}>
         {/* podcast/episode/clip info */}
-        <div className={styles.inputGroup}>
+        <div>
           <StyledInputLabel>
             Clip title <Asterisk />
           </StyledInputLabel>
@@ -87,7 +86,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
             text={title}
           />
         </div>
-        <div className={styles.inputGroup}>
+        <div>
           <StyledInputLabel>Clip description</StyledInputLabel>
           <StyledTextArea
             handleTextChange={setDescription}

@@ -9,7 +9,7 @@ import Listennotes from 'src/icons/Listennotes.png';
 const styles = {
   main: css({
     '@media (max-width: 600px)': {
-      height: 220,
+      height: 230,
     },
     backgroundColor: colors.gunmetal800,
     margin: 0,
