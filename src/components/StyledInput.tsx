@@ -12,13 +12,19 @@ type StyledInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 
 const styles = {
   input: css({
-    '&::placeholder': {},
+    '&::placeholder': {
+      color: colors.gray300,
+    },
+    '&:focus': {
+      border: `1px solid ${colors.tertiary100}`,
+    },
     height: 42,
     border: `1px solid ${colors.gray100}`,
-    borderRadius: 4,
+    borderRadius: 8,
     fontSize: 14,
     width: '100%',
     padding: '0 12px',
+    transition: 'border 300ms ease-out',
   }),
   label: css({
     color: colors.gray600,

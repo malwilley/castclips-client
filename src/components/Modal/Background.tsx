@@ -10,11 +10,15 @@ type ModalBackgroundProps = {
 
 const styles = {
   contentContainer: css({
-    position: 'absolute',
-    top: 260,
-    width: '100%',
+    '@media (max-width: 800px)': {
+      margin: '60px auto 40px auto',
+    },
+    margin: '260px auto 40px auto',
     display: 'flex',
     justifyContent: 'center',
+    width: '100%',
+    maxWidth: 600,
+    zIndex: zIndex.modal,
   }),
   main: css({
     position: 'fixed',
@@ -23,10 +27,7 @@ const styles = {
     height: '100%',
     width: '100%',
     backgroundColor: colors.darkestAlpha30,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: zIndex.modal,
+    zIndex: zIndex.modalBackground,
   }),
 };
 

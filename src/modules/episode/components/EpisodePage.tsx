@@ -1,21 +1,22 @@
 import * as React from 'react';
 import HttpContent from 'src/components/HttpContent';
 import EpisodeCard from 'src/modules/episode/components/EpisodeCard';
-import { EpisodeState } from './types';
+import { EpisodeState } from '../types';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
-import { thunks } from './redux';
+import { thunks } from '../redux';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, clickable } from 'src/styles';
 import SectionHeader from 'src/components/SectionHeader';
-import EpisodeClips from './components/EpisodeClips';
+import EpisodeClips from './EpisodeClips';
 import { CalendarClockIcon } from 'mdi-react';
 import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import { Link } from 'react-router-dom';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import formatPublishDate from 'src/utils/formatPublishDate';
-import EpisodePageBody from './components/EpisodePageBody';
+import EpisodePageBody from './EpisodePageBody';
+import PodcastLink from 'src/components/PodcastLink';
 
 type EpisodePageProps = {
   id: string;
@@ -55,7 +56,6 @@ const styles = {
   subTitle: css({
     '& > a': {
       color: colors.white,
-      marginLeft: 4,
     },
     color: colors.secondary,
   }),
@@ -92,9 +92,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
               <h1 className={styles.title}>{title}</h1>
               <h4 className={styles.subTitle}>
                 From the podcast{' '}
-                <Link to={`/podcast/${podcast.id}`}>
-                  <strong>{podcast.title}</strong>
-                </Link>
+                <PodcastLink id={podcast.id} thumbnail={podcast.thumbnail} title={podcast.title} />
               </h4>
             </>
           )}

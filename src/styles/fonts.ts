@@ -7,6 +7,7 @@ const heading: CSSObject = {
 };
 const text: CSSObject = {
   fontWeight: 'normal',
+  lineHeight: 1.3,
 };
 const attribute: CSSObject = {
   '& > svg': {

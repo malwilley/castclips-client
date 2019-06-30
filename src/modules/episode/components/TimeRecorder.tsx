@@ -26,7 +26,7 @@ const styles = {
     borderBottom: `1px solid ${colors.gray50}`,
     borderTop: `1px solid ${colors.gray50}`,
   }),
-  input: css({
+  input: css(fonts.text300, {
     '&::placeholder': {
       color: colors.gray200,
     },

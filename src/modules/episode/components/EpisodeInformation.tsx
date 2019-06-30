@@ -2,10 +2,13 @@ import * as React from 'react';
 import { EpisodeState } from '../types';
 import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
-import { CalendarClockIcon } from 'mdi-react';
+import { CalendarClockIcon, CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
+import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
+import formatAudioLength from 'src/utils/formatClipLength';
+import formatMinutes from 'src/utils/formatMinutes';
 
 type EpisodeInformationProps = {
   episodeMetadata: EpisodeState['metadata'];
@@ -13,9 +16,29 @@ type EpisodeInformationProps = {
 
 const styles = {
   main: css({
+    '& > :not(:last-child)': {
+      marginBottom: 12,
+    },
+  }),
+  item: css(fonts.text300, {
     display: 'flex',
-    padding: 20,
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    color: colors.gray700,
+  }),
+  icon: css({
+    '& > svg': {
+      height: 16,
+      width: 16,
+    },
+    color: colors.secondary500,
+    backgroundColor: colors.secondary50,
+    height: 30,
+    width: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    borderRadius: '50%',
   }),
   thumbnail: css({
     height: '4rem',
@@ -34,19 +57,26 @@ const styles = {
 };
 
 const EpisodeInformation: React.FC<EpisodeInformationProps> = ({ episodeMetadata }) => (
-  <Card>
-    <HttpContent
-      request={episodeMetadata}
-      renderSuccess={({ published, thumbnail }) => (
-        <div className={styles.main}>
-          <img className={styles.thumbnail} src={thumbnail} />
-          <div className={styles.text}>
-            <CalendarClockIcon size="1.2em" /> {`Published ${formatPublishDate(published)}`}
+  <HttpContent
+    request={episodeMetadata}
+    renderFetching={() => <ParagraphSkeleton />}
+    renderSuccess={({ audioLength, published }) => (
+      <div className={styles.main}>
+        <div className={styles.item}>
+          <div className={styles.icon}>
+            <CalendarDayIcon />
           </div>
+          {`Published ${formatPublishDate(published)}`}
         </div>
-      )}
-    />
-  </Card>
+        <div className={styles.item}>
+          <div className={styles.icon}>
+            <ClockOutlineIcon />
+          </div>
+          {formatMinutes(audioLength)}
+        </div>
+      </div>
+    )}
+  />
 );
 
 export default EpisodeInformation;

@@ -65,7 +65,7 @@ h6 {
   margin: 0;
 }
 
-input {
+input, textarea {
   background: none;
   border: none;
   font-family: var(--p-font);

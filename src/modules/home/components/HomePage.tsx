@@ -18,7 +18,7 @@ type HomePageConnectedProps = {
 const styles = {
   gradientContainer: css({
     backgroundImage: colors.gradient,
-    height: 400,
+    height: 450,
   }),
   shareContainer: css({
     display: 'flex',

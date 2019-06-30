@@ -12,6 +12,7 @@ const clickable: CSSObject = {
   '&:active': {
     transform: 'none',
   },
+  display: 'inline-block',
   transition: 'transform 300ms ease-out',
 };
 

@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { AppState } from 'src/redux/types';
 import { css } from 'emotion';
-import { colors, boxShadow, clickable } from 'src/styles';
+import { colors, clickable } from 'src/styles';
 import Button from 'src/components/Button';
-import { ThumbUpOutlineIcon, ThumbUpIcon, HeartIcon } from 'mdi-react';
-import SecondaryButton from 'src/components/SecondaryButton';
+import { HeartIcon } from 'mdi-react';
 
 type LikeButtonProps = {
   id: string;
@@ -16,6 +14,7 @@ type LikeButtonProps = {
 
 const styles = {
   main: css(clickable, {
+    display: 'flex',
     color: colors.gray700,
     padding: '6px 10px',
   }),

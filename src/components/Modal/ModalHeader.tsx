@@ -2,9 +2,9 @@ import * as React from 'react';
 import Button from 'src/components/Button';
 import { CloseIcon } from 'mdi-react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, clickable } from 'src/styles';
 
-export type HeaderProps = {
+export type ModalHeaderProps = {
   handleClose: () => void;
   icon: React.ReactNode;
   title: string;
@@ -12,13 +12,13 @@ export type HeaderProps = {
 
 const styles = {
   closeButton: css({
-    '& > svg': {
-      fill: colors.gray100,
-      height: 16,
-      width: 16,
+    '&:hover': {
+      color: colors.gray500,
     },
-    height: 28,
-    width: 28,
+    color: colors.gray200,
+    height: 30,
+    width: 30,
+    transition: 'color 300ms ease-out',
   }),
   icon: css({
     '& > svg': {
@@ -42,14 +42,11 @@ const styles = {
     alignItems: 'center',
   }),
   main: css({
-    height: 60,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    backgroundColor: colors.white,
+    height: 70,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '0 12px 0px 16px',
+    padding: '0 18px 0px 24px',
   }),
   title: css({
     color: colors.gray600,
@@ -57,16 +54,16 @@ const styles = {
   }),
 };
 
-const Header: React.SFC<HeaderProps> = ({ handleClose, icon, title }) => (
+const ModalHeader: React.SFC<ModalHeaderProps> = ({ handleClose, icon, title }) => (
   <div className={styles.main}>
     <div className={styles.iconTitleContainer}>
       <div className={styles.icon}>{icon}</div>
       <h1 className={styles.title}>{title}</h1>
     </div>
     <Button onClick={handleClose} className={styles.closeButton}>
-      <CloseIcon />
+      <CloseIcon size={18} />
     </Button>
   </div>
 );
 
-export default Header;
+export default ModalHeader;

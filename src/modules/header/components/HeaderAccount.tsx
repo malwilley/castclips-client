@@ -119,11 +119,9 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
 );
 
 const HeaderAccountLoggedOut: React.FC = () => (
-  <>
-    <Link className={secondaryButtonStyles} to={'/signin'}>
-      Sign in
-    </Link>
-  </>
+  <Link className={secondaryButtonStyles} to={'/signin'}>
+    Sign in
+  </Link>
 );
 
 const HeaderAccount: React.FC<HeaderAccountProps> = ({ className, user }) => (
