@@ -8,7 +8,7 @@ import Listennotes from 'src/icons/Listennotes.png';
 
 const styles = {
   main: css({
-    '@media (max-width: 600px)': {
+    '@media (max-width: 700px)': {
       height: 230,
     },
     backgroundColor: colors.gunmetal800,
@@ -16,7 +16,7 @@ const styles = {
     height: 180,
   }),
   content: css({
-    '@media (max-width: 600px)': {
+    '@media (max-width: 700px)': {
       '& > :not(:last-child)': {
         marginBottom: 40,
       },
@@ -25,7 +25,7 @@ const styles = {
       justifyContent: 'flex-start',
     },
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
     color: colors.gunmetal100,
     height: '100%',
@@ -41,9 +41,6 @@ const styles = {
     fontWeight: 'bold',
   }),
   listennotes: css(clickable, {
-    '& > img': {
-      height: 16,
-    },
     display: 'block',
   }),
 };

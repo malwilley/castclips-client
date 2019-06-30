@@ -19,6 +19,7 @@ const secondaryButtonStyles = css(fonts.heading300, {
   border: `1px solid ${colors.gray50}`,
   borderRadius: 8,
   display: 'flex',
+  justifyContent: 'center',
   color: colors.secondary500,
   padding: '0 20px',
   height: 42,

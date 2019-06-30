@@ -2,7 +2,7 @@ import * as qs from 'querystringify';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ClipPage from 'src/modules/clip/ClipPage';
-import EpisodePage from 'src/modules/episode/EpisodePage';
+import EpisodePage from 'src/modules/episode/components/EpisodePage';
 import PodcastPage from 'src/modules/podcast/PodcastPage';
 import SigninPage from './modules/auth/components/SigninPage';
 import HomePage from './modules/home/components/HomePage';

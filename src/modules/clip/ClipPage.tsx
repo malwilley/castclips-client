@@ -12,6 +12,7 @@ import { css } from 'emotion';
 import { colors, clickable } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import ClipPageBody from './components/ClipPageBody';
+import PodcastLink from 'src/components/PodcastLink';
 
 type ClipPageProps = {
   id: string;
@@ -28,9 +29,16 @@ const styles = {
   subTitle: css({
     ' > a': {
       color: colors.white,
-      marginLeft: 4,
     },
     color: colors.secondary,
+    verticalAlign: 'middle',
+  }),
+  episodeLink: css({
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+    display: 'inline',
+    margin: '0 4px',
   }),
   title: css({
     marginBottom: 6,
@@ -69,13 +77,11 @@ const ClipPage: React.FC<ClipPageConnectedProps> = ({
               <h1 className={styles.title}>{title}</h1>
               <h4 className={styles.subTitle}>
                 From the episode{' '}
-                <Link className={css(clickable)} to={`/episode/${episode.id}`}>
+                <Link className={styles.episodeLink} to={`/episode/${episode.id}`}>
                   <strong>{episode.title}</strong>
                 </Link>{' '}
                 of the podcast{' '}
-                <Link className={css(clickable)} to={`/podcast/${podcast.id}`}>
-                  <strong>{podcast.title}</strong>
-                </Link>
+                <PodcastLink id={podcast.id} thumbnail={podcast.thumbnail} title={podcast.title} />
               </h4>
             </>
           )}

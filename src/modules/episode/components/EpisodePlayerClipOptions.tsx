@@ -58,7 +58,7 @@ const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = ({
   previewing,
   time,
 }) => {
-  const clipBoundsSet = !isNil(start) && !isNil(end);
+  const clipBoundsSet = !isNil(start) && !isNil(end) && end > start;
 
   return (
     <Show>

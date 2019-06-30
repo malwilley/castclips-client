@@ -54,7 +54,7 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Player audioRef={ref} audioUrl={audio} title={title} {...audioStateControls} />
       <EpisodePlayerClipOptions
         start={start}
@@ -77,7 +77,7 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
         handlePreviewStart={handlePreviewStart}
         handlePreviewStop={handlePreviewStop}
       />
-    </React.Fragment>
+    </>
   );
 };
 
