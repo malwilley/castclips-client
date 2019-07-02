@@ -24,7 +24,7 @@ const styles = {
       backgroundColor: colors.secondary50,
     },
     backgroundColor: colors.secondary20,
-    color: colors.secondary500,
+    color: colors.primary500,
     padding: '12px 20px',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,

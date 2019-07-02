@@ -35,7 +35,7 @@ const styles = {
 const PodcastLink: React.FC<PodcastLinkProps> = ({ id, thumbnail, title }) => (
   <Link className={styles.main} to={`/podcast/${id}`}>
     <img className={styles.thumbnail} src={thumbnail} />
-    <strong>{title}</strong>
+    {title}
   </Link>
 );
 

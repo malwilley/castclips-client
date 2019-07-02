@@ -42,12 +42,12 @@ const styles = {
     background: colors.green20,
     color: colors.green500,
   }),
-  recordButton: css(fonts.heading300, {
+  recordButton: css(fonts.bold300, {
     '&:hover': {
-      backgroundColor: colors.secondary10,
+      backgroundColor: colors.secondary20,
     },
     height: 50,
-    color: colors.secondary500,
+    color: colors.secondary600,
     transition: '200ms background-color ease-out',
     width: '100%',
   }),
@@ -59,7 +59,7 @@ const styles = {
     height: 50,
   }),
   setTimeText: css({
-    color: colors.secondary500,
+    color: colors.secondary600,
     margin: 0,
     fontWeight: 'bold',
     fontSize: '0.9rem',

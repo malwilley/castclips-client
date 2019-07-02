@@ -32,6 +32,11 @@ html {
   box-sizing: border-box;
 }
 
+html::selection {
+  background-color: #009AFA;
+  color: #FFFFFF;
+}
+
 *, *:before, *:after {
   box-sizing: inherit;
 }

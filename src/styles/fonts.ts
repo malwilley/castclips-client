@@ -3,7 +3,10 @@ import colors from './colors';
 import { css } from 'emotion';
 
 const heading: CSSObject = {
-  fontWeight: 800,
+  fontWeight: 900,
+};
+const bold: CSSObject = {
+  fontWeight: 700,
 };
 const text: CSSObject = {
   fontWeight: 'normal',
@@ -43,6 +46,14 @@ const fonts = {
   heading100: css({
     ...heading,
     fontSize: '0.7rem',
+  }),
+  bold200: css({
+    ...bold,
+    fontSize: '0.8rem',
+  }),
+  bold300: css({
+    ...bold,
+    fontSize: '1rem',
   }),
   text300: css({
     ...text,

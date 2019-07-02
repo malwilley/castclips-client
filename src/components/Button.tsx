@@ -9,7 +9,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const styles = {
-  main: css(fonts.heading300, {
+  main: css(fonts.bold300, {
     '&::-moz-focus-inner': {
       border: 0,
       name,
