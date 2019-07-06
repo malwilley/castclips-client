@@ -13,6 +13,7 @@ import Player from 'src/components/Player';
 import useAudioControls from 'src/hooks/useAudioControls';
 import { stringify } from 'querystringify';
 import Tooltip from 'src/components/Tooltip';
+import ContinueListening from './components/ContinueListening';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
@@ -84,11 +85,6 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
     state: { time },
   } = audioStateControls;
 
-  useEffect(() => {
-    if (time >= end) {
-    }
-  }, []);
-
   return (
     <>
       <Player
@@ -111,6 +107,7 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
           className={styles.jumpToEpisode}
           to={`/episode/${episode.id}${stringify({ time: audioStateControls.state.time }, true)}`}
         >
+          <ContinueListening show={time >= end} />
           <span>Jump to full episode</span> <ChevronRightIcon size={18} />
         </Link>
       </div>

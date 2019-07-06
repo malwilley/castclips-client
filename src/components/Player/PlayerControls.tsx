@@ -40,9 +40,6 @@ const styles = {
     transition: 'all 200ms ease-out',
   }),
   controlsContainer: css({
-    '& > :not(:last-child)': {
-      marginRight: 4,
-    },
     display: 'flex',
     marginLeft: -8,
   }),
