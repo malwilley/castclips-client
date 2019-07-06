@@ -9,16 +9,6 @@ type ShowHideClipOptionsProps = ButtonProps & {
 };
 
 const styles = {
-  main: css({
-    '&:hover': {
-      backgroundColor: '#f8faff',
-    },
-    width: '100%',
-    height: 42,
-    color: colors.gray600,
-    borderBottomRightRadius: 8,
-    borderBottomLeftRadius: 8,
-  }),
   show: css({
     '&:hover': {
       backgroundColor: colors.secondary50,

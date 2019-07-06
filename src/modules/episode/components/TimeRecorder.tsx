@@ -47,7 +47,7 @@ const styles = {
       backgroundColor: colors.secondary20,
     },
     height: 50,
-    color: colors.secondary600,
+    color: colors.secondary500,
     transition: '200ms background-color ease-out',
     width: '100%',
   }),
@@ -59,7 +59,7 @@ const styles = {
     height: 50,
   }),
   setTimeText: css({
-    color: colors.secondary600,
+    color: colors.secondary500,
     margin: 0,
     fontWeight: 'bold',
     fontSize: '0.9rem',
