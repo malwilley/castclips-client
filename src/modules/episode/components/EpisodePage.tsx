@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { css } from 'emotion';
-import { colors, clickable } from 'src/styles';
+import { colors, clickable, fonts } from 'src/styles';
 import SectionHeader from 'src/components/SectionHeader';
 import EpisodeClips from './EpisodeClips';
 import { CalendarClockIcon } from 'mdi-react';
@@ -53,13 +53,13 @@ const styles = {
   sectionHeader: css({
     marginBottom: 30,
   }),
-  subTitle: css({
+  subTitle: css(fonts.bold300, {
     '& > a': {
       color: colors.white,
     },
-    color: colors.secondary,
+    color: colors.secondary50,
   }),
-  title: css({
+  title: css(fonts.heading700, {
     marginBottom: 6,
   }),
 };

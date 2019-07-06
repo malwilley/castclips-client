@@ -33,18 +33,7 @@ const styles = {
     width: '100%',
     maxWidth: 700,
   }),
-  left: css(fonts.heading300, {
-    '& > :not(:last-child)': {
-      marginRight: 12,
-    },
-    display: 'flex',
-    alignItems: 'center',
-    color: colors.secondary400,
-    backgroundColor: colors.secondary20,
-    borderRadius: 8,
-    padding: '12px 18px',
-  }),
-  jumpToEpisode: css(fonts.heading300, clickable, {
+  jumpToEpisode: css(fonts.bold300, {
     '& > svg': {
       transition: 'transform 250ms ease-out',
     },

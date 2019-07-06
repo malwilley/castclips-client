@@ -48,12 +48,12 @@ const styles = {
       flexGrow: 1,
       padding: '14px 20px 14px 0',
     }),
-    podTitle: css(fonts.heading200, {
+    podTitle: css(fonts.bold200, {
       lineHeight: 1,
       color: colors.gray700,
       marginBottom: 6,
     }),
-    epTitle: css(fonts.heading200, {
+    epTitle: css(fonts.bold200, {
       lineHeight: 1,
       color: colors.gray300,
     }),

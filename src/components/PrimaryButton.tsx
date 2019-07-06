@@ -6,12 +6,12 @@ import Button, { ButtonProps } from './Button';
 type PrimaryButtonProps = ButtonProps;
 
 const styles = {
-  main: css(fonts.heading300, {
+  main: css(fonts.bold300, {
     '&:disabled': {
       opacity: 0.5,
     },
     '&:hover:not(:disabled)': {
-      backgroundColor: colors.primary700,
+      backgroundColor: colors.secondary300,
     },
     '& > svg': {
       marginLeft: 8,
@@ -19,7 +19,7 @@ const styles = {
     alignItems: 'center',
     borderRadius: 8,
     display: 'flex',
-    background: colors.primary500,
+    background: colors.secondary500,
     color: colors.white,
     padding: '0 20px',
     height: 42,

@@ -9,7 +9,7 @@ import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import SectionHeader from 'src/components/SectionHeader';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors, clickable } from 'src/styles';
+import { colors, clickable, fonts } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import ClipPageBody from './components/ClipPageBody';
 import PodcastLink from 'src/components/PodcastLink';
@@ -26,7 +26,7 @@ type ClipPageConnectedProps = ClipPageProps & {
 };
 
 const styles = {
-  subTitle: css({
+  subTitle: css(fonts.bold300, {
     ' > a': {
       color: colors.white,
     },
@@ -40,7 +40,7 @@ const styles = {
     display: 'inline',
     margin: '0 4px',
   }),
-  title: css({
+  title: css(fonts.heading700, {
     marginBottom: 6,
   }),
 };
@@ -78,7 +78,7 @@ const ClipPage: React.FC<ClipPageConnectedProps> = ({
               <h4 className={styles.subTitle}>
                 From the episode{' '}
                 <Link className={styles.episodeLink} to={`/episode/${episode.id}`}>
-                  <strong>{episode.title}</strong>
+                  {episode.title}
                 </Link>{' '}
                 of the podcast{' '}
                 <PodcastLink id={podcast.id} thumbnail={podcast.thumbnail} title={podcast.title} />

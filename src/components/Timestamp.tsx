@@ -9,7 +9,7 @@ type TimestampProps = {
 };
 
 const styles = {
-  main: css(fonts.heading200, {
+  main: css(fonts.bold200, {
     color: colors.gray700,
     border: `1px solid ${colors.gray50}`,
     padding: '4px 8px',
