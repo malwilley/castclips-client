@@ -6,21 +6,16 @@ import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { css } from 'emotion';
-import { colors, clickable } from 'src/styles';
+import { colors } from 'src/styles';
 import SectionHeader from 'src/components/SectionHeader';
-import EpisodeClips from './EpisodeClips';
-import { CalendarClockIcon } from 'mdi-react';
 import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
-import { Link } from 'react-router-dom';
-import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import PageTitleFetching from 'src/components/PageTitleFetching';
-import formatPublishDate from 'src/utils/formatPublishDate';
 import EpisodePageBody from './EpisodePageBody';
 import PodcastLink from 'src/components/PodcastLink';
+import { RouteComponentProps } from 'react-router';
+import { parse } from 'querystringify';
 
-type EpisodePageProps = {
-  id: string;
-};
+type EpisodePageProps = RouteComponentProps<{ id: string }>;
 
 type EpisodePageConnectedProps = EpisodePageProps & {
   episodeMetadata: EpisodeState['metadata'];
@@ -67,8 +62,12 @@ const styles = {
 const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   episodeMetadata,
   fetchEpisodeMetadata,
-  id,
+  match,
+  location: { search },
 }) => {
+  const { id } = match.params;
+  const { time } = parse(search) as { time?: string };
+
   React.useEffect(() => {
     fetchEpisodeMetadata(id);
   }, [id]);
@@ -76,7 +75,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   return (
     <PageWithFeaturedContent
       bodyContent={<EpisodePageBody episodeMetadata={episodeMetadata} id={id} />}
-      featuredContent={<EpisodeCard episode={episodeMetadata} />}
+      featuredContent={<EpisodeCard episode={episodeMetadata} time={Number(time)} />}
       titleContent={
         <HttpContent
           request={episodeMetadata}

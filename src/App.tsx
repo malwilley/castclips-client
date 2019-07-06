@@ -32,14 +32,7 @@ const App: React.FC = () => (
             },
           }) => <PodcastPage id={id} />}
         />
-        <Route
-          path="/episode/:id"
-          render={({
-            match: {
-              params: { id },
-            },
-          }) => <EpisodePage id={id} />}
-        />
+        <Route path="/episode/:id" component={EpisodePage} />
         <Route
           path="/clip/:id"
           render={({

@@ -10,6 +10,7 @@ import { clamp } from 'ramda';
 
 type EpisodeCardProps = {
   episode: EpisodeState['metadata'];
+  time?: number;
 };
 
 const styles = {
@@ -23,11 +24,15 @@ const styles = {
   }),
 };
 
-const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
+const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'time'>> = ({
+  audio,
+  title,
+  time: initialTime,
+}) => {
   const ref = useRef<HTMLAudioElement>(null);
   const audioStateControls = useAudioControls(ref);
   const {
-    state: { time, duration },
+    state: { canPlay, duration, time },
     controls,
   } = audioStateControls;
   const [start, setStart] = useState<Maybe<number>>(null);
@@ -41,6 +46,12 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
       setPreviewing(false);
     }
   }, [previewing, time, end]);
+
+  useEffect(() => {
+    if (canPlay && initialTime) {
+      controls.seek(initialTime);
+    }
+  }, [canPlay, initialTime]);
 
   const handlePreviewStart = () => {
     controls.seek(start!);
@@ -81,11 +92,11 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata> = ({ audio, title }) => {
   );
 };
 
-const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => (
+const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode, time }) => (
   <Card className={styles.main} feature>
     <HttpContent
       request={episode}
-      renderSuccess={episodeData => <EpisodeCardSuccess {...episodeData} />}
+      renderSuccess={episodeData => <EpisodeCardSuccess {...episodeData} time={time} />}
     />
   </Card>
 );

@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { HttpRequest } from 'src/types';
 import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
@@ -9,7 +9,10 @@ import { colors, fonts, clickable } from 'src/styles';
 import { ChevronRightIcon } from 'mdi-react';
 import { Link } from 'react-router-dom';
 import LikeButton from './components/LikeButton';
-import PlayerWithState from 'src/components/Player/PlayerWithState';
+import Player from 'src/components/Player';
+import useAudioControls from 'src/hooks/useAudioControls';
+import { stringify } from 'querystringify';
+import Tooltip from 'src/components/Tooltip';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
@@ -57,6 +60,7 @@ const styles = {
       },
       color: colors.gray700,
     },
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
     color: colors.gray500,
@@ -65,7 +69,58 @@ const styles = {
   }),
 };
 
-const ClipCard: React.FC<ClipCardProps> = ({ clip, id, likeClip, unlikeClip }) => (
+const ClipCardSuccess: React.FC<ClipMetadata> = ({
+  id,
+  title,
+  audio,
+  start,
+  end,
+  episode,
+  userHasLiked,
+  likesCount,
+}) => {
+  const ref = React.useRef<HTMLAudioElement>(null);
+  const audioStateControls = useAudioControls(ref);
+  const {
+    state: { time },
+  } = audioStateControls;
+
+  useEffect(() => {
+    if (time >= end) {
+    }
+  }, []);
+
+  return (
+    <>
+      <Player
+        audioRef={ref}
+        audioUrl={`${audio}#time=${start},${end}`}
+        title={title}
+        start={start}
+        end={end}
+        {...audioStateControls}
+      />
+      <div className={styles.bottomContainer}>
+        <LikeButton
+          {...{
+            id,
+            hasLiked: userHasLiked,
+            numLikes: likesCount,
+          }}
+        />
+        <Link
+          className={styles.jumpToEpisode}
+          to={`/episode/${episode.id}${stringify({ time: audioStateControls.state.time }, true)}`}
+        >
+          {time >= end && <Tooltip>Continue listening!</Tooltip>}
+          <span>Jump to full episode</span> <ChevronRightIcon size={18} />
+        </Link>
+      </div>
+    </>
+  );
+};
+
+const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
   <Card className={styles.main} feature>
     <HttpContent
       request={clip}
@@ -77,30 +132,7 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip, id, likeClip, unlikeClip }) =
           </div>
         </>
       )}
-      renderSuccess={clipData => (
-        <>
-          <PlayerWithState
-            audioUrl={`${clipData.audio}#time=${clipData.start},${clipData.end}`}
-            title={clipData.title}
-            start={clipData.start}
-            end={clipData.end}
-          />
-          <div className={styles.bottomContainer}>
-            <LikeButton
-              {...{
-                likeClip,
-                unlikeClip,
-                id,
-                hasLiked: clipData.userHasLiked,
-                numLikes: clipData.likesCount,
-              }}
-            />
-            <Link className={styles.jumpToEpisode} to={`/episode/${clipData.episode.id}`}>
-              <span>Jump to full episode</span> <ChevronRightIcon size={18} />
-            </Link>
-          </div>
-        </>
-      )}
+      renderSuccess={clipData => <ClipCardSuccess {...clipData} />}
     />
   </Card>
 );
