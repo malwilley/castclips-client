@@ -96,7 +96,7 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
           className={styles.jumpToEpisode}
           to={`/episode/${episode.id}${stringify({ time: audioStateControls.state.time }, true)}`}
         >
-          <ContinueListening show={time >= end} />
+          <ContinueListening show={time > end - 1} />
           <span>Jump to full episode</span> <ChevronRightIcon size={18} />
         </Link>
       </div>

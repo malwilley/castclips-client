@@ -7,7 +7,7 @@ type ContinueListeningProps = {
 };
 
 const styles = {
-  main: css(fonts.text300, {
+  main: css(fonts.bold300, {
     position: 'absolute',
     display: 'flex',
     alignItems: 'center',
