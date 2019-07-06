@@ -1,52 +1,83 @@
-import * as React from 'react';
+import React, { useState, useCallback } from 'react';
 import { css, keyframes } from 'emotion';
 import { colors, fonts } from 'src/styles';
 
-const fadeIn = keyframes({
-  from: {
-    opacity: 0,
-    transform: 'translateY(10px) scale(0.6)',
-  },
-  to: {
-    opacity: 1,
-    transform: 'translateY(0) scale(1)',
-  },
-});
+type TooltipProps = {
+  className?: string;
+  bottom?: boolean;
+  text: string;
+};
 
 const styles = {
   main: css({
+    position: 'relative',
+    overflow: 'visible',
+  }),
+  tooltip: css({
     position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    top: -40,
-    animation: `${fadeIn} 200ms ease-out`,
+    top: -34,
+    transform: 'translateX(-50%)',
+    left: '50%',
   }),
-  container: css(fonts.text300, {
+  tooltipBottom: css({
+    top: 'auto',
+    bottom: -34,
+  }),
+  box: css(fonts.text200, {
     backgroundColor: colors.gray700,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 30,
     color: colors.white,
     borderRadius: 4,
-    padding: '1em',
+    padding: '0.4em 1em',
     textAlign: 'center',
+    whiteSpace: 'nowrap',
   }),
-  triangle: css({
+  triangleDown: css({
     width: 0,
     height: 0,
-    borderLeft: '10px solid transparent',
-    borderRight: '10px solid transparent',
-    borderTop: `10px solid ${colors.gray700}`,
+    borderLeft: '6px solid transparent',
+    borderRight: '6px solid transparent',
+    borderTop: `6px solid ${colors.gray700}`,
+  }),
+  triangleUp: css({
+    width: 0,
+    height: 0,
+    borderLeft: '6px solid transparent',
+    borderRight: '6px solid transparent',
+    borderBottom: `6px solid ${colors.gray700}`,
   }),
 };
 
-const Tooltip: React.FC = ({ children }) => (
-  <div className={styles.main}>
-    <div className={styles.container}>{children}</div>
-    <div className={styles.triangle} />
-  </div>
-);
+const Tooltip: React.FC<TooltipProps> = ({ bottom = false, children, className, text }) => {
+  const [show, setShow] = useState(false);
+  const onMouseOver = useCallback(() => {
+    setShow(true);
+  }, [setShow]);
+  const onMouseLeave = useCallback(() => {
+    setShow(false);
+  }, [setShow]);
+
+  return (
+    <div
+      className={css(styles.main, className)}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseLeave}
+    >
+      {show && (
+        <div className={css(styles.tooltip, bottom && styles.tooltipBottom)}>
+          {bottom && <div className={styles.triangleUp} />}
+          <div className={styles.box}>{text}</div>
+          {!bottom && <div className={styles.triangleDown} />}
+        </div>
+      )}
+      {children}
+    </div>
+  );
+};
 
 export default Tooltip;

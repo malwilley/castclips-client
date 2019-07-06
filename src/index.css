@@ -45,7 +45,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #fdfdff;
   color: var(--color-darkest);
   font-family: var(--p-font);
   font-weight: var(--normal-weight);

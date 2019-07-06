@@ -58,12 +58,11 @@ const styles = {
       '& > svg': {
         transform: 'translateX(4px)',
       },
-      color: colors.gray700,
     },
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    color: colors.gray500,
+    color: colors.gray700,
     padding: '8px 4px',
     transition: 'all 300ms ease-out',
   }),
@@ -112,7 +111,6 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
           className={styles.jumpToEpisode}
           to={`/episode/${episode.id}${stringify({ time: audioStateControls.state.time }, true)}`}
         >
-          {time >= end && <Tooltip>Continue listening!</Tooltip>}
           <span>Jump to full episode</span> <ChevronRightIcon size={18} />
         </Link>
       </div>
