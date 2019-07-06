@@ -5,7 +5,7 @@ import Button, { ButtonProps } from './Button';
 
 type SecondaryButtonProps = ButtonProps;
 
-const secondaryButtonStyles = css(fonts.heading300, {
+const secondaryButtonStyles = css(fonts.bold300, {
   '&:disabled': {
     opacity: 0.5,
   },

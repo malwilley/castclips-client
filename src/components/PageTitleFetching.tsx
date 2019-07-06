@@ -9,7 +9,7 @@ type PageTitleFetchingProps = {
 const styles = {
   main: css({
     '& > *': {
-      backgroundColor: colors.light,
+      backgroundColor: colors.white,
       borderRadius: 4,
     },
   }),

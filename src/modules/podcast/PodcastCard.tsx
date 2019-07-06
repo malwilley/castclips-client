@@ -104,9 +104,6 @@ const PodcastDataFetching: React.FC = () => (
     <div className={css(styles.thumbnail, styles.placeholder)} />
     <div className={styles.infoContainer}>
       <PageTitleFetching className={styles.heading} />
-      <TextSkeleton color={colors.secondary200} width={100} height={20} marginBottom={4} />
-      <TextSkeleton color={colors.secondary200} width={100} height={20} marginBottom={4} />
-      <TextSkeleton color={colors.secondary200} width={200} height={20} />
     </div>
   </div>
 );
