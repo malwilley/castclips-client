@@ -4,13 +4,12 @@ import Card from 'src/components/Card';
 import { ClipMetadata } from '../types';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
-import stripHtml from 'src/utils/stripHtml';
+import { colors, fonts, clickable } from 'src/styles';
 import { CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import ClipCardAccent from 'src/components/ClipCardAccent';
 import { Link } from 'react-router-dom';
-import zIndex from 'src/styles/zIndex';
+import { stringify } from 'querystringify';
 
 type ClipContextProps = { clip: ClipMetadata };
 
@@ -70,14 +69,27 @@ const styles = {
     color: colors.gray200,
     marginRight: 10,
   }),
+  link: css(clickable),
 };
 
 const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
   <div>
     <SectionHeader>from the episode</SectionHeader>
     <p className={styles.info}>
-      Clip starts at <a href="">{formatHrMinSec(clip.start)}</a> and ends at{' '}
-      <a href="">{formatHrMinSec(clip.end)}</a>
+      Clip starts at{' '}
+      <a
+        className={styles.link}
+        href={`/episode/${clip.episode.id}${stringify({ time: clip.start }, true)}`}
+      >
+        {formatHrMinSec(clip.start)}
+      </a>{' '}
+      and ends at{' '}
+      <a
+        className={styles.link}
+        href={`/episode/${clip.episode.id}${stringify({ time: clip.end }, true)}`}
+      >
+        {formatHrMinSec(clip.end)}
+      </a>
     </p>
     <Card className={styles.card} to={`/episode/${clip.episode.id}`}>
       <ClipCardAccent end={clip.end} length={clip.episode.audioLength} start={clip.start} />

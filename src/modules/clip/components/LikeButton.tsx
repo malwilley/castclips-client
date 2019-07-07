@@ -3,13 +3,13 @@ import { css } from 'emotion';
 import { colors, clickable } from 'src/styles';
 import Button from 'src/components/Button';
 import { HeartIcon } from 'mdi-react';
+import { useDispatch } from 'react-redux';
+import { thunks } from '../redux';
 
 type LikeButtonProps = {
   id: string;
   hasLiked: boolean;
-  likeClip: (id: string) => void;
   numLikes: number;
-  unlikeClip: (id: string) => void;
 };
 
 const styles = {
@@ -27,19 +27,13 @@ const styles = {
   }),
 };
 
-const LikeButton: React.FC<LikeButtonProps> = ({
-  id,
-  hasLiked,
-  likeClip,
-  numLikes,
-  unlikeClip,
-}) => {
-  const onClick = React.useCallback(() => (hasLiked ? unlikeClip(id) : likeClip(id)), [
-    hasLiked,
-    unlikeClip,
-    likeClip,
-    id,
-  ]);
+const LikeButton: React.FC<LikeButtonProps> = ({ id, hasLiked, numLikes }) => {
+  const dispatch = useDispatch();
+
+  const onClick = React.useCallback(
+    () => (hasLiked ? dispatch(thunks.unlikeClip(id)) : dispatch(thunks.likeClip(id))),
+    [hasLiked, id]
+  );
 
   return (
     <Button className={styles.main} onClick={onClick}>

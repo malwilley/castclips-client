@@ -4,7 +4,8 @@ import { colors, fonts, clickable } from 'src/styles';
 import LayoutContainer from './LayoutContainer';
 import BoxContainer from './BoxContainer';
 import Logo from 'src/icons/Logo';
-import Listennotes from 'src/icons/Listennotes.png';
+import ListennotesPng from 'src/icons/Listennotes.png';
+import ListennotesWebp from 'src/icons/Listennotes.webp';
 
 const styles = {
   main: css({
@@ -41,6 +42,9 @@ const styles = {
     fontWeight: 'bold',
   }),
   listennotes: css(clickable, {
+    '& img': {
+      height: 18,
+    },
     display: 'block',
   }),
 };
@@ -62,7 +66,10 @@ const Footer: React.FC = () => (
         </div>
         <div>
           <a className={styles.listennotes} href="https://listennotes.com">
-            <img src={Listennotes} />
+            <picture>
+              <source type="image/webp" srcSet={ListennotesWebp} />
+              <img alt="Listen Notes logo" src={ListennotesPng} />
+            </picture>
           </a>
         </div>
       </LayoutContainer>
