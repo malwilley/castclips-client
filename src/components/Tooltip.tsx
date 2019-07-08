@@ -14,6 +14,9 @@ const styles = {
     overflow: 'visible',
   }),
   tooltip: css({
+    '@media (hover: none)': {
+      display: 'none',
+    },
     position: 'absolute',
     display: 'flex',
     alignItems: 'center',

@@ -1,17 +1,17 @@
 import * as React from 'react';
 import HttpContent from 'src/components/HttpContent';
-import ClipCard from 'src/modules/clip/ClipCard';
+import ClipCard from 'src/modules/clip/components/ClipCard';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
-import { thunks } from './redux';
-import { ClipState } from './types';
+import { thunks } from '../redux';
+import { ClipState } from '../types';
 import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import SectionHeader from 'src/components/SectionHeader';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import { colors, clickable, fonts } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
-import ClipPageBody from './components/ClipPageBody';
+import ClipPageBody from './ClipPageBody';
 import PodcastLink from 'src/components/PodcastLink';
 
 type ClipPageProps = {

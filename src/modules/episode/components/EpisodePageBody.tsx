@@ -7,6 +7,7 @@ import SectionHeader from 'src/components/SectionHeader';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import EpisodeClips from './EpisodeClips';
 import EpisodeInformation from './EpisodeInformation';
+import TruncateContent from 'src/components/TruncateContent';
 
 type EpisodePageBodyProps = {
   episodeMetadata: EpisodeState['metadata'];
@@ -69,7 +70,9 @@ const EpisodePageBody: React.FC<EpisodePageBodyProps> = ({ episodeMetadata, id }
       renderSuccess={({ description }) => (
         <section>
           <SectionHeader>description</SectionHeader>
-          <div className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+          <TruncateContent maxHeight={200} expandable>
+            <div className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+          </TruncateContent>
         </section>
       )}
     />

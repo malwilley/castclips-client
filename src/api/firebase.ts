@@ -22,7 +22,6 @@ const fetchFirebase = async <TResponse>(
   token?: string,
   options: RequestInit = {}
 ): Promise<TResponse> => {
-  await fetch(host + '/health');
   const response = await fetch(host + route, {
     ...options,
     headers: token
