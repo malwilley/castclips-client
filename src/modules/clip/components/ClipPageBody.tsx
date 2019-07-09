@@ -9,6 +9,7 @@ import { RedditIcon, FacebookIcon, TwitterIcon, UserOutlineIcon } from 'mdi-reac
 import SectionHeader from 'src/components/SectionHeader';
 import ClipContext from './ClipContext';
 import TextSkeleton from 'src/components/TextSkeleton';
+import TruncateContent from 'src/components/TruncateContent';
 
 type ClipPageBodyProps = {
   clipId: string;
@@ -17,6 +18,10 @@ type ClipPageBodyProps = {
 
 const styles = {
   description: css({
+    margin: 0,
+    whiteSpace: 'pre-wrap',
+  }),
+  descriptionContainer: css({
     margin: '10px 0 40px 0',
   }),
   main: css({
@@ -110,7 +115,9 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
               {clip.description && (
                 <>
                   <SectionHeader>description</SectionHeader>
-                  <p className={styles.description}>{clip.description}</p>
+                  <TruncateContent className={styles.descriptionContainer} expandable>
+                    <p className={styles.description}>{clip.description}</p>
+                  </TruncateContent>
                 </>
               )}
               <ClipContext clip={clip} />

@@ -3,17 +3,17 @@ import React, { useEffect } from 'react';
 import { HttpRequest } from 'src/types';
 import Card from 'src/components/Card';
 import HttpContent from 'src/components/HttpContent';
-import { ClipMetadata } from './types';
+import { ClipMetadata } from '../types';
 import TextSkeleton from 'src/components/TextSkeleton';
 import { colors, fonts, clickable } from 'src/styles';
 import { ChevronRightIcon } from 'mdi-react';
 import { Link } from 'react-router-dom';
-import LikeButton from './components/LikeButton';
+import LikeButton from './LikeButton';
 import Player from 'src/components/Player';
 import useAudioControls from 'src/hooks/useAudioControls';
 import { stringify } from 'querystringify';
 import Tooltip from 'src/components/Tooltip';
-import ContinueListening from './components/ContinueListening';
+import ContinueListening from './ContinueListening';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;

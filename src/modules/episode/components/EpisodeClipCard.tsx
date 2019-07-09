@@ -5,6 +5,7 @@ import { fonts, colors } from 'src/styles';
 import ClipCardAccent from 'src/components/ClipCardAccent';
 import { ClipMetadata } from 'src/modules/clip/types';
 import ClipCardAttributes from 'src/components/ClipCardAttributes';
+import TruncateContent from 'src/components/TruncateContent';
 
 type EpisodeClipCardProps = {
   className?: string;
@@ -14,9 +15,10 @@ type EpisodeClipCardProps = {
 
 const styles = {
   description: css(fonts.text200, {
-    maxHeight: 100,
-    overflow: 'hidden',
     color: colors.gray300,
+    whiteSpace: 'pre-wrap',
+  }),
+  descriptionContainer: css({
     margin: '0.8em 0',
   }),
   main: css({
@@ -40,7 +42,9 @@ const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, epi
   <Card className={css(styles.main, className)} to={`/clip/${clip.id}`}>
     <ClipCardAccent end={clip.end} length={episodeLength} start={clip.start} />
     <h3 className={styles.title}>{clip.title}</h3>
-    <p className={styles.description}>{clip.description}</p>
+    <TruncateContent className={styles.descriptionContainer} maxHeight={50}>
+      <div className={styles.description}>{clip.description}</div>
+    </TruncateContent>
     <ClipCardAttributes clip={clip} />
   </Card>
 );
