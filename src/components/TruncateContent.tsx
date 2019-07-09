@@ -14,6 +14,8 @@ const styles = {
   main: css({
     overflow: 'hidden',
     position: 'relative',
+  }),
+  padBottom: css({
     paddingBottom: '3em',
   }),
   seeMoreContainer: (expandable: boolean) =>
@@ -47,7 +49,10 @@ const TruncateContent: React.FC<TruncateContentProps> = ({
   const needsTruncation = height > maxHeight;
 
   return (
-    <div className={css(styles.main, className)} style={{ maxHeight: open ? 'none' : maxHeight }}>
+    <div
+      className={css(styles.main, needsTruncation && styles.padBottom, className)}
+      style={{ maxHeight: open ? 'none' : maxHeight }}
+    >
       <div ref={ref}>{children}</div>
       {needsTruncation && (
         <div className={styles.seeMoreContainer(expandable)}>
