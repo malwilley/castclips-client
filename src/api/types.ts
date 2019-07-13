@@ -60,14 +60,15 @@ export type PodcastEpisodeResponse = {
 };
 
 export type PodcastMetadataResponse = {
+  description: string;
+  episodes: PodcastEpisodeResponse[];
   id: string;
+  nextEpisodePubDate: number;
+  publisher: string;
   thumbnail: string;
   title: string;
-  description: string;
   totalEpisodes: number;
-  publisher: string;
   website: string;
-  episodes: PodcastEpisodeResponse[];
 };
 
 export type EpisodePodcast = Pick<

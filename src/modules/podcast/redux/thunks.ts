@@ -3,9 +3,9 @@ import { actions } from './actions';
 import { last } from 'ramda';
 import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode';
 import mapApiPodcast from '../utils/mapApiPodcast';
-import { PodcastEpisode } from '../types';
+import { PodcastEpisode, PodcastMetadata } from '../types';
 import { path } from 'ramda';
-import { getClipsForPodcast, getPodcastData, getNextEpisodes } from 'src/api/firebase';
+import { getClipsForPodcast, getPodcastData } from 'src/api/firebase';
 import { getAuthToken } from 'src/modules/auth/firebase';
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
@@ -28,12 +28,16 @@ const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch
 };
 
 const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch, getState) => {
-  const currentlyLoadedPodcastId = path<string>(['podcast', 'metadata', 'data', 'id'], getState());
+  const currentlyLoadedPodcast = path<PodcastMetadata>(['podcast', 'metadata', 'data'], getState());
   const currentlyLoadedEpisodes = path<PodcastEpisode[]>(
     ['podcast', 'episodes', 'data'],
     getState()
   );
-  if (!currentlyLoadedPodcastId || !Array.isArray(currentlyLoadedEpisodes)) {
+  const nextEpisodePubDate = path<number>(
+    ['podcast', 'metadata', 'data', 'nextEpisodePubDate'],
+    getState()
+  );
+  if (!currentlyLoadedPodcast || !nextEpisodePubDate || !currentlyLoadedEpisodes) {
     return;
   }
 
@@ -41,17 +45,23 @@ const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch
 
   try {
     const token = await getAuthToken();
-    const lastEpisode = last(currentlyLoadedEpisodes)!;
-    const nextEpisodes = await getNextEpisodes(
+    const { nextEpisodePubDate: newNextEpisodePubDate, episodes } = await getPodcastData(
       token,
-      currentlyLoadedPodcastId,
-      lastEpisode.published.getTime()
+      currentlyLoadedPodcast.id,
+      nextEpisodePubDate
     );
-    const newEpisodesList = [...currentlyLoadedEpisodes, ...mapApiPodcastEpisodes(nextEpisodes)];
+    const newEpisodesList = [...currentlyLoadedEpisodes, ...mapApiPodcastEpisodes(episodes)];
 
-    nextEpisodes.length >= 10
+    newNextEpisodePubDate
       ? dispatch(actions.setEpisodes({ type: 'success', data: newEpisodesList }))
       : dispatch(actions.setEpisodes({ type: 'end', data: newEpisodesList }));
+
+    dispatch(
+      actions.setMetadata({
+        type: 'success',
+        data: { ...currentlyLoadedPodcast, nextEpisodePubDate: newNextEpisodePubDate },
+      })
+    );
   } catch {
     dispatch(
       actions.setEpisodes({

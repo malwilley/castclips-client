@@ -14,6 +14,7 @@ import {
 } from './types';
 import { SearchType } from 'src/modules/search/types';
 import config from 'src/config';
+import { stringify } from 'querystringify';
 
 const host = config.firebase.apiHost;
 
@@ -103,27 +104,17 @@ export const search = async (token: string, type: SearchType, query: string) => 
   return results;
 };
 
-export const getPodcastData = async (token: string, id: string) => {
-  const result = await fetchFirebase<PodcastMetadataResponse>(`/podcast/${id}`, token);
+export const getPodcastData = async (token: string, id: string, nextEpisodePubDate?: number) => {
+  const result = await fetchFirebase<PodcastMetadataResponse>(
+    `/podcast/${id}${stringify(nextEpisodePubDate ? { nextEpisodePubDate } : {}, true)}`,
+    token
+  );
 
   return result;
 };
 
 export const getEpisodeData = async (token: string, id: string) => {
   const result = await fetchFirebase<EpisodeMetadataResponse>(`/episode/${id}`, token);
-
-  return result;
-};
-
-export const getNextEpisodes = async (
-  token: string,
-  podcastId: string,
-  lastEpisodePublished: number
-) => {
-  const result = await fetchFirebase<PodcastEpisodeResponse[]>(
-    `/podcast/${podcastId}/episodes?${qs.stringify({ lastPublished: lastEpisodePublished })}`,
-    token
-  );
 
   return result;
 };
