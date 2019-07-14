@@ -22,7 +22,7 @@ const App: React.FC = () => (
   <>
     <div className={styles.main}>
       <Switch>
-        <Route exact={true} path="/" component={HomePage} />
+        <Route exact path="/" component={HomePage} />
         <Route path="/signin" component={SigninPage} />
         <Route
           path="/podcast/:id"

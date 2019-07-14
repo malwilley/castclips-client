@@ -19,7 +19,7 @@ type EpisodeClipsConnectedProps = EpisodeClipsProps & {
 
 const styles = {
   container: css({
-    '& > :not(:last-child)': {
+    '& > *': {
       marginBottom: 20,
     },
   }),
