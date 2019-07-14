@@ -3,7 +3,7 @@ import { PodcastEpisode, PodcastState } from '../types';
 import { Link } from 'react-router-dom';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
 import { ClockOutlineIcon, CalendarDayIcon, ArtistIcon } from 'mdi-react';
 import formatPublishDate from 'src/utils/formatPublishDate';
@@ -28,7 +28,7 @@ const styles = {
       display: 'grid',
       gridTemplateColumns: '[thumbnail] auto [middle] 1fr',
       gridColumnGap: 20,
-      alignItems: 'center',
+      alignItems: 'start',
       padding: '15px 18px',
     }),
     thumbnail: css({
@@ -39,20 +39,9 @@ const styles = {
     }),
     textIconContainer: css({
       display: 'flex',
+      marginTop: '0.4rem',
     }),
-    textIcon: css({
-      '& > svg': {
-        marginRight: 6,
-      },
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: 10,
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
-      letterSpacing: 1,
-      color: colors.gray200,
-      marginRight: 10,
-    }),
+    textIcon: css(fonts.attribute300),
     textIconGreen: css({
       color: colors.green200,
     }),
@@ -60,9 +49,10 @@ const styles = {
       gridTemplateAreas: 'middle',
       overflow: 'hidden',
     }),
-    title: css({
+    title: css(fonts.heading300, {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+      marginBottom: '0.1rem',
     }),
     description: css({
       overflow: 'hidden',
@@ -82,24 +72,26 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
     <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
       <img className={styles.episodeRow.thumbnail} src={thumbnail} />
       <div className={styles.episodeRow.titleDescriptionContainer}>
-        <div className={styles.episodeRow.textIconContainer}>
-          <div className={styles.episodeRow.textIcon}>
-            <CalendarDayIcon size={14} />
-            <div>{formatPublishDate(published)}</div>
-          </div>
-          <div className={styles.episodeRow.textIcon}>
-            <ClockOutlineIcon size={14} />
-            <div>{(audioLength / 60).toFixed(0)} min</div>
-          </div>
-          <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
-            <ArtistIcon size={14} />
-            <div>6 clips</div>
-          </div>
-        </div>
         <h4 className={styles.episodeRow.title}>{title}</h4>
         <p className={styles.episodeRow.description} title={sanitizedDescription}>
           {sanitizedDescription}
         </p>
+        <div className={styles.episodeRow.textIconContainer}>
+          <div className={styles.episodeRow.textIcon}>
+            <CalendarDayIcon />
+            <div>{formatPublishDate(published)}</div>
+          </div>
+          <div className={styles.episodeRow.textIcon}>
+            <ClockOutlineIcon />
+            <div>{(audioLength / 60).toFixed(0)} min</div>
+          </div>
+          {/*
+          <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
+            <ArtistIcon size={14} />
+            <div>6 clips</div>
+          </div>
+          */}
+        </div>
       </div>
     </Link>
   );

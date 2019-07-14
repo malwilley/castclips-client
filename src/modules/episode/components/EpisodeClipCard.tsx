@@ -43,7 +43,7 @@ const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, epi
   <Card className={css(styles.main, className)} hover>
     <ClipCardAccent end={clip.end} length={episodeLength} start={clip.start} />
     <Link className={css(coverContainer)} to={`/clip/${clip.id}`}>
-      <h3 className={styles.title}>{clip.title}</h3>>
+      <h3 className={styles.title}>{clip.title}</h3>
     </Link>
     <TruncateContent className={styles.descriptionContainer} maxHeight={50}>
       <div className={styles.description}>{clip.description}</div>

@@ -76,6 +76,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
   return (
     <div className={css(styles.main, className)}>
       <Input
+        aria-label="Search"
         className={styles.input}
         handleTextChange={setText}
         onKeyDown={e => {
@@ -90,6 +91,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
       />
       <Button
         active={canSearch}
+        aria-label="Submit"
         className={css(styles.searchButton, canSearch && styles.searchButtonEnabled)}
         onClick={search}
       >
