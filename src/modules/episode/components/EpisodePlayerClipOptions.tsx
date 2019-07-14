@@ -101,9 +101,12 @@ const EpisodePlayerClipOptionsContent: React.FC<
           <Show>
             {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
               <>
-                {modalIsOpen && clipBoundsSet && (
-                  <CreateClipModal start={start!} end={end!} handleClose={toggleModal} />
-                )}
+                <CreateClipModal
+                  start={start!}
+                  end={end!}
+                  handleClose={toggleModal}
+                  isOpen={modalIsOpen && clipBoundsSet}
+                />
                 <ShareButton active={clipBoundsSet} onClick={toggleModal} />
               </>
             )}
