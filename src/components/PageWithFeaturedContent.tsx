@@ -29,7 +29,6 @@ const styles = {
     gridColumnEnd: 3,
     gridRowStart: 5,
     gridRowEnd: -1,
-    padding: '40px 0',
   }),
   feature: css({
     gridColumnStart: 2,
@@ -54,15 +53,15 @@ const styles = {
     zIndex: zIndex.background,
   }),
   titleContainer: css({
-    '@media (max-width: 800px)': {
-      padding: '40px 0',
+    '@media (min-width: 800px)': {
+      padding: '20px 0 60px 0',
     },
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 2,
     gridColumnEnd: 3,
     color: colors.white,
-    padding: '60px 0',
+    padding: '10px 0 40px 0',
     zIndex: zIndex.card,
   }),
 };

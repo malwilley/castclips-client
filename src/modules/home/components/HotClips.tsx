@@ -1,7 +1,8 @@
 import HttpContent from 'src/components/HttpContent';
 import { HomeState } from '../types';
 import { css } from 'emotion';
-import HotClip from './HotClip';
+import { range } from 'ramda';
+import HotClip, { HotClipSkeleton } from './HotClip';
 import React from 'react';
 
 type HotClipsProps = {
@@ -28,6 +29,13 @@ const HotClips: React.FC<HotClipsProps> = ({ hotClips }) => (
   <div className={styles.clipsContainer}>
     <HttpContent
       request={hotClips}
+      renderFetching={() => (
+        <>
+          {range(0, 20).map(i => (
+            <HotClipSkeleton key={i} />
+          ))}
+        </>
+      )}
       renderSuccess={clips => (
         <>
           {clips.map(clip => (

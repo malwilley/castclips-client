@@ -22,6 +22,7 @@ const styles = {
   }),
   message: css(fonts.text300, {
     lineHeight: 1.5,
+    maxWidth: 300,
   }),
 };
 

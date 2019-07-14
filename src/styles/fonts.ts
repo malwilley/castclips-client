@@ -21,7 +21,6 @@ const attribute: CSSObject = {
   display: 'flex',
   alignItems: 'center',
   fontWeight: 'bold',
-  // textTransform: 'uppercase',
   color: colors.gray200,
   marginRight: '1em',
 };
@@ -66,7 +65,10 @@ const fonts = {
   attribute300: css({
     ...attribute,
     fontSize: '0.8rem',
-    letterSpacing: '0.05rem',
+  }),
+  attribute200: css({
+    ...attribute,
+    fontSize: '0.7rem',
   }),
 };
 

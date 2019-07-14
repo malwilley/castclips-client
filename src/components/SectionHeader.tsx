@@ -12,6 +12,7 @@ const styles = {
   main: css({
     color: colors.gray700,
     marginBottom: '1rem',
+    marginTop: '2rem',
   }),
   text: css(fonts.heading100, {
     letterSpacing: '0.1em',

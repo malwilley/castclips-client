@@ -14,7 +14,7 @@ type SearchBarProps = { className?: string; initialText?: string };
 
 const styles = {
   main: css(fonts.text300, {
-    '&:hover': {
+    '&:hover, &:focus-within': {
       border: `1px solid ${colors.gray50}`,
     },
     backgroundColor: colors.gray20,
@@ -44,15 +44,16 @@ const styles = {
     top: -1,
     height: 42,
     width: 60,
-    borderRadius: '4px 20px 20px 4px',
+    borderRadius: '0 20px 20px 0',
     transition: 'all 500ms ease-out',
   }),
   searchButtonEnabled: css({
     '&:hover': {
-      backgroundColor: colors.primary700,
+      backgroundColor: colors.secondary600,
     },
-    backgroundColor: colors.primary500,
+    backgroundColor: colors.secondary500,
     color: colors.white,
+    transition: 'all 200ms ease-out',
   }),
 };
 
@@ -75,6 +76,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
   return (
     <div className={css(styles.main, className)}>
       <Input
+        aria-label="Search"
         className={styles.input}
         handleTextChange={setText}
         onKeyDown={e => {
@@ -83,10 +85,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
           }
         }}
         placeholder="Search for podcasts, episodes, and clips"
+        role="search"
+        type="text"
         value={text}
       />
       <Button
         active={canSearch}
+        aria-label="Submit"
         className={css(styles.searchButton, canSearch && styles.searchButtonEnabled)}
         onClick={search}
       >

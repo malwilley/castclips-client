@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { HttpRequest } from 'src/types';
-import { PodcastMetadata } from './types';
+import { PodcastMetadata } from '../types';
 import HttpContent from 'src/components/HttpContent';
 import { css } from 'emotion';
-import { colors, boxShadow } from 'src/styles';
-import { EarthIcon } from 'mdi-react';
-import { dropLast, last } from 'ramda';
-import TextSkeleton from 'src/components/TextSkeleton';
+import { colors, boxShadow, fonts } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 
 type PodcastCardProps = {
@@ -21,49 +18,25 @@ const styles = {
     alignItems: 'flex-start',
   }),
   heading: css({
+    '@media (min-width: 800px)': {
+      padding: '1rem 0 0 1rem',
+    },
     '& > h1': {
-      marginBottom: 6,
+      marginBottom: '0.5rem',
     },
-    '& > h4': {
-      color: colors.secondary,
-    },
-    marginBottom: 16,
+    marginBottom: '1rem',
+  }),
+  publisher: css(fonts.bold300, {
+    color: colors.secondary50,
   }),
   infoContainer: css({
-    '@media (max-width: 600px)': {
-      display: 'none',
+    '@media (min-width: 600px)': {
+      display: 'block',
     },
+    display: 'none',
     flexGrow: 1,
     width: 0,
     padding: '10px 20px',
-  }),
-  link: css({
-    '& > svg': {
-      marginRight: 4,
-    },
-    '& > a': {},
-    display: 'flex',
-    alignItems: 'center',
-    maxWidth: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    textDecoration: 'underline',
-    whiteSpace: 'nowrap',
-  }),
-  episodes: css({
-    display: 'flex',
-    alignItems: 'flex-end',
-  }),
-  episodesNumber: css({
-    fontSize: 28,
-    marginRight: 8,
-    fontWeight: 'bold',
-  }),
-  episodesText: css({
-    fontSize: 12,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: 8,
   }),
   placeholder: css({
     backgroundColor: colors.gray20,
@@ -87,18 +60,6 @@ const styles = {
   }),
 };
 
-const sanitizeUrl = (url: string) => {
-  const regex = /https?:\/\/(?:www.)?(.*)\?utm/;
-  const result = regex.exec(url);
-
-  if (!result || !result[1]) {
-    return url;
-  }
-
-  const formatted = result[1];
-  return last(formatted) === '/' ? dropLast(1, formatted) : formatted;
-};
-
 const PodcastDataFetching: React.FC = () => (
   <div className={styles.main}>
     <div className={css(styles.thumbnail, styles.placeholder)} />
@@ -108,27 +69,13 @@ const PodcastDataFetching: React.FC = () => (
   </div>
 );
 
-const PodcastDataSuccess: React.FC<PodcastMetadata> = ({
-  publisher,
-  thumbnail,
-  website,
-  title,
-  totalEpisodes,
-}) => (
+const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ publisher, thumbnail, title }) => (
   <div className={styles.main}>
     <img className={styles.thumbnail} src={thumbnail} />
     <div className={styles.infoContainer}>
       <div className={styles.heading}>
         <h1>{title}</h1>
-        <h4>{publisher}</h4>
-      </div>
-      <div className={styles.episodes}>
-        <div className={styles.episodesNumber}>{totalEpisodes}</div>{' '}
-        <div className={styles.episodesText}>episodes</div>
-      </div>
-      <div className={styles.link}>
-        <EarthIcon size={20} />
-        <a href={website}>{sanitizeUrl(website)}</a>
+        <div className={styles.publisher}>{publisher}</div>
       </div>
     </div>
   </div>

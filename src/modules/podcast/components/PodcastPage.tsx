@@ -1,18 +1,21 @@
 import * as React from 'react';
-import PodcastCard from 'src/modules/podcast/PodcastCard';
-import { thunks } from './redux';
+import PodcastCard from 'src/modules/podcast/components/PodcastCard';
+import { thunks } from '../redux';
 import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
-import { PodcastState } from './types';
+import { PodcastState } from '../types';
 import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import SectionHeader from 'src/components/SectionHeader';
 import { css } from 'emotion';
-import LatestEpisodes from './components/LatestEpisodes';
-import PodcastClips from './components/PodcastClips';
+import LatestEpisodes from './LatestEpisodes';
+import PodcastClips from './PodcastClips';
 import HttpContent from 'src/components/HttpContent';
-import { colors } from 'src/styles';
+import { colors, clickable, fonts } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
+import Attribute from 'src/components/Attribute';
+import { AnimationPlayOutlineIcon, LinkIcon } from 'mdi-react';
+import sanitizeUrl from 'src/utils/sanitizeUrl';
 
 type PodcastPageProps = {
   id: string;
@@ -27,22 +30,24 @@ type PodcastPageConnectedProps = PodcastPageProps & {
 
 const styles = {
   main: css({
-    '@media (max-width: 800px)': {
-      gridTemplateColumns: '[episodes] 1fr',
+    '@media (min-width: 800px)': {
+      gridTemplateColumns: '[episodes] 1fr [clips] 300px',
+    },
+    '@media (min-width: 1800px)': {
+      gridTemplateColumns: '[episodes] 1fr [clips] 400px',
     },
     display: 'grid',
-    gridTemplateColumns: '[episodes] 2fr [clips] 1fr',
+    gridTemplateColumns: '[episodes] 1fr',
     gridColumnGap: 40,
-    gridRowGap: 40,
   }),
   heading: css({
     '& > h1': {
-      marginBottom: 6,
+      marginBottom: '0.5rem',
     },
-    '& > h4': {
-      color: colors.secondary,
-    },
-    marginBottom: 16,
+    marginBottom: '1rem',
+  }),
+  publisher: css(fonts.bold300, {
+    color: colors.secondary50,
   }),
   description: css({
     color: colors.gray600,
@@ -57,9 +62,27 @@ const styles = {
   clips: css({
     gridTemplateAreas: 'clips',
   }),
+  episodesNumber: css({
+    fontWeight: 900,
+    marginRight: '0.4em',
+  }),
   title: css({
     '@media (min-width: 600px)': {
       display: 'none',
+    },
+  }),
+  link: css(clickable, {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    textDecoration: 'underline',
+  }),
+  podcastSectionHeader: css({
+    '@media (min-width: 600px)': {
+      marginBottom: '-1rem',
+    },
+    '@media (min-width: 800px)': {
+      marginBottom: '-2rem',
     },
   }),
 };
@@ -95,6 +118,23 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
             <LatestEpisodes episodes={episodes} />
           </section>
           <section className={styles.clips}>
+            <SectionHeader>podcast information</SectionHeader>
+            <HttpContent
+              request={podcastMetadata}
+              renderFetching={() => <ParagraphSkeleton />}
+              renderSuccess={({ totalEpisodes, website }) => (
+                <div>
+                  <Attribute icon={<AnimationPlayOutlineIcon />}>
+                    <strong className={styles.episodesNumber}>{totalEpisodes}</strong> episodes
+                  </Attribute>
+                  <Attribute icon={<LinkIcon />}>
+                    <a className={styles.link} href={website}>
+                      {sanitizeUrl(website)}
+                    </a>
+                  </Attribute>
+                </div>
+              )}
+            />
             <SectionHeader className={styles.sectionHeader}>user clips</SectionHeader>
             <PodcastClips />
           </section>
@@ -103,7 +143,9 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
       featuredContent={<PodcastCard podcast={podcastMetadata} />}
       titleContent={
         <>
-          <SectionHeader light>podcast</SectionHeader>
+          <SectionHeader className={styles.podcastSectionHeader} light>
+            podcast
+          </SectionHeader>
           <div className={styles.title}>
             <HttpContent
               request={podcastMetadata}
@@ -111,7 +153,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
               renderSuccess={({ title, publisher }) => (
                 <div className={styles.heading}>
                   <h1>{title}</h1>
-                  <h4>{publisher}</h4>
+                  <div className={styles.publisher}>{publisher}</div>
                 </div>
               )}
             />
