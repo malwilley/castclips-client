@@ -17,6 +17,7 @@ type HotClipProps = {
 const styles = {
   main: css({
     position: 'relative',
+    width: '100%',
   }),
   container: css({
     padding: 20,
