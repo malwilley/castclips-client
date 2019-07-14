@@ -8,7 +8,7 @@ type TextSkeletonProps = {
   color?: string;
   height?: number | string;
   width?: number | string;
-  marginBottom?: number;
+  marginBottom?: number | string;
 };
 
 const styles = {

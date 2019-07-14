@@ -4,7 +4,7 @@ import Card from 'src/components/Card';
 import { ClipMetadata } from '../types';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
 import { css } from 'emotion';
-import { colors, fonts, clickable } from 'src/styles';
+import { colors, fonts, clickable, coverContainer } from 'src/styles';
 import { CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import ClipCardAccent from 'src/components/ClipCardAccent';
@@ -49,7 +49,7 @@ const styles = {
     margin: 16,
     borderRadius: 8,
   }),
-  titleEpisode: css(fonts.heading300, {
+  titleEpisode: css(fonts.bold300, {
     marginBottom: 4,
     color: colors.gray300,
   }),
@@ -91,7 +91,7 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
         {formatHrMinSec(clip.end)}
       </a>
     </p>
-    <Card className={styles.card} to={`/episode/${clip.episode.id}`}>
+    <Card className={styles.card} hover>
       <ClipCardAccent end={clip.end} length={clip.episode.audioLength} start={clip.start} />
       <div className={styles.podcastContainer}>
         <img className={styles.thumbnail} src={clip.podcast.thumbnail} />
@@ -106,11 +106,15 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
               <div>{(clip.episode.audioLength / 60).toFixed(0)} min</div>
             </div>
           </div>
-          <div className={styles.titlePodcast}>
-            <Link to={`/podcast/${clip.podcast.id}`}>{clip.podcast.title}</Link>
-          </div>
+          <div className={styles.titlePodcast}>{clip.podcast.title}</div>
           <div className={styles.titleEpisode}>
-            <Link to={`/episode/${clip.episode.id}`}>{clip.episode.title}</Link>
+            <Link
+              className={css(coverContainer)}
+              href={css(coverContainer)}
+              to={`/episode/${clip.episode.id}`}
+            >
+              {clip.episode.title}
+            </Link>
           </div>
         </div>
       </div>

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, coverContainer } from 'src/styles';
 import { ClockOutlineIcon, CalendarDayIcon, AnimationPlayOutlineIcon } from 'mdi-react';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
 import TextSkeleton from 'src/components/TextSkeleton';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
+import { Link } from 'react-router-dom';
 
 type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;
 
@@ -123,7 +124,7 @@ const SearchResultCardFetching: React.FC = () => (
 );
 
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
-  <Card className={styles.main} to={`/${props.type}/${props.id}`}>
+  <Card className={styles.main} hover>
     <img className={styles.thumbnail} src={props.thumbnail} />
     <div className={styles.attributesContainer}>
       {(props.type === SearchType.Episodes || props.type === SearchType.Clips) && (
@@ -131,7 +132,10 @@ const SearchResultCard: React.FC<SearchResultCardProps> = props => (
       )}
       {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
     </div>
-    <h3>{props.title}</h3>
+    <Link className={css(coverContainer)} to={`/${props.type}/${props.id}`}>
+      {' '}
+      <h3>{props.title}</h3>
+    </Link>
     <SubText {...props} />
     <p className={styles.description}>{props.description}</p>
   </Card>

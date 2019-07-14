@@ -1,13 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import { css } from 'emotion';
 import { colors, boxShadow, clickable } from 'src/styles';
-import { Link } from 'react-router-dom';
 import zIndex from 'src/styles/zIndex';
 
 type CardProps = {
   className?: string;
   feature?: boolean;
-  to?: string;
+  hover?: boolean;
 };
 
 const styles = {
@@ -26,33 +25,23 @@ const styles = {
         zIndex: zIndex.card,
       },
       position: 'relative',
-      transition: 'all 300ms ease-out',
+      transition: 'all 250ms ease-out',
     }),
   feature: css({
     boxShadow: boxShadow.card,
     border: 'none',
   }),
-  link: css({
-    '&::after': {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      content: '""',
-      zIndex: zIndex.card,
-    },
-  }),
 };
 
-const Card: React.SFC<CardProps> = ({ children, className, feature = false, to }) => (
+const Card: React.SFC<CardProps> = ({ children, className, feature = false, hover = false }) => (
   <div
     className={css(
       styles.main,
       feature && styles.feature,
-      to && styles.mainHoverable(feature),
+      hover && styles.mainHoverable(feature),
       className
     )}
   >
-    {to && <Link className={styles.link} to={to} />}
     {children}
   </div>
 );

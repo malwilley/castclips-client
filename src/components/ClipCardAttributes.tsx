@@ -5,6 +5,7 @@ import { fonts } from 'src/styles';
 import { HeartIcon, CalendarDayIcon } from 'mdi-react';
 import formatClipAge from 'src/utils/formatClipAge';
 import Timestamp from './Timestamp';
+import TextSkeleton from './TextSkeleton';
 
 type ClipCardAttributesProps = {
   className?: string;
@@ -22,6 +23,13 @@ const styles = {
   }),
   iconText: css(fonts.attribute300),
 };
+
+const ClipCardAttributesSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+  <div className={css(styles.main, className)}>
+    <TextSkeleton height="1em" width={120} />
+    <TextSkeleton height="1em" width={45} />
+  </div>
+);
 
 const ClipCardAttributes: React.FC<ClipCardAttributesProps> = ({
   className,
@@ -42,4 +50,5 @@ const ClipCardAttributes: React.FC<ClipCardAttributesProps> = ({
   </div>
 );
 
+export { ClipCardAttributesSkeleton };
 export default ClipCardAttributes;

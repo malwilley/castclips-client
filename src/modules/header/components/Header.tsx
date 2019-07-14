@@ -17,16 +17,17 @@ const styles = {
     '@media (min-width: 1800px)': {
       maxWidth: 1400,
     },
-    '@media (max-width: 800px)': {
-      height: 140,
-      paddingTop: 20,
+    '@media (min-width: 800px)': {
+      height: 100,
+      paddingTop: 0,
     },
-    height: 110,
+    height: 140,
     position: 'relative',
     maxWidth: 1200,
     margin: '0 auto',
     width: '100%',
     zIndex: zIndex.card,
+    paddingTop: 20,
   }),
   logo: css(clickable, {
     gridArea: 'logo',
@@ -42,19 +43,21 @@ const styles = {
     height: '100%',
   }),
   search: css({
-    '@media (max-width: 800px)': {
-      transform: 'none',
-      left: 0,
-      right: 0,
-      width: '100%',
-      padding: '0 20px',
-      bottom: 20,
+    '@media (min-width: 800px)': {
+      width: 400,
+      bottom: 29,
+      left: '50%',
+      padding: 0,
+      transform: 'translateX(-50%)',
+      right: 'auto',
     },
+    left: 0,
+    right: 0,
+    transform: 'none',
     position: 'absolute',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    bottom: 34,
-    width: 400,
+    bottom: 20,
+    padding: '0 20px',
+    width: '100%',
   }),
 };
 

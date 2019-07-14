@@ -9,24 +9,21 @@ import ListennotesWebp from 'src/icons/Listennotes.webp';
 
 const styles = {
   main: css({
-    '@media (max-width: 700px)': {
-      height: 230,
+    '@media (min-width: 700px)': {
+      height: 180,
     },
     backgroundColor: colors.gunmetal800,
     margin: 0,
-    height: 180,
+    height: 250,
   }),
   content: css({
     '@media (max-width: 700px)': {
-      '& > :not(:last-child)': {
-        marginBottom: 40,
-      },
       alignItems: 'flex-start',
       flexDirection: 'column',
-      justifyContent: 'flex-start',
+      justifyContent: 'space-between',
     },
     display: 'flex',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     justifyContent: 'space-between',
     color: colors.gunmetal100,
     height: '100%',
@@ -56,7 +53,7 @@ const Footer: React.FC = () => (
         <div>
           <Logo color={colors.white} height={23} width={100} />
           <p className={styles.text}>
-            Create, edit, and share clips from your favorite podcasts
+            Create, share, and discover clips from your favorite podcasts.
             <br />
             Brought to you by podcast lover{' '}
             <a className={styles.link} href="https://malachi.dev/">
