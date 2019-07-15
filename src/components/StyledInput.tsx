@@ -10,6 +10,10 @@ type StyledInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   text: string;
 };
 
+type StyledInputLabelProps = {
+  htmlFor: string;
+};
+
 const styles = {
   input: css({
     '&::placeholder': {
@@ -34,13 +38,14 @@ const styles = {
   }),
 };
 
-const StyledInputLabel: React.SFC = ({ children }) => (
-  <label className={styles.label}>{children}</label>
+const StyledInputLabel: React.FC<StyledInputLabelProps> = ({ children, htmlFor }) => (
+  <label className={styles.label} htmlFor={htmlFor}>
+    {children}
+  </label>
 );
 
-const StyledInput: React.SFC<StyledInputProps> = ({
+const StyledInput: React.FC<StyledInputProps> = ({
   className,
-  focus = false,
   handleTextChange,
   text,
   ...inputProps

@@ -2,7 +2,8 @@ import * as React from 'react';
 import Button from 'src/components/Button';
 import { CloseIcon } from 'mdi-react';
 import { css } from 'emotion';
-import { colors, clickable } from 'src/styles';
+import { colors } from 'src/styles';
+import AccessibleLabel from '../AccessibleLabel';
 
 export type ModalHeaderProps = {
   handleClose: () => void;
@@ -58,9 +59,12 @@ const ModalHeader: React.SFC<ModalHeaderProps> = ({ handleClose, icon, title }) 
   <div className={styles.main}>
     <div className={styles.iconTitleContainer}>
       <div className={styles.icon}>{icon}</div>
-      <h1 className={styles.title}>{title}</h1>
+      <h1 className={styles.title} id="modal-title">
+        {title}
+      </h1>
     </div>
-    <Button onClick={handleClose} className={styles.closeButton}>
+    <Button aria-labelledby="close-modal" onClick={handleClose} className={styles.closeButton}>
+      <AccessibleLabel id="close-modal">Close modal</AccessibleLabel>
       <CloseIcon size={18} />
     </Button>
   </div>

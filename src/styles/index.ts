@@ -3,6 +3,7 @@ import colors from 'src/styles/colors';
 import fonts from 'src/styles/fonts';
 import { CSSObject } from 'create-emotion';
 import zIndex from './zIndex';
+import { css } from 'emotion';
 
 const borderRadius = 8;
 

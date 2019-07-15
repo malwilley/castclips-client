@@ -18,10 +18,12 @@ const styles = {
     bottom: 0,
   }),
   main: css({
+    width: '100%',
+    padding: '40px 0',
+  }),
+  content: css({
     backgroundColor: colors.gray20,
     height: 50,
-    width: '100%',
-    margin: '40px 0',
     position: 'relative',
   }),
   startEndNeedle: css({
@@ -42,19 +44,21 @@ const styles = {
 
 const ClipPreview: React.FC<ClipPreviewProps> = ({ end, length, start, time }) => (
   <div className={styles.main}>
-    {!isNil(start) && (
-      <div className={styles.startEndNeedle} style={{ left: `${(start / length) * 100}%` }} />
-    )}
-    {!isNil(end) && (
-      <div className={styles.startEndNeedle} style={{ left: `${(end / length) * 100}%` }} />
-    )}
-    {!isNil(start) && !isNil(end) && (
-      <div
-        className={styles.completedClip}
-        style={{ left: `${(start / length) * 100}%`, right: `${(1 - end / length) * 100}%` }}
-      />
-    )}
-    <div className={styles.timeNeedle} style={{ left: `${(time / length) * 100}%` }} />
+    <div className={styles.content}>
+      {!isNil(start) && (
+        <div className={styles.startEndNeedle} style={{ left: `${(start / length) * 100}%` }} />
+      )}
+      {!isNil(end) && (
+        <div className={styles.startEndNeedle} style={{ left: `${(end / length) * 100}%` }} />
+      )}
+      {!isNil(start) && !isNil(end) && (
+        <div
+          className={styles.completedClip}
+          style={{ left: `${(start / length) * 100}%`, right: `${(1 - end / length) * 100}%` }}
+        />
+      )}
+      <div className={styles.timeNeedle} style={{ left: `${(time / length) * 100}%` }} />
+    </div>
   </div>
 );
 

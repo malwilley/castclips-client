@@ -10,6 +10,7 @@ import SecondaryButton from '../SecondaryButton';
 
 type ModalProps = ModalHeaderProps & {
   handleClose: () => void;
+  isOpen: boolean;
   primaryButtonProps?: ButtonProps;
   secondaryButtonProps?: ButtonProps;
 };
@@ -29,12 +30,13 @@ const styles = {
 const Modal: React.SFC<ModalProps> = ({
   children,
   handleClose,
+  isOpen,
   icon,
   title,
   primaryButtonProps,
   secondaryButtonProps,
 }) => (
-  <Background handleClose={handleClose}>
+  <Background handleClose={handleClose} isOpen={isOpen}>
     <div className={styles.main}>
       <ModalHeader {...{ handleClose, icon, title }} />
       <div className={styles.bodyContainer}>{children}</div>

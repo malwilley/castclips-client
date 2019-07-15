@@ -16,6 +16,7 @@ type ShareModalProps = {
   start: number;
   end: number;
   handleClose: () => void;
+  isOpen: boolean;
 };
 
 type ShareModalConnectedProps = ShareModalProps & {
@@ -39,6 +40,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
   handleClose,
   start,
   end,
+  isOpen,
 }) => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -65,6 +67,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
   return (
     <Modal
       handleClose={handleClose}
+      isOpen={isOpen}
       icon={<ScissorsIcon />}
       primaryButtonProps={
         clipId.type === 'fetching'
@@ -76,19 +79,22 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
       <div className={styles.container}>
         {/* podcast/episode/clip info */}
         <div>
-          <StyledInputLabel>
+          <StyledInputLabel htmlFor="title-input">
             Clip title <Asterisk />
           </StyledInputLabel>
           <StyledInput
+            id="title-input"
             focus
             handleTextChange={setTitle}
             placeholder="A descriptive title for your clip"
+            required
             text={title}
           />
         </div>
         <div>
-          <StyledInputLabel>Clip description</StyledInputLabel>
+          <StyledInputLabel htmlFor="description-input">Clip description</StyledInputLabel>
           <StyledTextArea
+            id="description-input"
             handleTextChange={setDescription}
             placeholder="If the title isn't enough, say more here!"
             text={description}
