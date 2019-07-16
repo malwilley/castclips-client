@@ -2,7 +2,7 @@ import { HttpRequest } from 'src/types';
 
 export type ClipMetadata = {
   audio: string;
-  createdAt: string;
+  createdAt: Date;
   description: string;
   end: number;
   episode: {

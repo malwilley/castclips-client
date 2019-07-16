@@ -87,8 +87,14 @@ const fetchClipsForPodcast: Thunk<string, Promise<void>> = id => async (dispatch
       actions.setClips({
         type: 'success',
         data: clips.map(
-          ({ episode: { published: episodePublished, ...episode }, published, ...rest }) => ({
+          ({
+            episode: { published: episodePublished, ...episode },
+            createdAt,
+            published,
+            ...rest
+          }) => ({
             ...rest,
+            createdAt: new Date(createdAt),
             published: new Date(published),
             episode: {
               ...episode,

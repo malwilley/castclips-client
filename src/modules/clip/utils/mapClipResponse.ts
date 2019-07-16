@@ -7,6 +7,7 @@ const mapClipResponse = (clipResponse: GetClipResponse): ClipMetadata => ({
     ...clipResponse.episode,
     published: new Date(clipResponse.episode.published),
   },
+  createdAt: new Date(clipResponse.createdAt),
   published: new Date(clipResponse.published),
 });
 

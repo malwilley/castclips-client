@@ -1,6 +1,7 @@
 export type GetClipResponse = {
   audio: string;
-  createdAt: string;
+  createdAt: number;
+  updatedAt: number;
   description: string;
   end: number;
   episode: {

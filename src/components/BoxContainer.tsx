@@ -27,7 +27,7 @@ const styles = {
   border: css({
     height: 32,
     width: '100%',
-    backgroundColor: colors.background,
+    backgroundColor: colors.white,
     position: 'absolute',
   }),
   borderTop: css({

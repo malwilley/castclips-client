@@ -5,11 +5,24 @@ import CopyLink from 'src/components/CopyLink';
 import HttpContent from 'src/components/HttpContent';
 import { ClipState } from '../types';
 import { colors, clickable } from 'src/styles';
-import { RedditIcon, FacebookIcon, TwitterIcon, UserOutlineIcon } from 'mdi-react';
+import {
+  RedditIcon,
+  FacebookIcon,
+  TwitterIcon,
+  UserOutlineIcon,
+  EyeOutlineIcon,
+  CalendarDayIcon,
+} from 'mdi-react';
 import SectionHeader from 'src/components/SectionHeader';
 import ClipContext from './ClipContext';
 import TextSkeleton from 'src/components/TextSkeleton';
 import TruncateContent from 'src/components/TruncateContent';
+import Attribute from 'src/components/Attribute';
+import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
+import formatPublishDate from 'src/utils/formatPublishDate';
+import AccessibleLabel from 'src/components/AccessibleLabel';
+import Tooltip from 'src/components/Tooltip';
+import formatClipAge from 'src/utils/formatClipAge';
 
 type ClipPageBodyProps = {
   clipId: string;
@@ -76,14 +89,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
   }),
-  shareButton: css(clickable, {
+  shareButton: css({
     alignItems: 'center',
     borderRadius: '50%',
     color: colors.white,
     display: 'flex',
-    height: 30,
+    height: '2rem',
     justifyContent: 'center',
-    width: 30,
+    width: '2rem',
   }),
   shareButtonFacebook: css({
     backgroundColor: '#3C5A99',
@@ -126,68 +139,66 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
         />
       </div>
       <div className={styles.sideContainer}>
-        <SectionHeader>clip creator</SectionHeader>
-        <Card className={styles.userCard}>
-          <div className={styles.userPicNameContainer}>
-            <div className={styles.userPic}>
-              <UserOutlineIcon />
-            </div>
-            <HttpContent
-              request={clipMetadata}
-              renderSuccess={data => (
-                <div>
-                  <h4>username</h4>
-                  <h5
-                    className={styles.userPublished}
-                  >{`Created ${data.published.toLocaleDateString()}`}</h5>
-                </div>
-              )}
-            />
-          </div>
-        </Card>
+        <SectionHeader>clip information</SectionHeader>
+        <HttpContent
+          request={clipMetadata}
+          renderFetching={() => <ParagraphSkeleton />}
+          renderSuccess={({ createdAt, views }) => (
+            <>
+              <Attribute icon={<EyeOutlineIcon />}>{views} views</Attribute>
+              <Attribute icon={<CalendarDayIcon />}>Created {formatClipAge(createdAt)}</Attribute>
+            </>
+          )}
+        />
         <SectionHeader>tell the world</SectionHeader>
         <Card className={styles.shareCard}>
           <CopyLink text={link} />
           <div className={styles.shareButtons}>
-            <a
-              className={css(styles.shareButton, styles.shareButtonReddit)}
-              href={
-                clipMetadata.type === 'success'
-                  ? `https://reddit.com/submit?url=${link}&title=${encodeURIComponent(
-                      clipMetadata.data.title
-                    )}`
-                  : `https://reddit.com/submit?url=${link}`
-              }
-              target="__blank"
-            >
-              <RedditIcon size={20} />
-            </a>
-            <a
-              className={css(styles.shareButton, styles.shareButtonTwitter)}
-              href={
-                clipMetadata.type === 'success'
-                  ? `https://reddit.com/submit?url=${link}&title=${encodeURIComponent(
-                      clipMetadata.data.title
-                    )}`
-                  : `https://reddit.com/submit?url=${link}`
-              }
-              target="__blank"
-            >
-              <TwitterIcon size={20} />
-            </a>
-            <a
-              className={css(styles.shareButton, styles.shareButtonFacebook)}
-              href={
-                clipMetadata.type === 'success'
-                  ? `https://reddit.com/submit?url=${link}&title=${encodeURIComponent(
-                      clipMetadata.data.title
-                    )}`
-                  : `https://reddit.com/submit?url=${link}`
-              }
-              target="__blank"
-            >
-              <FacebookIcon size={20} />
-            </a>
+            <Tooltip text="Share to reddit">
+              <a
+                aria-labelledby="reddit-label"
+                className={css(styles.shareButton, styles.shareButtonReddit)}
+                href={
+                  clipMetadata.type === 'success'
+                    ? `https://reddit.com/submit?url=${link}&title=${encodeURIComponent(
+                        clipMetadata.data.title
+                      )}`
+                    : `https://reddit.com/submit?url=${link}`
+                }
+                target="__blank"
+              >
+                <AccessibleLabel id="reddit-label">Share to reddit</AccessibleLabel>
+                <RedditIcon size={20} />
+              </a>
+            </Tooltip>
+            <Tooltip text="Share to Twitter">
+              <a
+                aria-labelledby="twitter-label"
+                className={css(styles.shareButton, styles.shareButtonTwitter)}
+                href={
+                  clipMetadata.type === 'success'
+                    ? `https://twitter.com/intent/tweet?url=${link}&text=${encodeURIComponent(
+                        clipMetadata.data.title
+                      )}`
+                    : `https://twitter.com/intent/tweet?url=${link}`
+                }
+                target="__blank"
+              >
+                <AccessibleLabel id="twitter-label">Share to Twitter</AccessibleLabel>
+                <TwitterIcon size={20} />
+              </a>
+            </Tooltip>
+            <Tooltip text="Share to Facebook">
+              <a
+                aria-labelledby="facebook-label"
+                className={css(styles.shareButton, styles.shareButtonFacebook)}
+                href={`https://www.facebook.com/sharer.php?u=${link}`}
+                target="__blank"
+              >
+                <AccessibleLabel id="facebook-label">Share to Facebook</AccessibleLabel>
+                <FacebookIcon size={20} />
+              </a>
+            </Tooltip>
           </div>
         </Card>
       </div>

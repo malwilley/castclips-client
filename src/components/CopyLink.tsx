@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { css } from 'emotion';
 import Button from './Button';
 import { colors, fonts } from 'src/styles';
-import { ClipboardTextOutlineIcon } from 'mdi-react';
+import { ClipboardTextOutlineIcon, ContentCopyIcon } from 'mdi-react';
+import AccessibleLabel from './AccessibleLabel';
 
 type CopyLinkProps = {
   className?: string;
@@ -55,10 +56,10 @@ const styles = {
 // animate?
 
 const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
-  const [, setCopied] = React.useState<null | 'copied' | 'error'>(null);
-  const ref = React.useRef<HTMLInputElement>(null);
+  const [, setCopied] = useState<null | 'copied' | 'error'>(null);
+  const ref = useRef<HTMLInputElement>(null);
 
-  const copyToClipboard = React.useCallback(() => {
+  const copyToClipboard = useCallback(() => {
     if (!ref.current) {
       return;
     }
@@ -71,7 +72,7 @@ const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
     }
   }, [ref]);
 
-  const selectOnClick = React.useCallback(() => {
+  const selectOnClick = useCallback(() => {
     if (!ref.current) {
       return;
     }
@@ -81,10 +82,15 @@ const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
   return (
     <div className={css(styles.main, className)}>
       <div className={styles.inputContainer}>
-        <input className={styles.input} onClick={selectOnClick} ref={ref} value={text} />
+        <input className={styles.input} readOnly onClick={selectOnClick} ref={ref} value={text} />
       </div>
-      <Button className={styles.clipboardButton} onClick={copyToClipboard}>
-        <ClipboardTextOutlineIcon size={20} />
+      <Button
+        aria-labelledby="copy-label"
+        className={styles.clipboardButton}
+        onClick={copyToClipboard}
+      >
+        <AccessibleLabel id="copy-label">Copy link to clipboard</AccessibleLabel>
+        <ContentCopyIcon aria-hidden size="1.2em" />
       </Button>
     </div>
   );

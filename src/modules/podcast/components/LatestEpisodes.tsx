@@ -9,6 +9,7 @@ import { ClockOutlineIcon, CalendarDayIcon, ArtistIcon } from 'mdi-react';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import TextSkeleton from 'src/components/TextSkeleton';
 import stripHtml from 'src/utils/stripHtml';
+import capitalizeFirstLetter from 'src/utils/capitalizeFirstLetter';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -79,7 +80,7 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
         <div className={styles.episodeRow.textIconContainer}>
           <div className={styles.episodeRow.textIcon}>
             <CalendarDayIcon />
-            <div>{formatPublishDate(published)}</div>
+            <div>{capitalizeFirstLetter(formatPublishDate(published))}</div>
           </div>
           <div className={styles.episodeRow.textIcon}>
             <ClockOutlineIcon />
