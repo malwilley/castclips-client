@@ -1,8 +1,6 @@
 :root {
   --h-font: 'Nunito', sans-serif;
   --p-font: 'Nunito', sans-serif;
-  --normal-weight: 400;
-  --bold-weight: 800;
 
   --color-primary: #07689f;
   --color-primary-dark: #49759c;
@@ -32,11 +30,6 @@ html {
   box-sizing: border-box;
 }
 
-html::selection {
-  background-color: #009AFA;
-  color: #FFFFFF;
-}
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -52,13 +45,12 @@ body {
   font-family: sans-serif;
   color: var(--color-darkest);
   font-family: var(--p-font);
-  font-weight: var(--normal-weight);
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: var(--h-font);
-  font-weight: var(--bold-weight);
+  font-weight: 900;
   margin: 0;
 }
 

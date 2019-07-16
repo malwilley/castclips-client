@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { fonts } from 'src/styles';
 import { HeartIcon, CalendarDayIcon } from 'mdi-react';
 import formatClipAge from 'src/utils/formatClipAge';
+import capitalizeFirstLetter from 'src/utils/capitalizeFirstLetter';
 import Timestamp from './Timestamp';
 import TextSkeleton from './TextSkeleton';
 
@@ -43,7 +44,7 @@ const ClipCardAttributes: React.FC<ClipCardAttributesProps> = ({
       </span>
       <span className={styles.iconText}>
         <CalendarDayIcon />
-        {formatClipAge(published)}
+        {capitalizeFirstLetter(formatClipAge(published))}
       </span>
     </div>
     <Timestamp seconds={end - start} />

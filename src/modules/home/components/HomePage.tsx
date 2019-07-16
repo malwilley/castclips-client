@@ -2,18 +2,13 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import Header from 'src/modules/header';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { HomeState } from '../types';
 import BoxContainer from 'src/components/BoxContainer';
 import TextPointer from './TextPointer';
 import HotClips from './HotClips';
-
-type HomePageConnectedProps = {
-  fetchHotClips: (num: number) => void;
-  hotClips: HomeState['hotClips'];
-};
 
 const styles = {
   gradientContainer: css({
@@ -49,10 +44,13 @@ const styles = {
   }),
 };
 
-const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips }) => {
+const HomePage: React.FC = () => {
+  const dispatch = useDispatch();
+  const hotClips = useSelector((state: AppState) => state.home.hotClips);
+
   React.useEffect(() => {
-    fetchHotClips(0);
-  }, [fetchHotClips]);
+    dispatch(thunks.fetchHotClips(0));
+  }, []);
 
   return (
     <div>
@@ -76,15 +74,4 @@ const HomePage: React.FC<HomePageConnectedProps> = ({ fetchHotClips, hotClips })
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  hotClips: state.home.hotClips,
-});
-
-const mapDispatchToProps = {
-  fetchHotClips: thunks.fetchHotClips,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomePage);
+export default HomePage;
