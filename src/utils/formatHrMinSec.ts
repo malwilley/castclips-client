@@ -4,9 +4,9 @@ const formatNumber = (num: number) => (num < 10 ? `0${num}` : num);
 
 const formatHrMinSec = (seconds: number, shorten = false): string => {
   const hrMinSec = [
-    Math.floor(seconds / 3600),
-    Math.floor((seconds % 3600) / 60),
-    Math.floor((seconds % 3600) % 60),
+    Math.max(Math.floor(seconds / 3600), 0),
+    Math.max(Math.floor((seconds % 3600) / 60), 0),
+    Math.max(Math.floor((seconds % 3600) % 60), 0),
   ];
 
   if (!shorten) {

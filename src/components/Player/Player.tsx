@@ -3,7 +3,7 @@ import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../Audio';
 import useAudioControls, { AudioControlsResult } from 'src/hooks/useAudioControls';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts, breakpoints } from 'src/styles';
 import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
 
@@ -22,7 +22,7 @@ const styles = {
     justifyContent: 'space-between',
     padding: '12px 30px 10px 4px',
   }),
-  timeLabel: css(fonts.text300, {
+  timeLabel: css(fonts.text250, breakpoints.breakpoint600(fonts.text300), {
     color: colors.gray700,
   }),
   slider: css({

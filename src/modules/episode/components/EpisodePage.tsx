@@ -69,6 +69,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   const { time } = parse(search) as { time?: string };
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     fetchEpisodeMetadata(id);
   }, [id]);
 

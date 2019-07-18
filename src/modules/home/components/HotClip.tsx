@@ -20,7 +20,7 @@ const styles = {
     width: '100%',
   }),
   container: css({
-    padding: 20,
+    padding: '1rem 1.4rem 0.8rem 1.4rem',
   }),
   footerContainer: css({
     marginTop: 8,
@@ -29,6 +29,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
   }),
+  title: css(fonts.heading300),
   podEpSection: {
     accent: css({
       top: -1,
@@ -44,14 +45,14 @@ const styles = {
     thumbnail: css({
       backgroundColor: colors.gray50,
       borderRadius: 4,
-      height: 60,
-      width: 60,
+      height: '4rem',
+      width: '4rem',
       flexShrink: 0,
-      margin: 10,
+      margin: '0.8rem',
     }),
     titlesContainer: css({
       flexGrow: 1,
-      padding: '14px 20px 14px 0',
+      padding: '1rem 1rem 0.8rem 0',
     }),
     podTitle: css(fonts.bold200, {
       lineHeight: 1,
@@ -119,7 +120,7 @@ const HotClip: React.FC<HotClipProps> = ({ clip }) => (
   <Card className={styles.main} feature hover>
     <div className={styles.container}>
       <Link className={css(coverContainer)} to={`/clip/${clip.id}`}>
-        <h3>{clip.title}</h3>
+        <h3 className={styles.title}>{clip.title}</h3>
       </Link>
       <ClipCardAttributes className={styles.footerContainer} clip={clip} />
     </div>

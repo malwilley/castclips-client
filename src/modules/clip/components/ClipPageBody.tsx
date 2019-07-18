@@ -1,25 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import { css } from 'emotion';
 import Card from 'src/components/Card';
 import CopyLink from 'src/components/CopyLink';
 import HttpContent from 'src/components/HttpContent';
 import { ClipState } from '../types';
-import { colors, clickable } from 'src/styles';
-import {
-  RedditIcon,
-  FacebookIcon,
-  TwitterIcon,
-  UserOutlineIcon,
-  EyeOutlineIcon,
-  CalendarDayIcon,
-} from 'mdi-react';
+import { colors } from 'src/styles';
+import { RedditIcon, FacebookIcon, TwitterIcon, EyeOutlineIcon, CalendarDayIcon } from 'mdi-react';
 import SectionHeader from 'src/components/SectionHeader';
 import ClipContext from './ClipContext';
-import TextSkeleton from 'src/components/TextSkeleton';
 import TruncateContent from 'src/components/TruncateContent';
 import Attribute from 'src/components/Attribute';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
-import formatPublishDate from 'src/utils/formatPublishDate';
 import AccessibleLabel from 'src/components/AccessibleLabel';
 import Tooltip from 'src/components/Tooltip';
 import formatClipAge from 'src/utils/formatClipAge';
@@ -118,9 +109,8 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
           request={clipMetadata}
           renderFetching={() => (
             <div>
-              <TextSkeleton height={20} width={100} color={colors.gray50} />
-              <TextSkeleton height={20} width={300} color={colors.gray50} />
-              <TextSkeleton height={20} width={200} color={colors.gray50} />
+              <SectionHeader>description</SectionHeader>
+              <ParagraphSkeleton />
             </div>
           )}
           renderSuccess={clip => (

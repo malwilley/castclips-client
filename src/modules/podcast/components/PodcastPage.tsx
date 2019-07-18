@@ -95,6 +95,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
   id,
 }) => {
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     fetchPodcastMetadata(id);
     fetchClipsForPodcast(id);
   }, [id]);
