@@ -6,7 +6,7 @@ import { css } from 'emotion';
 import { colors } from 'src/styles';
 import { isNil } from 'ramda';
 import PreviewButton from './PreviewButton';
-import { ArrowRightIcon } from 'mdi-react';
+import ArrowRightIcon from 'mdi-react/ArrowRightIcon';
 import CreateClipModal from './CreateClipModal';
 import ShareButton from './ShareButton';
 import { animated, useSpring } from 'react-spring';

@@ -1,7 +1,6 @@
-import { css } from 'emotion';
-import { ShareIcon, ContentCutIcon, PlusCircleOutlineIcon } from 'mdi-react';
-import * as React from 'react';
-import Button, { ButtonProps } from 'src/components/Button';
+import PlusCircleOutlineIcon from 'mdi-react/PlusCircleOutlineIcon';
+import React from 'react';
+import { ButtonProps } from 'src/components/Button';
 import PrimaryButton from 'src/components/PrimaryButton';
 
 const ShareButton: React.SFC<ButtonProps> = ({ className, ...props }) => (

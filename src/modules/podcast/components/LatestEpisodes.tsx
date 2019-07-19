@@ -5,7 +5,9 @@ import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
-import { ClockOutlineIcon, CalendarDayIcon, ArtistIcon } from 'mdi-react';
+import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
+import ArtistIcon from 'mdi-react/ArtistIcon';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import TextSkeleton from 'src/components/TextSkeleton';
 import stripHtml from 'src/utils/stripHtml';
@@ -55,11 +57,10 @@ const styles = {
       textOverflow: 'ellipsis',
       marginBottom: '0.1rem',
     }),
-    description: css({
+    description: css(fonts.text250, {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       margin: 0,
-      fontSize: 14,
       whiteSpace: 'nowrap',
     }),
   },
@@ -88,10 +89,10 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
           </div>
           {/*
           <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
-            <ArtistIcon size={14} />
-            <div>6 clips</div>
+          <ArtistIcon size={14} />
+          <div>6 clips</div>
           </div>
-          */}
+        */}
         </div>
       </div>
     </Link>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { EpisodeState } from '../types';
 import HttpContent from 'src/components/HttpContent';
-import { CalendarDayIcon, ClockOutlineIcon } from 'mdi-react';
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
+import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import formatMinutes from 'src/utils/formatMinutes';

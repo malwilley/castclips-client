@@ -1,11 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../Audio';
-import useAudioControls, { AudioControlsResult } from 'src/hooks/useAudioControls';
-import { colors, fonts } from 'src/styles';
+import { AudioControlsResult } from 'src/hooks/useAudioControls';
+import { colors, fonts, breakpoints } from 'src/styles';
 import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
+import noop from 'src/utils/noop';
+import { KeyCode } from 'src/types';
+import AccessibleLabel from '../AccessibleLabel';
 
 type PlayerProps = AudioControlsResult & {
   audioRef: React.RefObject<HTMLAudioElement>;
@@ -22,7 +25,7 @@ const styles = {
     justifyContent: 'space-between',
     padding: '12px 30px 10px 4px',
   }),
-  timeLabel: css(fonts.text300, {
+  timeLabel: css(fonts.text250, breakpoints.breakpoint600(fonts.text300), {
     color: colors.gray700,
   }),
   slider: css({
@@ -39,6 +42,16 @@ const styles = {
     transition: 'background-color 300ms ease-out',
   }),
   handle: css({
+    '&:active::after': {
+      position: 'absolute',
+      left: -10,
+      top: -10,
+      height: 34,
+      width: 34,
+      backgroundColor: colors.tertiary100alpha30,
+      borderRadius: '50%',
+      content: '""',
+    },
     backgroundColor: colors.tertiary100,
     cursor: 'grab',
     position: 'absolute',
@@ -46,7 +59,7 @@ const styles = {
     width: 14,
     borderRadius: 7,
     top: -5,
-    transform: 'translateX(-7px)',
+    transform: 'translateX(-8px)',
   }),
   rail: css({
     position: 'absolute',
@@ -81,14 +94,54 @@ const Player: React.FC<PlayerProps> = ({
 }) => {
   const { canPlay, duration, isPlaying, setTime, time } = state;
   const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
+  const togglePlayback = () => {
+    if (!isPlaying && canPlay) {
+      controls.play();
+    } else {
+      controls.pause();
+    }
+  };
+
   useEffect(() => {
     if (time >= (end || duration)) {
       controls.pause();
     }
   }, [time, end, duration]);
 
+  useEffect(() => {
+    const handleKeyboardControls = ({ keyCode }: KeyboardEvent) => {
+      switch (keyCode) {
+        case KeyCode.Space:
+          togglePlayback();
+          return;
+        case KeyCode.ArrowLeft:
+          canPlay && controls.seek(time - 5);
+          return;
+        case KeyCode.ArrowRight:
+          canPlay && controls.seek(time + 5);
+          return;
+      }
+    };
+    window.onkeydown = e => {
+      if (
+        e.keyCode === KeyCode.Space ||
+        e.keyCode === KeyCode.ArrowLeft ||
+        e.keyCode === KeyCode.ArrowRight
+      ) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener('keydown', handleKeyboardControls);
+
+    return () => {
+      window.onkeydown = noop;
+      window.removeEventListener('keydown', handleKeyboardControls);
+    };
+  });
+
   return (
     <div>
+      <AccessibleLabel id="slider-label">Audio seek slider</AccessibleLabel>
       <Audio src={audioUrl} title={title} audioRef={audioRef} />
       {canPlay && (
         <Slider
@@ -115,7 +168,7 @@ const Player: React.FC<PlayerProps> = ({
           <Tracks right={false}>
             {({ tracks, getTrackProps }) => (
               <div>
-                {tracks.map(({ id, source, target }) => (
+                {tracks.map(({ id, target }) => (
                   <div
                     key={id}
                     className={styles.track}
@@ -131,8 +184,16 @@ const Player: React.FC<PlayerProps> = ({
               <div>
                 {handles.map(({ id, percent }) => (
                   <div
+                    aria-labelledby="slider-label"
+                    aria-valuemin={start}
+                    aria-valuemax={end || duration}
+                    aria-valuenow={time}
+                    aria-valuetext={`${formatHrMinSec(time - start)} of ${formatHrMinSec(
+                      (end || duration) - start
+                    )}`}
                     className={styles.handle}
                     key={id}
+                    role="slider"
                     style={{ left: `${percent}%` }}
                     {...getHandleProps(id)}
                   />
@@ -145,9 +206,9 @@ const Player: React.FC<PlayerProps> = ({
       <div className={styles.controlsContainer}>
         <PlayerControls
           canPlay={canPlay}
-          handleBackClick={() => controls.seek(time - 5)}
+          handleBackClick={() => controls.seek(time - 10)}
           handleForwardClick={() => controls.seek(time + 30)}
-          handlePlayPauseClick={() => (isPlaying ? controls.pause() : controls.play())}
+          handlePlayPauseClick={togglePlayback}
           isPlaying={isPlaying}
         />
         <div className={styles.timeLabel}>

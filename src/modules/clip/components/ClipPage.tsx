@@ -53,6 +53,7 @@ const ClipPage: React.FC<ClipPageConnectedProps> = ({
   unlikeClip,
 }) => {
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     fetchClip(id);
   }, [id]);
 

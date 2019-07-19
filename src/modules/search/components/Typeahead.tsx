@@ -7,7 +7,7 @@ import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import Downshift from 'downshift';
 import { css } from 'emotion';
-import { SearchIcon } from 'mdi-react';
+import SearchIcon from 'mdi-react/SearchIcon';
 import { colors } from 'src/styles';
 import { push } from 'connected-react-router';
 

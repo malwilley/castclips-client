@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import HeaderAccount from './HeaderAccount';
@@ -18,7 +18,7 @@ const styles = {
       maxWidth: 1400,
     },
     '@media (min-width: 800px)': {
-      height: 100,
+      height: 90,
       paddingTop: 0,
     },
     height: 140,
@@ -45,7 +45,7 @@ const styles = {
   search: css({
     '@media (min-width: 800px)': {
       width: 400,
-      bottom: 29,
+      bottom: 24,
       left: '50%',
       padding: 0,
       transform: 'translateX(-50%)',

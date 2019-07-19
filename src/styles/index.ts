@@ -1,9 +1,9 @@
 import boxShadow from 'src/styles/boxShadow';
+import breakpoints from 'src/styles/breakpoints';
 import colors from 'src/styles/colors';
 import fonts from 'src/styles/fonts';
 import { CSSObject } from 'create-emotion';
 import zIndex from './zIndex';
-import { css } from 'emotion';
 
 const borderRadius = 8;
 
@@ -30,4 +30,4 @@ const coverContainer: CSSObject = {
   },
 };
 
-export { clickable, coverContainer, borderRadius, boxShadow, colors, fonts };
+export { breakpoints, clickable, coverContainer, borderRadius, boxShadow, colors, fonts };

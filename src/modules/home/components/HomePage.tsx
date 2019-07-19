@@ -49,6 +49,7 @@ const HomePage: React.FC = () => {
   const hotClips = useSelector((state: AppState) => state.home.hotClips);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(thunks.fetchHotClips(0));
   }, []);
 

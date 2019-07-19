@@ -2,7 +2,7 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors, clickable } from 'src/styles';
 import Button from 'src/components/Button';
-import { HeartIcon } from 'mdi-react';
+import HeartIcon from 'mdi-react/HeartIcon';
 import { useDispatch } from 'react-redux';
 import { thunks } from '../redux';
 
