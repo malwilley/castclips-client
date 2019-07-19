@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EmoticonSadIcon } from 'mdi-react';
+import EmoticonSadIcon from 'mdi-react/EmoticonSadIcon';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScissorsIcon } from 'mdi-react';
+import ScissorsIcon from 'mdi-react/ScissorsIcon';
 import Modal from 'src/components/Modal';
 import StyledInput, { StyledInputLabel } from 'src/components/StyledInput';
 import { css } from 'emotion';

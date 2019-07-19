@@ -11,7 +11,7 @@
     "firebase": "^5.8.2",
     "lodash": "^4.17.4",
     "lodash.throttle": "^4.1.1",
-    "mdi-react": "^4.0.0",
+    "mdi-react": "^5.5.0",
     "query-string": "^6.1.0",
     "querystringify": "^2.1.0",
     "ramda": "^0.25.0",

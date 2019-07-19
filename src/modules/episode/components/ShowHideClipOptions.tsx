@@ -2,7 +2,8 @@ import * as React from 'react';
 import Button, { ButtonProps } from 'src/components/Button';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
-import { ChevronDownIcon, ChevronUpIcon } from 'mdi-react';
+import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
+import ChevronUpIcon from 'mdi-react/ChevronUpIcon';
 
 type ShowHideClipOptionsProps = ButtonProps & {
   show: boolean;

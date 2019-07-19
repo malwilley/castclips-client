@@ -6,7 +6,7 @@ import HttpContent from 'src/components/HttpContent';
 import { ClipMetadata } from '../types';
 import TextSkeleton from 'src/components/TextSkeleton';
 import { colors, fonts, clickable } from 'src/styles';
-import { ChevronRightIcon } from 'mdi-react';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
 import Player from 'src/components/Player';

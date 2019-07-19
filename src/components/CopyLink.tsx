@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { css } from 'emotion';
 import Button from './Button';
 import { colors, fonts } from 'src/styles';
-import { ClipboardTextOutlineIcon, ContentCopyIcon } from 'mdi-react';
+import ContentCopyIcon from 'mdi-react/ContentCopyIcon';
 import AccessibleLabel from './AccessibleLabel';
 
 type CopyLinkProps = {

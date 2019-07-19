@@ -14,7 +14,8 @@ import { colors, clickable, fonts } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
 import Attribute from 'src/components/Attribute';
-import { AnimationPlayOutlineIcon, LinkIcon } from 'mdi-react';
+import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon';
+import LinkIcon from 'mdi-react/LinkIcon';
 import sanitizeUrl from 'src/utils/sanitizeUrl';
 
 type PodcastPageProps = {

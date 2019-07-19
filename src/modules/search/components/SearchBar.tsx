@@ -7,7 +7,7 @@ import { stringify } from 'querystringify';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 import zIndex from 'src/styles/zIndex';
-import { SearchIcon } from 'mdi-react';
+import SearchIcon from 'mdi-react/SearchIcon';
 import Button from 'src/components/Button';
 
 type SearchBarProps = { className?: string; initialText?: string };

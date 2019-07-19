@@ -8,7 +8,8 @@ import Button from 'src/components/Button';
 import firebase from 'src/modules/auth/firebase';
 import Downshift from 'downshift';
 import { colors, fonts, boxShadow } from 'src/styles';
-import { MenuDownIcon, UserIcon } from 'mdi-react';
+import MenuDownIcon from 'mdi-react/MenuDownIcon';
+import UserIcon from 'mdi-react/UserIcon';
 import zIndex from 'src/styles/zIndex';
 import { secondaryButtonStyles } from 'src/components/SecondaryButton';
 

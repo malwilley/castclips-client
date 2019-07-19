@@ -1,8 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 import Button from '../Button';
-import { Rewind10, FastForward30, PlayArrowIcon, PauseIcon } from 'mdi-react';
-import { Forward30, Back5 } from 'src/icons';
+import Rewind10 from 'mdi-react/Rewind10Icon';
+import FastForward30 from 'mdi-react/FastForward30Icon';
+import PlayArrowIcon from 'mdi-react/PlayArrowIcon';
+import PauseIcon from 'mdi-react/PauseIcon';
 import { colors } from 'src/styles';
 import Tooltip from '../Tooltip';
 import AccessibleLabel from '../AccessibleLabel';

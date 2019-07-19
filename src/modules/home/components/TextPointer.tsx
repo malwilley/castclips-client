@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ArrowUpIcon, ArrowDownIcon } from 'mdi-react';
+import ArrowUpIcon from 'mdi-react/ArrowUpIcon';
+import ArrowDownIcon from 'mdi-react/ArrowDownIcon';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 

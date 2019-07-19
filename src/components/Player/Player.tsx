@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../Audio';

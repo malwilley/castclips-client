@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { colors, coverContainer } from 'src/styles';
-import { ClockOutlineIcon, CalendarDayIcon, AnimationPlayOutlineIcon } from 'mdi-react';
+import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
+import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
 import TextSkeleton from 'src/components/TextSkeleton';
