@@ -8,6 +8,7 @@ import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
 import noop from 'src/utils/noop';
 import { KeyCode } from 'src/types';
+import AccessibleLabel from '../AccessibleLabel';
 
 type PlayerProps = AudioControlsResult & {
   audioRef: React.RefObject<HTMLAudioElement>;
@@ -41,6 +42,16 @@ const styles = {
     transition: 'background-color 300ms ease-out',
   }),
   handle: css({
+    '&:active::after': {
+      position: 'absolute',
+      left: -10,
+      top: -10,
+      height: 34,
+      width: 34,
+      backgroundColor: colors.tertiary100alpha30,
+      borderRadius: '50%',
+      content: '""',
+    },
     backgroundColor: colors.tertiary100,
     cursor: 'grab',
     position: 'absolute',
@@ -48,7 +59,7 @@ const styles = {
     width: 14,
     borderRadius: 7,
     top: -5,
-    transform: 'translateX(-7px)',
+    transform: 'translateX(-8px)',
   }),
   rail: css({
     position: 'absolute',
@@ -130,6 +141,7 @@ const Player: React.FC<PlayerProps> = ({
 
   return (
     <div>
+      <AccessibleLabel id="slider-label">Audio seek slider</AccessibleLabel>
       <Audio src={audioUrl} title={title} audioRef={audioRef} />
       {canPlay && (
         <Slider
@@ -156,7 +168,7 @@ const Player: React.FC<PlayerProps> = ({
           <Tracks right={false}>
             {({ tracks, getTrackProps }) => (
               <div>
-                {tracks.map(({ id, source, target }) => (
+                {tracks.map(({ id, target }) => (
                   <div
                     key={id}
                     className={styles.track}
@@ -172,8 +184,16 @@ const Player: React.FC<PlayerProps> = ({
               <div>
                 {handles.map(({ id, percent }) => (
                   <div
+                    aria-labelledby="slider-label"
+                    aria-valuemin={start}
+                    aria-valuemax={end || duration}
+                    aria-valuenow={time}
+                    aria-valuetext={`${formatHrMinSec(time - start)} of ${formatHrMinSec(
+                      (end || duration) - start
+                    )}`}
                     className={styles.handle}
                     key={id}
+                    role="slider"
                     style={{ left: `${percent}%` }}
                     {...getHandleProps(id)}
                   />

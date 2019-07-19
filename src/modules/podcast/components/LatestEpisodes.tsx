@@ -57,11 +57,10 @@ const styles = {
       textOverflow: 'ellipsis',
       marginBottom: '0.1rem',
     }),
-    description: css({
+    description: css(fonts.text250, {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       margin: 0,
-      fontSize: 14,
       whiteSpace: 'nowrap',
     }),
   },
@@ -90,10 +89,10 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
           </div>
           {/*
           <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
-            <ArtistIcon size={14} />
-            <div>6 clips</div>
+          <ArtistIcon size={14} />
+          <div>6 clips</div>
           </div>
-          */}
+        */}
         </div>
       </div>
     </Link>
