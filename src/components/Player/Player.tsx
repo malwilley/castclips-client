@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../Audio';
-import useAudioControls, { AudioControlsResult } from 'src/hooks/useAudioControls';
+import { AudioControlsResult } from 'src/hooks/useAudioControls';
 import { colors, fonts, breakpoints } from 'src/styles';
 import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
+import noop from 'src/utils/noop';
+import { KeyCode } from 'src/types';
 
 type PlayerProps = AudioControlsResult & {
   audioRef: React.RefObject<HTMLAudioElement>;
@@ -81,11 +83,50 @@ const Player: React.FC<PlayerProps> = ({
 }) => {
   const { canPlay, duration, isPlaying, setTime, time } = state;
   const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
+  const togglePlayback = () => {
+    if (!isPlaying && canPlay) {
+      controls.play();
+    } else {
+      controls.pause();
+    }
+  };
+
   useEffect(() => {
     if (time >= (end || duration)) {
       controls.pause();
     }
   }, [time, end, duration]);
+
+  useEffect(() => {
+    const handleKeyboardControls = ({ keyCode }: KeyboardEvent) => {
+      switch (keyCode) {
+        case KeyCode.Space:
+          togglePlayback();
+          return;
+        case KeyCode.ArrowLeft:
+          canPlay && controls.seek(time - 5);
+          return;
+        case KeyCode.ArrowRight:
+          canPlay && controls.seek(time + 5);
+          return;
+      }
+    };
+    window.onkeydown = e => {
+      if (
+        e.keyCode === KeyCode.Space ||
+        e.keyCode === KeyCode.ArrowLeft ||
+        e.keyCode === KeyCode.ArrowRight
+      ) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener('keydown', handleKeyboardControls);
+
+    return () => {
+      window.onkeydown = noop;
+      window.removeEventListener('keydown', handleKeyboardControls);
+    };
+  });
 
   return (
     <div>
@@ -145,9 +186,9 @@ const Player: React.FC<PlayerProps> = ({
       <div className={styles.controlsContainer}>
         <PlayerControls
           canPlay={canPlay}
-          handleBackClick={() => controls.seek(time - 5)}
+          handleBackClick={() => controls.seek(time - 10)}
           handleForwardClick={() => controls.seek(time + 30)}
-          handlePlayPauseClick={() => (isPlaying ? controls.pause() : controls.play())}
+          handlePlayPauseClick={togglePlayback}
           isPlaying={isPlaying}
         />
         <div className={styles.timeLabel}>

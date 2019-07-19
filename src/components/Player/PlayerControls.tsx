@@ -1,10 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 import Button from '../Button';
-import { PlayArrowIcon, PauseIcon } from 'mdi-react';
+import { Rewind10, FastForward30, PlayArrowIcon, PauseIcon } from 'mdi-react';
 import { Forward30, Back5 } from 'src/icons';
 import { colors } from 'src/styles';
 import Tooltip from '../Tooltip';
+import AccessibleLabel from '../AccessibleLabel';
 
 type PlayerControlsProps = {
   className?: string;
@@ -58,25 +59,49 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     <div className={styles.controlsContainer}>
       {isPlaying ? (
         <Tooltip bottom text="Pause">
-          <Button className={styles.controlIcon} active={canPlay} onClick={handlePlayPauseClick}>
+          <Button
+            aria-labelledby="pause-label"
+            className={styles.controlIcon}
+            active={canPlay}
+            onClick={handlePlayPauseClick}
+          >
+            <AccessibleLabel id="pause-label">Pause</AccessibleLabel>
             <PauseIcon />
           </Button>
         </Tooltip>
       ) : (
         <Tooltip bottom text="Play">
-          <Button className={styles.controlIcon} active={canPlay} onClick={handlePlayPauseClick}>
+          <Button
+            aria-labelledby="play-label"
+            className={styles.controlIcon}
+            active={canPlay}
+            onClick={handlePlayPauseClick}
+          >
+            <AccessibleLabel id="play-label">Play</AccessibleLabel>
             <PlayArrowIcon />
           </Button>
         </Tooltip>
       )}
-      <Tooltip bottom text="Back 5s">
-        <Button className={styles.controlIcon} active={canPlay} onClick={handleBackClick}>
-          <Back5 />
+      <Tooltip bottom text="Rewind 10s">
+        <Button
+          aria-labelledby="back10-label"
+          className={styles.controlIcon}
+          active={canPlay}
+          onClick={handleBackClick}
+        >
+          <AccessibleLabel id="back10-label">Rewind 10 seconds</AccessibleLabel>
+          <Rewind10 />
         </Button>
       </Tooltip>
       <Tooltip bottom text="Forward 30s">
-        <Button className={styles.controlIcon} active={canPlay} onClick={handleForwardClick}>
-          <Forward30 />
+        <Button
+          aria-labelledby="forward-label"
+          className={styles.controlIcon}
+          active={canPlay}
+          onClick={handleForwardClick}
+        >
+          <AccessibleLabel id="forward-label">Fast-forward 30 seconds</AccessibleLabel>
+          <FastForward30 />
         </Button>
       </Tooltip>
     </div>
