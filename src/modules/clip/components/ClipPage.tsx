@@ -30,7 +30,7 @@ const styles = {
     ' > a': {
       color: colors.white,
     },
-    color: colors.secondary,
+    color: colors.secondary50,
     verticalAlign: 'middle',
   }),
   episodeLink: css({

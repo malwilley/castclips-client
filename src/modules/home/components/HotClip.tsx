@@ -20,7 +20,7 @@ const styles = {
     width: '100%',
   }),
   container: css({
-    padding: '1rem 1.4rem 0.8rem 1.4rem',
+    padding: '1rem 1.2rem 0.5rem 1.2rem',
   }),
   footerContainer: css({
     marginTop: 8,
@@ -45,19 +45,19 @@ const styles = {
     thumbnail: css({
       backgroundColor: colors.gray50,
       borderRadius: 4,
-      height: '4rem',
-      width: '4rem',
+      height: '3.25rem',
+      width: '3.25rem',
       flexShrink: 0,
-      margin: '0.8rem',
+      margin: '0.75rem',
     }),
     titlesContainer: css({
       flexGrow: 1,
-      padding: '1rem 1rem 0.8rem 0',
+      padding: '0.8rem 0.75rem 0.75rem 0',
     }),
     podTitle: css(fonts.bold200, {
       lineHeight: 1,
       color: colors.gray700,
-      marginBottom: 6,
+      marginBottom: '0.375em',
     }),
     epTitle: css(fonts.bold200, {
       lineHeight: 1,

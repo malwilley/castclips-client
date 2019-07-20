@@ -19,7 +19,7 @@ const styles = {
     height: 3,
   }),
   accentClipSection: css({
-    backgroundColor: colors.tertiary,
+    backgroundColor: colors.tertiary100,
     position: 'absolute',
     height: '100%',
     borderRadius: 2,

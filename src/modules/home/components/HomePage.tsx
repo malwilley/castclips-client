@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import Header from 'src/modules/header';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
-import { HomeState } from '../types';
 import BoxContainer from 'src/components/BoxContainer';
 import TextPointer from './TextPointer';
 import HotClips from './HotClips';
@@ -13,7 +12,7 @@ import HotClips from './HotClips';
 const styles = {
   gradientContainer: css({
     backgroundImage: colors.gradient,
-    height: 450,
+    height: '25rem',
   }),
   shareContainer: css({
     display: 'flex',

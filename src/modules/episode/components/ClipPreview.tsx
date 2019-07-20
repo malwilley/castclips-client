@@ -12,7 +12,7 @@ type ClipPreviewProps = {
 
 const styles = {
   completedClip: css({
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.secondary80,
     position: 'absolute',
     top: 0,
     bottom: 0,
@@ -27,14 +27,14 @@ const styles = {
     position: 'relative',
   }),
   startEndNeedle: css({
-    backgroundColor: colors.gray200,
+    backgroundColor: colors.secondary80,
     width: 1,
     position: 'absolute',
     top: 0,
     bottom: 0,
   }),
   timeNeedle: css({
-    backgroundColor: colors.tertiary,
+    backgroundColor: colors.tertiary100,
     width: 1,
     position: 'absolute',
     top: -10,

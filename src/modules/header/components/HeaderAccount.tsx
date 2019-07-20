@@ -9,8 +9,6 @@ import firebase from 'src/modules/auth/firebase';
 import Downshift from 'downshift';
 import { colors, fonts, boxShadow } from 'src/styles';
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import UserIcon from 'mdi-react/UserIcon';
-import zIndex from 'src/styles/zIndex';
 import { secondaryButtonStyles } from 'src/components/SecondaryButton';
 
 type HeaderAccountProps = {
@@ -34,7 +32,6 @@ const styles = {
       '& svg': {
         color: isOpen ? colors.gray800 : colors.gray100,
       },
-      background: colors.background,
       outline: 'none',
       padding: '8px 12px',
       borderRadius: 8,

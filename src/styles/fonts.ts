@@ -48,7 +48,11 @@ const fonts = {
   },
   bold200: {
     ...bold,
-    fontSize: '0.8rem',
+    fontSize: '0.75rem',
+  },
+  bold250: {
+    ...bold,
+    fontSize: '0.9rem',
   },
   bold300: {
     ...bold,

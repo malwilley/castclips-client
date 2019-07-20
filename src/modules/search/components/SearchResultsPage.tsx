@@ -56,7 +56,7 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
       <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} setSearch={setSearch} type={type} />
         <h2 className={styles.resultsHeader}>
-          Search results for <strong>{query}</strong>
+          {type}s matching <strong>{query}</strong>
         </h2>
         <HttpContent
           request={results}

@@ -9,6 +9,7 @@ import { colors, fonts } from 'src/styles';
 import zIndex from 'src/styles/zIndex';
 import SearchIcon from 'mdi-react/SearchIcon';
 import Button from 'src/components/Button';
+import AccessibleLabel from 'src/components/AccessibleLabel';
 
 type SearchBarProps = { className?: string; initialText?: string };
 
@@ -27,7 +28,7 @@ const styles = {
   }),
   input: css({
     '&::placeholder': {
-      color: colors.gray300,
+      color: colors.gray500,
     },
     border: 'none',
     background: 'none',
@@ -75,8 +76,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
 
   return (
     <div className={css(styles.main, className)}>
+      <AccessibleLabel id="search-label">Search</AccessibleLabel>
       <Input
-        aria-label="Search"
+        aria-labelledby="search-label"
         className={styles.input}
         handleTextChange={setText}
         onKeyDown={e => {
@@ -91,11 +93,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
       />
       <Button
         active={canSearch}
-        aria-label="Submit"
+        aria-labelledby="submit-label"
         className={css(styles.searchButton, canSearch && styles.searchButtonEnabled)}
         onClick={search}
       >
-        <SearchIcon size={20} />
+        <AccessibleLabel id="submit-label">Submit</AccessibleLabel>
+        <SearchIcon aria-hidden size={20} />
       </Button>
     </div>
   );

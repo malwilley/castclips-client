@@ -5,20 +5,23 @@ import { range } from 'ramda';
 import HotClip, { HotClipSkeleton } from './HotClip';
 import React from 'react';
 import StackGrid from 'src/components/StackGrid';
+import { breakpoints } from 'src/styles';
 
 type HotClipsProps = {
   hotClips: HomeState['hotClips'];
 };
 
 const styles = {
-  clipsContainer: css({
-    '@media (max-width: 800px)': {
+  clipsContainer: css(
+    breakpoints.breakpoint800({
+      padding: '0 40px',
+    }),
+    {
+      margin: '0 auto',
       padding: '0 10px',
-    },
-    padding: '0 40px',
-    margin: '0 auto',
-    maxWidth: 1400,
-  }),
+      maxWidth: 1400,
+    }
+  ),
 };
 
 const HotClips: React.FC<HotClipsProps> = ({ hotClips }) => (

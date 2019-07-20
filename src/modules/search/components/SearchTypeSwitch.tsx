@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { SearchType } from '../types';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import Button from 'src/components/Button';
+import AccessibleLabel from 'src/components/AccessibleLabel';
 
 type SearchTypeSwitchProps = {
   className?: string;
@@ -17,14 +18,16 @@ const styles = {
     height: 50,
     borderRadius: 25,
   }),
-  option: css({
+  option: css(fonts.bold200, {
+    '@media (min-width: 430px)': {
+      ...fonts.bold250,
+      padding: '0 2rem',
+    },
     color: colors.gray200,
-    padding: '0 30px',
+    padding: '0 1.25rem',
     textTransform: 'uppercase',
-    fontWeight: 'bold',
     borderRadius: 25,
-    fontSize: 13,
-    letterSpacing: 1,
+    letterSpacing: '0.05em',
   }),
   optionSelected: css({
     background: colors.gradient,
@@ -38,9 +41,11 @@ const SearchTypeOption: React.FC<{
   setSearch: SearchTypeSwitchProps['setSearch'];
 }> = ({ children, selected, setSearch, type }) => (
   <Button
+    aria-labelledby={`${type}-switch-label`}
     className={css(styles.option, type === selected && styles.optionSelected)}
     onClick={() => setSearch({ type })}
   >
+    <AccessibleLabel id={`${type}-switch-label`}>Search {type}s</AccessibleLabel>
     {children}
   </Button>
 );
