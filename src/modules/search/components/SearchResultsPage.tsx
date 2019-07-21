@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { AppState } from 'src/redux/types';
-import { SearchState, SearchType, SearchParams } from '../types';
+import { SearchState, SearchParams, SearchType } from '../types';
 import { thunks } from '../redux';
 import HttpContent from 'src/components/HttpContent';
 import Header from 'src/modules/header';
@@ -10,6 +10,10 @@ import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
 import LayoutContainer from 'src/components/LayoutContainer';
+import { LocalStorageKey } from 'src/types';
+import useLocalStorage from 'src/hooks/useLocalStorage';
+import { replace } from 'connected-react-router';
+import useChangeQueryParam from 'src/hooks/useChangeQueryParam';
 
 type SearchResultsPageProps = {
   query: string;
@@ -17,9 +21,7 @@ type SearchResultsPageProps = {
 };
 
 type SearchResultsPageConnectedProps = SearchResultsPageProps & {
-  fetchSearchResults: (params: SearchParams) => void;
   results: SearchState['results'];
-  setSearch: (params: SearchParams) => void;
 };
 
 const styles = {
@@ -40,21 +42,37 @@ const styles = {
 };
 
 const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
-  fetchSearchResults,
   query,
   results,
-  setSearch,
-  type,
+  type: typeFromUrl,
 }) => {
+  const dispatch = useDispatch();
+  const changeQueryParam = useChangeQueryParam(replace);
+  const [storedType, setStoredType] = useLocalStorage(
+    LocalStorageKey.SearchType,
+    SearchType.Podcasts
+  );
+
+  const type = typeFromUrl || storedType;
+
   React.useEffect(() => {
-    fetchSearchResults({ query, type });
-  }, [fetchSearchResults, type]);
+    if (!typeFromUrl) {
+      changeQueryParam('type', type);
+    }
+    if (type !== storedType) {
+      setStoredType(type);
+    }
+  }, [type]);
+
+  React.useEffect(() => {
+    dispatch(thunks.fetchSearchResults({ query, type }));
+  }, [query, type]);
 
   return (
     <div>
       <Header searchText={query} />
       <LayoutContainer className={styles.container}>
-        <SearchTypeSwitch className={styles.searchTypeSwitch} setSearch={setSearch} type={type} />
+        <SearchTypeSwitch className={styles.searchTypeSwitch} type={type} />
         <h2 className={styles.resultsHeader}>
           {type}s matching <strong>{query}</strong>
         </h2>
@@ -86,12 +104,4 @@ const mapStateToProps = (state: AppState) => ({
   results: state.search.results,
 });
 
-const mapDispatchToProps = {
-  fetchSearchResults: thunks.fetchSearchResults,
-  setSearch: thunks.setSearch,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchResultsPage);
+export default connect(mapStateToProps)(SearchResultsPage);

@@ -10,6 +10,8 @@ import zIndex from 'src/styles/zIndex';
 import SearchIcon from 'mdi-react/SearchIcon';
 import Button from 'src/components/Button';
 import AccessibleLabel from 'src/components/AccessibleLabel';
+import { KeyCode } from 'src/types';
+import useLocalStorage from 'src/hooks/useLocalStorage';
 
 type SearchBarProps = { className?: string; initialText?: string };
 
@@ -70,7 +72,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
   const canSearch = text.length > 0;
   const search = useCallback(() => {
     if (canSearch) {
-      dispatch(push(`/search?${stringify({ q: text, type: SearchType.Podcasts })}`));
+      dispatch(push(`/search?${stringify({ q: text })}`));
     }
   }, [dispatch, push, text]);
 
@@ -82,7 +84,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
         className={styles.input}
         handleTextChange={setText}
         onKeyDown={e => {
-          if (e.keyCode === 13 && canSearch) {
+          if (e.keyCode === KeyCode.Enter && canSearch) {
             search();
           }
         }}
