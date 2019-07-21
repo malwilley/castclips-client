@@ -44,8 +44,12 @@ const App: React.FC = () => (
         <Route
           path="/search"
           render={({ location: { search } }) => {
-            const { q, type } = qs.parse(search) as { q: string; type: SearchType };
-            return <SearchResultsPage query={q} type={type} />;
+            const { q, type, page } = qs.parse(search) as {
+              q: string;
+              type: SearchType;
+              page: number;
+            };
+            return <SearchResultsPage query={q} type={type} page={page} />;
           }}
         />
       </Switch>

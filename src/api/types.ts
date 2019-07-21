@@ -101,8 +101,9 @@ export type TypeaheadResponse = {
 
 export type SearchResultsResponse<T> = {
   count: number;
-  total: number;
+  nextOffset: number;
   results: T[];
+  total: number;
 };
 
 export type SearchResultEpisodeResponse = {

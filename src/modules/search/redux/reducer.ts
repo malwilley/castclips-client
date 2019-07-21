@@ -1,14 +1,30 @@
-import { ActionTypes } from './actions';
+import { Actions, ActionTypes } from './actions';
 import { combineReducers } from 'redux';
-import makeHttpReducer from 'src/redux/utils/setHttpStateReducer';
-import { SearchState } from '../types';
+import {
+  SearchType,
+  SearchResult,
+  SearchResults,
+  PodcastResult,
+  ClipResult,
+  EpisodeResult,
+} from '../types';
 
-const results = makeHttpReducer<SearchState['results']>(ActionTypes.SetSearchResults);
-const suggestions = makeHttpReducer<SearchState['suggestions']>(ActionTypes.SetSuggestions);
+const makeResultReducer = <T extends SearchResult>(type: SearchType) => (
+  state: SearchResults<T> = { type: 'not_asked' },
+  action: Actions
+): SearchResults<T> => {
+  switch (action.type) {
+    case ActionTypes.SetSearchResults:
+      return (action.payload.type === type ? action.payload.request : state) as SearchResults<T>;
+    default:
+      return state;
+  }
+};
 
 const reducer = combineReducers({
-  results,
-  suggestions,
+  [SearchType.Podcasts]: makeResultReducer<PodcastResult>(SearchType.Podcasts),
+  [SearchType.Episodes]: makeResultReducer<EpisodeResult>(SearchType.Episodes),
+  [SearchType.Clips]: makeResultReducer<ClipResult>(SearchType.Clips),
 });
 
 export default reducer;

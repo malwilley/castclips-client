@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { SearchState, SearchParams, SearchType } from '../types';
 import { thunks } from '../redux';
@@ -8,52 +8,97 @@ import Header from 'src/modules/header';
 import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
 import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import LayoutContainer from 'src/components/LayoutContainer';
 import { LocalStorageKey } from 'src/types';
 import useLocalStorage from 'src/hooks/useLocalStorage';
 import { replace } from 'connected-react-router';
 import useChangeQueryParam from 'src/hooks/useChangeQueryParam';
+import { actions } from '../redux/actions';
+import { search } from 'src/api/firebase';
+import { getAuthToken } from 'src/modules/auth/firebase';
+import makeMapSearchResult from '../utils/mapSearchResult';
 
 type SearchResultsPageProps = {
   query: string;
-  type?: SearchState['type'];
-};
-
-type SearchResultsPageConnectedProps = SearchResultsPageProps & {
-  results: SearchState['results'];
+  type?: SearchType;
+  page?: number;
 };
 
 const styles = {
   container: css({
     marginTop: 40,
   }),
-  resultsHeader: css({
+  resultsHeader: css(fonts.text300, {
     '& > strong': {
       color: colors.gray600,
     },
+    height: '1.1em',
     color: colors.gray200,
-    marginBottom: 20,
-    fontWeight: 'normal',
+    marginBottom: '1em',
   }),
   searchTypeSwitch: css({
     marginBottom: 30,
   }),
 };
 
-const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
+const fetchSearchResults = async ({
+  dispatch,
   query,
-  results,
+  type,
+  page,
+}: {
+  dispatch: (_: any) => void;
+  query: string;
+  type: SearchType;
+  page: number;
+}) => {
+  if (!query) {
+    return;
+  }
+
+  dispatch(actions.setSearchRequest({ request: { type: 'fetching' }, type }));
+
+  try {
+    const token = await getAuthToken();
+    const offset = (page - 1) * 10;
+    const { results, total } = await search(token, type, query, offset);
+    dispatch(
+      actions.setSearchRequest({
+        type,
+        request: {
+          type: 'success',
+          data: {
+            total,
+            results: results.map(makeMapSearchResult(type)),
+          },
+        },
+      })
+    );
+  } catch {
+    dispatch(
+      actions.setSearchRequest({
+        request: { type: 'error', message: 'Error fetching search results' },
+        type,
+      })
+    );
+  }
+};
+
+const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
+  query,
   type: typeFromUrl,
+  page = 1,
 }) => {
   const dispatch = useDispatch();
   const changeQueryParam = useChangeQueryParam(replace);
-  const [storedType, setStoredType] = useLocalStorage(
+  const [storedType, setStoredType] = useLocalStorage<SearchType>(
     LocalStorageKey.SearchType,
     SearchType.Podcasts
   );
 
   const type = typeFromUrl || storedType;
+  const results = useSelector((state: AppState) => state.search[type]);
 
   React.useEffect(() => {
     if (!typeFromUrl) {
@@ -65,8 +110,9 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
   }, [type]);
 
   React.useEffect(() => {
-    dispatch(thunks.fetchSearchResults({ query, type }));
-  }, [query, type]);
+    window.scrollTo(0, 0);
+    fetchSearchResults({ dispatch, query, type, page });
+  }, [query, type, page]);
 
   return (
     <div>
@@ -74,10 +120,17 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
       <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} type={type} />
         <h2 className={styles.resultsHeader}>
-          {type}s matching <strong>{query}</strong>
+          <HttpContent
+            request={results as any}
+            renderSuccess={({ total }) => (
+              <>
+                {total} {type}s matching <strong>{query}</strong>
+              </>
+            )}
+          />
         </h2>
         <HttpContent
-          request={results}
+          request={results as any}
           renderFetching={() => (
             <>
               {Array(10)
@@ -87,21 +140,19 @@ const SearchResultsPage: React.FC<SearchResultsPageConnectedProps> = ({
                 ))}
             </>
           )}
-          renderSuccess={data => (
-            <div>
-              {data.map(result => (
-                <SearchResultCard key={result.id} {...result} />
-              ))}
-            </div>
-          )}
+          renderSuccess={data => {
+            return (
+              <div>
+                {data.results.map((result: any) => (
+                  <SearchResultCard key={result.id} {...result} />
+                ))}
+              </div>
+            );
+          }}
         />
       </LayoutContainer>
     </div>
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  results: state.search.results,
-});
-
-export default connect(mapStateToProps)(SearchResultsPage);
+export default SearchResultsPage;

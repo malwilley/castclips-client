@@ -48,15 +48,21 @@ export type ClipResult = {
   published: Date;
 };
 
-export type SearchResult = PodcastResult | EpisodeResult;
+export type SearchResult = PodcastResult | EpisodeResult | ClipResult;
+
+export type SearchResults<T extends SearchResult> = HttpRequest<{
+  results: T[];
+  total: number;
+}>;
 
 export type SearchState = {
-  results: HttpRequest<SearchResult[]>;
-  suggestions: HttpRequest<string[]>;
-  type: SearchType;
+  [SearchType.Podcasts]: SearchResults<PodcastResult>;
+  [SearchType.Episodes]: SearchResults<EpisodeResult>;
+  [SearchType.Clips]: SearchResults<ClipResult>;
 };
 
-export type SearchParams = Partial<{
+export type SearchParams = {
   query: string;
   type: SearchType;
-}>;
+  offset?: number;
+};

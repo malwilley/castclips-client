@@ -95,9 +95,9 @@ export const typeahead = async (token: string, query: string) => {
   return result;
 };
 
-export const search = async (token: string, type: SearchType, query: string) => {
+export const search = async (token: string, type: SearchType, query: string, offset: number) => {
   const results = await fetchFirebase<SearchResultsResponse<any>>(
-    `/search?${qs.stringify({ q: query, type })}`,
+    `/search?${qs.stringify({ q: query, type, offset })}`,
     token
   );
 
