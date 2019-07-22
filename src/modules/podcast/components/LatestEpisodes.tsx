@@ -37,12 +37,12 @@ const styles = {
     thumbnail: css({
       gridTemplateAreas: 'thumbnail',
       borderRadius: 8,
-      height: 59,
-      width: 59,
+      height: '4rem',
+      width: '4rem',
     }),
     textIconContainer: css({
       display: 'flex',
-      marginTop: '0.4rem',
+      marginTop: '0.375rem',
     }),
     textIcon: css(fonts.attribute300),
     textIconGreen: css({
@@ -51,11 +51,13 @@ const styles = {
     titleDescriptionContainer: css({
       gridTemplateAreas: 'middle',
       overflow: 'hidden',
+      marginTop: '0.25rem',
     }),
     title: css(fonts.heading300, {
+      lineHeight: 1,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      marginBottom: '0.1rem',
+      marginBottom: '0.05rem',
     }),
     description: css(fonts.text250, {
       overflow: 'hidden',

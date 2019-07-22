@@ -45,13 +45,6 @@ const styles = {
     fontWeight: 'bold',
     margin: '20px 0 0 0',
   }),
-  subTitle: css({
-    '& > a': {
-      color: colors.white,
-      marginLeft: 4,
-    },
-    color: colors.secondary,
-  }),
   title: css({
     marginBottom: 6,
   }),

@@ -4,7 +4,7 @@ import { colors } from 'src/styles';
 
 const styles = {
   main: css({
-    color: colors.tertiary,
+    color: colors.tertiary100,
     display: 'inline-block',
     marginLeft: 2,
   }),

@@ -15,9 +15,6 @@ const styles = {
   main: css({
     padding: 16,
   }),
-  episode: css({
-    color: colors.gray200,
-  }),
   footer: css({
     marginTop: 12,
   }),
@@ -30,8 +27,11 @@ const styles = {
     alignItems: 'center',
   }),
   iconText: css(fonts.attribute300),
-  title: css({
+  title: css(fonts.heading300, {
     marginBottom: 4,
+  }),
+  episode: css(fonts.bold200, {
+    color: colors.gray200,
   }),
   viewStars: css({
     '> :not(:last-child)': {

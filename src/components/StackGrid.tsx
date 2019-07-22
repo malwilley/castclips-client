@@ -11,13 +11,13 @@ type StackGridProps = {
 const styles = {
   main: css({
     '& > :not(:last-child)': {
-      marginRight: '1.5rem',
+      marginRight: '1rem',
     },
     display: 'flex',
   }),
   column: css({
     '& > :not(:last-child)': {
-      marginBottom: '1rem',
+      marginBottom: '0.5rem',
     },
     flex: 1,
   }),
@@ -38,13 +38,16 @@ const StackGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
     }, range(0, numColumns).map(() => []));
   }, [children, numColumns]);
 
+  const content = range(0, numColumns).map(i => (
+    <div className={styles.column} key={i}>
+      {itemsByColumn[i]}
+    </div>
+  ));
+
   return (
     <div className={styles.main} ref={ref}>
-      {range(0, numColumns).map(i => (
-        <div className={styles.column} key={i}>
-          {itemsByColumn[i]}
-        </div>
-      ))}
+      {/* Prevents from rendering a single column before rerendering with the correct number */}
+      {width ? content : null}
     </div>
   );
 };

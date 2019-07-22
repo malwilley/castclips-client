@@ -37,3 +37,7 @@ export enum KeyCode {
   Enter = 13,
   Space = 32,
 }
+
+export enum LocalStorageKey {
+  SearchType = 'search_type',
+}

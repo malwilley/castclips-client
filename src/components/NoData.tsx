@@ -1,5 +1,5 @@
-import * as React from 'react';
-import EmoticonSadIcon from 'mdi-react/EmoticonSadIcon';
+import React from 'react';
+import EmoticonSadOutlineIcon from 'mdi-react/EmoticonSadOutlineIcon';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 
@@ -26,7 +26,10 @@ const styles = {
   }),
 };
 
-const NoData: React.FC<NoDataProps> = ({ icon = <EmoticonSadIcon size={60} />, message }) => (
+const NoData: React.FC<NoDataProps> = ({
+  icon = <EmoticonSadOutlineIcon size={60} />,
+  message,
+}) => (
   <div className={styles.main}>
     {icon}
     <p className={styles.message}>{message}</p>

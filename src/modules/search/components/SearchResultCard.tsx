@@ -1,46 +1,53 @@
 import React from 'react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
-import { colors, coverContainer } from 'src/styles';
-import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
-import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon';
-import formatPublishDate from 'src/utils/formatPublishDate';
+import { colors, coverContainer, breakpoints, fonts } from 'src/styles';
 import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
 import TextSkeleton from 'src/components/TextSkeleton';
-import formatHrMinSec from 'src/utils/formatHrMinSec';
 import { Link } from 'react-router-dom';
 
 type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;
 
 const styles = {
   main: css({
-    padding: 20,
-    marginBottom: 20,
+    marginBottom: '1rem',
+    padding: '1.5rem 1.5rem 0.5rem 1.5rem',
+    position: 'relative',
+    maxHeight: 250,
   }),
-  thumbnail: css({
-    '@media (max-width: 600px)': {
-      height: 100,
-      width: 100,
-    },
-    height: 150,
-    width: 150,
-    borderRadius: 8,
-    marginRight: 20,
-    marginBottom: 15,
-    float: 'left',
-  }),
-  description: css({
+  thumbnail: css(
+    breakpoints.breakpoint600({
+      height: '8rem',
+      width: '8rem',
+      marginRight: '1.5rem',
+    }),
+    {
+      height: '5rem',
+      width: '5rem',
+      borderRadius: 8,
+      marginRight: '1rem',
+      marginBottom: '1rem',
+      float: 'left',
+    }
+  ),
+  description: css(fonts.text250, {
     color: colors.gray200,
-    margin: '6px 0 0 0',
+    margin: '0.5em 0 1rem 0',
+  }),
+  descriptionContainer: css({
+    display: 'inline-block',
   }),
   attributesContainer: css({
     display: 'flex',
     alignItems: 'center',
     marginBottom: 4,
   }),
-  subText: css({
+  subText: css(fonts.bold300, {
     color: colors.gray200,
+  }),
+  title: css(fonts.heading300, {
+    marginBottom: '0.05rem',
+    lineHeight: 1,
   }),
   textIcon: css({
     '& > svg': {
@@ -55,43 +62,31 @@ const styles = {
     color: colors.gray200,
     marginRight: 10,
   }),
+  hideOverflowGradient: css({
+    display: 'flex',
+    alignItems: 'flex-end',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: '1.5rem',
+    background: 'linear-gradient(to top, white 1rem, transparent)',
+  }),
 };
 
 const fetchingStyles = {
   main: css({
     display: 'flex',
   }),
+  textContainer: css({
+    flexGrow: 1,
+  }),
   thumbnail: css({
     backgroundColor: colors.gray20,
     float: 'none',
+    flexShrink: 0,
     border: 'none',
   }),
 };
-
-const SearchResultEpisodeAttributes: React.FC<EpisodeResult | ClipResult> = ({
-  audioLength,
-  published,
-}) => (
-  <>
-    <div className={styles.textIcon}>
-      <CalendarDayIcon size={16} />
-      {formatPublishDate(published)}
-    </div>
-    <div className={styles.textIcon}>
-      <ClockOutlineIcon size={16} />
-      {typeof audioLength === 'number' ? formatHrMinSec(audioLength) : audioLength}
-    </div>
-  </>
-);
-
-const SearchResultPodcastAttributes: React.FC<PodcastResult> = ({ numEpisodes }) => (
-  <>
-    <div className={styles.textIcon}>
-      <AnimationPlayOutlineIcon size={16} />
-      {numEpisodes} episodes
-    </div>
-  </>
-);
 
 const SubText: React.FC<SearchResultCardProps> = props => {
   switch (props.type) {
@@ -114,13 +109,12 @@ const SubText: React.FC<SearchResultCardProps> = props => {
 const SearchResultCardFetching: React.FC = () => (
   <Card className={css(styles.main, fetchingStyles.main)}>
     <div className={css(styles.thumbnail, fetchingStyles.thumbnail)} />
-    <div>
-      <TextSkeleton width={110} height={18} marginBottom={2} color={colors.gray20} />
-      <TextSkeleton width={200} height={23} marginBottom={2} color={colors.gray50} />
-      <TextSkeleton width={80} height={18} marginBottom={4} color={colors.gray50} />
-      <TextSkeleton width={250} height={16} marginBottom={2} color={colors.gray20} />
-      <TextSkeleton width={230} height={16} marginBottom={2} color={colors.gray20} />
-      <TextSkeleton width={280} height={16} marginBottom={2} color={colors.gray20} />
+    <div className={fetchingStyles.textContainer}>
+      <TextSkeleton width={170} height={23} marginBottom={2} color={colors.gray20} />
+      <TextSkeleton width={190} height={18} marginBottom={4} color={colors.gray20} />
+      <TextSkeleton width="92%" height={16} marginBottom={2} color={colors.gray20} />
+      <TextSkeleton width="98%" height={16} marginBottom={2} color={colors.gray20} />
+      <TextSkeleton width="75%" height={16} marginBottom={2} color={colors.gray20} />
     </div>
   </Card>
 );
@@ -128,18 +122,12 @@ const SearchResultCardFetching: React.FC = () => (
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
   <Card className={styles.main} hover>
     <img className={styles.thumbnail} src={props.thumbnail} />
-    <div className={styles.attributesContainer}>
-      {(props.type === SearchType.Episodes || props.type === SearchType.Clips) && (
-        <SearchResultEpisodeAttributes {...props} />
-      )}
-      {props.type === SearchType.Podcasts && <SearchResultPodcastAttributes {...props} />}
-    </div>
     <Link className={css(coverContainer)} to={`/${props.type}/${props.id}`}>
-      {' '}
-      <h3>{props.title}</h3>
+      <h3 className={styles.title}>{props.title}</h3>
     </Link>
     <SubText {...props} />
     <p className={styles.description}>{props.description}</p>
+    <div className={styles.hideOverflowGradient} />
   </Card>
 );
 

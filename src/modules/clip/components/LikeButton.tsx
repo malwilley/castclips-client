@@ -5,6 +5,7 @@ import Button from 'src/components/Button';
 import HeartIcon from 'mdi-react/HeartIcon';
 import { useDispatch } from 'react-redux';
 import { thunks } from '../redux';
+import AccessibleLabel from 'src/components/AccessibleLabel';
 
 type LikeButtonProps = {
   id: string;
@@ -36,9 +37,16 @@ const LikeButton: React.FC<LikeButtonProps> = ({ id, hasLiked, numLikes }) => {
   );
 
   return (
-    <Button className={styles.main} onClick={onClick}>
-      <HeartIcon className={css(styles.icon, hasLiked && styles.iconSelected)} size={24} />
-      <span>{numLikes || 0}</span>
+    <Button aria-labelledby="like-label" className={styles.main} onClick={onClick}>
+      <AccessibleLabel id="like-label">Like this clip</AccessibleLabel>
+      <HeartIcon
+        aria-hidden
+        className={css(styles.icon, hasLiked && styles.iconSelected)}
+        size={24}
+      />
+      <span title={`${numLikes} ${numLikes === 1 ? 'person has' : 'people have'} liked this clip`}>
+        {numLikes || 0}{' '}
+      </span>
     </Button>
   );
 };
