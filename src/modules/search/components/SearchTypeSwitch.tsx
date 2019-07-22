@@ -25,13 +25,21 @@ const styles = {
       ...fonts.bold250,
       padding: '0 2rem',
     },
+    '&:hover': {
+      color: colors.gray700,
+    },
     color: colors.gray200,
     padding: '0 1.25rem',
     textTransform: 'uppercase',
     borderRadius: 25,
     letterSpacing: '0.05em',
+    transition: 'color 250ms ease-out',
   }),
   optionSelected: css({
+    '&:hover': {
+      color: colors.white,
+    },
+    cursor: 'default',
     background: colors.gradient,
     color: colors.white,
   }),

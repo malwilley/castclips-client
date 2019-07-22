@@ -18,6 +18,7 @@ import { actions } from '../redux/actions';
 import { search } from 'src/api/firebase';
 import { getAuthToken } from 'src/modules/auth/firebase';
 import makeMapSearchResult from '../utils/mapSearchResult';
+import SearchPagination from './SearchPagination';
 
 type SearchResultsPageProps = {
   query: string;
@@ -124,7 +125,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
             request={results as any}
             renderSuccess={({ total }) => (
               <>
-                {total} {type}s matching <strong>{query}</strong>
+                {(total || 0).toLocaleString()} {type}s matching <strong>{query}</strong>
               </>
             )}
           />
@@ -142,11 +143,12 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
           )}
           renderSuccess={data => {
             return (
-              <div>
+              <>
                 {data.results.map((result: any) => (
                   <SearchResultCard key={result.id} {...result} />
                 ))}
-              </div>
+                <SearchPagination {...{ page, total: data.total }} />
+              </>
             );
           }}
         />

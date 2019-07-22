@@ -5,7 +5,7 @@ import { push, replace } from 'connected-react-router';
 const useChangeQueryParam = (pushOrReplace: typeof push | typeof replace = push) => {
   const dispatch = useDispatch();
 
-  return (key: string, value: string) => {
+  return (key: string, value: string | number) => {
     const pathname = window.location.pathname;
     const search = parse(window.location.search);
 

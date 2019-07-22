@@ -2,15 +2,9 @@ import React from 'react';
 import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { colors, coverContainer, breakpoints, fonts } from 'src/styles';
-import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
-import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon';
-import formatPublishDate from 'src/utils/formatPublishDate';
 import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
 import TextSkeleton from 'src/components/TextSkeleton';
-import formatHrMinSec from 'src/utils/formatHrMinSec';
 import { Link } from 'react-router-dom';
-import TruncateContent from 'src/components/TruncateContent';
 
 type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;
 
