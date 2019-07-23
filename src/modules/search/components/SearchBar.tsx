@@ -5,7 +5,7 @@ import { push } from 'connected-react-router';
 import { SearchType } from '../types';
 import { stringify } from 'querystringify';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts, breakpoints } from 'src/styles';
 import zIndex from 'src/styles/zIndex';
 import SearchIcon from 'mdi-react/SearchIcon';
 import Button from 'src/components/Button';
@@ -16,21 +16,21 @@ import useLocalStorage from 'src/hooks/useLocalStorage';
 type SearchBarProps = { className?: string; initialText?: string };
 
 const styles = {
-  main: css(fonts.text300, {
+  main: css(fonts.text250, breakpoints.breakpoint600(fonts.text300), {
     '&:hover, &:focus-within': {
       border: `1px solid ${colors.gray50}`,
     },
     backgroundColor: colors.gray20,
     border: `1px solid transparent`,
     borderRadius: 20,
-    color: colors.gray500,
+    color: colors.gray700,
     position: 'relative',
     transition: 'border 200ms ease-out',
     zIndex: zIndex.card,
   }),
   input: css({
     '&::placeholder': {
-      color: colors.gray500,
+      color: colors.gray300,
     },
     border: 'none',
     background: 'none',

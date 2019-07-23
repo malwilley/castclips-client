@@ -54,7 +54,6 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <Header />
       <BoxContainer
         className={styles.gradientContainer}
         containerClassName={styles.shareContainer}

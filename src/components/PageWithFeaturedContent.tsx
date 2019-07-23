@@ -40,11 +40,6 @@ const styles = {
     justifyContent: 'center',
     zIndex: zIndex.card,
   }),
-  header: css({
-    gridRowStart: 1,
-    gridRowEnd: 2,
-    gridColumn: '1 / -1',
-  }),
   heroContainer: css({
     gridRowStart: 2,
     gridRowEnd: 4,
@@ -76,7 +71,6 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
     <div className={styles.titleContainer}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
-    <Header className={styles.header} />
   </div>
 );
 

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import firebaseApp from '../firebase';
 import Header from 'src/modules/header';
 import LayoutContainer from 'src/components/LayoutContainer';
 import { css } from 'emotion';
-import { colors, boxShadow } from 'src/styles';
+import { colors } from 'src/styles';
 import BoxContainer from 'src/components/BoxContainer';
 import Card from 'src/components/Card';
 import zIndex from 'src/styles/zIndex';
@@ -15,7 +15,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -150,
+    marginTop: -250,
   }),
   authContainer: css({
     height: 300,
@@ -28,7 +28,7 @@ const styles = {
   }),
   hero: css({
     background: colors.gradient,
-    height: 400,
+    height: 500,
   }),
   heroContainer: css({
     paddingTop: 80,
@@ -50,14 +50,13 @@ const SigninPage: React.FC = () => {
     signInSuccessUrl: '/',
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
   };
 
   return (
-    <div>
-      <Header />
+    <>
       <BoxContainer className={styles.hero} containerClassName={styles.heroContainer} top bottom>
         <LayoutContainer className={styles.textContainer}>
           <h2 className={styles.signin}>Sign in</h2>
@@ -69,7 +68,7 @@ const SigninPage: React.FC = () => {
           <StyledFirebaseAuth firebaseAuth={firebaseApp.auth()} uiConfig={uiConfig} />
         </Card>
       </div>
-    </div>
+    </>
   );
 };
 
