@@ -30,7 +30,7 @@ const styles = {
   }),
   input: css({
     '&::placeholder': {
-      color: colors.gray300,
+      color: colors.gray400,
     },
     border: 'none',
     background: 'none',
