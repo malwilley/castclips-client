@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Background from 'src/components/Modal/Background';
 import { css } from 'emotion';
 import ModalHeader, { ModalHeaderProps } from 'src/components/Modal/ModalHeader';

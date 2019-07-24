@@ -137,7 +137,7 @@ const Player: React.FC<PlayerProps> = ({
     return () => {
       window.removeEventListener('keydown', handleKeyboardControls);
     };
-  }, [canPlay, captureKeyboardInput, togglePlayback]);
+  }, [canPlay, captureKeyboardInput, togglePlayback, controls.seekRelative]);
 
   return (
     <div>
