@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../Audio';
@@ -16,6 +16,7 @@ type PlayerProps = AudioControlsResult & {
   title: string;
   start?: number;
   end?: number;
+  captureKeyboardInput?: boolean;
 };
 
 const styles = {
@@ -86,6 +87,7 @@ const toSeconds = (value: number) => value / 100;
 const Player: React.FC<PlayerProps> = ({
   audioRef,
   audioUrl,
+  captureKeyboardInput = true,
   title,
   start = 0,
   end,
@@ -94,13 +96,13 @@ const Player: React.FC<PlayerProps> = ({
 }) => {
   const { canPlay, duration, isPlaying, setTime, time } = state;
   const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
-  const togglePlayback = () => {
+  const togglePlayback = useCallback(() => {
     if (!isPlaying && canPlay) {
       controls.play();
     } else {
       controls.pause();
     }
-  };
+  }, [isPlaying, canPlay]);
 
   useEffect(() => {
     if (time >= (end || duration)) {
@@ -109,35 +111,33 @@ const Player: React.FC<PlayerProps> = ({
   }, [time, end, duration]);
 
   useEffect(() => {
-    const handleKeyboardControls = ({ keyCode }: KeyboardEvent) => {
-      switch (keyCode) {
+    const handleKeyboardControls = (e: KeyboardEvent) => {
+      if (!captureKeyboardInput) {
+        return;
+      }
+
+      switch (e.keyCode) {
         case KeyCode.Space:
+          e.preventDefault();
           togglePlayback();
           return;
         case KeyCode.ArrowLeft:
-          canPlay && controls.seek(time - 5);
+          e.preventDefault();
+          canPlay && controls.seekRelative(-5);
           return;
         case KeyCode.ArrowRight:
-          canPlay && controls.seek(time + 5);
+          e.preventDefault();
+          canPlay && controls.seekRelative(5);
           return;
       }
     };
-    window.onkeydown = e => {
-      if (
-        e.keyCode === KeyCode.Space ||
-        e.keyCode === KeyCode.ArrowLeft ||
-        e.keyCode === KeyCode.ArrowRight
-      ) {
-        e.preventDefault();
-      }
-    };
+
     window.addEventListener('keydown', handleKeyboardControls);
 
     return () => {
-      window.onkeydown = noop;
       window.removeEventListener('keydown', handleKeyboardControls);
     };
-  });
+  }, [canPlay, captureKeyboardInput, togglePlayback, controls.seekRelative]);
 
   return (
     <div>

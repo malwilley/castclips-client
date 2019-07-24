@@ -23,6 +23,8 @@ type EpisodePlayerClipOptionsProps = {
   previewing: boolean;
   handlePreviewStart: () => void;
   handlePreviewStop: () => void;
+  modalOpen: boolean;
+  setModalOpen: (isOpen: boolean) => void;
 };
 
 const styles = {
@@ -65,6 +67,8 @@ const EpisodePlayerClipOptionsContent: React.FC<
   previewing,
   time,
   isOpen,
+  modalOpen,
+  setModalOpen,
 }) => {
   const clipBoundsSet = !isNil(start) && !isNil(end) && end > start;
   const {
@@ -98,19 +102,13 @@ const EpisodePlayerClipOptionsContent: React.FC<
             onClick={previewing ? handlePreviewStop : handlePreviewStart}
             previewing={previewing}
           />
-          <Show>
-            {({ isOpen: modalIsOpen, toggle: toggleModal }) => (
-              <>
-                <CreateClipModal
-                  start={start!}
-                  end={end!}
-                  handleClose={toggleModal}
-                  isOpen={modalIsOpen && clipBoundsSet}
-                />
-                <ShareButton active={clipBoundsSet} onClick={toggleModal} />
-              </>
-            )}
-          </Show>
+          <CreateClipModal
+            start={start!}
+            end={end!}
+            handleClose={() => setModalOpen(false)}
+            isOpen={modalOpen && clipBoundsSet}
+          />
+          <ShareButton active={clipBoundsSet} onClick={() => setModalOpen(true)} />
         </div>
       </div>
     </animated.div>
