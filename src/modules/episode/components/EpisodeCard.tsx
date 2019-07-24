@@ -37,7 +37,8 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
   } = audioStateControls;
   const [start, setStart] = useState<Maybe<number>>(null);
   const [end, setEnd] = useState<Maybe<number>>(null);
-  const [previewing, setPreviewing] = useState<boolean>(false);
+  const [previewing, setPreviewing] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (previewing && time >= end!) {
@@ -66,7 +67,13 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
 
   return (
     <>
-      <Player audioRef={ref} audioUrl={audio} title={title} {...audioStateControls} />
+      <Player
+        audioRef={ref}
+        audioUrl={audio}
+        title={title}
+        captureKeyboardInput={!modalOpen}
+        {...audioStateControls}
+      />
       <EpisodePlayerClipOptions
         start={start}
         end={end}
@@ -87,6 +94,8 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
         previewing={previewing}
         handlePreviewStart={handlePreviewStart}
         handlePreviewStop={handlePreviewStop}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
       />
     </>
   );

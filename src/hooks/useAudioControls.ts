@@ -13,6 +13,7 @@ export type AudioControls = {
   play: () => void;
   pause: () => void;
   seek: (time: number) => void;
+  seekRelative: (relativeTime: number) => void;
 };
 
 export type AudioControlsResult = { state: AudioState; controls: AudioControls };
@@ -75,22 +76,28 @@ const useAudioControls = (
     };
   }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause]);
 
-  const controls: AudioControls = {
-    play: () => {
-      ref.current && ref.current.play();
-    },
-    pause: () => {
-      ref.current && ref.current.pause();
-    },
-    seek: (time: number) => {
-      const truncated = Math.min(duration, Math.max(0, time));
-      setTime(truncated);
-      ref.current && (ref.current.currentTime = truncated);
-    },
+  const play = () => {
+    ref.current && ref.current.play();
+  };
+  const pause = () => {
+    ref.current && ref.current.pause();
+  };
+  const seek = (time: number) => {
+    const truncated = Math.min(duration, Math.max(0, time));
+    setTime(truncated);
+    ref.current && (ref.current.currentTime = truncated);
+  };
+  const seekRelative = (relativeTime: number) => {
+    seek(time + relativeTime);
   };
 
   return {
-    controls,
+    controls: {
+      play,
+      pause,
+      seek,
+      seekRelative,
+    },
     state: {
       time,
       duration,

@@ -22,7 +22,7 @@ const styles = {
   main: css({
     borderRadius: 8,
     background: colors.white,
-    boxShadow: boxShadow.card,
+    boxShadow: boxShadow.cardHover,
     width: '100%',
   }),
 };
