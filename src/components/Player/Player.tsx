@@ -6,7 +6,7 @@ import { AudioControlsResult } from 'src/hooks/useAudioControls';
 import { colors, fonts, breakpoints } from 'src/styles';
 import PlayerControls from './PlayerControls';
 import formatHrMinSec from 'src/utils/formatHrMinSec';
-import noop from 'src/utils/noop';
+import { includes, pathOr } from 'ramda';
 import { KeyCode } from 'src/types';
 import AccessibleLabel from '../AccessibleLabel';
 
@@ -112,7 +112,15 @@ const Player: React.FC<PlayerProps> = ({
 
   useEffect(() => {
     const handleKeyboardControls = (e: KeyboardEvent) => {
-      if (!captureKeyboardInput) {
+      if (
+        includes(pathOr('', ['target', 'nodeName'], e).toLowerCase(), [
+          'input',
+          'textarea',
+          'select',
+          'button',
+        ]) ||
+        !captureKeyboardInput
+      ) {
         return;
       }
 
