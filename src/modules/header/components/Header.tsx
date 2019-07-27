@@ -5,7 +5,7 @@ import HeaderAccount from './HeaderAccount';
 import Logo from 'src/icons/Logo';
 import zIndex from 'src/styles/zIndex';
 import SearchBar from 'src/modules/search/components/SearchBar';
-import { clickable } from 'src/styles';
+import { clickable, colors } from 'src/styles';
 
 type HeaderProps = {
   className?: string;
@@ -14,6 +14,12 @@ type HeaderProps = {
 
 const styles = {
   main: css({
+    backgroundColor: colors.white,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    zIndex: zIndex.header,
+  }),
+  contentContainer: css({
     '@media (min-width: 1800px)': {
       maxWidth: 1400,
     },
@@ -25,8 +31,6 @@ const styles = {
     position: 'relative',
     maxWidth: 1200,
     margin: '0 auto',
-    width: '100%',
-    zIndex: zIndex.card,
     paddingTop: 20,
   }),
   logo: css(clickable, {
@@ -63,14 +67,16 @@ const styles = {
 
 const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
   <header className={css(styles.main, className)}>
-    <div className={styles.logoAccountContainer}>
-      <Link className={styles.logo} to="/">
-        <Logo height={30} width={130} />
-      </Link>
-      <HeaderAccount />
-    </div>
-    <div className={styles.search}>
-      <SearchBar initialText={searchText} />
+    <div className={styles.contentContainer}>
+      <div className={styles.logoAccountContainer}>
+        <Link className={styles.logo} to="/">
+          <Logo height={30} width={130} />
+        </Link>
+        <HeaderAccount />
+      </div>
+      <div className={styles.search}>
+        <SearchBar initialText={searchText} />
+      </div>
     </div>
   </header>
 );

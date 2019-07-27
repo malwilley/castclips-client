@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
-import Header from 'src/modules/header';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
@@ -13,6 +12,8 @@ const styles = {
   gradientContainer: css({
     backgroundImage: colors.gradient,
     height: '25rem',
+    marginTop: -32,
+    zIndex: -1,
   }),
   shareContainer: css({
     display: 'flex',
@@ -32,6 +33,9 @@ const styles = {
   }),
   downPointer: css({
     marginBottom: 40,
+  }),
+  upPointer: css({
+    marginTop: 32,
   }),
   hotClipsContainer: css({
     marginTop: -70,
@@ -57,10 +61,11 @@ const HomePage: React.FC = () => {
       <BoxContainer
         className={styles.gradientContainer}
         containerClassName={styles.shareContainer}
-        top
         bottom
       >
-        <TextPointer direction="up">Try searching for a podcast you like</TextPointer>
+        <TextPointer className={styles.upPointer} direction="up">
+          Try searching for a podcast you like
+        </TextPointer>
         <h1 className={styles.shareText}>Share your favorite podcast moments.</h1>
         <TextPointer className={styles.downPointer} direction="down">
           Or see what's popular

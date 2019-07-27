@@ -22,6 +22,7 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '1fr 1200px 1fr',
     gridTemplateRows: 'auto auto auto 6px auto',
+    marginTop: -32,
     overflowX: 'hidden',
   }),
   body: css({
@@ -45,18 +46,18 @@ const styles = {
     gridRowEnd: 4,
     gridColumn: '1 / -1',
     backgroundImage: colors.gradient,
-    zIndex: zIndex.background,
+    zIndex: -1,
   }),
   titleContainer: css({
     '@media (min-width: 800px)': {
-      padding: '20px 0 60px 0',
+      padding: '3.5rem 0 4rem 0',
     },
     gridRowStart: 2,
     gridRowEnd: 3,
     gridColumnStart: 2,
     gridColumnEnd: 3,
     color: colors.white,
-    padding: '10px 0 40px 0',
+    padding: '2rem 0 2rem 0',
     zIndex: zIndex.card,
   }),
 };
@@ -67,7 +68,7 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
   titleContent,
 }) => (
   <div className={styles.main}>
-    <BoxContainer className={styles.heroContainer} bottom top />
+    <BoxContainer className={styles.heroContainer} bottom />
     <div className={styles.titleContainer}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>

@@ -16,6 +16,7 @@ const secondaryButtonStyles = css(fonts.bold300, {
     marginLeft: 8,
   },
   alignItems: 'center',
+  backgroundColor: colors.white,
   border: `1px solid ${colors.gray50}`,
   borderRadius: 8,
   display: 'flex',

@@ -29,9 +29,11 @@ const styles = {
   hero: css({
     background: colors.gradient,
     height: 500,
+    marginTop: -32,
+    zIndex: -1,
   }),
   heroContainer: css({
-    paddingTop: 80,
+    paddingTop: 100,
   }),
   signin: css({
     fontSize: 48,
@@ -57,7 +59,7 @@ const SigninPage: React.FC = () => {
 
   return (
     <>
-      <BoxContainer className={styles.hero} containerClassName={styles.heroContainer} top bottom>
+      <BoxContainer className={styles.hero} containerClassName={styles.heroContainer} bottom>
         <LayoutContainer className={styles.textContainer}>
           <h2 className={styles.signin}>Sign in</h2>
           <h3>or create an account</h3>
