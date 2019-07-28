@@ -36,8 +36,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "now-build": "NODE_PATH=./ && react-scripts build",
-    "now-dev": "react-scripts start"
+    "now-build": "NODE_PATH=./ && GENERATE_SOURCEMAP=false react-scripts build",
+    "now-dev": "react-scripts start",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -67,6 +68,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/redux-logger": "^3.0.6",
     "prettier": "^1.16.1",
+    "source-map-explorer": "^2.0.1",
     "tslint-config-prettier": "^1.17.0"
   }
 }

@@ -116,8 +116,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   }, [query, type, page]);
 
   return (
-    <div>
-      <Header searchText={query} />
+    <>
       <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} type={type} />
         <h2 className={styles.resultsHeader}>
@@ -153,7 +152,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
           }}
         />
       </LayoutContainer>
-    </div>
+    </>
   );
 };
 

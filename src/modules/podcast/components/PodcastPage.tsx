@@ -59,9 +59,11 @@ const styles = {
   }),
   episodes: css({
     gridTemplateAreas: 'episodes',
+    overflow: 'hidden',
   }),
   clips: css({
     gridTemplateAreas: 'clips',
+    overflow: 'hidden',
   }),
   episodesNumber: css({
     fontWeight: 900,
@@ -129,11 +131,13 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
                   <Attribute icon={<AnimationPlayOutlineIcon />}>
                     <strong className={styles.episodesNumber}>{totalEpisodes}</strong> episodes
                   </Attribute>
-                  <Attribute icon={<LinkIcon />}>
-                    <a className={styles.link} href={website}>
-                      {sanitizeUrl(website)}
-                    </a>
-                  </Attribute>
+                  {website && (
+                    <Attribute icon={<LinkIcon />}>
+                      <a className={styles.link} href={website}>
+                        {sanitizeUrl(website)}
+                      </a>
+                    </Attribute>
+                  )}
                 </div>
               )}
             />
