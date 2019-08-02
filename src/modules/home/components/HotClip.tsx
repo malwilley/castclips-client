@@ -9,6 +9,7 @@ import fonts from 'src/styles/fonts';
 import ClipCardAttributes, { ClipCardAttributesSkeleton } from 'src/components/ClipCardAttributes';
 import TextSkeleton from 'src/components/TextSkeleton';
 import { Link } from 'react-router-dom';
+import TruncateContent from 'src/components/TruncateContent';
 
 type HotClipProps = {
   clip: ClipMetadata;
@@ -21,6 +22,10 @@ const styles = {
   }),
   container: css({
     padding: '1rem 1.2rem 0.5rem 1.2rem',
+  }),
+  description: css(fonts.text200, {
+    margin: '0.3rem 0 0 0',
+    color: colors.gray300,
   }),
   footerContainer: css({
     marginTop: 8,
@@ -76,7 +81,7 @@ const HotClipSkeleton: React.FC = () => (
   <Card className={styles.main} feature>
     <div className={styles.container}>
       <div className={styles.skeletonTitle}>
-        {range(0, Math.ceil(Math.random() * 3)).map(i => (
+        {range(0, Math.ceil(Math.random() * 4)).map(i => (
           <TextSkeleton key={i} height="1rem" width={`${Math.random() * 40 + 60}%`} />
         ))}
       </div>
@@ -122,6 +127,13 @@ const HotClip: React.FC<HotClipProps> = ({ clip }) => (
       <Link className={css(coverContainer)} to={`/clip/${clip.id}`}>
         <h3 className={styles.title}>{clip.title}</h3>
       </Link>
+      {clip.description && (
+        <TruncateContent maxHeight={60}>
+          <p className={styles.description} title={clip.description}>
+            {clip.description}
+          </p>
+        </TruncateContent>
+      )}
       <ClipCardAttributes className={styles.footerContainer} clip={clip} />
     </div>
     <PodcastEpisodeSection clip={clip} />
