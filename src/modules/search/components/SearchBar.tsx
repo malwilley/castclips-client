@@ -11,7 +11,6 @@ import SearchIcon from 'mdi-react/SearchIcon';
 import Button from 'src/components/Button';
 import AccessibleLabel from 'src/components/AccessibleLabel';
 import { KeyCode } from 'src/types';
-import useLocalStorage from 'src/hooks/useLocalStorage';
 
 type SearchBarProps = { className?: string; initialText?: string };
 

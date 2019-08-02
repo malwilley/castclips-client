@@ -144,7 +144,11 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
             return (
               <>
                 {data.results.map((result: any) => (
-                  <SearchResultCard key={result.id} {...result} />
+                  <SearchResultCard
+                    key={result.id}
+                    {...result}
+                    thumbnail={result.thumbnail || result.podcast.thumbnail}
+                  />
                 ))}
                 <SearchPagination {...{ page, total: data.total }} />
               </>
