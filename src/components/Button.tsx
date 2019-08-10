@@ -12,7 +12,6 @@ const styles = {
   main: css(fonts.bold300, {
     '&::-moz-focus-inner': {
       border: 0,
-      name,
     },
     '&:disabled': {
       cursor: 'not-allowed',
