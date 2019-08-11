@@ -25,7 +25,7 @@ const styles = {
         zIndex: zIndex.card,
       },
       position: 'relative',
-      transition: 'all 250ms ease-out',
+      transition: 'all 200ms ease-out',
     }),
   feature: css({
     boxShadow: boxShadow.card,

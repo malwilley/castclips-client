@@ -23,7 +23,6 @@ const styles = {
     gridTemplateColumns: '1fr 1200px 1fr',
     gridTemplateRows: 'auto auto auto 6px auto',
     marginTop: -32,
-    overflowX: 'hidden',
   }),
   body: css({
     gridColumnStart: 2,

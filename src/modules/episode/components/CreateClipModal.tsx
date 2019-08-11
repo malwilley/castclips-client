@@ -11,6 +11,7 @@ import { EpisodeState } from '../types';
 import StyledTextArea from 'src/components/StyledTextArea';
 import pick from 'ramda/es/pick';
 import { AddClipPayload } from 'src/api/types';
+import CharacterCounter from 'src/components/CharacterCounter';
 
 type ShareModalProps = {
   start: number;
@@ -28,8 +29,12 @@ type ShareModalConnectedProps = ShareModalProps & {
 const styles = {
   container: css({
     '& > :not(:last-child)': {
-      marginBottom: 24,
+      marginBottom: '1rem',
     },
+  }),
+  counter: css({
+    textAlign: 'right',
+    paddingTop: '0.5em',
   }),
 };
 
@@ -64,6 +69,8 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
     });
   };
 
+  const valid = title.length > 0 && title.length < 200 && description.length < 2000;
+
   return (
     <Modal
       handleClose={handleClose}
@@ -72,7 +79,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
       primaryButtonProps={
         clipId.type === 'fetching'
           ? { active: false, children: 'Creating...' }
-          : { active: title.length > 0, onClick: handleCreate, children: 'Create' }
+          : { active: valid, onClick: handleCreate, children: 'Create' }
       }
       title="Create a clip"
     >
@@ -90,6 +97,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
             required
             text={title}
           />
+          <CharacterCounter className={styles.counter} max={200} text={title} />
         </div>
         <div>
           <StyledInputLabel htmlFor="description-input">Clip description</StyledInputLabel>
@@ -99,6 +107,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
             placeholder="If the title isn't enough, say more here!"
             text={description}
           />
+          <CharacterCounter className={styles.counter} max={2000} text={description} />
         </div>
       </div>
     </Modal>

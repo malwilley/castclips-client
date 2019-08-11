@@ -29,12 +29,16 @@ const styles = {
     borderRadius: '50%',
     flexShrink: 0,
   }),
+  content: css({
+    flexGrow: 1,
+    width: 0,
+  }),
 };
 
 const Attribute: React.FC<AttributeProps> = ({ children, icon }) => (
   <div className={styles.main}>
     <div className={styles.icon}>{icon}</div>
-    {children}
+    <div className={styles.content}>{children}</div>
   </div>
 );
 

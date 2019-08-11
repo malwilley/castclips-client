@@ -63,7 +63,6 @@ const styles = {
   }),
   clips: css({
     gridTemplateAreas: 'clips',
-    overflow: 'hidden',
   }),
   episodesNumber: css({
     fontWeight: 900,
@@ -79,6 +78,7 @@ const styles = {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     textDecoration: 'underline',
+    width: '100%',
   }),
   podcastSectionHeader: css({
     '@media (min-width: 600px)': {

@@ -42,7 +42,6 @@ const styles = {
       },
     },
     padding: '16px 16px 16px 0',
-    overflow: 'hidden',
   }),
   thumbnail: css({
     width: 80,

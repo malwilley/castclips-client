@@ -25,7 +25,7 @@ const styles = {
       position: 'absolute',
       bottom: 0,
       width: '100%',
-      height: expandable ? '3em' : '1em',
+      height: expandable ? '3em' : '2em',
       background: expandable
         ? 'linear-gradient(to top, white 1.5em, transparent)'
         : 'linear-gradient(to top, white, transparent)',
