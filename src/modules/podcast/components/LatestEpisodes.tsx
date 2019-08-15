@@ -1,17 +1,22 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { PodcastEpisode, PodcastState } from '../types';
 import { Link } from 'react-router-dom';
-import Card from 'src/components/Card';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import ArtistIcon from 'mdi-react/ArtistIcon';
 import formatPublishDate from 'src/utils/formatPublishDate';
 import TextSkeleton from 'src/components/TextSkeleton';
 import stripHtml from 'src/utils/stripHtml';
 import capitalizeFirstLetter from 'src/utils/capitalizeFirstLetter';
+import { useDispatch, useSelector } from 'react-redux';
+import { thunks } from '../redux';
+import Card from 'src/components/Card';
+import { AppState } from 'src/redux/types';
+import { KeyCode } from 'src/types';
+import SearchInput from 'src/components/SearchableItems';
+import Button from 'src/components/Button';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -22,6 +27,22 @@ const styles = {
     '& > :not(:last-child)': {
       borderBottom: `1px solid ${colors.gray50}`,
     },
+  }),
+  header: css({
+    padding: '1rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }),
+  clear: css(fonts.bold250, {
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+    color: colors.secondary500,
+    marginLeft: '1rem',
+  }),
+  search: css({
+    maxWidth: '20rem',
   }),
   episodeRow: {
     main: css({
@@ -36,7 +57,7 @@ const styles = {
     }),
     thumbnail: css({
       gridTemplateAreas: 'thumbnail',
-      borderRadius: 8,
+      borderRadius: 4,
       height: '4rem',
       width: '4rem',
     }),
@@ -51,10 +72,9 @@ const styles = {
     titleDescriptionContainer: css({
       gridTemplateAreas: 'middle',
       overflow: 'hidden',
-      marginTop: '0.25rem',
+      marginTop: '0.1rem',
     }),
-    title: css(fonts.heading300, {
-      lineHeight: 1,
+    title: css(fonts.bold250, {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       marginBottom: '0.05rem',
@@ -85,10 +105,12 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
             <CalendarDayIcon />
             <div>{capitalizeFirstLetter(formatPublishDate(published))}</div>
           </div>
-          <div className={styles.episodeRow.textIcon}>
-            <ClockOutlineIcon />
-            <div>{(audioLength / 60).toFixed(0)} min</div>
-          </div>
+          {Number(audioLength) ? (
+            <div className={styles.episodeRow.textIcon}>
+              <ClockOutlineIcon />
+              <div>{(audioLength / 60).toFixed(0)} min</div>
+            </div>
+          ) : null}
           {/*
           <div className={css(styles.episodeRow.textIcon, styles.episodeRow.textIconGreen)}>
           <ArtistIcon size={14} />
@@ -105,14 +127,18 @@ const EpisodeRowLoading: React.FC = () => (
   <div className={styles.episodeRow.main}>
     <TextSkeleton className={styles.episodeRow.thumbnail} />
     <div className={styles.episodeRow.titleDescriptionContainer}>
-      <TextSkeleton color={colors.gray50} height={13} marginBottom={2} width={150} />
-      <TextSkeleton color={colors.gray200} height={16} marginBottom={4} width={200} />
-      <TextSkeleton height={15} marginBottom={0} />
+      <TextSkeleton color={colors.gray100} height={16} marginBottom={2} width="80%" />
+      <TextSkeleton height={15} marginBottom={4} />
+      <TextSkeleton color={colors.gray50} height={13} width={150} />
     </div>
   </div>
 );
 
 const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
+  const dispatch = useDispatch();
+  const query = useSelector((state: AppState) => state.podcast.search.query);
+  const [text, setText] = useState('');
+
   if (episodes.type === 'not_asked') {
     return null;
   }
@@ -121,6 +147,32 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
 
   return (
     <Card className={styles.main}>
+      <div className={styles.header}>
+        <SearchInput
+          className={styles.search}
+          handleTextChange={setText}
+          value={text}
+          placeholder="Search..."
+          onKeyDown={e => {
+            if (e.keyCode === KeyCode.Enter) {
+              dispatch(thunks.searchEpisodes(text));
+            }
+          }}
+        />
+        {query ? (
+          <Button
+            className={styles.clear}
+            onClick={() => {
+              setText('');
+              dispatch(thunks.clearSearch());
+            }}
+          >
+            Clear
+          </Button>
+        ) : (
+          <div />
+        )}
+      </div>
       {episodeList.length > 0
         ? episodeList.map(episode => <EpisodeRow key={episode.id} episode={episode} />)
         : Array(10)

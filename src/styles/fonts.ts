@@ -38,6 +38,10 @@ const fonts = {
     ...heading,
     fontSize: '1rem',
   },
+  heading250: {
+    ...heading,
+    fontSize: '0.9rem',
+  },
   heading200: {
     ...heading,
     fontSize: '0.8rem',

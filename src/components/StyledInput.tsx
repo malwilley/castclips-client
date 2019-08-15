@@ -21,6 +21,7 @@ const styles = {
     },
     '&:focus': {
       border: `1px solid ${colors.tertiary100}`,
+      boxShadow: `0 1px 10px ${colors.tertiary100alpha30}`,
     },
     height: 42,
     border: `1px solid ${colors.gray100}`,
@@ -28,7 +29,7 @@ const styles = {
     fontSize: 14,
     width: '100%',
     padding: '0 12px',
-    transition: 'border 300ms ease-out',
+    transition: 'all 200ms ease-out',
   }),
   label: css({
     color: colors.gray600,

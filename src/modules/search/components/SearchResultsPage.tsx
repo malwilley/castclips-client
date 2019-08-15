@@ -63,7 +63,7 @@ const fetchSearchResults = async ({
   try {
     const token = await getAuthToken();
     const offset = (page - 1) * 10;
-    const { results, total } = await search(token, type, query, offset);
+    const { results, total } = await search(token, { type, query, offset });
     dispatch(
       actions.setSearchRequest({
         type,
