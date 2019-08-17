@@ -95,7 +95,7 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
             handleTextChange={setTitle}
             placeholder="A descriptive title for your clip"
             required
-            text={title}
+            value={title}
           />
           <CharacterCounter className={styles.counter} max={200} text={title} />
         </div>

@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Input from 'src/components/Input';
 import { push } from 'connected-react-router';
-import { SearchType } from '../types';
 import { stringify } from 'querystringify';
 import { css } from 'emotion';
 import { colors, fonts, breakpoints } from 'src/styles';

@@ -24,10 +24,31 @@ const episodes = (state: PodcastState['episodes'] = { type: 'not_asked' }, actio
 
 const metadata = makeHttpReducer<PodcastState['metadata']>(ActionTypes.SetMetadata);
 
+const query = (state: PodcastState['search']['query'] = '', action: Actions) => {
+  switch (action.type) {
+    case ActionTypes.SetEpisodeSearchTerm:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const offset = (state: PodcastState['search']['offset'] = 0, action: Actions) => {
+  switch (action.type) {
+    case ActionTypes.SetEpisodeSearchOffset:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const search = combineReducers({ query, offset });
+
 const reducer = combineReducers({
   clips,
   episodes,
   metadata,
+  search,
 });
 
 export default reducer;

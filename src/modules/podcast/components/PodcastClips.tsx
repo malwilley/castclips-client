@@ -30,7 +30,7 @@ const PodcastClips: React.FC<PodcastClipsConnectedProps> = ({ clipsRequest }) =>
             {Array(3)
               .fill(0)
               .map((_, index) => (
-                <PodcastClipCardFetching />
+                <PodcastClipCardFetching key={index} />
               ))}
           </>
         )}

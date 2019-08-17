@@ -7,6 +7,8 @@ export enum ActionTypes {
   SetClips = 'podcast/set_clips',
   SetEpisodes = 'podcast/set_episodes',
   SetMetadata = 'podcast/set_metadata',
+  SetEpisodeSearchTerm = 'podcast/set_episode_search_term',
+  SetEpisodeSearchOffset = 'podcast/set_episode_search_offset',
 }
 
 export const actions = {
@@ -16,6 +18,10 @@ export const actions = {
     createAction(ActionTypes.SetEpisodes, episodes),
   setMetadata: (metadata: PodcastState['metadata']) =>
     createAction(ActionTypes.SetMetadata, metadata),
+  setEpisodeSearchTerm: (query: PodcastState['search']['query']) =>
+    createAction(ActionTypes.SetEpisodeSearchTerm, query),
+  setEpisodeSearchOffset: (offset: PodcastState['search']['offset']) =>
+    createAction(ActionTypes.SetEpisodeSearchOffset, offset),
 };
 
 export type Actions = ActionsUnion<typeof actions>;
