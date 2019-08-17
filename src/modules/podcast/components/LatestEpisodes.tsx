@@ -15,7 +15,7 @@ import { thunks } from '../redux';
 import Card from 'src/components/Card';
 import { AppState } from 'src/redux/types';
 import { KeyCode } from 'src/types';
-import SearchInput from 'src/components/SearchableItems';
+import SearchInput from 'src/components/SearchInput';
 import Button from 'src/components/Button';
 
 type LatestEpisodesProps = {

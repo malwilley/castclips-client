@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
-import Input from './Input';
+import Input, { InputProps } from './Input';
 
-type StyledInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  className?: string;
-  focus?: boolean;
-  handleTextChange: (text: string) => void;
-  text: string;
-};
+type StyledInputProps = InputProps;
 
 type StyledInputLabelProps = {
   htmlFor: string;
@@ -48,14 +43,12 @@ const StyledInputLabel: React.FC<StyledInputLabelProps> = ({ children, htmlFor }
 const StyledInput: React.FC<StyledInputProps> = ({
   className,
   handleTextChange,
-  text,
   ...inputProps
 }) => {
   return (
     <Input
       className={css(styles.input, className)}
       handleTextChange={handleTextChange}
-      value={text}
       {...inputProps}
     />
   );
