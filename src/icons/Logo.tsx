@@ -6,7 +6,12 @@ type LogoProps = React.SVGProps<SVGSVGElement> & {
 };
 
 const Logo: React.FC<LogoProps> = ({ color, ...props }) => (
-  <svg viewBox="0 0 211.11 50.952" aria-label="Castclips" {...props}>
+  <svg
+    viewBox="0 0 211.11 50.952"
+    preserveAspectRatio="xMidYMid meet"
+    aria-label="Castclips"
+    {...props}
+  >
     <g transform="translate(-38.312 -136.68)">
       <g>
         <g fill={color ? color : '#3A89C9'}>

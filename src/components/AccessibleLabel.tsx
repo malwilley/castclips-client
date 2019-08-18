@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 type AccessibleLabelProps = {
-  id: string;
+  id?: string;
 };
 
 const styles = {
