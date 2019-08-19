@@ -1,34 +1,48 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, fonts, clickable } from 'src/styles';
+import { colors, fonts, clickable, breakpoints } from 'src/styles';
 import LayoutContainer from './LayoutContainer';
 import BoxContainer from './BoxContainer';
 import Logo from 'src/icons/Logo';
 import ListennotesPng from 'src/icons/Listennotes.png';
 import ListennotesWebp from 'src/icons/Listennotes.webp';
+import Appbase from 'src/icons/Appbase';
+import AccessibleLabel from './AccessibleLabel';
 
 const styles = {
-  main: css({
-    '@media (min-width: 700px)': {
-      height: 180,
-    },
-    backgroundColor: colors.gunmetal800,
-    margin: 0,
-    height: 250,
-  }),
-  content: css({
-    '@media (max-width: 700px)': {
+  main: css(
+    breakpoints.breakpoint400({
+      height: '14rem',
+    }),
+    breakpoints.breakpoint800({
+      height: '12rem',
+    }),
+    {
+      backgroundColor: colors.gunmetal800,
+      margin: 0,
+      height: '18rem',
+      overflow: 'hidden',
+    }
+  ),
+  content: css(
+    breakpoints.breakpoint600({
+      padding: '2rem',
+    }),
+    breakpoints.breakpoint800({
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    }),
+    {
+      display: 'flex',
       alignItems: 'flex-start',
       flexDirection: 'column',
       justifyContent: 'space-between',
-    },
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    color: colors.gunmetal100,
-    height: '100%',
-    padding: 40,
-  }),
+      color: colors.gunmetal100,
+      height: '100%',
+      padding: '2rem 1rem',
+    }
+  ),
   text: css(fonts.text200, {
     margin: '0.5rem 0 0 0',
   }),
@@ -42,7 +56,21 @@ const styles = {
     '& img': {
       height: 18,
     },
+    margin: '0.5rem 2rem 0.5rem 0',
     display: 'block',
+  }),
+  appbase: css(clickable, {
+    '& > svg': {
+      height: 24,
+      fill: colors.white,
+    },
+    margin: '0.5rem 0rem 0.5rem 0',
+    display: 'block',
+  }),
+  attributionContainer: css({
+    display: 'flex',
+    alignItems: 'flex-end',
+    flexWrap: 'wrap',
   }),
 };
 
@@ -61,12 +89,17 @@ const Footer: React.FC = () => (
             </a>
           </p>
         </div>
-        <div>
-          <a className={styles.listennotes} href="https://listennotes.com">
+        <div className={styles.attributionContainer}>
+          <a className={styles.listennotes} href="https://listennotes.com" target="_blank">
+            <AccessibleLabel>Powered by Listen Notes</AccessibleLabel>
             <picture>
               <source type="image/webp" srcSet={ListennotesWebp} />
               <img alt="Listen Notes logo" src={ListennotesPng} />
             </picture>
+          </a>
+          <a className={styles.appbase} href="https://appbase.io/" target="_blank">
+            <AccessibleLabel>Powered by Appbase</AccessibleLabel>
+            <Appbase />
           </a>
         </div>
       </LayoutContainer>
