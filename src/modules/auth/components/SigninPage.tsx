@@ -2,13 +2,12 @@ import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 import firebaseApp from '../firebase';
-import Header from 'src/modules/header';
 import LayoutContainer from 'src/components/LayoutContainer';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
-import BoxContainer from 'src/components/BoxContainer';
 import Card from 'src/components/Card';
 import zIndex from 'src/styles/zIndex';
+import RoundedCorners from 'src/components/RoundedCorners';
 
 const styles = {
   authCenter: css({
@@ -27,19 +26,19 @@ const styles = {
     zIndex: zIndex.card,
   }),
   hero: css({
+    '@media (max-width: 800px)': {
+      borderRadius: 8,
+    },
+    borderRadius: 16,
     background: colors.gradient,
     height: 500,
-    marginTop: -32,
-    zIndex: -1,
-  }),
-  heroContainer: css({
-    paddingTop: 100,
   }),
   signin: css({
     fontSize: 48,
     marginBottom: 6,
   }),
   textContainer: css({
+    paddingTop: 100,
     color: colors.white,
     textAlign: 'center',
   }),
@@ -59,12 +58,13 @@ const SigninPage: React.FC = () => {
 
   return (
     <>
-      <BoxContainer className={styles.hero} containerClassName={styles.heroContainer} bottom>
+      <div className={styles.hero}>
         <LayoutContainer className={styles.textContainer}>
           <h2 className={styles.signin}>Sign in</h2>
           <h3>or create an account</h3>
         </LayoutContainer>
-      </BoxContainer>
+      </div>
+      <RoundedCorners top />
       <div className={styles.authCenter}>
         <Card className={styles.authContainer} feature>
           <StyledFirebaseAuth firebaseAuth={firebaseApp.auth()} uiConfig={uiConfig} />

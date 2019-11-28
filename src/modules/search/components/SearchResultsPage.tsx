@@ -19,6 +19,7 @@ import { search } from 'src/api/firebase';
 import { getAuthToken } from 'src/modules/auth/firebase';
 import makeMapSearchResult from '../utils/mapSearchResult';
 import SearchPagination from './SearchPagination';
+import RoundedCorners from 'src/components/RoundedCorners';
 
 type SearchResultsPageProps = {
   query: string;
@@ -40,6 +41,11 @@ const styles = {
   }),
   searchTypeSwitch: css({
     marginBottom: 30,
+  }),
+  separator: css({
+    width: '100%',
+    height: 1,
+    backgroundColor: colors.gray50,
   }),
 };
 
@@ -117,6 +123,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
 
   return (
     <>
+      <div className={styles.separator} />
       <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} type={type} />
         <h2 className={styles.resultsHeader}>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { colors, fonts, clickable, breakpoints } from 'src/styles';
 import LayoutContainer from './LayoutContainer';
-import BoxContainer from './BoxContainer';
 import Logo from 'src/icons/Logo';
 import ListennotesPng from 'src/icons/Listennotes.png';
 import ListennotesWebp from 'src/icons/Listennotes.webp';
@@ -22,6 +21,7 @@ const styles = {
       margin: 0,
       height: '18rem',
       overflow: 'hidden',
+      paddingTop: 30,
     }
   ),
   content: css(
@@ -75,35 +75,33 @@ const styles = {
 };
 
 const Footer: React.FC = () => (
-  <div>
-    <BoxContainer className={styles.main} top>
-      <LayoutContainer className={styles.content}>
-        <div>
-          <Logo color={colors.white} height={23} width={100} />
-          <p className={styles.text}>
-            Create, share, and discover clips from your favorite podcasts.
-            <br />
-            Brought to you by podcast lover{' '}
-            <a className={styles.link} href="https://malachi.dev/">
-              malachi.dev
-            </a>
-          </p>
-        </div>
-        <div className={styles.attributionContainer}>
-          <a className={styles.listennotes} href="https://listennotes.com" target="_blank">
-            <AccessibleLabel>Powered by Listen Notes</AccessibleLabel>
-            <picture>
-              <source type="image/webp" srcSet={ListennotesWebp} />
-              <img alt="Listen Notes logo" src={ListennotesPng} />
-            </picture>
+  <div className={styles.main}>
+    <LayoutContainer className={styles.content}>
+      <div>
+        <Logo color={colors.white} height={23} width={100} />
+        <p className={styles.text}>
+          Create, share, and discover clips from your favorite podcasts.
+          <br />
+          Brought to you by podcast lover{' '}
+          <a className={styles.link} href="https://malachi.dev/">
+            malachi.dev
           </a>
-          <a className={styles.appbase} href="https://appbase.io/" target="_blank">
-            <AccessibleLabel>Powered by Appbase</AccessibleLabel>
-            <Appbase />
-          </a>
-        </div>
-      </LayoutContainer>
-    </BoxContainer>
+        </p>
+      </div>
+      <div className={styles.attributionContainer}>
+        <a className={styles.listennotes} href="https://listennotes.com" target="_blank">
+          <AccessibleLabel>Powered by Listen Notes</AccessibleLabel>
+          <picture>
+            <source type="image/webp" srcSet={ListennotesWebp} />
+            <img alt="Listen Notes logo" src={ListennotesPng} />
+          </picture>
+        </a>
+        <a className={styles.appbase} href="https://appbase.io/" target="_blank">
+          <AccessibleLabel>Powered by Appbase</AccessibleLabel>
+          <Appbase />
+        </a>
+      </div>
+    </LayoutContainer>
   </div>
 );
 

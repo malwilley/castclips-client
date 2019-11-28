@@ -4,23 +4,27 @@ import { colors } from 'src/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
-import BoxContainer from 'src/components/BoxContainer';
 import TextPointer from './TextPointer';
 import HotClips from './HotClips';
+import RoundedCorners from 'src/components/RoundedCorners';
 
 const styles = {
   gradientContainer: css({
+    '@media (max-width: 800px)': {
+      borderRadius: '8px 8px 0 0',
+    },
+    borderRadius: '16px 16px 0 0',
     backgroundImage: colors.gradient,
     height: '25rem',
-    marginTop: -32,
-    zIndex: -1,
+    position: 'relative',
   }),
   shareContainer: css({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
+    padding: '0 20px',
+    height: '100%',
   }),
   shareText: css({
     '@media (max-width: 800px)': {
@@ -32,7 +36,7 @@ const styles = {
     lineHeight: 1,
   }),
   downPointer: css({
-    marginBottom: 40,
+    marginBottom: 90,
   }),
   upPointer: css({
     marginTop: 32,
@@ -44,6 +48,10 @@ const styles = {
   search: css({
     gridTemplateArea: 'search',
     margin: '0 auto',
+  }),
+  roundedCorners: css({
+    position: 'absolute',
+    bottom: 0,
   }),
 };
 
@@ -58,19 +66,18 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <BoxContainer
-        className={styles.gradientContainer}
-        containerClassName={styles.shareContainer}
-        bottom
-      >
-        <TextPointer className={styles.upPointer} direction="up">
-          Try searching for a podcast you like
-        </TextPointer>
-        <h1 className={styles.shareText}>Share your favorite podcast moments.</h1>
-        <TextPointer className={styles.downPointer} direction="down">
-          Or see what's popular
-        </TextPointer>
-      </BoxContainer>
+      <div className={styles.gradientContainer}>
+        <div className={styles.shareContainer}>
+          <TextPointer className={styles.upPointer} direction="up">
+            Try searching for a podcast you like
+          </TextPointer>
+          <h1 className={styles.shareText}>Share your favorite podcast moments.</h1>
+          <TextPointer className={styles.downPointer} direction="down">
+            Or see what's popular
+          </TextPointer>
+        </div>
+        <RoundedCorners className={styles.roundedCorners} top />
+      </div>
       <div className={styles.hotClipsContainer}>
         <HotClips hotClips={hotClips} />
       </div>

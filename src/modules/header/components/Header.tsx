@@ -15,8 +15,6 @@ type HeaderProps = {
 const styles = {
   main: css({
     backgroundColor: colors.white,
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
     zIndex: zIndex.header,
   }),
   contentContainer: css({
