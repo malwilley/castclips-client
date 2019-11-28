@@ -1,13 +1,15 @@
 const background = 1;
-const boxContainer = 4;
-const card = 5;
-const header = 3;
+const header = 4;
+const feature = 5;
+const body = 6;
+const card = 7;
 const modal = 103;
 const modalBackground = 102;
 
 export default {
   background,
-  boxContainer,
+  feature,
+  body,
   card,
   header,
   modal,

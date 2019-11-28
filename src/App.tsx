@@ -6,11 +6,19 @@ import Footer from './components/Footer';
 import { css } from 'emotion';
 import PulsingLogo from './components/PulsingLogo';
 import Header from './modules/header';
+import RoundedCorners from './components/RoundedCorners';
+import { colors } from './styles';
 
 const styles = {
   main: css({
     minHeight: '100vh',
-    paddingBottom: 100,
+    backgroundColor: colors.white,
+    position: 'relative',
+    paddingBottom: 80,
+  }),
+  bottomRounding: css({
+    position: 'absolute',
+    bottom: 0,
   }),
 };
 
@@ -64,6 +72,7 @@ const App: React.FC = () => (
             }}
           />
         </Switch>
+        <RoundedCorners className={styles.bottomRounding} bottom />
       </div>
       <Footer />
     </Suspense>

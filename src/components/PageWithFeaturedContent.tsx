@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { colors } from 'src/styles';
-import Header from 'src/modules/header';
-import BoxContainer from './BoxContainer';
 import zIndex from 'src/styles/zIndex';
+import RoundedCorners from './RoundedCorners';
 
 type PageWithFeaturedContentProps = {
   bodyContent: React.ReactNode;
@@ -22,7 +21,6 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '1fr 1200px 1fr',
     gridTemplateRows: 'auto auto auto 6px auto',
-    marginTop: -32,
   }),
   body: css({
     gridColumnStart: 2,
@@ -41,11 +39,21 @@ const styles = {
     zIndex: zIndex.card,
   }),
   heroContainer: css({
+    '@media (max-width: 800px)': {
+      borderRadius: '8px 8px 0 0',
+    },
     gridRowStart: 2,
     gridRowEnd: 4,
     gridColumn: '1 / -1',
     backgroundImage: colors.gradient,
-    zIndex: -1,
+    borderRadius: '16px 16px 0 0',
+    position: 'relative',
+    zIndex: zIndex.feature,
+  }),
+  bodyRounding: css({
+    position: 'absolute',
+    bottom: 0,
+    zIndex: zIndex.body,
   }),
   titleContainer: css({
     '@media (min-width: 800px)': {
@@ -67,7 +75,9 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
   titleContent,
 }) => (
   <div className={styles.main}>
-    <BoxContainer className={styles.heroContainer} bottom />
+    <div className={styles.heroContainer}>
+      <RoundedCorners className={styles.bodyRounding} top />
+    </div>
     <div className={styles.titleContainer}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
