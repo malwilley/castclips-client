@@ -1,11 +1,11 @@
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import { HomeState } from '../types';
 import { css } from 'emotion';
 import { range } from 'ramda';
 import HotClip, { HotClipSkeleton } from './HotClip';
 import React from 'react';
-import StackGrid from 'src/components/StackGrid';
-import { breakpoints } from 'src/styles';
+import StackGrid from 'components/StackGrid';
+import { breakpoints } from 'styles';
 
 type HotClipsProps = {
   hotClips: HomeState['hotClips'];

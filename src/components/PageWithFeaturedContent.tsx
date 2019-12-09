@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
-import zIndex from 'src/styles/zIndex';
+import { colors } from 'styles';
+import zIndex from 'styles/zIndex';
 import RoundedCorners from './RoundedCorners';
 
 type PageWithFeaturedContentProps = {

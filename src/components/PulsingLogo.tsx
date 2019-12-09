@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from 'src/icons';
+import { Logo } from 'icons';
 import { css, keyframes } from 'emotion';
 
 type PulsingLogoProps = {};

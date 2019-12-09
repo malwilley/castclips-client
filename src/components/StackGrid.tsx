@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import useResizeObserver from 'src/hooks/useResizeObserver';
+import useResizeObserver from 'hooks/useResizeObserver';
 import { css } from 'emotion';
-import { range, update } from 'ramda';
+import { range } from 'ramda';
 
 type StackGridProps = {
   children: Array<React.ReactNode>;
@@ -32,10 +32,13 @@ const StackGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
   const numColumns = Math.floor(width / minColumnWidth) || 1;
 
   const itemsByColumn = useMemo(() => {
-    return children.reduce<React.ReactNode[][]>((acc, next, i) => {
-      acc[i % numColumns].push(next);
-      return acc;
-    }, range(0, numColumns).map(() => []));
+    return children.reduce<React.ReactNode[][]>(
+      (acc, next, i) => {
+        acc[i % numColumns].push(next);
+        return acc;
+      },
+      range(0, numColumns).map(() => [])
+    );
   }, [children, numColumns]);
 
   const content = range(0, numColumns).map(i => (

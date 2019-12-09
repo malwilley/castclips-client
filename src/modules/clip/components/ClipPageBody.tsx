@@ -1,23 +1,23 @@
 import React from 'react';
 import { css } from 'emotion';
-import Card from 'src/components/Card';
-import CopyLink from 'src/components/CopyLink';
-import HttpContent from 'src/components/HttpContent';
+import Card from 'components/Card';
+import CopyLink from 'components/CopyLink';
+import HttpContent from 'components/HttpContent';
 import { ClipState } from '../types';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 import RedditIcon from 'mdi-react/RedditIcon';
 import FacebookIcon from 'mdi-react/FacebookIcon';
 import TwitterIcon from 'mdi-react/TwitterIcon';
 import EyeOutlineIcon from 'mdi-react/EyeOutlineIcon';
 import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import SectionHeader from 'src/components/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 import ClipContext from './ClipContext';
-import TruncateContent from 'src/components/TruncateContent';
-import Attribute from 'src/components/Attribute';
-import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
-import AccessibleLabel from 'src/components/AccessibleLabel';
-import Tooltip from 'src/components/Tooltip';
-import formatClipAge from 'src/utils/formatClipAge';
+import TruncateContent from 'components/TruncateContent';
+import Attribute from 'components/Attribute';
+import ParagraphSkeleton from 'components/ParagraphSkeleton';
+import AccessibleLabel from 'components/AccessibleLabel';
+import Tooltip from 'components/Tooltip';
+import formatClipAge from 'utils/formatClipAge';
 
 type ClipPageBodyProps = {
   clipId: string;

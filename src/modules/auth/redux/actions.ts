@@ -1,5 +1,5 @@
-import { createAction } from 'src/redux/createAction';
-import { ActionsUnion } from 'src/redux/types';
+import { createAction } from 'redux/createAction';
+import { ActionsUnion } from 'redux/types';
 import { AuthState } from '../types';
 
 export enum ActionTypes {

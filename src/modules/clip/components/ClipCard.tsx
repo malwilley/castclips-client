@@ -1,18 +1,17 @@
 import { css } from 'emotion';
-import React, { useEffect } from 'react';
-import { HttpRequest } from 'src/types';
-import Card from 'src/components/Card';
-import HttpContent from 'src/components/HttpContent';
+import React from 'react';
+import { HttpRequest } from 'types';
+import Card from 'components/Card';
+import HttpContent from 'components/HttpContent';
 import { ClipMetadata } from '../types';
-import TextSkeleton from 'src/components/TextSkeleton';
-import { colors, fonts, clickable } from 'src/styles';
+import TextSkeleton from 'components/TextSkeleton';
+import { colors, fonts } from 'styles';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
-import Player from 'src/components/Player';
-import useAudioControls from 'src/hooks/useAudioControls';
+import Player from 'components/Player';
+import useAudioControls from 'hooks/useAudioControls';
 import { stringify } from 'querystringify';
-import Tooltip from 'src/components/Tooltip';
 import ContinueListening from './ContinueListening';
 
 type ClipCardProps = {

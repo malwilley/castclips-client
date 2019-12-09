@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import HeaderAccount from './HeaderAccount';
-import Logo from 'src/icons/Logo';
-import zIndex from 'src/styles/zIndex';
-import SearchBar from 'src/modules/search/components/SearchBar';
-import { clickable, colors } from 'src/styles';
+import Logo from 'icons/Logo';
+import zIndex from 'styles/zIndex';
+import SearchBar from 'modules/search/components/SearchBar';
+import { clickable, colors } from 'styles';
 
 type HeaderProps = {
   className?: string;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { isNil } from 'ramda';
 
 export type AudioState = {
   time: number;
@@ -18,7 +17,7 @@ export type AudioControls = {
 
 export type AudioControlsResult = { state: AudioState; controls: AudioControls };
 
-// https://github.com/streamich/react-use/blob/master/src/util/createHTMLMediaHook.ts
+// https://github.com/streamich/react-use/blob/master/util/createHTMLMediaHook.ts
 
 const useAudioControls = (
   ref: React.RefObject<HTMLAudioElement>
@@ -32,13 +31,13 @@ const useAudioControls = (
     if (ref.current) {
       setTime(ref.current.currentTime);
     }
-  }, [setTime]);
+  }, [ref]);
 
   const onDurationChange = React.useCallback(() => {
     if (ref.current) {
       setDuration(ref.current.duration);
     }
-  }, [setDuration]);
+  }, [ref]);
 
   const onPlay = React.useCallback(() => {
     setIsPlaying(true);
@@ -63,18 +62,20 @@ const useAudioControls = (
     ref.current.addEventListener('play', onPlay);
     ref.current.addEventListener('pause', onPause);
 
+    const refCopy = ref.current;
+
     return () => {
-      if (!ref.current) {
+      if (!refCopy) {
         return;
       }
 
-      ref.current.removeEventListener('timeupdate', onTimeUpdate);
-      ref.current.removeEventListener('durationchange', onDurationChange);
-      ref.current.removeEventListener('canplay', onCanPlay);
-      ref.current.removeEventListener('play', onPlay);
-      ref.current.removeEventListener('pause', onPause);
+      refCopy.removeEventListener('timeupdate', onTimeUpdate);
+      refCopy.removeEventListener('durationchange', onDurationChange);
+      refCopy.removeEventListener('canplay', onCanPlay);
+      refCopy.removeEventListener('play', onPlay);
+      refCopy.removeEventListener('pause', onPause);
     };
-  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause]);
+  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay]);
 
   const play = () => {
     ref.current && ref.current.play();

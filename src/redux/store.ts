@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
 import history from './history';
-import { attachAuthListener } from 'src/modules/auth/firebase';
+import { attachAuthListener } from 'modules/auth/firebase';
 
 const store = createStore(
   reducer,

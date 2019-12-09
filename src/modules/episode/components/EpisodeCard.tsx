@@ -1,11 +1,11 @@
 import { css } from 'emotion';
 import { EpisodeState, EpisodeMetadata } from '../types';
-import Card from 'src/components/Card';
-import HttpContent from 'src/components/HttpContent';
-import Player from 'src/components/Player';
+import Card from 'components/Card';
+import HttpContent from 'components/HttpContent';
+import Player from 'components/Player';
 import React, { useState, useRef, useEffect } from 'react';
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
-import useAudioControls from 'src/hooks/useAudioControls';
+import useAudioControls from 'hooks/useAudioControls';
 import { clamp } from 'ramda';
 
 type EpisodeCardProps = {
@@ -46,13 +46,13 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
       controls.pause();
       setPreviewing(false);
     }
-  }, [previewing, time, end]);
+  }, [previewing, time, end, controls]);
 
   useEffect(() => {
     if (canPlay && initialTime) {
       controls.seek(initialTime);
     }
-  }, [canPlay, initialTime]);
+  }, [canPlay, controls, initialTime]);
 
   const handlePreviewStart = () => {
     controls.seek(start!);

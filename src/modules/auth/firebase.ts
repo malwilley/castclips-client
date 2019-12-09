@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Store } from 'src/redux/types';
+import { Store } from 'redux/types';
 import { actions } from './redux/actions';
 import { UserData } from './types';
-import config from 'src/config';
+import config from 'config';
 
 const app = firebase.initializeApp({
   apiKey: config.firebase.apiKey,

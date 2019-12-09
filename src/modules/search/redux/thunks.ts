@@ -1,5 +1,5 @@
 import * as qs from 'querystringify';
-import { Thunk } from 'src/redux/types';
+import { Thunk } from 'redux/types';
 import { push } from 'connected-react-router';
 import { SearchType, SearchParams } from '../types';
 

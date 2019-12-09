@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'src/redux/types';
-import { SearchState, SearchParams, SearchType } from '../types';
-import { thunks } from '../redux';
-import HttpContent from 'src/components/HttpContent';
-import Header from 'src/modules/header';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from 'redux/types';
+import { SearchType } from '../types';
+import HttpContent from 'components/HttpContent';
 import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
 import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
-import LayoutContainer from 'src/components/LayoutContainer';
-import { LocalStorageKey } from 'src/types';
-import useLocalStorage from 'src/hooks/useLocalStorage';
+import { colors, fonts } from 'styles';
+import LayoutContainer from 'components/LayoutContainer';
+import { LocalStorageKey } from 'types';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { replace } from 'connected-react-router';
-import useChangeQueryParam from 'src/hooks/useChangeQueryParam';
+import useChangeQueryParam from 'hooks/useChangeQueryParam';
 import { actions } from '../redux/actions';
-import { search } from 'src/api/firebase';
-import { getAuthToken } from 'src/modules/auth/firebase';
+import { search } from 'api/firebase';
+import { getAuthToken } from 'modules/auth/firebase';
 import makeMapSearchResult from '../utils/mapSearchResult';
 import SearchPagination from './SearchPagination';
-import RoundedCorners from 'src/components/RoundedCorners';
 
 type SearchResultsPageProps = {
   query: string;
@@ -114,12 +111,12 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     if (type !== storedType) {
       setStoredType(type);
     }
-  }, [type]);
+  }, [changeQueryParam, setStoredType, storedType, type, typeFromUrl]);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
     fetchSearchResults({ dispatch, query, type, page });
-  }, [query, type, page]);
+  }, [query, type, page, dispatch]);
 
   return (
     <>

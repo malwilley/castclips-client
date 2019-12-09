@@ -1,5 +1,5 @@
 import { ActionWithPayload } from '../types';
-import { HttpRequest } from 'src/types';
+import { HttpRequest } from 'types';
 import { Reducer } from 'redux';
 
 const makeHttpReducer = <P extends HttpRequest<any>, A extends string = any>(

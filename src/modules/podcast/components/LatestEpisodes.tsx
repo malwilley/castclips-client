@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { PodcastEpisode, PodcastState } from '../types';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts } from 'styles';
 import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import formatPublishDate from 'src/utils/formatPublishDate';
-import TextSkeleton from 'src/components/TextSkeleton';
-import stripHtml from 'src/utils/stripHtml';
-import capitalizeFirstLetter from 'src/utils/capitalizeFirstLetter';
+import formatPublishDate from 'utils/formatPublishDate';
+import TextSkeleton from 'components/TextSkeleton';
+import stripHtml from 'utils/stripHtml';
+import capitalizeFirstLetter from 'utils/capitalizeFirstLetter';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunks } from '../redux';
-import Card from 'src/components/Card';
-import { AppState } from 'src/redux/types';
-import { KeyCode } from 'src/types';
-import SearchInput from 'src/components/SearchInput';
-import Button from 'src/components/Button';
+import Card from 'components/Card';
+import { AppState } from 'redux/types';
+import { KeyCode } from 'types';
+import SearchInput from 'components/SearchInput';
+import Button from 'components/Button';
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes'];
@@ -94,7 +94,7 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
   const sanitizedDescription = stripHtml(description);
   return (
     <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
-      <img className={styles.episodeRow.thumbnail} src={thumbnail} />
+      <img alt="Episode thumbnail" className={styles.episodeRow.thumbnail} src={thumbnail} />
       <div className={styles.episodeRow.titleDescriptionContainer}>
         <h4 className={styles.episodeRow.title}>{title}</h4>
         <p className={styles.episodeRow.description} title={sanitizedDescription}>

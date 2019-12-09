@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import useAudioControls from 'src/hooks/useAudioControls';
+import useAudioControls from 'hooks/useAudioControls';
 import Player from '.';
 
 type PlayerWithStateProps = {

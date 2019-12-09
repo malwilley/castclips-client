@@ -22,12 +22,24 @@ const styles = {
   }),
 };
 
-const HomePage = lazy(() => import('src/modules/home/components/HomePage'));
-const SearchResultsPage = lazy(() => import('src/modules/search/components/SearchResultsPage'));
-const SigninPage = lazy(() => import('src/modules/auth/components/SigninPage'));
-const PodcastPage = lazy(() => import('src/modules/podcast/components/PodcastPage'));
-const EpisodePage = lazy(() => import('src/modules/episode/components/EpisodePage'));
-const ClipPage = lazy(() => import('src/modules/clip/components/ClipPage'));
+const HomePage = lazy(() =>
+  import(/* webpackPrefetch: true */ 'modules/home/components/HomePage')
+);
+const SearchResultsPage = lazy(() =>
+  import(/* webpackPrefetch: true */ 'modules/search/components/SearchResultsPage')
+);
+const SigninPage = lazy(() =>
+  import(/* webpackPrefetch: true */ 'modules/auth/components/SigninPage')
+);
+const PodcastPage = lazy(() =>
+  import(/* webpackPrefetch: true */ 'modules/podcast/components/PodcastPage')
+);
+const EpisodePage = lazy(() =>
+  import(/* webpackPrefetch: true */ 'modules/episode/components/EpisodePage')
+);
+const ClipPage = lazy(() =>
+  import(/* webpackPrefetch: true */ 'modules/clip/components/ClipPage')
+);
 
 const App: React.FC = () => (
   <>

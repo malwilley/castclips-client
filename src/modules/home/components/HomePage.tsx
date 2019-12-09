@@ -1,12 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import { thunks } from '../redux';
 import TextPointer from './TextPointer';
 import HotClips from './HotClips';
-import RoundedCorners from 'src/components/RoundedCorners';
+import RoundedCorners from 'components/RoundedCorners';
 
 const styles = {
   gradientContainer: css({
@@ -62,7 +62,7 @@ const HomePage: React.FC = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(thunks.fetchHotClips(0));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

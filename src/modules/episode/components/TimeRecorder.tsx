@@ -1,8 +1,8 @@
 import { css } from 'emotion';
-import formatHrMinSec from 'src/utils/formatHrMinSec';
-import Button from 'src/components/Button';
+import formatHrMinSec from 'utils/formatHrMinSec';
+import Button from 'components/Button';
 import React, { useState, useEffect } from 'react';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts } from 'styles';
 import { addIndex, pipe, isNil, reverse, split, take, map, reduce } from 'ramda';
 
 type TimeRecorderProps = {

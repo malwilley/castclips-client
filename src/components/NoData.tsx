@@ -1,7 +1,7 @@
 import React from 'react';
 import EmoticonSadOutlineIcon from 'mdi-react/EmoticonSadOutlineIcon';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts } from 'styles';
 
 type NoDataProps = {
   icon?: React.ReactNode;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import Button from './Button';
-import useResizeObserver from 'src/hooks/useResizeObserver';
-import { colors, fonts, clickable } from 'src/styles';
+import useResizeObserver from 'hooks/useResizeObserver';
+import { colors, fonts, clickable } from 'styles';
 
 type TruncateContentProps = {
   className?: string;

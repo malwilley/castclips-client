@@ -1,7 +1,7 @@
 import PlusCircleOutlineIcon from 'mdi-react/PlusCircleOutlineIcon';
 import React from 'react';
-import { ButtonProps } from 'src/components/Button';
-import PrimaryButton from 'src/components/PrimaryButton';
+import { ButtonProps } from 'components/Button';
+import PrimaryButton from 'components/PrimaryButton';
 
 const ShareButton: React.SFC<ButtonProps> = ({ className, ...props }) => (
   <PrimaryButton {...props} className={className}>

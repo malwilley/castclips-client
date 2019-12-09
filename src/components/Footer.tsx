@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, fonts, clickable, breakpoints } from 'src/styles';
+import { colors, fonts, clickable, breakpoints } from 'styles';
 import LayoutContainer from './LayoutContainer';
-import Logo from 'src/icons/Logo';
-import ListennotesPng from 'src/icons/Listennotes.png';
-import ListennotesWebp from 'src/icons/Listennotes.webp';
-import Appbase from 'src/icons/Appbase';
+import Logo from 'icons/Logo';
+import ListennotesPng from 'icons/Listennotes.png';
+import ListennotesWebp from 'icons/Listennotes.webp';
+import Appbase from 'icons/Appbase';
 import AccessibleLabel from './AccessibleLabel';
 
 const styles = {
@@ -89,14 +89,24 @@ const Footer: React.FC = () => (
         </p>
       </div>
       <div className={styles.attributionContainer}>
-        <a className={styles.listennotes} href="https://listennotes.com" target="_blank">
+        <a
+          className={styles.listennotes}
+          href="https://listennotes.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <AccessibleLabel>Powered by Listen Notes</AccessibleLabel>
           <picture>
             <source type="image/webp" srcSet={ListennotesWebp} />
             <img alt="Listen Notes logo" src={ListennotesPng} />
           </picture>
         </a>
-        <a className={styles.appbase} href="https://appbase.io/" target="_blank">
+        <a
+          className={styles.appbase}
+          href="https://appbase.io/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <AccessibleLabel>Powered by Appbase</AccessibleLabel>
           <Appbase />
         </a>

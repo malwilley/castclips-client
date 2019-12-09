@@ -1,6 +1,6 @@
 import { ActionTypes } from './actions';
 import { combineReducers } from 'redux';
-import makeHttpReducer from 'src/redux/utils/setHttpStateReducer';
+import makeHttpReducer from 'redux/utils/setHttpStateReducer';
 import { EpisodeState } from '../types';
 
 const clips = makeHttpReducer<EpisodeState['clips']>(ActionTypes.SetClips);

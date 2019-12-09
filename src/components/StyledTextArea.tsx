@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 
 type StyledInputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
   className?: string;

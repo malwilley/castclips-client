@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button, { ButtonProps } from 'src/components/Button';
+import Button, { ButtonProps } from 'components/Button';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
 import ChevronUpIcon from 'mdi-react/ChevronUpIcon';
 

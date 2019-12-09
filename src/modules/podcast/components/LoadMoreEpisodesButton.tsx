@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { thunks } from '../redux';
 import { connect } from 'react-redux';
-import Button from 'src/components/Button';
+import Button from 'components/Button';
 import { PodcastState } from '../types';
-import Spinner from 'src/components/Spinner/Spinner';
+import Spinner from 'components/Spinner/Spinner';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 
 type LoadMoreEpisodesProps = {
   episodes: PodcastState['episodes'];

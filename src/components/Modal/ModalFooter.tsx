@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
 
 const styles = {
   main: css({

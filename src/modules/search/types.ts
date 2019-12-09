@@ -1,4 +1,4 @@
-import { HttpRequest } from 'src/types';
+import { HttpRequest } from 'types';
 
 export enum SearchType {
   Clips = 'clip',

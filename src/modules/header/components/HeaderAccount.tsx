@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import { connect } from 'react-redux';
-import { AuthState, UserLoggedIn } from 'src/modules/auth/types';
-import Button from 'src/components/Button';
-import firebase from 'src/modules/auth/firebase';
+import { AuthState, UserLoggedIn } from 'modules/auth/types';
+import Button from 'components/Button';
+import firebase from 'modules/auth/firebase';
 import Downshift from 'downshift';
-import { colors, fonts, boxShadow } from 'src/styles';
+import { colors, fonts, boxShadow } from 'styles';
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import { secondaryButtonStyles } from 'src/components/SecondaryButton';
+import { secondaryButtonStyles } from 'components/SecondaryButton';
 
 type HeaderAccountProps = {
   className?: string;
@@ -97,7 +97,7 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
         >
           <div className={styles.email}>
             {user.user.photoUrl ? (
-              <img className={styles.userPic} src={user.user.photoUrl} />
+              <img alt="User avatar" className={styles.userPic} src={user.user.photoUrl} />
             ) : (
               <div className={styles.userPicPlaceholder}>{user.user.email[0].toUpperCase()}</div>
             )}

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { thunks } from '../redux';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import { EpisodeState } from '../types';
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import EpisodeClipCard from './EpisodeClipCard';
 import { css } from 'emotion';
-import NoData from 'src/components/NoData';
+import NoData from 'components/NoData';
 
 type EpisodeClipsProps = {
   episodeId: string;

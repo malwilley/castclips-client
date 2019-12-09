@@ -1,9 +1,9 @@
 import React from 'react';
-import Background from 'src/components/Modal/Background';
+import Background from 'components/Modal/Background';
 import { css } from 'emotion';
-import ModalHeader, { ModalHeaderProps } from 'src/components/Modal/ModalHeader';
-import ModalFooter from 'src/components/Modal/ModalFooter';
-import { colors, boxShadow } from 'src/styles';
+import ModalHeader, { ModalHeaderProps } from 'components/Modal/ModalHeader';
+import ModalFooter from 'components/Modal/ModalFooter';
+import { colors, boxShadow } from 'styles';
 import { ButtonProps } from '../Button';
 import PrimaryButton from '../PrimaryButton';
 import SecondaryButton from '../SecondaryButton';

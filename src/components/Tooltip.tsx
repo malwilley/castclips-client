@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { css, keyframes } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { css } from 'emotion';
+import { colors, fonts } from 'styles';
 
 type TooltipProps = {
   className?: string;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { EpisodeState } from '../types';
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
-import formatPublishDate from 'src/utils/formatPublishDate';
-import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
-import formatMinutes from 'src/utils/formatMinutes';
-import Attribute from 'src/components/Attribute';
+import formatPublishDate from 'utils/formatPublishDate';
+import ParagraphSkeleton from 'components/ParagraphSkeleton';
+import formatMinutes from 'utils/formatMinutes';
+import Attribute from 'components/Attribute';
 
 type EpisodeInformationProps = {
   episodeMetadata: EpisodeState['metadata'];

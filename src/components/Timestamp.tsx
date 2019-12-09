@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { fonts, colors } from 'src/styles';
-import formatHrMinSec from 'src/utils/formatHrMinSec';
+import { fonts, colors } from 'styles';
+import formatHrMinSec from 'utils/formatHrMinSec';
 
 type TimestampProps = {
   className?: string;

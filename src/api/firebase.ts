@@ -7,13 +7,12 @@ import {
   GetClipsForPodcastResponse,
   PodcastMetadataResponse,
   EpisodeMetadataResponse,
-  PodcastEpisodeResponse,
   TypeaheadResponse,
   SearchResultsResponse,
   GetHotClipsResponse,
 } from './types';
-import { SearchType } from 'src/modules/search/types';
-import config from 'src/config';
+import { SearchType } from 'modules/search/types';
+import config from 'config';
 import { stringify } from 'querystringify';
 
 const host = config.firebase.apiHost;

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ButtonProps } from 'src/components/Button';
+import { ButtonProps } from 'components/Button';
 import PlayCircleIcon from 'mdi-react/PlayCircleIcon';
 import StopCircleIcon from 'mdi-react/StopCircleIcon';
-import SecondaryButton from 'src/components/SecondaryButton';
+import SecondaryButton from 'components/SecondaryButton';
 
 type PreviewButtonProps = ButtonProps & {
   previewing: boolean;

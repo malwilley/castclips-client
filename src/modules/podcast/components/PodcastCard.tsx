@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { HttpRequest } from 'src/types';
+import { HttpRequest } from 'types';
 import { PodcastMetadata } from '../types';
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import { css } from 'emotion';
-import { colors, boxShadow, fonts } from 'src/styles';
-import PageTitleFetching from 'src/components/PageTitleFetching';
+import { colors, boxShadow, fonts } from 'styles';
+import PageTitleFetching from 'components/PageTitleFetching';
 
 type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;
@@ -71,7 +71,7 @@ const PodcastDataFetching: React.FC = () => (
 
 const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ publisher, thumbnail, title }) => (
   <div className={styles.main}>
-    <img className={styles.thumbnail} src={thumbnail} />
+    <img alt="Podcast thumbnail" className={styles.thumbnail} src={thumbnail} />
     <div className={styles.infoContainer}>
       <div className={styles.heading}>
         <h1>{title}</h1>

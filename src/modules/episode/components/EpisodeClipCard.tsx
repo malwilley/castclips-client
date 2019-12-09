@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Card from 'src/components/Card';
+import Card from 'components/Card';
 import { css } from 'emotion';
-import { fonts, colors, coverContainer } from 'src/styles';
-import ClipCardAccent from 'src/components/ClipCardAccent';
-import { ClipMetadata } from 'src/modules/clip/types';
-import ClipCardAttributes from 'src/components/ClipCardAttributes';
-import TruncateContent from 'src/components/TruncateContent';
+import { fonts, colors, coverContainer } from 'styles';
+import ClipCardAccent from 'components/ClipCardAccent';
+import { ClipMetadata } from 'modules/clip/types';
+import ClipCardAttributes from 'components/ClipCardAttributes';
+import TruncateContent from 'components/TruncateContent';
 import { Link } from 'react-router-dom';
 
 type EpisodeClipCardProps = {
