@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Card from 'src/components/Card';
+import Card from 'components/Card';
 import { css } from 'emotion';
-import { colors, fonts, coverContainer } from 'src/styles';
-import { ClipMetadata } from 'src/modules/clip/types';
-import ClipCardAttributes from 'src/components/ClipCardAttributes';
-import ClipCardAccent from 'src/components/ClipCardAccent';
+import { colors, fonts, coverContainer } from 'styles';
+import { ClipMetadata } from 'modules/clip/types';
+import ClipCardAttributes from 'components/ClipCardAttributes';
+import ClipCardAccent from 'components/ClipCardAccent';
 import { Link } from 'react-router-dom';
 
 type PodcastClipCardProps = {

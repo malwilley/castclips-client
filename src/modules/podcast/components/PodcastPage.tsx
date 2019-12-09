@@ -1,22 +1,22 @@
 import * as React from 'react';
-import PodcastCard from 'src/modules/podcast/components/PodcastCard';
+import PodcastCard from 'modules/podcast/components/PodcastCard';
 import { thunks } from '../redux';
 import { connect } from 'react-redux';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import { PodcastState } from '../types';
-import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
-import SectionHeader from 'src/components/SectionHeader';
+import PageWithFeaturedContent from 'components/PageWithFeaturedContent';
+import SectionHeader from 'components/SectionHeader';
 import { css } from 'emotion';
 import LatestEpisodes from './LatestEpisodes';
 import PodcastClips from './PodcastClips';
-import HttpContent from 'src/components/HttpContent';
-import { colors, clickable, fonts } from 'src/styles';
-import PageTitleFetching from 'src/components/PageTitleFetching';
-import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
-import Attribute from 'src/components/Attribute';
+import HttpContent from 'components/HttpContent';
+import { colors, clickable, fonts } from 'styles';
+import PageTitleFetching from 'components/PageTitleFetching';
+import ParagraphSkeleton from 'components/ParagraphSkeleton';
+import Attribute from 'components/Attribute';
 import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon';
 import LinkIcon from 'mdi-react/LinkIcon';
-import sanitizeUrl from 'src/utils/sanitizeUrl';
+import sanitizeUrl from 'utils/sanitizeUrl';
 
 type PodcastPageProps = {
   id: string;

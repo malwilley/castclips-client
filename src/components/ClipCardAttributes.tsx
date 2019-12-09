@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ClipMetadata } from 'src/modules/clip/types';
+import { ClipMetadata } from 'modules/clip/types';
 import { css } from 'emotion';
-import { fonts } from 'src/styles';
+import { fonts } from 'styles';
 import HeartIcon from 'mdi-react/HeartIcon';
 import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import formatClipAge from 'src/utils/formatClipAge';
-import capitalizeFirstLetter from 'src/utils/capitalizeFirstLetter';
+import formatClipAge from 'utils/formatClipAge';
+import capitalizeFirstLetter from 'utils/capitalizeFirstLetter';
 import Timestamp from './Timestamp';
 import TextSkeleton from './TextSkeleton';
 

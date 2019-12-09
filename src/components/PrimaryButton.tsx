@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts } from 'styles';
 import Button, { ButtonProps } from './Button';
 
 type PrimaryButtonProps = ButtonProps;

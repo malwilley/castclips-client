@@ -2,12 +2,12 @@ import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 import firebaseApp from '../firebase';
-import LayoutContainer from 'src/components/LayoutContainer';
+import LayoutContainer from 'components/LayoutContainer';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
-import Card from 'src/components/Card';
-import zIndex from 'src/styles/zIndex';
-import RoundedCorners from 'src/components/RoundedCorners';
+import { colors } from 'styles';
+import Card from 'components/Card';
+import zIndex from 'styles/zIndex';
+import RoundedCorners from 'components/RoundedCorners';
 
 const styles = {
   authCenter: css({

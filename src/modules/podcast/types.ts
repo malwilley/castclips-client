@@ -1,5 +1,5 @@
-import { LazyLoadedData, HttpRequest } from 'src/types';
-import { PodcastMetadataResponse, PodcastEpisodeResponse } from 'src/api/types';
+import { LazyLoadedData, HttpRequest } from 'types';
+import { PodcastMetadataResponse, PodcastEpisodeResponse } from 'api/types';
 import { ClipMetadata } from '../clip/types';
 
 export type PodcastEpisode = Merge<

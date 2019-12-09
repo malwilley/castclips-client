@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts } from 'styles';
 
 type SectionHeaderProps = {
   className?: string;

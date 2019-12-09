@@ -1,9 +1,9 @@
 import React from 'react';
-import useChangeQueryParam from 'src/hooks/useChangeQueryParam';
+import useChangeQueryParam from 'hooks/useChangeQueryParam';
 import { push } from 'connected-react-router';
 import { css } from 'emotion';
-import PrimaryButton from 'src/components/PrimaryButton';
-import SecondaryButton from 'src/components/SecondaryButton';
+import PrimaryButton from 'components/PrimaryButton';
+import SecondaryButton from 'components/SecondaryButton';
 
 type SearchPaginationProps = {
   page: number;

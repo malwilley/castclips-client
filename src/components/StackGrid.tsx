@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import useResizeObserver from 'src/hooks/useResizeObserver';
+import useResizeObserver from 'hooks/useResizeObserver';
 import { css } from 'emotion';
 import { range } from 'ramda';
 

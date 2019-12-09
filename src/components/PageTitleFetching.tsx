@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 
 type PageTitleFetchingProps = {
   className?: string;

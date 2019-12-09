@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 
 type LogoProps = React.SVGProps<SVGSVGElement> & {
   color?: string;

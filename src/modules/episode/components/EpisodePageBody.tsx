@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { EpisodeState } from '../types';
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import { css } from 'emotion';
-import { colors, fonts, clickable } from 'src/styles';
-import SectionHeader from 'src/components/SectionHeader';
-import ParagraphSkeleton from 'src/components/ParagraphSkeleton';
+import { colors, fonts, clickable } from 'styles';
+import SectionHeader from 'components/SectionHeader';
+import ParagraphSkeleton from 'components/ParagraphSkeleton';
 import EpisodeClips from './EpisodeClips';
 import EpisodeInformation from './EpisodeInformation';
-import TruncateContent from 'src/components/TruncateContent';
+import TruncateContent from 'components/TruncateContent';
 
 type EpisodePageBodyProps = {
   episodeMetadata: EpisodeState['metadata'];

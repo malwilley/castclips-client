@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
-import zIndex from 'src/styles/zIndex';
+import { colors } from 'styles';
+import zIndex from 'styles/zIndex';
 import { pick } from 'ramda';
 import { animated, config, useTransition } from 'react-spring';
 

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors, clickable } from 'src/styles';
-import Button from 'src/components/Button';
+import { colors, clickable } from 'styles';
+import Button from 'components/Button';
 import HeartIcon from 'mdi-react/HeartIcon';
 import { useDispatch } from 'react-redux';
 import { thunks } from '../redux';
-import AccessibleLabel from 'src/components/AccessibleLabel';
+import AccessibleLabel from 'components/AccessibleLabel';
 
 type LikeButtonProps = {
   id: string;

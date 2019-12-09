@@ -1,8 +1,8 @@
 import * as React from 'react';
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import { PodcastState } from '../types';
 import { connect } from 'react-redux';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import PodcastClipCard from './PodcastClipCard';
 import { css } from 'emotion';
 import PodcastClipCardFetching from './PodcastClipCardFetching';

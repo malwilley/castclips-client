@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { fonts, colors } from 'src/styles';
+import { fonts, colors } from 'styles';
 
 type CharacterCounterProps = {
   className?: string;

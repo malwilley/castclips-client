@@ -2,7 +2,7 @@ import { Actions, ActionTypes } from './actions';
 import { PodcastState, PodcastEpisode } from '../types';
 import { combineReducers } from 'redux';
 import { propOr } from 'ramda';
-import makeHttpReducer from 'src/redux/utils/setHttpStateReducer';
+import makeHttpReducer from 'redux/utils/setHttpStateReducer';
 
 const clips = makeHttpReducer<PodcastState['clips']>(ActionTypes.SetClips);
 

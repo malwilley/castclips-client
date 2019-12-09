@@ -1,14 +1,14 @@
 import * as React from 'react';
-import SectionHeader from 'src/components/SectionHeader';
-import Card from 'src/components/Card';
+import SectionHeader from 'components/SectionHeader';
+import Card from 'components/Card';
 import { ClipMetadata } from '../types';
-import formatHrMinSec from 'src/utils/formatHrMinSec';
+import formatHrMinSec from 'utils/formatHrMinSec';
 import { css } from 'emotion';
-import { colors, fonts, clickable, coverContainer } from 'src/styles';
+import { colors, fonts, clickable, coverContainer } from 'styles';
 import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
-import formatPublishDate from 'src/utils/formatPublishDate';
-import ClipCardAccent from 'src/components/ClipCardAccent';
+import formatPublishDate from 'utils/formatPublishDate';
+import ClipCardAccent from 'components/ClipCardAccent';
 import { Link } from 'react-router-dom';
 import { stringify } from 'querystringify';
 

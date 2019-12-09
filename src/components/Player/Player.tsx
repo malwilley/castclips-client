@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { css } from 'emotion';
 import Audio from '../Audio';
-import { AudioControlsResult } from 'src/hooks/useAudioControls';
-import { colors, fonts, breakpoints } from 'src/styles';
+import { AudioControlsResult } from 'hooks/useAudioControls';
+import { colors, fonts, breakpoints } from 'styles';
 import PlayerControls from './PlayerControls';
-import formatHrMinSec from 'src/utils/formatHrMinSec';
+import formatHrMinSec from 'utils/formatHrMinSec';
 import { includes, pathOr } from 'ramda';
-import { KeyCode } from 'src/types';
+import { KeyCode } from 'types';
 import AccessibleLabel from '../AccessibleLabel';
 
 type PlayerProps = AudioControlsResult & {

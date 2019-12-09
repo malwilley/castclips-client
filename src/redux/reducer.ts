@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import auth from 'src/modules/auth/redux';
-import clip from 'src/modules/clip/redux';
-import episode from 'src/modules/episode/redux';
-import podcast from 'src/modules/podcast/redux';
-import home from 'src/modules/home/redux';
-import search from 'src/modules/search/redux';
+import auth from 'modules/auth/redux';
+import clip from 'modules/clip/redux';
+import episode from 'modules/episode/redux';
+import podcast from 'modules/podcast/redux';
+import home from 'modules/home/redux';
+import search from 'modules/search/redux';
 import { connectRouter } from 'connected-react-router';
 import history from './history';
 

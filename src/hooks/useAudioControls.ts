@@ -17,7 +17,7 @@ export type AudioControls = {
 
 export type AudioControlsResult = { state: AudioState; controls: AudioControls };
 
-// https://github.com/streamich/react-use/blob/master/src/util/createHTMLMediaHook.ts
+// https://github.com/streamich/react-use/blob/master/util/createHTMLMediaHook.ts
 
 const useAudioControls = (
   ref: React.RefObject<HTMLAudioElement>

@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { ClipMetadata } from 'src/modules/clip/types';
-import Card from 'src/components/Card';
+import { ClipMetadata } from 'modules/clip/types';
+import Card from 'components/Card';
 import { css } from 'emotion';
-import { colors, coverContainer } from 'src/styles';
+import { colors, coverContainer } from 'styles';
 import { range } from 'ramda';
-import ClipCardAccent from 'src/components/ClipCardAccent';
-import fonts from 'src/styles/fonts';
-import ClipCardAttributes, { ClipCardAttributesSkeleton } from 'src/components/ClipCardAttributes';
-import TextSkeleton from 'src/components/TextSkeleton';
+import ClipCardAccent from 'components/ClipCardAccent';
+import fonts from 'styles/fonts';
+import ClipCardAttributes, { ClipCardAttributesSkeleton } from 'components/ClipCardAttributes';
+import TextSkeleton from 'components/TextSkeleton';
 import { Link } from 'react-router-dom';
-import TruncateContent from 'src/components/TruncateContent';
+import TruncateContent from 'components/TruncateContent';
 
 type HotClipProps = {
   clip: ClipMetadata;

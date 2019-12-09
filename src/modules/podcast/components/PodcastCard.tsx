@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { HttpRequest } from 'src/types';
+import { HttpRequest } from 'types';
 import { PodcastMetadata } from '../types';
-import HttpContent from 'src/components/HttpContent';
+import HttpContent from 'components/HttpContent';
 import { css } from 'emotion';
-import { colors, boxShadow, fonts } from 'src/styles';
-import PageTitleFetching from 'src/components/PageTitleFetching';
+import { colors, boxShadow, fonts } from 'styles';
+import PageTitleFetching from 'components/PageTitleFetching';
 
 type PodcastCardProps = {
   podcast: HttpRequest<PodcastMetadata>;

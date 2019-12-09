@@ -1,7 +1,7 @@
-import boxShadow from 'src/styles/boxShadow';
-import breakpoints from 'src/styles/breakpoints';
-import colors from 'src/styles/colors';
-import fonts from 'src/styles/fonts';
+import boxShadow from 'styles/boxShadow';
+import breakpoints from 'styles/breakpoints';
+import colors from 'styles/colors';
+import fonts from 'styles/fonts';
 import { CSSObject } from 'create-emotion';
 import zIndex from './zIndex';
 

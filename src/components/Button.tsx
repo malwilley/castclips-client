@@ -1,6 +1,6 @@
 import { css } from 'emotion';
 import * as React from 'react';
-import { fonts } from 'src/styles';
+import { fonts } from 'styles';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   active?: boolean;

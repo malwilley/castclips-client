@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from 'src/components/Card';
+import Card from 'components/Card';
 import { css } from 'emotion';
-import { colors, coverContainer, breakpoints, fonts } from 'src/styles';
+import { colors, coverContainer, breakpoints, fonts } from 'styles';
 import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
-import TextSkeleton from 'src/components/TextSkeleton';
+import TextSkeleton from 'components/TextSkeleton';
 import { Link } from 'react-router-dom';
 
 type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;

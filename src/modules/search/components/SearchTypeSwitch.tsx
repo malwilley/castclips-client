@@ -1,10 +1,10 @@
 import React from 'react';
 import { SearchType } from '../types';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
-import Button from 'src/components/Button';
-import AccessibleLabel from 'src/components/AccessibleLabel';
-import useChangeQueryParam from 'src/hooks/useChangeQueryParam';
+import { colors, fonts } from 'styles';
+import Button from 'components/Button';
+import AccessibleLabel from 'components/AccessibleLabel';
+import useChangeQueryParam from 'hooks/useChangeQueryParam';
 
 type SearchTypeSwitchProps = {
   className?: string;

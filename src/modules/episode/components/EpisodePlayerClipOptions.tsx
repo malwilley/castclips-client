@@ -1,9 +1,9 @@
 import React from 'react';
-import Show from 'src/components/Show';
+import Show from 'components/Show';
 import ClipPreview from './ClipPreview';
 import TimeRecorder from './TimeRecorder';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 import { isNil } from 'ramda';
 import PreviewButton from './PreviewButton';
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon';
@@ -11,7 +11,7 @@ import CreateClipModal from './CreateClipModal';
 import ShareButton from './ShareButton';
 import { animated, useSpring } from 'react-spring';
 import ShowHideClipOptions from './ShowHideClipOptions';
-import useResizeObserver from 'src/hooks/useResizeObserver';
+import useResizeObserver from 'hooks/useResizeObserver';
 
 type EpisodePlayerClipOptionsProps = {
   start: Maybe<number>;

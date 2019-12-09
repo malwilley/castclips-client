@@ -1,4 +1,4 @@
-import { HttpRequest } from 'src/types';
+import { HttpRequest } from 'types';
 
 export type ClipMetadata = {
   audio: string;

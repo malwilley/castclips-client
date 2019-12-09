@@ -23,22 +23,22 @@ const styles = {
 };
 
 const HomePage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'src/modules/home/components/HomePage')
+  import(/* webpackPrefetch: true */ 'modules/home/components/HomePage')
 );
 const SearchResultsPage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'src/modules/search/components/SearchResultsPage')
+  import(/* webpackPrefetch: true */ 'modules/search/components/SearchResultsPage')
 );
 const SigninPage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'src/modules/auth/components/SigninPage')
+  import(/* webpackPrefetch: true */ 'modules/auth/components/SigninPage')
 );
 const PodcastPage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'src/modules/podcast/components/PodcastPage')
+  import(/* webpackPrefetch: true */ 'modules/podcast/components/PodcastPage')
 );
 const EpisodePage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'src/modules/episode/components/EpisodePage')
+  import(/* webpackPrefetch: true */ 'modules/episode/components/EpisodePage')
 );
 const ClipPage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'src/modules/clip/components/ClipPage')
+  import(/* webpackPrefetch: true */ 'modules/clip/components/ClipPage')
 );
 
 const App: React.FC = () => (

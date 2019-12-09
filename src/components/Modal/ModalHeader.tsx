@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Button from 'src/components/Button';
+import Button from 'components/Button';
 import CloseIcon from 'mdi-react/CloseIcon';
 import { css } from 'emotion';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 import AccessibleLabel from '../AccessibleLabel';
 
 export type ModalHeaderProps = {

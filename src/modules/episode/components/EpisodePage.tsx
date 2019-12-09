@@ -1,17 +1,17 @@
 import * as React from 'react';
-import HttpContent from 'src/components/HttpContent';
-import EpisodeCard from 'src/modules/episode/components/EpisodeCard';
+import HttpContent from 'components/HttpContent';
+import EpisodeCard from 'modules/episode/components/EpisodeCard';
 import { EpisodeState } from '../types';
 import { connect } from 'react-redux';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import { thunks } from '../redux';
 import { css } from 'emotion';
-import { colors, fonts } from 'src/styles';
-import SectionHeader from 'src/components/SectionHeader';
-import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
-import PageTitleFetching from 'src/components/PageTitleFetching';
+import { colors, fonts } from 'styles';
+import SectionHeader from 'components/SectionHeader';
+import PageWithFeaturedContent from 'components/PageWithFeaturedContent';
+import PageTitleFetching from 'components/PageTitleFetching';
 import EpisodePageBody from './EpisodePageBody';
-import PodcastLink from 'src/components/PodcastLink';
+import PodcastLink from 'components/PodcastLink';
 import { RouteComponentProps } from 'react-router';
 import { parse } from 'querystringify';
 

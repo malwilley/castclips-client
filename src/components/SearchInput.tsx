@@ -3,7 +3,7 @@ import SearchIcon from 'mdi-react/SearchIcon';
 import { css } from 'emotion';
 import StyledInput from './StyledInput';
 import { InputProps } from './Input';
-import { colors } from 'src/styles';
+import { colors } from 'styles';
 
 type SearchInputProps = InputProps;
 

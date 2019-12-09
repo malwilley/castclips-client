@@ -1,17 +1,17 @@
 import * as React from 'react';
 import ScissorsIcon from 'mdi-react/ScissorsIcon';
-import Modal from 'src/components/Modal';
-import StyledInput, { StyledInputLabel } from 'src/components/StyledInput';
+import Modal from 'components/Modal';
+import StyledInput, { StyledInputLabel } from 'components/StyledInput';
 import { css } from 'emotion';
-import Asterisk from 'src/components/Asterisk';
+import Asterisk from 'components/Asterisk';
 import { connect } from 'react-redux';
 import { thunks } from '../redux';
-import { AppState } from 'src/redux/types';
+import { AppState } from 'redux/types';
 import { EpisodeState } from '../types';
-import StyledTextArea from 'src/components/StyledTextArea';
+import StyledTextArea from 'components/StyledTextArea';
 import pick from 'ramda/es/pick';
-import { AddClipPayload } from 'src/api/types';
-import CharacterCounter from 'src/components/CharacterCounter';
+import { AddClipPayload } from 'api/types';
+import CharacterCounter from 'components/CharacterCounter';
 
 type ShareModalProps = {
   start: number;

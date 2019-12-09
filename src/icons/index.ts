@@ -1,4 +1,4 @@
-import Logo from 'src/icons/Logo';
-import Spinner from 'src/icons/Spinner';
+import Logo from 'icons/Logo';
+import Spinner from 'icons/Spinner';
 
 export { Logo, Spinner };

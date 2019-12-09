@@ -1,12 +1,12 @@
-import { Thunk } from 'src/redux/types';
+import { Thunk } from 'redux/types';
 import { actions } from './actions';
 import { path } from 'ramda';
 import mapApiEpisode from '../utils/mapApiEpisode';
-import { addClip, getClipsForEpisode, getEpisodeData } from 'src/api/firebase';
+import { addClip, getClipsForEpisode, getEpisodeData } from 'api/firebase';
 import { push } from 'connected-react-router';
-import { getAuthToken } from 'src/modules/auth/firebase';
-import { AddClipPayload } from 'src/api/types';
-import mapClipResponse from 'src/modules/clip/utils/mapClipResponse';
+import { getAuthToken } from 'modules/auth/firebase';
+import { AddClipPayload } from 'api/types';
+import mapClipResponse from 'modules/clip/utils/mapClipResponse';
 
 const fetchClips: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   // todo: wtf is this

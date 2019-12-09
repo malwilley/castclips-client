@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { colors, boxShadow, clickable } from 'src/styles';
-import zIndex from 'src/styles/zIndex';
+import { colors, boxShadow, clickable } from 'styles';
+import zIndex from 'styles/zIndex';
 
 type CardProps = {
   className?: string;

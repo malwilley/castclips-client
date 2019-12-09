@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { css } from 'emotion';
 import Button from './Button';
-import { colors, fonts } from 'src/styles';
+import { colors, fonts } from 'styles';
 import ContentCopyIcon from 'mdi-react/ContentCopyIcon';
 import AccessibleLabel from './AccessibleLabel';
 
