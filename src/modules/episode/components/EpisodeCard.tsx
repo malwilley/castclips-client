@@ -46,13 +46,13 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
       controls.pause();
       setPreviewing(false);
     }
-  }, [previewing, time, end]);
+  }, [previewing, time, end, controls]);
 
   useEffect(() => {
     if (canPlay && initialTime) {
       controls.seek(initialTime);
     }
-  }, [canPlay, initialTime]);
+  }, [canPlay, controls, initialTime]);
 
   const handlePreviewStart = () => {
     controls.seek(start!);

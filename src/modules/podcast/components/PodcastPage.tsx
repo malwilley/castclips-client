@@ -101,7 +101,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
     window.scrollTo(0, 0);
     fetchPodcastMetadata(id);
     fetchClipsForPodcast(id);
-  }, [id]);
+  }, [fetchClipsForPodcast, fetchPodcastMetadata, id]);
 
   return (
     <PageWithFeaturedContent
@@ -180,7 +180,4 @@ const mapStateToProps = (state: AppState) => ({
   podcastMetadata: state.podcast.metadata,
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PodcastPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PodcastPage);

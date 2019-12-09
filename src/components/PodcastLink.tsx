@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from 'emotion';
-import { clickable } from 'src/styles';
 import { Link } from 'react-router-dom';
 
 type PodcastLinkProps = {
@@ -34,7 +33,7 @@ const styles = {
 
 const PodcastLink: React.FC<PodcastLinkProps> = ({ id, thumbnail, title }) => (
   <Link className={styles.main} to={`/podcast/${id}`}>
-    <img className={styles.thumbnail} src={thumbnail} />
+    <img alt="Podcast thumbnail" className={styles.thumbnail} src={thumbnail} />
     {title}
   </Link>
 );

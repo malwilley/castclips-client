@@ -1,11 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { SearchType } from '../types';
 import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 import Button from 'src/components/Button';
 import AccessibleLabel from 'src/components/AccessibleLabel';
-import useLocalStorage from 'src/hooks/useLocalStorage';
-import { LocalStorageKey } from 'src/types';
 import useChangeQueryParam from 'src/hooks/useChangeQueryParam';
 
 type SearchTypeSwitchProps = {

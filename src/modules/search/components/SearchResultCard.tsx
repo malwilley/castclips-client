@@ -121,7 +121,7 @@ const SearchResultCardFetching: React.FC = () => (
 
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
   <Card className={styles.main} hover>
-    <img className={styles.thumbnail} src={props.thumbnail} />
+    <img alt="Thumbnail" className={styles.thumbnail} src={props.thumbnail} />
     <Link className={css(coverContainer)} to={`/${props.type}/${props.id}`}>
       <h3 className={styles.title}>{props.title}</h3>
     </Link>

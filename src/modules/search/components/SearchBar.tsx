@@ -72,7 +72,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
     if (canSearch) {
       dispatch(push(`/search?${stringify({ q: text })}`));
     }
-  }, [dispatch, push, text]);
+  }, [canSearch, dispatch, text]);
 
   return (
     <div className={css(styles.main, className)}>

@@ -62,7 +62,7 @@ const HomePage: React.FC = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(thunks.fetchHotClips(0));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

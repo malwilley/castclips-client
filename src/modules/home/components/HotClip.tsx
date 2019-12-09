@@ -112,7 +112,7 @@ const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
       length={clip.episode.audioLength}
     />
     <div className={styles.podEpSection.container}>
-      <img className={styles.podEpSection.thumbnail} src={clip.podcast.thumbnail} />
+      <img alt="Episode thumbnail" className={styles.podEpSection.thumbnail} src={clip.podcast.thumbnail} />
       <div className={styles.podEpSection.titlesContainer}>
         <div className={styles.podEpSection.podTitle}>{clip.podcast.title}</div>
         <div className={styles.podEpSection.epTitle}>{clip.episode.title}</div>

@@ -94,7 +94,7 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
   const sanitizedDescription = stripHtml(description);
   return (
     <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
-      <img className={styles.episodeRow.thumbnail} src={thumbnail} />
+      <img alt="Episode thumbnail" className={styles.episodeRow.thumbnail} src={thumbnail} />
       <div className={styles.episodeRow.titleDescriptionContainer}>
         <h4 className={styles.episodeRow.title}>{title}</h4>
         <p className={styles.episodeRow.description} title={sanitizedDescription}>

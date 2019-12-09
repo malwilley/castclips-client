@@ -97,7 +97,7 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
         >
           <div className={styles.email}>
             {user.user.photoUrl ? (
-              <img className={styles.userPic} src={user.user.photoUrl} />
+              <img alt="User avatar" className={styles.userPic} src={user.user.photoUrl} />
             ) : (
               <div className={styles.userPicPlaceholder}>{user.user.email[0].toUpperCase()}</div>
             )}

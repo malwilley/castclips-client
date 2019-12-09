@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'src/redux/types';
-import { SearchState, SearchParams, SearchType } from '../types';
-import { thunks } from '../redux';
+import { SearchType } from '../types';
 import HttpContent from 'src/components/HttpContent';
-import Header from 'src/modules/header';
 import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
 import SearchTypeSwitch from './SearchTypeSwitch';
 import { css } from 'emotion';
@@ -19,7 +17,6 @@ import { search } from 'src/api/firebase';
 import { getAuthToken } from 'src/modules/auth/firebase';
 import makeMapSearchResult from '../utils/mapSearchResult';
 import SearchPagination from './SearchPagination';
-import RoundedCorners from 'src/components/RoundedCorners';
 
 type SearchResultsPageProps = {
   query: string;
@@ -114,12 +111,12 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     if (type !== storedType) {
       setStoredType(type);
     }
-  }, [type]);
+  }, [changeQueryParam, setStoredType, storedType, type, typeFromUrl]);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
     fetchSearchResults({ dispatch, query, type, page });
-  }, [query, type, page]);
+  }, [query, type, page, dispatch]);
 
   return (
     <>

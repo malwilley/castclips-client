@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { css, keyframes } from 'emotion';
+import { css } from 'emotion';
 import { colors, fonts } from 'src/styles';
 
 type TooltipProps = {

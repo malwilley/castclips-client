@@ -6,6 +6,7 @@ type AppConfig = {
   };
 };
 
+/*
 const local: AppConfig = {
   firebase: {
     apiHost: 'http://localhost:5000/castclips-dev/us-central1/api',
@@ -13,6 +14,7 @@ const local: AppConfig = {
     apiKey: 'AIzaSyBtA0m2pgSQ16SOVXdAexWD5K_hqXWa1b0',
   },
 };
+*/
 
 const development: AppConfig = {
   firebase: {

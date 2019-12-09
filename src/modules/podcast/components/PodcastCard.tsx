@@ -71,7 +71,7 @@ const PodcastDataFetching: React.FC = () => (
 
 const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ publisher, thumbnail, title }) => (
   <div className={styles.main}>
-    <img className={styles.thumbnail} src={thumbnail} />
+    <img alt="Podcast thumbnail" className={styles.thumbnail} src={thumbnail} />
     <div className={styles.infoContainer}>
       <div className={styles.heading}>
         <h1>{title}</h1>

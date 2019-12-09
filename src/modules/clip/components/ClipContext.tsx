@@ -94,7 +94,7 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
     <Card className={styles.card} hover>
       <ClipCardAccent end={clip.end} length={clip.episode.audioLength} start={clip.start} />
       <div className={styles.podcastContainer}>
-        <img className={styles.thumbnail} src={clip.podcast.thumbnail} />
+        <img alt="Podcast thumbnail" className={styles.thumbnail} src={clip.podcast.thumbnail} />
         <div className={styles.podcastTextContainer}>
           <div className={styles.episodeTags}>
             <div className={styles.textIcon}>

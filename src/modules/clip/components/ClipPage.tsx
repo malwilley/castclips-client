@@ -9,7 +9,7 @@ import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import SectionHeader from 'src/components/SectionHeader';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
-import { colors, clickable, fonts } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import PageTitleFetching from 'src/components/PageTitleFetching';
 import ClipPageBody from './ClipPageBody';
 import PodcastLink from 'src/components/PodcastLink';
@@ -55,7 +55,7 @@ const ClipPage: React.FC<ClipPageConnectedProps> = ({
   React.useEffect(() => {
     window.scrollTo(0, 0);
     fetchClip(id);
-  }, [id]);
+  }, [fetchClip, id]);
 
   return (
     <PageWithFeaturedContent
@@ -102,7 +102,4 @@ const mapDispatchToProps = {
   unlikeClip: thunks.unlikeClip,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClipPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ClipPage);

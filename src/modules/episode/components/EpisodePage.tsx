@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { AppState } from 'src/redux/types';
 import { thunks } from '../redux';
 import { css } from 'emotion';
-import { colors, clickable, fonts } from 'src/styles';
+import { colors, fonts } from 'src/styles';
 import SectionHeader from 'src/components/SectionHeader';
 import PageWithFeaturedContent from 'src/components/PageWithFeaturedContent';
 import PageTitleFetching from 'src/components/PageTitleFetching';
@@ -71,7 +71,7 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   React.useEffect(() => {
     window.scrollTo(0, 0);
     fetchEpisodeMetadata(id);
-  }, [id]);
+  }, [fetchEpisodeMetadata, id]);
 
   return (
     <PageWithFeaturedContent
@@ -108,7 +108,4 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = { fetchEpisodeMetadata: thunks.fetchEpisodeMetadata };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EpisodePage);
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodePage);

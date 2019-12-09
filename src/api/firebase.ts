@@ -7,7 +7,6 @@ import {
   GetClipsForPodcastResponse,
   PodcastMetadataResponse,
   EpisodeMetadataResponse,
-  PodcastEpisodeResponse,
   TypeaheadResponse,
   SearchResultsResponse,
   GetHotClipsResponse,

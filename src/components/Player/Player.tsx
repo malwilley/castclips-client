@@ -102,13 +102,13 @@ const Player: React.FC<PlayerProps> = ({
     } else {
       controls.pause();
     }
-  }, [isPlaying, canPlay]);
+  }, [isPlaying, canPlay, controls]);
 
   useEffect(() => {
     if (time >= (end || duration)) {
       controls.pause();
     }
-  }, [time, end, duration]);
+  }, [time, end, duration, controls]);
 
   useEffect(() => {
     const handleKeyboardControls = (e: KeyboardEvent) => {
@@ -145,7 +145,7 @@ const Player: React.FC<PlayerProps> = ({
     return () => {
       window.removeEventListener('keydown', handleKeyboardControls);
     };
-  }, [canPlay, captureKeyboardInput, togglePlayback, controls.seekRelative]);
+  }, [canPlay, captureKeyboardInput, togglePlayback, controls.seekRelative, controls]);
 
   return (
     <div>

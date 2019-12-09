@@ -33,7 +33,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ id, hasLiked, numLikes }) => {
 
   const onClick = React.useCallback(
     () => (hasLiked ? dispatch(thunks.unlikeClip(id)) : dispatch(thunks.likeClip(id))),
-    [hasLiked, id]
+    [dispatch, hasLiked, id]
   );
 
   return (
