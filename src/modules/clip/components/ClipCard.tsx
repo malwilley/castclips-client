@@ -16,9 +16,6 @@ import ContinueListening from './ContinueListening';
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>;
-  id: string;
-  likeClip: (id: string) => void;
-  unlikeClip: (id: string) => void;
 };
 
 const styles = {

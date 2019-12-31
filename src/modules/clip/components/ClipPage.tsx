@@ -1,10 +1,8 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import HttpContent from 'components/HttpContent';
 import ClipCard from 'modules/clip/components/ClipCard';
-import { connect } from 'react-redux';
 import { AppState } from 'redux/types';
 import { thunks } from '../redux';
-import { ClipState } from '../types';
 import PageWithFeaturedContent from 'components/PageWithFeaturedContent';
 import SectionHeader from 'components/SectionHeader';
 import { Link } from 'react-router-dom';
@@ -13,16 +11,11 @@ import { colors, fonts } from 'styles';
 import PageTitleFetching from 'components/PageTitleFetching';
 import ClipPageBody from './ClipPageBody';
 import PodcastLink from 'components/PodcastLink';
+import { useSelector } from 'react-redux';
+import useThunkDispatch from 'hooks/useThunkDispatch';
 
 type ClipPageProps = {
   id: string;
-};
-
-type ClipPageConnectedProps = ClipPageProps & {
-  clipMetadata: ClipState['metadata'];
-  fetchClip: (id: string) => void;
-  likeClip: (id: string) => void;
-  unlikeClip: (id: string) => void;
 };
 
 const styles = {
@@ -45,24 +38,19 @@ const styles = {
   }),
 };
 
-const ClipPage: React.FC<ClipPageConnectedProps> = ({
-  clipMetadata,
-  fetchClip,
-  id,
-  likeClip,
-  unlikeClip,
-}) => {
-  React.useEffect(() => {
+const ClipPage: React.FC<ClipPageProps> = ({ id }) => {
+  const thunkDispatch = useThunkDispatch();
+  const clipMetadata = useSelector((state: AppState) => state.clip.metadata);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
-    fetchClip(id);
-  }, [fetchClip, id]);
+    thunkDispatch(thunks.fetchClip(id));
+  }, [id, thunkDispatch]);
 
   return (
     <PageWithFeaturedContent
       bodyContent={<ClipPageBody clipId={id} clipMetadata={clipMetadata} />}
-      featuredContent={
-        <ClipCard clip={clipMetadata} id={id} likeClip={likeClip} unlikeClip={unlikeClip} />
-      }
+      featuredContent={<ClipCard clip={clipMetadata} />}
       titleContent={
         <HttpContent
           request={clipMetadata}
@@ -92,14 +80,4 @@ const ClipPage: React.FC<ClipPageConnectedProps> = ({
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  clipMetadata: state.clip.metadata,
-});
-
-const mapDispatchToProps = {
-  fetchClip: thunks.fetchClip,
-  likeClip: thunks.likeClip,
-  unlikeClip: thunks.unlikeClip,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ClipPage);
+export default ClipPage;
