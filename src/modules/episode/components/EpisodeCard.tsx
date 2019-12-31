@@ -33,7 +33,7 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
   const audioStateControls = useAudioControls(ref);
   const {
     state: { canPlay, duration, time },
-    controls,
+    controls: { seek, pause, play },
   } = audioStateControls;
   const [start, setStart] = useState<Maybe<number>>(null);
   const [end, setEnd] = useState<Maybe<number>>(null);
@@ -42,26 +42,26 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
 
   useEffect(() => {
     if (previewing && time >= end!) {
-      controls.seek(end!);
-      controls.pause();
+      seek(end!);
+      pause();
       setPreviewing(false);
     }
-  }, [previewing, time, end, controls]);
+  }, [previewing, time, end, seek, pause]);
 
   useEffect(() => {
     if (canPlay && initialTime) {
-      controls.seek(initialTime);
+      seek(initialTime);
     }
-  }, [canPlay, controls, initialTime]);
+  }, [canPlay, initialTime, seek]);
 
   const handlePreviewStart = () => {
-    controls.seek(start!);
-    controls.play();
+    seek(start!);
+    play();
     setPreviewing(true);
   };
 
   const handlePreviewStop = () => {
-    controls.pause();
+    pause();
     setPreviewing(false);
   };
 
