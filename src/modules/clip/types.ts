@@ -20,6 +20,7 @@ export type ClipMetadata = {
   start: number;
   title: string;
   userHasLiked: boolean;
+  userId: string;
   views: number;
 };
 

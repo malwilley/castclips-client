@@ -96,10 +96,10 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
           onClick={() => toggleMenu()}
         >
           <div className={styles.email}>
-            {user.user.photoUrl ? (
-              <img alt="User avatar" className={styles.userPic} src={user.user.photoUrl} />
+            {user.data.photoUrl ? (
+              <img alt="User avatar" className={styles.userPic} src={user.data.photoUrl} />
             ) : (
-              <div className={styles.userPicPlaceholder}>{user.user.email[0].toUpperCase()}</div>
+              <div className={styles.userPicPlaceholder}>{user.data.email[0].toUpperCase()}</div>
             )}
             <MenuDownIcon className={styles.menuDown} size={24} />
           </div>

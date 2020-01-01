@@ -25,7 +25,7 @@ const CharacterCounter: React.FC<CharacterCounterProps> = ({ className, max, tex
       className={css(styles.main, numChars > max && styles.overLimit, className)}
       title={`Character limit: ${numChars}/${max}`}
     >
-      {numChars}/{max}
+      {numChars} / {max}
     </div>
   );
 };

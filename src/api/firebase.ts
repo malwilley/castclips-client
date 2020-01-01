@@ -53,6 +53,28 @@ export const addClip = async (clip: AddClipPayload, token: string) => {
   return result;
 };
 
+export const editClip = async ({
+  clipId,
+  data,
+  token,
+}: {
+  clipId: string;
+  token: string;
+  data: { title: string; description: string; start: number; end: number };
+}) => {
+  await fetchFirebase(`/clip/${clipId}`, token, {
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'PATCH',
+  });
+};
+
+export const deleteClip = async ({ clipId, token }: { clipId: string; token: string }) => {
+  await fetchFirebase(`/clip/${clipId}`, token, { method: 'DELETE' });
+};
+
 export const likeClip = async (clipId: string, token: string) => {
   await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'POST' });
 };
