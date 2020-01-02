@@ -7,11 +7,13 @@ import {
   unlikeClip as unlikeClipApi,
   likeClip as likeClipApi,
   editClip as editClipApi,
+  deleteClip as deleteClipApi,
 } from 'api/firebase';
 import mapClipResponse from '../utils/mapClipResponse';
 import { getAuthToken } from 'modules/auth/firebase';
 import { ClipMetadata } from '../types';
 import { getClipData } from '../selectors';
+import { push } from 'connected-react-router';
 
 const fetchClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   const currentlyLoadedClip = path(['clip', 'metadata', 'data', 'id'], getState());
@@ -68,6 +70,26 @@ const editClip: Thunk<
   }
 };
 
+const deleteClip: Thunk<string, Promise<void>> = clipId => async (dispatch, getState) => {
+  const currentlyLoadedClip = getClipData(getState());
+
+  if (!currentlyLoadedClip) {
+    return;
+  }
+
+  dispatch(modalActions.modalSend());
+
+  try {
+    const token = await getAuthToken();
+    await deleteClipApi({ clipId, token });
+    dispatch(push(`/episode/${currentlyLoadedClip.episode.id}`));
+  } catch (e) {
+    console.log(e);
+    dispatch(modalActions.modalError('Failed to delete clip.'));
+    // todo: show error notification
+  }
+};
+
 const likeClip: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
   dispatch(actions.setLikeState(true));
 
@@ -96,6 +118,7 @@ const unlikeClip: Thunk<string, Promise<void>> = id => async (dispatch, getState
 
 export default {
   editClip,
+  deleteClip,
   fetchClip,
   likeClip,
   unlikeClip,
