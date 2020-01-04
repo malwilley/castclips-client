@@ -1,9 +1,10 @@
 import { css } from 'emotion';
 import formatHrMinSec from 'utils/formatHrMinSec';
+import parseHrMinSec from 'utils/parseHrMinSec';
 import Button from 'components/Button';
 import React, { useState, useEffect } from 'react';
 import { colors, fonts } from 'styles';
-import { addIndex, pipe, isNil, reverse, split, take, map, reduce } from 'ramda';
+import { isNil } from 'ramda';
 
 type TimeRecorderProps = {
   className?: string;
@@ -78,17 +79,6 @@ const makeAdjustTimeHandler = ({
   handleRecordClick(newTime);
 };
 
-const parseInput = pipe<string, string[], string[], string[], number[], number>(
-  split(':'),
-  reverse,
-  take(3),
-  map((str: string) => Number(str) || 0),
-  addIndex<number, number>(reduce)(
-    (seconds, next, index) => seconds + next * Math.pow(60, index),
-    0
-  )
-);
-
 const TimeRecorder: React.FC<TimeRecorderProps> = ({
   className,
   currentTime,
@@ -130,7 +120,7 @@ const TimeRecorder: React.FC<TimeRecorderProps> = ({
           value={value}
           onChange={e => setValue(e.target.value)}
           onBlur={() => {
-            handleRecordClick(parseInput(value));
+            handleRecordClick(parseHrMinSec(value));
           }}
           placeholder={placeholder}
         />

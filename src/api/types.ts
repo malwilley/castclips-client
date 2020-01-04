@@ -20,6 +20,7 @@ export type GetClipResponse = {
   title: string;
   userHasLiked: boolean;
   views: number;
+  userId: string;
 };
 
 export type AddClipPayload = {

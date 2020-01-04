@@ -28,6 +28,7 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "typescript": "^3.7.3"
   },

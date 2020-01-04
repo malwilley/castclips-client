@@ -11,16 +11,17 @@ export type UserData = {
 
 export type UserLoggedIn = {
   type: 'loggedin';
-  user: UserData;
+  data: UserData;
 };
 
 export type UserLoggedOut = {
   type: 'loggedout';
+  data: null;
 };
 
 export type AnonymousUser = {
   type: 'anonymous';
-  user: UserData;
+  data: UserData;
 };
 
 type UserState = UserLoggedIn | UserLoggedOut | AnonymousUser;

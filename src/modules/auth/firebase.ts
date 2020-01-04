@@ -38,14 +38,14 @@ const attachAuthListener = (store: Store) => {
         return store.dispatch(
           actions.setUser({
             type: 'anonymous',
-            user: mapUser(user),
+            data: mapUser(user),
           })
         );
       }
       return store.dispatch(
         actions.setUser({
           type: 'loggedin',
-          user: mapUser(user),
+          data: mapUser(user),
         })
       );
     }
@@ -53,6 +53,7 @@ const attachAuthListener = (store: Store) => {
     return store.dispatch(
       actions.setUser({
         type: 'loggedout',
+        data: null,
       })
     );
   });

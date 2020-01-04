@@ -5,13 +5,13 @@ import ModalHeader, { ModalHeaderProps } from 'components/Modal/ModalHeader';
 import ModalFooter from 'components/Modal/ModalFooter';
 import { colors, boxShadow } from 'styles';
 import { ButtonProps } from '../Button';
-import PrimaryButton from '../PrimaryButton';
+import PrimaryButton, { PrimaryButtonProps } from '../PrimaryButton';
 import SecondaryButton from '../SecondaryButton';
 
 type ModalProps = ModalHeaderProps & {
   handleClose: () => void;
   isOpen: boolean;
-  primaryButtonProps?: ButtonProps;
+  primaryButtonProps?: PrimaryButtonProps;
   secondaryButtonProps?: ButtonProps;
 };
 

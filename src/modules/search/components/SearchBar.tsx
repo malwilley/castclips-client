@@ -50,9 +50,9 @@ const styles = {
   }),
   searchButtonEnabled: css({
     '&:hover': {
-      backgroundColor: colors.secondary600,
+      backgroundColor: colors.secondary500,
     },
-    backgroundColor: colors.secondary500,
+    backgroundColor: colors.secondary300,
     color: colors.white,
     transition: 'all 200ms ease-out',
   }),
