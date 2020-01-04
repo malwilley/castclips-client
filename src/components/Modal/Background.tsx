@@ -89,14 +89,14 @@ const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, handleClose
                 aria-labelledby="modal-title"
                 className={styles.main}
                 key={key}
-                onClick={handleClose}
+                onMouseDown={handleClose}
                 role="dialog"
                 style={pick(['opacity'], props)}
                 tabIndex={-1}
               >
                 <animated.div
                   className={styles.contentContainer}
-                  onClick={e => e.stopPropagation()}
+                  onMouseDown={e => e.stopPropagation()}
                   style={pick(['opacity', 'transform'], props)}
                 >
                   {children}

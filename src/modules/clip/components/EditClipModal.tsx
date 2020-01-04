@@ -13,6 +13,7 @@ import { css } from 'emotion';
 import useModalState from 'modules/modal/hooks/useModalState';
 import useThunkDispatch from 'hooks/useThunkDispatch';
 import thunks from '../redux/thunks';
+import { colors, fonts } from 'styles';
 
 const styles = {
   container: css({
@@ -32,6 +33,10 @@ const styles = {
   }),
   timestampInput: css({
     width: 140,
+  }),
+  error: css({
+    color: colors.red400,
+    ...fonts.text250,
   }),
 };
 
@@ -123,13 +128,20 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
               handleTextChange={setStartStamp}
               required
               value={startStamp}
+              onBlur={() => setStartStamp(formatHrMinSec(parseHrMinSec(startStamp)))}
             />
           </div>
           <div className={styles.timestampInput}>
             <StyledInputLabel htmlFor="end-input">
               End <Asterisk />
             </StyledInputLabel>
-            <StyledInput id="end-input" handleTextChange={setEndStamp} required value={endStamp} />
+            <StyledInput
+              id="end-input"
+              handleTextChange={setEndStamp}
+              required
+              value={endStamp}
+              onBlur={() => setEndStamp(formatHrMinSec(parseHrMinSec(endStamp)))}
+            />
           </div>
         </div>
         <div>
@@ -154,6 +166,9 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
             text={description}
           />
           <CharacterCounter className={styles.counter} max={2000} text={description} />
+        </div>
+        <div>
+          {modalState.type === 'error' && <div className={styles.error}>{modalState.message}</div>}
         </div>
       </div>
     </Modal>
