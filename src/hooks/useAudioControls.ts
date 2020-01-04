@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 export type AudioState = {
   time: number;
@@ -77,20 +77,26 @@ const useAudioControls = (
     };
   }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay]);
 
-  const play = () => {
+  const play = useCallback(() => {
     ref.current && ref.current.play();
-  };
-  const pause = () => {
+  }, [ref]);
+  const pause = useCallback(() => {
     ref.current && ref.current.pause();
-  };
-  const seek = (time: number) => {
-    const truncated = Math.min(duration, Math.max(0, time));
-    setTime(truncated);
-    ref.current && (ref.current.currentTime = truncated);
-  };
-  const seekRelative = (relativeTime: number) => {
-    seek(time + relativeTime);
-  };
+  }, [ref]);
+  const seek = useCallback(
+    (time: number) => {
+      const truncated = Math.min(duration, Math.max(0, time));
+      setTime(truncated);
+      ref.current && (ref.current.currentTime = truncated);
+    },
+    [duration, ref]
+  );
+  const seekRelative = useCallback(
+    (relativeTime: number) => {
+      seek(time + relativeTime);
+    },
+    [seek, time]
+  );
 
   return {
     controls: {
