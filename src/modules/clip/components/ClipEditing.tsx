@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from 'redux/types';
 import { getUserUid } from 'modules/auth/selectors';
-import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import EditIcon from 'mdi-react/EditIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
