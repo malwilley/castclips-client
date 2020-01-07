@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { colors } from 'styles';
-import { css } from 'emotion';
-import { CSSObject } from 'create-emotion';
+import * as React from 'react'
+import { colors } from 'styles'
+import { css } from 'emotion'
+import { CSSObject } from 'create-emotion'
 
 type TextSkeletonProps = {
-  className?: string;
-  color?: string;
-  height?: number | string;
-  width?: number | string;
-  marginBottom?: number | string;
-};
+  className?: string
+  color?: string
+  height?: number | string
+  width?: number | string
+  marginBottom?: number | string
+}
 
 const styles = {
   main: (style: CSSObject) =>
@@ -17,7 +17,7 @@ const styles = {
       borderRadius: 4,
       ...style,
     }),
-};
+}
 
 const TextSkeleton: React.FC<TextSkeletonProps> = ({
   className,
@@ -29,6 +29,6 @@ const TextSkeleton: React.FC<TextSkeletonProps> = ({
   <div
     className={css(styles.main({ backgroundColor: color, height, marginBottom, width }), className)}
   />
-);
+)
 
-export default TextSkeleton;
+export default TextSkeleton

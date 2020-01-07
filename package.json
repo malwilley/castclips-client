@@ -1,6 +1,9 @@
 {
   "name": "castclips-client",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.x"
+  },
   "private": true,
   "dependencies": {
     "connected-react-router": "^6.6.1",
@@ -8,7 +11,7 @@
     "debounce": "^1.2.0",
     "downshift": "^3.2.7",
     "emotion": "^9.2.6",
-    "firebase": "^5.8.2",
+    "firebase": "^7.6.1",
     "lodash": "^4.17.4",
     "lodash.throttle": "^4.1.1",
     "mdi-react": "^5.5.0",
@@ -19,7 +22,7 @@
     "react-autosuggest": "^9.3.4",
     "react-compound-slider": "^2.0.0",
     "react-dom": "^16.8.1",
-    "react-firebaseui": "^3.1.2",
+    "react-firebaseui": "^4.0.0",
     "react-redux": "^7.1.3",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
@@ -37,7 +40,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "now-build": "NODE_PATH=./ && GENERATE_SOURCEMAP=false react-scripts build",
+    "prettier-check": "prettier --check \"**/*.{html,ts,tsx,json}\"",
+    "prettier-write": "prettier --write \"**/*.{html,ts,tsx,json}\"",
+    "now-build": "GENERATE_SOURCEMAP=false && yarn prettier-check && yarn build",
     "now-dev": "react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },

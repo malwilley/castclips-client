@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { AppState } from 'redux/types';
-import { getUserUid } from 'modules/auth/selectors';
-import Button from 'components/Button';
-import EditIcon from 'mdi-react/EditIcon';
-import DeleteIcon from 'mdi-react/DeleteIcon';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import EditClipModal from './EditClipModal';
-import DeleteClipModal from './DeleteClipModal';
-import Card from 'components/Card';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { AppState } from 'redux/types'
+import { getUserUid } from 'modules/auth/selectors'
+import Button from 'components/Button'
+import EditIcon from 'mdi-react/EditIcon'
+import DeleteIcon from 'mdi-react/DeleteIcon'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import EditClipModal from './EditClipModal'
+import DeleteClipModal from './DeleteClipModal'
+import Card from 'components/Card'
 
 const styles = {
   card: css({
@@ -37,16 +37,16 @@ const styles = {
     },
     color: colors.red400,
   }),
-};
+}
 
 const ClipEditing: React.FC = () => {
-  const metadata = useSelector((state: AppState) => state.clip.metadata);
-  const userUid = useSelector(getUserUid);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const metadata = useSelector((state: AppState) => state.clip.metadata)
+  const userUid = useSelector(getUserUid)
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   if (metadata.type !== 'success' || metadata.data.userId !== userUid) {
-    return null;
+    return null
   }
 
   return (
@@ -67,7 +67,7 @@ const ClipEditing: React.FC = () => {
       <EditClipModal isOpen={showEditModal} handleClose={() => setShowEditModal(false)} />
       <DeleteClipModal isOpen={showDeleteModal} handleClose={() => setShowDeleteModal(false)} />
     </>
-  );
-};
+  )
+}
 
-export default ClipEditing;
+export default ClipEditing

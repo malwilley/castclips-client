@@ -1,3 +1,3 @@
-import { AppState } from 'redux/types';
+import { AppState } from 'redux/types'
 
-export const getModalState = (state: AppState) => state.modal;
+export const getModalState = (state: AppState) => state.modal

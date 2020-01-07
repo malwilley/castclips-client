@@ -1,15 +1,15 @@
-import HttpContent from 'components/HttpContent';
-import { HomeState } from '../types';
-import { css } from 'emotion';
-import { range } from 'ramda';
-import HotClip, { HotClipSkeleton } from './HotClip';
-import React from 'react';
-import StackGrid from 'components/StackGrid';
-import { breakpoints } from 'styles';
+import HttpContent from 'components/HttpContent'
+import { HomeState } from '../types'
+import { css } from 'emotion'
+import { range } from 'ramda'
+import HotClip, { HotClipSkeleton } from './HotClip'
+import React from 'react'
+import StackGrid from 'components/StackGrid'
+import { breakpoints } from 'styles'
 
 type HotClipsProps = {
-  hotClips: HomeState['hotClips'];
-};
+  hotClips: HomeState['hotClips']
+}
 
 const styles = {
   clipsContainer: css(
@@ -22,7 +22,7 @@ const styles = {
       maxWidth: 1400,
     }
   ),
-};
+}
 
 const HotClips: React.FC<HotClipsProps> = ({ hotClips }) => (
   <div className={styles.clipsContainer}>
@@ -44,6 +44,6 @@ const HotClips: React.FC<HotClipsProps> = ({ hotClips }) => (
       )}
     />
   </div>
-);
+)
 
-export default HotClips;
+export default HotClips

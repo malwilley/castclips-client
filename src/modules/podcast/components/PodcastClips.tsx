@@ -1,16 +1,16 @@
-import * as React from 'react';
-import HttpContent from 'components/HttpContent';
-import { PodcastState } from '../types';
-import { connect } from 'react-redux';
-import { AppState } from 'redux/types';
-import PodcastClipCard from './PodcastClipCard';
-import { css } from 'emotion';
-import PodcastClipCardFetching from './PodcastClipCardFetching';
-import PodcastClipsNoData from './PodcastClipsNoData';
+import * as React from 'react'
+import HttpContent from 'components/HttpContent'
+import { PodcastState } from '../types'
+import { connect } from 'react-redux'
+import { AppState } from 'redux/types'
+import PodcastClipCard from './PodcastClipCard'
+import { css } from 'emotion'
+import PodcastClipCardFetching from './PodcastClipCardFetching'
+import PodcastClipsNoData from './PodcastClipsNoData'
 
 type PodcastClipsConnectedProps = {
-  clipsRequest: PodcastState['clips'];
-};
+  clipsRequest: PodcastState['clips']
+}
 
 const styles = {
   main: css({
@@ -18,7 +18,7 @@ const styles = {
       marginBottom: 18,
     },
   }),
-};
+}
 
 const PodcastClips: React.FC<PodcastClipsConnectedProps> = ({ clipsRequest }) => {
   return (
@@ -47,11 +47,11 @@ const PodcastClips: React.FC<PodcastClipsConnectedProps> = ({ clipsRequest }) =>
         }
       />
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state: AppState) => ({
   clipsRequest: state.podcast.clips,
-});
+})
 
-export default connect(mapStateToProps)(PodcastClips);
+export default connect(mapStateToProps)(PodcastClips)

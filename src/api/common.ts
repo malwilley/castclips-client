@@ -1,9 +1,9 @@
 export async function get<T>(url: string): Promise<T> {
-  const response = await fetch(url);
+  const response = await fetch(url)
 
   if (response.ok) {
-    return response.json();
+    return response.json()
   }
 
-  throw new Error(response.statusText);
+  throw new Error(response.statusText)
 }

@@ -1,19 +1,19 @@
-import React, { useCallback, useState } from 'react';
-import Modal from 'components/Modal';
-import EditIcon from 'mdi-react/EditIcon';
-import { useSelector } from 'react-redux';
-import { getClipData } from '../selectors';
-import CharacterCounter from 'components/CharacterCounter';
-import StyledTextArea from 'components/StyledTextArea';
-import StyledInput, { StyledInputLabel } from 'components/StyledInput';
-import Asterisk from 'components/Asterisk';
-import formatHrMinSec from 'utils/formatHrMinSec';
-import parseHrMinSec from 'utils/parseHrMinSec';
-import { css } from 'emotion';
-import useModalState from 'modules/modal/hooks/useModalState';
-import useThunkDispatch from 'hooks/useThunkDispatch';
-import thunks from '../redux/thunks';
-import { colors, fonts } from 'styles';
+import React, { useCallback, useState } from 'react'
+import Modal from 'components/Modal'
+import EditIcon from 'mdi-react/EditIcon'
+import { useSelector } from 'react-redux'
+import { getClipData } from '../selectors'
+import CharacterCounter from 'components/CharacterCounter'
+import StyledTextArea from 'components/StyledTextArea'
+import StyledInput, { StyledInputLabel } from 'components/StyledInput'
+import Asterisk from 'components/Asterisk'
+import formatHrMinSec from 'utils/formatHrMinSec'
+import parseHrMinSec from 'utils/parseHrMinSec'
+import { css } from 'emotion'
+import useModalState from 'modules/modal/hooks/useModalState'
+import useThunkDispatch from 'hooks/useThunkDispatch'
+import thunks from '../redux/thunks'
+import { colors, fonts } from 'styles'
 
 const styles = {
   container: css({
@@ -38,12 +38,12 @@ const styles = {
     color: colors.red400,
     ...fonts.text250,
   }),
-};
+}
 
 type EditClipModalProps = {
-  handleClose: () => void;
-  isOpen: boolean;
-};
+  handleClose: () => void
+  isOpen: boolean
+}
 
 const formIsValid = ({
   title,
@@ -52,38 +52,38 @@ const formIsValid = ({
   end,
   episodeLength,
 }: {
-  title: string;
-  description: string;
-  start: number;
-  end: number;
-  episodeLength: number;
+  title: string
+  description: string
+  start: number
+  end: number
+  episodeLength: number
 }) => {
   if (title.length === 0 || title.length > 200) {
-    return false;
+    return false
   }
 
   if (description.length > 2000) {
-    return false;
+    return false
   }
 
   if (start < 0 || start >= end || end > episodeLength) {
-    return false;
+    return false
   }
 
-  return true;
-};
+  return true
+}
 
 const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) => {
-  const thunkDispatch = useThunkDispatch();
-  const modalState = useModalState({ closeOnSuccess: true, handleClose });
-  const clipData = useSelector(getClipData);
+  const thunkDispatch = useThunkDispatch()
+  const modalState = useModalState({ closeOnSuccess: true, handleClose })
+  const clipData = useSelector(getClipData)
 
-  const [title, setTitle] = useState(clipData?.title ?? '');
-  const [description, setDescription] = useState(clipData?.description ?? '');
-  const [startStamp, setStartStamp] = useState(formatHrMinSec(clipData?.start ?? 0));
-  const [endStamp, setEndStamp] = useState(formatHrMinSec(clipData?.end ?? 0));
-  const start = parseHrMinSec(startStamp);
-  const end = parseHrMinSec(endStamp);
+  const [title, setTitle] = useState(clipData?.title ?? '')
+  const [description, setDescription] = useState(clipData?.description ?? '')
+  const [startStamp, setStartStamp] = useState(formatHrMinSec(clipData?.start ?? 0))
+  const [endStamp, setEndStamp] = useState(formatHrMinSec(clipData?.end ?? 0))
+  const start = parseHrMinSec(startStamp)
+  const end = parseHrMinSec(endStamp)
 
   const valid = formIsValid({
     title,
@@ -91,7 +91,7 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
     start,
     end,
     episodeLength: clipData?.episode.audioLength ?? 0,
-  });
+  })
 
   const modifyClip = useCallback(() => {
     thunkDispatch(
@@ -102,8 +102,8 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
         start,
         end,
       })
-    );
-  }, [clipData, description, end, start, thunkDispatch, title]);
+    )
+  }, [clipData, description, end, start, thunkDispatch, title])
 
   return (
     <Modal
@@ -172,7 +172,7 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
         </div>
       </div>
     </Modal>
-  );
-};
+  )
+}
 
-export default EditClipModal;
+export default EditClipModal

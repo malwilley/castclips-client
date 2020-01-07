@@ -1,19 +1,19 @@
-import React from 'react';
-import Background from 'components/Modal/Background';
-import { css } from 'emotion';
-import ModalHeader, { ModalHeaderProps } from 'components/Modal/ModalHeader';
-import ModalFooter from 'components/Modal/ModalFooter';
-import { colors, boxShadow } from 'styles';
-import { ButtonProps } from '../Button';
-import PrimaryButton, { PrimaryButtonProps } from '../PrimaryButton';
-import SecondaryButton from '../SecondaryButton';
+import React from 'react'
+import Background from 'components/Modal/Background'
+import { css } from 'emotion'
+import ModalHeader, { ModalHeaderProps } from 'components/Modal/ModalHeader'
+import ModalFooter from 'components/Modal/ModalFooter'
+import { colors, boxShadow } from 'styles'
+import { ButtonProps } from '../Button'
+import PrimaryButton, { PrimaryButtonProps } from '../PrimaryButton'
+import SecondaryButton from '../SecondaryButton'
 
 type ModalProps = ModalHeaderProps & {
-  handleClose: () => void;
-  isOpen: boolean;
-  primaryButtonProps?: PrimaryButtonProps;
-  secondaryButtonProps?: ButtonProps;
-};
+  handleClose: () => void
+  isOpen: boolean
+  primaryButtonProps?: PrimaryButtonProps
+  secondaryButtonProps?: ButtonProps
+}
 
 const styles = {
   bodyContainer: css({
@@ -25,7 +25,7 @@ const styles = {
     boxShadow: boxShadow.cardHover,
     width: '100%',
   }),
-};
+}
 
 const Modal: React.SFC<ModalProps> = ({
   children,
@@ -46,6 +46,6 @@ const Modal: React.SFC<ModalProps> = ({
       </ModalFooter>
     </div>
   </Background>
-);
+)
 
-export default Modal;
+export default Modal

@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { PodcastEpisode, PodcastState } from '../types';
-import { Link } from 'react-router-dom';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import LoadMoreEpisodesButton from './LoadMoreEpisodesButton';
-import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
-import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import formatPublishDate from 'utils/formatPublishDate';
-import TextSkeleton from 'components/TextSkeleton';
-import stripHtml from 'utils/stripHtml';
-import capitalizeFirstLetter from 'utils/capitalizeFirstLetter';
-import { useDispatch, useSelector } from 'react-redux';
-import { thunks } from '../redux';
-import Card from 'components/Card';
-import { AppState } from 'redux/types';
-import { KeyCode } from 'types';
-import SearchInput from 'components/SearchInput';
-import Button from 'components/Button';
+import React, { useState } from 'react'
+import { PodcastEpisode, PodcastState } from '../types'
+import { Link } from 'react-router-dom'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import LoadMoreEpisodesButton from './LoadMoreEpisodesButton'
+import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon'
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon'
+import formatPublishDate from 'utils/formatPublishDate'
+import TextSkeleton from 'components/TextSkeleton'
+import stripHtml from 'utils/stripHtml'
+import capitalizeFirstLetter from 'utils/capitalizeFirstLetter'
+import { useDispatch, useSelector } from 'react-redux'
+import { thunks } from '../redux'
+import Card from 'components/Card'
+import { AppState } from 'redux/types'
+import { KeyCode } from 'types'
+import SearchInput from 'components/SearchInput'
+import Button from 'components/Button'
 
 type LatestEpisodesProps = {
-  episodes: PodcastState['episodes'];
-};
+  episodes: PodcastState['episodes']
+}
 
 const styles = {
   main: css({
@@ -86,12 +86,12 @@ const styles = {
       whiteSpace: 'nowrap',
     }),
   },
-};
+}
 
 const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
   episode: { audioLength, id, title, description, published, thumbnail },
 }) => {
-  const sanitizedDescription = stripHtml(description);
+  const sanitizedDescription = stripHtml(description)
   return (
     <Link to={`/episode/${id}`} className={styles.episodeRow.main}>
       <img alt="Episode thumbnail" className={styles.episodeRow.thumbnail} src={thumbnail} />
@@ -120,8 +120,8 @@ const EpisodeRow: React.FC<{ episode: PodcastEpisode }> = ({
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
 const EpisodeRowLoading: React.FC = () => (
   <div className={styles.episodeRow.main}>
@@ -132,18 +132,18 @@ const EpisodeRowLoading: React.FC = () => (
       <TextSkeleton color={colors.gray50} height={13} width={150} />
     </div>
   </div>
-);
+)
 
 const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
-  const dispatch = useDispatch();
-  const query = useSelector((state: AppState) => state.podcast.search.query);
-  const [text, setText] = useState('');
+  const dispatch = useDispatch()
+  const query = useSelector((state: AppState) => state.podcast.search.query)
+  const [text, setText] = useState('')
 
   if (episodes.type === 'not_asked') {
-    return null;
+    return null
   }
 
-  const episodeList = episodes.data;
+  const episodeList = episodes.data
 
   return (
     <Card className={styles.main}>
@@ -155,7 +155,7 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
           placeholder="Search..."
           onKeyDown={e => {
             if (e.keyCode === KeyCode.Enter) {
-              dispatch(thunks.searchEpisodes(text));
+              dispatch(thunks.searchEpisodes(text))
             }
           }}
         />
@@ -163,8 +163,8 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
           <Button
             className={styles.clear}
             onClick={() => {
-              setText('');
-              dispatch(thunks.clearSearch());
+              setText('')
+              dispatch(thunks.clearSearch())
             }}
           >
             Clear
@@ -180,7 +180,7 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
             .map((_, index) => <EpisodeRowLoading key={index} />)}
       {episodeList.length > 0 && <LoadMoreEpisodesButton episodes={episodes} />}
     </Card>
-  );
-};
+  )
+}
 
-export default LatestEpisodes;
+export default LatestEpisodes

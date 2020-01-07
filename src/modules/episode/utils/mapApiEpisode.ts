@@ -1,6 +1,6 @@
-import { EpisodeMetadata } from '../types';
-import { pick } from 'ramda';
-import { EpisodeMetadataResponse } from 'api/types';
+import { EpisodeMetadata } from '../types'
+import { pick } from 'ramda'
+import { EpisodeMetadataResponse } from 'api/types'
 
 const mapApiEpisode = ({
   podcast,
@@ -10,6 +10,6 @@ const mapApiEpisode = ({
   ...rest,
   podcast: pick(['id', 'title', 'description', 'thumbnail', 'website'], podcast),
   published: new Date(published),
-});
+})
 
-export default mapApiEpisode;
+export default mapApiEpisode

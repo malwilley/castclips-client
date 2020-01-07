@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { HttpRequest } from 'types';
-import { PodcastMetadata } from '../types';
-import HttpContent from 'components/HttpContent';
-import { css } from 'emotion';
-import { colors, boxShadow, fonts } from 'styles';
-import PageTitleFetching from 'components/PageTitleFetching';
+import * as React from 'react'
+import { HttpRequest } from 'types'
+import { PodcastMetadata } from '../types'
+import HttpContent from 'components/HttpContent'
+import { css } from 'emotion'
+import { colors, boxShadow, fonts } from 'styles'
+import PageTitleFetching from 'components/PageTitleFetching'
 
 type PodcastCardProps = {
-  podcast: HttpRequest<PodcastMetadata>;
-};
+  podcast: HttpRequest<PodcastMetadata>
+}
 
 const styles = {
   main: css({
@@ -58,7 +58,7 @@ const styles = {
     boxShadow: boxShadow.card,
     backgroundColor: colors.white,
   }),
-};
+}
 
 const PodcastDataFetching: React.FC = () => (
   <div className={styles.main}>
@@ -67,7 +67,7 @@ const PodcastDataFetching: React.FC = () => (
       <PageTitleFetching className={styles.heading} />
     </div>
   </div>
-);
+)
 
 const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ publisher, thumbnail, title }) => (
   <div className={styles.main}>
@@ -79,7 +79,7 @@ const PodcastDataSuccess: React.FC<PodcastMetadata> = ({ publisher, thumbnail, t
       </div>
     </div>
   </div>
-);
+)
 
 const PodcastCard: React.FC<PodcastCardProps> = ({ podcast }) => {
   return (
@@ -88,7 +88,7 @@ const PodcastCard: React.FC<PodcastCardProps> = ({ podcast }) => {
       renderFetching={() => <PodcastDataFetching />}
       renderSuccess={data => <PodcastDataSuccess {...data} />}
     />
-  );
-};
+  )
+}
 
-export default PodcastCard;
+export default PodcastCard

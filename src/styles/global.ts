@@ -1,4 +1,4 @@
-import { CSSObject } from 'create-emotion';
+import { CSSObject } from 'create-emotion'
 
 const global = {
   ':root': {
@@ -32,6 +32,6 @@ const global = {
     fontWeight: 'inherit',
     letterSpacing: 'inherit',
   },
-};
+}
 
-export default global;
+export default global

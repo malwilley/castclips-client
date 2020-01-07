@@ -1,35 +1,35 @@
 export type NotAsked = {
-  type: 'not_asked';
-};
+  type: 'not_asked'
+}
 
 export type Success<T> = {
-  type: 'success';
-  data: T;
-};
+  type: 'success'
+  data: T
+}
 
 export type Fetching = {
-  type: 'fetching';
-};
+  type: 'fetching'
+}
 
 export type FetchingWithData<T> = {
-  data: T;
-  type: 'fetching';
-};
+  data: T
+  type: 'fetching'
+}
 
 export type Error = {
-  type: 'error';
-  message: string;
-};
+  type: 'error'
+  message: string
+}
 
 export type ErrorWithData<T> = {
-  data: T;
-  type: 'error';
-  message: string;
-};
+  data: T
+  type: 'error'
+  message: string
+}
 
-export type HttpRequest<T> = NotAsked | Fetching | Success<T> | Error;
+export type HttpRequest<T> = NotAsked | Fetching | Success<T> | Error
 
-export type LazyLoadedData<T> = NotAsked | FetchingWithData<T> | Success<T> | ErrorWithData<T>;
+export type LazyLoadedData<T> = NotAsked | FetchingWithData<T> | Success<T> | ErrorWithData<T>
 
 export enum KeyCode {
   ArrowLeft = 37,

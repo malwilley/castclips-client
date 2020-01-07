@@ -1,13 +1,13 @@
-import React from 'react';
-import { css } from 'emotion';
-import { colors, boxShadow, clickable } from 'styles';
-import zIndex from 'styles/zIndex';
+import React from 'react'
+import { css } from 'emotion'
+import { colors, boxShadow, clickable } from 'styles'
+import zIndex from 'styles/zIndex'
 
 type CardProps = {
-  className?: string;
-  feature?: boolean;
-  hover?: boolean;
-};
+  className?: string
+  feature?: boolean
+  hover?: boolean
+}
 
 const styles = {
   main: css({
@@ -31,7 +31,7 @@ const styles = {
     boxShadow: boxShadow.card,
     border: 'none',
   }),
-};
+}
 
 const Card: React.SFC<CardProps> = ({ children, className, feature = false, hover = false }) => (
   <div
@@ -44,6 +44,6 @@ const Card: React.SFC<CardProps> = ({ children, className, feature = false, hove
   >
     {children}
   </div>
-);
+)
 
-export default Card;
+export default Card

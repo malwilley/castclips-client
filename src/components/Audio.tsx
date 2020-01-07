@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from 'react'
 
 type AudioProps = {
-  src: string;
-  audioRef?: React.RefObject<HTMLAudioElement>;
-} & React.ButtonHTMLAttributes<HTMLAudioElement>;
+  src: string
+  audioRef?: React.RefObject<HTMLAudioElement>
+} & React.ButtonHTMLAttributes<HTMLAudioElement>
 
 const Audio: React.FC<AudioProps> = ({ audioRef: ref, src, ...audioProps }) => {
   return (
@@ -13,7 +13,7 @@ const Audio: React.FC<AudioProps> = ({ audioRef: ref, src, ...audioProps }) => {
         Your browser does not support the <code>audio</code> element.
       </p>
     </audio>
-  );
-};
+  )
+}
 
-export default Audio;
+export default Audio

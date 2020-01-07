@@ -1,22 +1,22 @@
-import React from 'react';
-import { css } from 'emotion';
-import Button from '../Button';
-import Rewind10 from 'mdi-react/Rewind10Icon';
-import FastForward30 from 'mdi-react/FastForward30Icon';
-import PlayArrowIcon from 'mdi-react/PlayArrowIcon';
-import PauseIcon from 'mdi-react/PauseIcon';
-import { colors } from 'styles';
-import Tooltip from '../Tooltip';
-import AccessibleLabel from '../AccessibleLabel';
+import React from 'react'
+import { css } from 'emotion'
+import Button from '../Button'
+import Rewind10 from 'mdi-react/Rewind10Icon'
+import FastForward30 from 'mdi-react/FastForward30Icon'
+import PlayArrowIcon from 'mdi-react/PlayArrowIcon'
+import PauseIcon from 'mdi-react/PauseIcon'
+import { colors } from 'styles'
+import Tooltip from '../Tooltip'
+import AccessibleLabel from '../AccessibleLabel'
 
 type PlayerControlsProps = {
-  className?: string;
-  canPlay: boolean;
-  isPlaying: boolean;
-  handlePlayPauseClick?: () => void;
-  handleForwardClick?: () => void;
-  handleBackClick?: () => void;
-};
+  className?: string
+  canPlay: boolean
+  isPlaying: boolean
+  handlePlayPauseClick?: () => void
+  handleForwardClick?: () => void
+  handleBackClick?: () => void
+}
 
 const styles = {
   controlsAndTimeContainer: css({
@@ -47,7 +47,7 @@ const styles = {
     marginLeft: -8,
   }),
   main: css({}),
-};
+}
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   className,
@@ -108,6 +108,6 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
       </Tooltip>
     </div>
   </div>
-);
+)
 
-export default PlayerControls;
+export default PlayerControls

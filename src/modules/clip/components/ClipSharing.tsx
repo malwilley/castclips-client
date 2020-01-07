@@ -1,20 +1,20 @@
-import React from 'react';
-import { css } from 'emotion';
-import Card from 'components/Card';
-import CopyLink from 'components/CopyLink';
-import RedditIcon from 'mdi-react/RedditIcon';
-import FacebookIcon from 'mdi-react/FacebookIcon';
-import TwitterIcon from 'mdi-react/TwitterIcon';
-import SectionHeader from 'components/SectionHeader';
-import AccessibleLabel from 'components/AccessibleLabel';
-import Tooltip from 'components/Tooltip';
-import { colors } from 'styles';
-import { ClipState } from '../types';
+import React from 'react'
+import { css } from 'emotion'
+import Card from 'components/Card'
+import CopyLink from 'components/CopyLink'
+import RedditIcon from 'mdi-react/RedditIcon'
+import FacebookIcon from 'mdi-react/FacebookIcon'
+import TwitterIcon from 'mdi-react/TwitterIcon'
+import SectionHeader from 'components/SectionHeader'
+import AccessibleLabel from 'components/AccessibleLabel'
+import Tooltip from 'components/Tooltip'
+import { colors } from 'styles'
+import { ClipState } from '../types'
 
 type ClipPageBodyProps = {
-  clipId: string;
-  clipMetadata: ClipState['metadata'];
-};
+  clipId: string
+  clipMetadata: ClipState['metadata']
+}
 
 const styles = {
   shareCard: css({
@@ -48,10 +48,10 @@ const styles = {
   shareButtonTwitter: css({
     backgroundColor: '#1DA1F2',
   }),
-};
+}
 
 export const ClipSharing: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => {
-  const link = `https://castclips.com/clip/${clipId}`;
+  const link = `https://castclips.com/clip/${clipId}`
 
   return (
     <>
@@ -107,5 +107,5 @@ export const ClipSharing: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata 
         </div>
       </Card>
     </>
-  );
-};
+  )
+}

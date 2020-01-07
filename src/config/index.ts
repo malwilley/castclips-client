@@ -1,10 +1,10 @@
 type AppConfig = {
   firebase: {
-    apiHost: string;
-    authHost: string;
-    apiKey: string;
-  };
-};
+    apiHost: string
+    authHost: string
+    apiKey: string
+  }
+}
 
 /*
 const local: AppConfig = {
@@ -22,7 +22,7 @@ const development: AppConfig = {
     authHost: 'castclips-dev.firebaseapp.com',
     apiKey: 'AIzaSyBtA0m2pgSQ16SOVXdAexWD5K_hqXWa1b0',
   },
-};
+}
 
 const production: AppConfig = {
   firebase: {
@@ -30,8 +30,8 @@ const production: AppConfig = {
     authHost: 'castclips-7c579.firebaseapp.com',
     apiKey: 'AIzaSyCDNk16gnJo4FHVLfqD-l_vEYZH8MCkcJo',
   },
-};
+}
 
-const config = process.env.NODE_ENV === 'production' ? production : development;
+const config = process.env.NODE_ENV === 'production' ? production : development
 
-export default config;
+export default config

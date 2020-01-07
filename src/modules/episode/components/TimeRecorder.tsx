@@ -1,18 +1,18 @@
-import { css } from 'emotion';
-import formatHrMinSec from 'utils/formatHrMinSec';
-import parseHrMinSec from 'utils/parseHrMinSec';
-import Button from 'components/Button';
-import React, { useState, useEffect } from 'react';
-import { colors, fonts } from 'styles';
-import { isNil } from 'ramda';
+import { css } from 'emotion'
+import formatHrMinSec from 'utils/formatHrMinSec'
+import parseHrMinSec from 'utils/parseHrMinSec'
+import Button from 'components/Button'
+import React, { useState, useEffect } from 'react'
+import { colors, fonts } from 'styles'
+import { isNil } from 'ramda'
 
 type TimeRecorderProps = {
-  className?: string;
-  handleRecordClick: (time: number) => void;
-  placeholder?: string;
-  time: Maybe<number>; // seconds
-  currentTime: number;
-};
+  className?: string
+  handleRecordClick: (time: number) => void
+  placeholder?: string
+  time: Maybe<number> // seconds
+  currentTime: number
+}
 
 const styles = {
   main: css({
@@ -65,7 +65,7 @@ const styles = {
     fontWeight: 'bold',
     fontSize: '0.9rem',
   }),
-};
+}
 
 const makeAdjustTimeHandler = ({
   currentTime,
@@ -73,11 +73,11 @@ const makeAdjustTimeHandler = ({
   time,
   timeModifier,
 }: Pick<TimeRecorderProps, 'currentTime' | 'time' | 'handleRecordClick'> & {
-  timeModifier: number;
+  timeModifier: number
 }) => () => {
-  const newTime = time ? time + timeModifier : currentTime + timeModifier;
-  handleRecordClick(newTime);
-};
+  const newTime = time ? time + timeModifier : currentTime + timeModifier
+  handleRecordClick(newTime)
+}
 
 const TimeRecorder: React.FC<TimeRecorderProps> = ({
   className,
@@ -86,12 +86,12 @@ const TimeRecorder: React.FC<TimeRecorderProps> = ({
   placeholder,
   time,
 }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('')
   useEffect(() => {
     if (!isNil(time)) {
-      setValue(formatHrMinSec(time));
+      setValue(formatHrMinSec(time))
     }
-  }, [time, setValue]);
+  }, [time, setValue])
 
   return (
     <div className={css(styles.main, className)}>
@@ -120,7 +120,7 @@ const TimeRecorder: React.FC<TimeRecorderProps> = ({
           value={value}
           onChange={e => setValue(e.target.value)}
           onBlur={() => {
-            handleRecordClick(parseHrMinSec(value));
+            handleRecordClick(parseHrMinSec(value))
           }}
           placeholder={placeholder}
         />
@@ -129,7 +129,7 @@ const TimeRecorder: React.FC<TimeRecorderProps> = ({
         <div className={styles.setTimeText}>Set current time</div>
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default TimeRecorder;
+export default TimeRecorder

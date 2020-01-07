@@ -1,12 +1,12 @@
-import React from 'react';
-import EmoticonSadOutlineIcon from 'mdi-react/EmoticonSadOutlineIcon';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
+import React from 'react'
+import EmoticonSadOutlineIcon from 'mdi-react/EmoticonSadOutlineIcon'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
 
 type NoDataProps = {
-  icon?: React.ReactNode;
-  message: string;
-};
+  icon?: React.ReactNode
+  message: string
+}
 
 const styles = {
   main: css({
@@ -24,7 +24,7 @@ const styles = {
     lineHeight: 1.5,
     maxWidth: 300,
   }),
-};
+}
 
 const NoData: React.FC<NoDataProps> = ({
   icon = <EmoticonSadOutlineIcon size={60} />,
@@ -34,6 +34,6 @@ const NoData: React.FC<NoDataProps> = ({
     {icon}
     <p className={styles.message}>{message}</p>
   </div>
-);
+)
 
-export default NoData;
+export default NoData

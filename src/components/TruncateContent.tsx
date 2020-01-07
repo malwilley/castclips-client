@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { css } from 'emotion';
-import Button from './Button';
-import useResizeObserver from 'hooks/useResizeObserver';
-import { colors, fonts, clickable } from 'styles';
+import React, { useState } from 'react'
+import { css } from 'emotion'
+import Button from './Button'
+import useResizeObserver from 'hooks/useResizeObserver'
+import { colors, fonts, clickable } from 'styles'
 
 type TruncateContentProps = {
-  className?: string;
-  maxHeight?: number;
-  expandable?: boolean;
-};
+  className?: string
+  maxHeight?: number
+  expandable?: boolean
+}
 
 const styles = {
   main: css({
@@ -33,7 +33,7 @@ const styles = {
   seeMoreButton: css(fonts.bold200, clickable, {
     color: colors.gray700,
   }),
-};
+}
 
 const TruncateContent: React.FC<TruncateContentProps> = ({
   className,
@@ -41,12 +41,12 @@ const TruncateContent: React.FC<TruncateContentProps> = ({
   expandable = false,
   maxHeight = 200,
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const {
     ref,
     dimensions: { height },
-  } = useResizeObserver<HTMLDivElement>();
-  const needsTruncation = height > maxHeight;
+  } = useResizeObserver<HTMLDivElement>()
+  const needsTruncation = height > maxHeight
 
   return (
     <div
@@ -64,7 +64,7 @@ const TruncateContent: React.FC<TruncateContentProps> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TruncateContent;
+export default TruncateContent

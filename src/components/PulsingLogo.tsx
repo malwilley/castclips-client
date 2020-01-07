@@ -1,8 +1,8 @@
-import React from 'react';
-import { Logo } from 'icons';
-import { css, keyframes } from 'emotion';
+import React from 'react'
+import { Logo } from 'icons'
+import { css, keyframes } from 'emotion'
 
-type PulsingLogoProps = {};
+type PulsingLogoProps = {}
 
 const pulse = keyframes({
   'from, to': {
@@ -11,7 +11,7 @@ const pulse = keyframes({
   '50%': {
     opacity: 0.5,
   },
-});
+})
 
 const styles = {
   main: css({
@@ -25,12 +25,12 @@ const styles = {
     height: 60,
     width: 248,
   }),
-};
+}
 
 const PulsingLogo: React.FC<PulsingLogoProps> = () => (
   <div className={styles.main}>
     <Logo className={styles.logo} />
   </div>
-);
+)
 
-export default PulsingLogo;
+export default PulsingLogo

@@ -1,62 +1,62 @@
-import { Thunk } from 'redux/types';
-import { actions } from './actions';
-import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode';
-import mapApiPodcast from '../utils/mapApiPodcast';
-import { PodcastEpisode, PodcastMetadata } from '../types';
-import { path } from 'ramda';
-import { getClipsForPodcast, getPodcastData, search } from 'api/firebase';
-import { getAuthToken } from 'modules/auth/firebase';
-import { SearchType } from 'modules/search/types';
+import { Thunk } from 'redux/types'
+import { actions } from './actions'
+import mapApiPodcastEpisodes from '../utils/mapApiPodcastEpisode'
+import mapApiPodcast from '../utils/mapApiPodcast'
+import { PodcastEpisode, PodcastMetadata } from '../types'
+import { path } from 'ramda'
+import { getClipsForPodcast, getPodcastData, search } from 'api/firebase'
+import { getAuthToken } from 'modules/auth/firebase'
+import { SearchType } from 'modules/search/types'
 
 const fetchPodcastMetadata: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
-  const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
+  const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState())
   if (currentlyLoadedPodcast === id) {
-    return;
+    return
   }
 
-  dispatch(actions.setMetadata({ type: 'fetching' }));
-  dispatch(actions.setEpisodes({ type: 'fetching', data: [] }));
+  dispatch(actions.setMetadata({ type: 'fetching' }))
+  dispatch(actions.setEpisodes({ type: 'fetching', data: [] }))
 
   try {
-    const token = await getAuthToken();
-    const metadata = await getPodcastData(token, id);
-    dispatch(actions.setMetadata({ type: 'success', data: mapApiPodcast(metadata) }));
-    dispatch(actions.addEpisodes(mapApiPodcastEpisodes(metadata.episodes)));
-    dispatch(actions.setEpisodeSearchOffset(metadata.nextEpisodePubDate));
+    const token = await getAuthToken()
+    const metadata = await getPodcastData(token, id)
+    dispatch(actions.setMetadata({ type: 'success', data: mapApiPodcast(metadata) }))
+    dispatch(actions.addEpisodes(mapApiPodcastEpisodes(metadata.episodes)))
+    dispatch(actions.setEpisodeSearchOffset(metadata.nextEpisodePubDate))
   } catch {
-    dispatch(actions.setMetadata({ type: 'error', message: 'Error fetching podcast metadata' }));
+    dispatch(actions.setMetadata({ type: 'error', message: 'Error fetching podcast metadata' }))
   }
-};
+}
 
 const searchEpisodes: Thunk<string, Promise<void>> = (query: string) => async (
   dispatch,
   getState
 ) => {
-  const metadata = getState().podcast.metadata;
+  const metadata = getState().podcast.metadata
   if (metadata.type !== 'success') {
-    return;
+    return
   }
 
-  dispatch(actions.setEpisodeSearchTerm(query));
-  dispatch(actions.setEpisodeSearchOffset(0));
-  dispatch(actions.setEpisodes({ data: [], type: 'fetching' }));
+  dispatch(actions.setEpisodeSearchTerm(query))
+  dispatch(actions.setEpisodeSearchOffset(0))
+  dispatch(actions.setEpisodes({ data: [], type: 'fetching' }))
 
   try {
-    const token = await getAuthToken();
+    const token = await getAuthToken()
     const { results, nextOffset, total } = await search(token, {
       query,
       podcastId: metadata.data.id,
       type: SearchType.Episodes,
-    });
+    })
 
     dispatch(
       actions.setEpisodes({
         type: nextOffset < total ? 'success' : 'end',
         data: mapApiPodcastEpisodes(results),
       })
-    );
+    )
 
-    dispatch(actions.setEpisodeSearchOffset(nextOffset));
+    dispatch(actions.setEpisodeSearchOffset(nextOffset))
   } catch {
     dispatch(
       actions.setEpisodes({
@@ -64,27 +64,27 @@ const searchEpisodes: Thunk<string, Promise<void>> = (query: string) => async (
         data: [],
         message: 'Error searching episodes',
       })
-    );
+    )
   }
-};
+}
 
 const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch, getState) => {
-  const currentlyLoadedPodcast = path<PodcastMetadata>(['podcast', 'metadata', 'data'], getState());
+  const currentlyLoadedPodcast = path<PodcastMetadata>(['podcast', 'metadata', 'data'], getState())
   const currentlyLoadedEpisodes = path<PodcastEpisode[]>(
     ['podcast', 'episodes', 'data'],
     getState()
-  );
+  )
   if (!currentlyLoadedPodcast || !currentlyLoadedEpisodes) {
-    return;
+    return
   }
 
-  const query = getState().podcast.search.query;
-  const offset = getState().podcast.search.offset;
+  const query = getState().podcast.search.query
+  const offset = getState().podcast.search.offset
 
-  dispatch(actions.setEpisodes({ type: 'fetching', data: currentlyLoadedEpisodes }));
+  dispatch(actions.setEpisodes({ type: 'fetching', data: currentlyLoadedEpisodes }))
 
   try {
-    const token = await getAuthToken();
+    const token = await getAuthToken()
 
     if (query) {
       const { results, nextOffset, total } = await search(token, {
@@ -92,30 +92,30 @@ const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch
         offset,
         podcastId: currentlyLoadedPodcast.id,
         type: SearchType.Episodes,
-      });
-      const newEpisodesList = [...currentlyLoadedEpisodes, ...mapApiPodcastEpisodes(results)];
+      })
+      const newEpisodesList = [...currentlyLoadedEpisodes, ...mapApiPodcastEpisodes(results)]
 
       dispatch(
         actions.setEpisodes({
           type: nextOffset < total ? 'success' : 'end',
           data: newEpisodesList,
         })
-      );
+      )
 
-      dispatch(actions.setEpisodeSearchOffset(nextOffset));
+      dispatch(actions.setEpisodeSearchOffset(nextOffset))
     } else {
       const { nextEpisodePubDate, episodes } = await getPodcastData(
         token,
         currentlyLoadedPodcast.id,
         offset
-      );
-      const newEpisodesList = [...currentlyLoadedEpisodes, ...mapApiPodcastEpisodes(episodes)];
+      )
+      const newEpisodesList = [...currentlyLoadedEpisodes, ...mapApiPodcastEpisodes(episodes)]
 
       nextEpisodePubDate
         ? dispatch(actions.setEpisodes({ type: 'success', data: newEpisodesList }))
-        : dispatch(actions.setEpisodes({ type: 'end', data: newEpisodesList }));
+        : dispatch(actions.setEpisodes({ type: 'end', data: newEpisodesList }))
 
-      dispatch(actions.setEpisodeSearchOffset(nextEpisodePubDate));
+      dispatch(actions.setEpisodeSearchOffset(nextEpisodePubDate))
     }
   } catch {
     dispatch(
@@ -124,29 +124,29 @@ const fetchMoreEpisodes: Thunk<undefined, Promise<void>> = () => async (dispatch
         data: currentlyLoadedEpisodes,
         message: 'Error fetching new episodes',
       })
-    );
+    )
   }
-};
+}
 
 const clearSearch: Thunk<undefined, Promise<void>> = () => async (dispatch, getState) => {
-  const currentlyLoadedPodcast = path<PodcastMetadata>(['podcast', 'metadata', 'data'], getState());
+  const currentlyLoadedPodcast = path<PodcastMetadata>(['podcast', 'metadata', 'data'], getState())
   if (!currentlyLoadedPodcast) {
-    return;
+    return
   }
 
-  dispatch(actions.setEpisodeSearchTerm(''));
-  dispatch(actions.setEpisodes({ type: 'fetching', data: [] }));
+  dispatch(actions.setEpisodeSearchTerm(''))
+  dispatch(actions.setEpisodes({ type: 'fetching', data: [] }))
 
   try {
-    const token = await getAuthToken();
-    const { nextEpisodePubDate, episodes } = await getPodcastData(token, currentlyLoadedPodcast.id);
-    const newEpisodesList = mapApiPodcastEpisodes(episodes);
+    const token = await getAuthToken()
+    const { nextEpisodePubDate, episodes } = await getPodcastData(token, currentlyLoadedPodcast.id)
+    const newEpisodesList = mapApiPodcastEpisodes(episodes)
 
     nextEpisodePubDate
       ? dispatch(actions.setEpisodes({ type: 'success', data: newEpisodesList }))
-      : dispatch(actions.setEpisodes({ type: 'end', data: newEpisodesList }));
+      : dispatch(actions.setEpisodes({ type: 'end', data: newEpisodesList }))
 
-    dispatch(actions.setEpisodeSearchOffset(nextEpisodePubDate));
+    dispatch(actions.setEpisodeSearchOffset(nextEpisodePubDate))
   } catch {
     dispatch(
       actions.setEpisodes({
@@ -154,20 +154,20 @@ const clearSearch: Thunk<undefined, Promise<void>> = () => async (dispatch, getS
         data: [],
         message: 'Error fetching new episodes',
       })
-    );
+    )
   }
-};
+}
 
 const fetchClipsForPodcast: Thunk<string, Promise<void>> = id => async (dispatch, getState) => {
-  const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState());
+  const currentlyLoadedPodcast = path(['podcast', 'metadata', 'data', 'id'], getState())
   if (currentlyLoadedPodcast === id && getState().podcast.clips.type === 'success') {
-    return;
+    return
   }
 
-  dispatch(actions.setClips({ type: 'fetching' }));
+  dispatch(actions.setClips({ type: 'fetching' }))
 
   try {
-    const clips = await getClipsForPodcast(id);
+    const clips = await getClipsForPodcast(id)
     dispatch(
       actions.setClips({
         type: 'success',
@@ -188,11 +188,11 @@ const fetchClipsForPodcast: Thunk<string, Promise<void>> = id => async (dispatch
           })
         ),
       })
-    );
+    )
   } catch {
-    dispatch(actions.setClips({ type: 'error', message: 'Error fetching podcast metadata' }));
+    dispatch(actions.setClips({ type: 'error', message: 'Error fetching podcast metadata' }))
   }
-};
+}
 
 export default {
   clearSearch,
@@ -200,4 +200,4 @@ export default {
   fetchClipsForPodcast,
   fetchMoreEpisodes,
   fetchPodcastMetadata,
-};
+}

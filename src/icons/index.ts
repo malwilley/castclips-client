@@ -1,4 +1,4 @@
-import Logo from 'icons/Logo';
-import Spinner from 'icons/Spinner';
+import Logo from 'icons/Logo'
+import Spinner from 'icons/Spinner'
 
-export { Logo, Spinner };
+export { Logo, Spinner }

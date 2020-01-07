@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
-import Modal from 'components/Modal';
-import DeleteIcon from 'mdi-react/DeleteIcon';
-import { useSelector } from 'react-redux';
-import { getClipData } from '../selectors';
-import { css } from 'emotion';
-import useModalState from 'modules/modal/hooks/useModalState';
-import useThunkDispatch from 'hooks/useThunkDispatch';
-import thunks from '../redux/thunks';
-import { fonts } from 'styles';
+import React, { useCallback } from 'react'
+import Modal from 'components/Modal'
+import DeleteIcon from 'mdi-react/DeleteIcon'
+import { useSelector } from 'react-redux'
+import { getClipData } from '../selectors'
+import { css } from 'emotion'
+import useModalState from 'modules/modal/hooks/useModalState'
+import useThunkDispatch from 'hooks/useThunkDispatch'
+import thunks from '../redux/thunks'
+import { fonts } from 'styles'
 
 const styles = {
   container: css({
@@ -25,21 +25,21 @@ const styles = {
   clipTitle: css({
     ...fonts.bold300,
   }),
-};
+}
 
 type DeleteClipModalProps = {
-  handleClose: () => void;
-  isOpen: boolean;
-};
+  handleClose: () => void
+  isOpen: boolean
+}
 
 const DeleteClipModal: React.FC<DeleteClipModalProps> = ({ handleClose, isOpen }) => {
-  const thunkDispatch = useThunkDispatch();
-  const modalState = useModalState({ handleClose });
-  const clipData = useSelector(getClipData);
+  const thunkDispatch = useThunkDispatch()
+  const modalState = useModalState({ handleClose })
+  const clipData = useSelector(getClipData)
 
   const deleteClip = useCallback(() => {
-    thunkDispatch(thunks.deleteClip(clipData!.id));
-  }, [clipData, thunkDispatch]);
+    thunkDispatch(thunks.deleteClip(clipData!.id))
+  }, [clipData, thunkDispatch])
 
   return (
     <Modal
@@ -58,7 +58,7 @@ const DeleteClipModal: React.FC<DeleteClipModalProps> = ({ handleClose, isOpen }
         <div className={styles.clipTitle}>{clipData!.title}</div>
       </div>
     </Modal>
-  );
-};
+  )
+}
 
-export default DeleteClipModal;
+export default DeleteClipModal

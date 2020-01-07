@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import { isNil } from 'ramda';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import { isNil } from 'ramda'
 
 type ClipPreviewProps = {
-  time: number;
-  length: number;
-  start: Maybe<number>;
-  end: Maybe<number>;
-};
+  time: number
+  length: number
+  start: Maybe<number>
+  end: Maybe<number>
+}
 
 const styles = {
   completedClip: css({
@@ -40,7 +40,7 @@ const styles = {
     top: -10,
     bottom: -10,
   }),
-};
+}
 
 const ClipPreview: React.FC<ClipPreviewProps> = ({ end, length, start, time }) => (
   <div className={styles.main}>
@@ -60,6 +60,6 @@ const ClipPreview: React.FC<ClipPreviewProps> = ({ end, length, start, time }) =
       <div className={styles.timeNeedle} style={{ left: `${(time / length) * 100}%` }} />
     </div>
   </div>
-);
+)
 
-export default ClipPreview;
+export default ClipPreview

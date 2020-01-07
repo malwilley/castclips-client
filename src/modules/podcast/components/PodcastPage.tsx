@@ -1,33 +1,33 @@
-import * as React from 'react';
-import PodcastCard from 'modules/podcast/components/PodcastCard';
-import { thunks } from '../redux';
-import { connect } from 'react-redux';
-import { AppState } from 'redux/types';
-import { PodcastState } from '../types';
-import PageWithFeaturedContent from 'components/PageWithFeaturedContent';
-import SectionHeader from 'components/SectionHeader';
-import { css } from 'emotion';
-import LatestEpisodes from './LatestEpisodes';
-import PodcastClips from './PodcastClips';
-import HttpContent from 'components/HttpContent';
-import { colors, clickable, fonts } from 'styles';
-import PageTitleFetching from 'components/PageTitleFetching';
-import ParagraphSkeleton from 'components/ParagraphSkeleton';
-import Attribute from 'components/Attribute';
-import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon';
-import LinkIcon from 'mdi-react/LinkIcon';
-import sanitizeUrl from 'utils/sanitizeUrl';
+import * as React from 'react'
+import PodcastCard from 'modules/podcast/components/PodcastCard'
+import { thunks } from '../redux'
+import { connect } from 'react-redux'
+import { AppState } from 'redux/types'
+import { PodcastState } from '../types'
+import PageWithFeaturedContent from 'components/PageWithFeaturedContent'
+import SectionHeader from 'components/SectionHeader'
+import { css } from 'emotion'
+import LatestEpisodes from './LatestEpisodes'
+import PodcastClips from './PodcastClips'
+import HttpContent from 'components/HttpContent'
+import { colors, clickable, fonts } from 'styles'
+import PageTitleFetching from 'components/PageTitleFetching'
+import ParagraphSkeleton from 'components/ParagraphSkeleton'
+import Attribute from 'components/Attribute'
+import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon'
+import LinkIcon from 'mdi-react/LinkIcon'
+import sanitizeUrl from 'utils/sanitizeUrl'
 
 type PodcastPageProps = {
-  id: string;
-};
+  id: string
+}
 
 type PodcastPageConnectedProps = PodcastPageProps & {
-  episodes: PodcastState['episodes'];
-  fetchClipsForPodcast: (id: string) => void;
-  fetchPodcastMetadata: (id: string) => void;
-  podcastMetadata: PodcastState['metadata'];
-};
+  episodes: PodcastState['episodes']
+  fetchClipsForPodcast: (id: string) => void
+  fetchPodcastMetadata: (id: string) => void
+  podcastMetadata: PodcastState['metadata']
+}
 
 const styles = {
   main: css({
@@ -88,7 +88,7 @@ const styles = {
       marginBottom: '-2rem',
     },
   }),
-};
+}
 
 const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
   episodes,
@@ -98,10 +98,10 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
   id,
 }) => {
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchPodcastMetadata(id);
-    fetchClipsForPodcast(id);
-  }, [fetchClipsForPodcast, fetchPodcastMetadata, id]);
+    window.scrollTo(0, 0)
+    fetchPodcastMetadata(id)
+    fetchClipsForPodcast(id)
+  }, [fetchClipsForPodcast, fetchPodcastMetadata, id])
 
   return (
     <PageWithFeaturedContent
@@ -167,17 +167,17 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
         </>
       }
     />
-  );
-};
+  )
+}
 
 const mapDispatchToProps = {
   fetchClipsForPodcast: thunks.fetchClipsForPodcast,
   fetchPodcastMetadata: thunks.fetchPodcastMetadata,
-};
+}
 
 const mapStateToProps = (state: AppState) => ({
   episodes: state.podcast.episodes,
   podcastMetadata: state.podcast.metadata,
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(PodcastPage);
+export default connect(mapStateToProps, mapDispatchToProps)(PodcastPage)

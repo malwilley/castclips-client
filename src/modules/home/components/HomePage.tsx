@@ -1,12 +1,12 @@
-import React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from 'redux/types';
-import { thunks } from '../redux';
-import TextPointer from './TextPointer';
-import HotClips from './HotClips';
-import RoundedCorners from 'components/RoundedCorners';
+import React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import { useSelector, useDispatch } from 'react-redux'
+import { AppState } from 'redux/types'
+import { thunks } from '../redux'
+import TextPointer from './TextPointer'
+import HotClips from './HotClips'
+import RoundedCorners from 'components/RoundedCorners'
 
 const styles = {
   gradientContainer: css({
@@ -53,16 +53,16 @@ const styles = {
     position: 'absolute',
     bottom: 0,
   }),
-};
+}
 
 const HomePage: React.FC = () => {
-  const dispatch = useDispatch();
-  const hotClips = useSelector((state: AppState) => state.home.hotClips);
+  const dispatch = useDispatch()
+  const hotClips = useSelector((state: AppState) => state.home.hotClips)
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-    dispatch(thunks.fetchHotClips(0));
-  }, [dispatch]);
+    window.scrollTo(0, 0)
+    dispatch(thunks.fetchHotClips(0))
+  }, [dispatch])
 
   return (
     <div>
@@ -82,7 +82,7 @@ const HomePage: React.FC = () => {
         <HotClips hotClips={hotClips} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

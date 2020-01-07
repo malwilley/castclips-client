@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { ClipMetadata } from 'modules/clip/types';
-import Card from 'components/Card';
-import { css } from 'emotion';
-import { colors, coverContainer } from 'styles';
-import { range } from 'ramda';
-import ClipCardAccent from 'components/ClipCardAccent';
-import fonts from 'styles/fonts';
-import ClipCardAttributes, { ClipCardAttributesSkeleton } from 'components/ClipCardAttributes';
-import TextSkeleton from 'components/TextSkeleton';
-import { Link } from 'react-router-dom';
-import TruncateContent from 'components/TruncateContent';
+import * as React from 'react'
+import { ClipMetadata } from 'modules/clip/types'
+import Card from 'components/Card'
+import { css } from 'emotion'
+import { colors, coverContainer } from 'styles'
+import { range } from 'ramda'
+import ClipCardAccent from 'components/ClipCardAccent'
+import fonts from 'styles/fonts'
+import ClipCardAttributes, { ClipCardAttributesSkeleton } from 'components/ClipCardAttributes'
+import TextSkeleton from 'components/TextSkeleton'
+import { Link } from 'react-router-dom'
+import TruncateContent from 'components/TruncateContent'
 
 type HotClipProps = {
-  clip: ClipMetadata;
-};
+  clip: ClipMetadata
+}
 
 const styles = {
   main: css({
@@ -75,7 +75,7 @@ const styles = {
     },
     marginBottom: '1rem',
   }),
-};
+}
 
 const HotClipSkeleton: React.FC = () => (
   <Card className={styles.main} feature>
@@ -101,7 +101,7 @@ const HotClipSkeleton: React.FC = () => (
       </div>
     </div>
   </Card>
-);
+)
 
 const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
   <div className={styles.podEpSection.main}>
@@ -112,14 +112,18 @@ const PodcastEpisodeSection: React.FC<HotClipProps> = ({ clip }) => (
       length={clip.episode.audioLength}
     />
     <div className={styles.podEpSection.container}>
-      <img alt="Episode thumbnail" className={styles.podEpSection.thumbnail} src={clip.podcast.thumbnail} />
+      <img
+        alt="Episode thumbnail"
+        className={styles.podEpSection.thumbnail}
+        src={clip.podcast.thumbnail}
+      />
       <div className={styles.podEpSection.titlesContainer}>
         <div className={styles.podEpSection.podTitle}>{clip.podcast.title}</div>
         <div className={styles.podEpSection.epTitle}>{clip.episode.title}</div>
       </div>
     </div>
   </div>
-);
+)
 
 const HotClip: React.FC<HotClipProps> = ({ clip }) => (
   <Card className={styles.main} feature hover>
@@ -138,7 +142,7 @@ const HotClip: React.FC<HotClipProps> = ({ clip }) => (
     </div>
     <PodcastEpisodeSection clip={clip} />
   </Card>
-);
+)
 
-export { HotClipSkeleton };
-export default HotClip;
+export { HotClipSkeleton }
+export default HotClip

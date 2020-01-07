@@ -1,4 +1,4 @@
-import { pipe, split, reverse, take, map, addIndex, reduce } from 'ramda';
+import { pipe, split, reverse, take, map, addIndex, reduce } from 'ramda'
 
 const parseHrMinSec = pipe<string, string[], string[], string[], number[], number>(
   split(':'),
@@ -9,6 +9,6 @@ const parseHrMinSec = pipe<string, string[], string[], string[], number[], numbe
     (seconds, next, index) => seconds + next * Math.pow(60, index),
     0
   )
-);
+)
 
-export default parseHrMinSec;
+export default parseHrMinSec

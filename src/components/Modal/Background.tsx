@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import zIndex from 'styles/zIndex';
-import { pick } from 'ramda';
-import { animated, config, useTransition } from 'react-spring';
+import React, { useCallback, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import zIndex from 'styles/zIndex'
+import { pick } from 'ramda'
+import { animated, config, useTransition } from 'react-spring'
 
 type ModalBackgroundProps = {
-  handleClose: () => void;
-  isOpen: boolean;
-};
+  handleClose: () => void
+  isOpen: boolean
+}
 
 const styles = {
   contentContainer: css({
@@ -40,44 +40,44 @@ const styles = {
     width: '100%',
     overflowY: 'scroll',
   }),
-};
+}
 
 const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, handleClose, isOpen }) => {
   const closeOnEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.keyCode === 27) {
-        handleClose();
+        handleClose()
       }
     },
     [handleClose]
-  );
+  )
 
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add(styles.scrollLock);
+      document.body.classList.add(styles.scrollLock)
     } else {
-      document.body.classList.remove(styles.scrollLock);
+      document.body.classList.remove(styles.scrollLock)
     }
 
     return () => {
-      document.body.classList.remove(styles.scrollLock);
-    };
-  }, [isOpen]);
+      document.body.classList.remove(styles.scrollLock)
+    }
+  }, [isOpen])
 
   useEffect(() => {
-    window.addEventListener('keydown', closeOnEscape);
+    window.addEventListener('keydown', closeOnEscape)
 
     return () => {
-      window.removeEventListener('keydown', closeOnEscape);
-    };
-  }, [closeOnEscape, handleClose]);
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [closeOnEscape, handleClose])
 
   const transitions = useTransition(isOpen, null, {
     from: { opacity: 0, transform: 'scale(0.7)' },
     enter: { opacity: 1, transform: 'scale(1)' },
     leave: { opacity: 0, transform: 'scale(0.7)' },
     config: config.stiff,
-  });
+  })
 
   return (
     <>
@@ -107,7 +107,7 @@ const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, handleClose
           : null
       )}
     </>
-  );
-};
+  )
+}
 
-export default ModalBackground;
+export default ModalBackground

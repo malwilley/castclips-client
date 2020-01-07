@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
 
 type ClipCardAccentProps = {
-  className?: string;
-  end: number;
-  length: number;
-  start: number;
-};
+  className?: string
+  end: number
+  length: number
+  start: number
+}
 
 const styles = {
   accent: css({
@@ -24,12 +24,12 @@ const styles = {
     height: '100%',
     borderRadius: 2,
   }),
-};
+}
 
 const ClipCardAccent: React.FC<ClipCardAccentProps> = ({ className, end, length, start }) => {
-  const left = (start / length) * 100;
-  const calculatedWidth = ((end - start) / length) * 100;
-  const width = Math.max(calculatedWidth, Math.min(1, 100 - left));
+  const left = (start / length) * 100
+  const calculatedWidth = ((end - start) / length) * 100
+  const width = Math.max(calculatedWidth, Math.min(1, 100 - left))
 
   return (
     <div className={css(styles.accent, className)}>
@@ -41,7 +41,7 @@ const ClipCardAccent: React.FC<ClipCardAccentProps> = ({ className, end, length,
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default ClipCardAccent;
+export default ClipCardAccent

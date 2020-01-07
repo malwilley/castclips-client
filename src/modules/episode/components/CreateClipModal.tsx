@@ -1,30 +1,30 @@
-import * as React from 'react';
-import ScissorsIcon from 'mdi-react/ScissorsIcon';
-import Modal from 'components/Modal';
-import StyledInput, { StyledInputLabel } from 'components/StyledInput';
-import { css } from 'emotion';
-import Asterisk from 'components/Asterisk';
-import { connect } from 'react-redux';
-import { thunks } from '../redux';
-import { AppState } from 'redux/types';
-import { EpisodeState } from '../types';
-import StyledTextArea from 'components/StyledTextArea';
-import pick from 'ramda/es/pick';
-import { AddClipPayload } from 'api/types';
-import CharacterCounter from 'components/CharacterCounter';
+import * as React from 'react'
+import ScissorsIcon from 'mdi-react/ScissorsIcon'
+import Modal from 'components/Modal'
+import StyledInput, { StyledInputLabel } from 'components/StyledInput'
+import { css } from 'emotion'
+import Asterisk from 'components/Asterisk'
+import { connect } from 'react-redux'
+import { thunks } from '../redux'
+import { AppState } from 'redux/types'
+import { EpisodeState } from '../types'
+import StyledTextArea from 'components/StyledTextArea'
+import pick from 'ramda/es/pick'
+import { AddClipPayload } from 'api/types'
+import CharacterCounter from 'components/CharacterCounter'
 
 type ShareModalProps = {
-  start: number;
-  end: number;
-  handleClose: () => void;
-  isOpen: boolean;
-};
+  start: number
+  end: number
+  handleClose: () => void
+  isOpen: boolean
+}
 
 type ShareModalConnectedProps = ShareModalProps & {
-  clipId: EpisodeState['view']['clipId'];
-  createClip: (clip: AddClipPayload) => void;
-  episode: EpisodeState['metadata'];
-};
+  clipId: EpisodeState['view']['clipId']
+  createClip: (clip: AddClipPayload) => void
+  episode: EpisodeState['metadata']
+}
 
 const styles = {
   container: css({
@@ -36,7 +36,7 @@ const styles = {
     textAlign: 'right',
     paddingTop: '0.5em',
   }),
-};
+}
 
 const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
   clipId,
@@ -47,12 +47,12 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
   end,
   isOpen,
 }) => {
-  const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [title, setTitle] = React.useState('')
+  const [description, setDescription] = React.useState('')
 
   const handleCreate = () => {
     if (episode.type !== 'success') {
-      return;
+      return
     }
 
     createClip({
@@ -66,10 +66,10 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
       description,
       start,
       end,
-    });
-  };
+    })
+  }
 
-  const valid = title.length > 0 && title.length < 200 && description.length < 2000;
+  const valid = title.length > 0 && title.length < 200 && description.length < 2000
 
   return (
     <Modal
@@ -111,19 +111,16 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
         </div>
       </div>
     </Modal>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state: AppState) => ({
   clipId: state.episode.view.clipId,
   episode: state.episode.metadata,
-});
+})
 
 const mapDispatchToProps = {
   createClip: thunks.createClip,
-};
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateClipModal);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateClipModal)

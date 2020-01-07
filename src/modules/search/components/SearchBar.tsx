@@ -1,17 +1,17 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import Input from 'components/Input';
-import { push } from 'connected-react-router';
-import { stringify } from 'querystringify';
-import { css } from 'emotion';
-import { colors, fonts, breakpoints } from 'styles';
-import zIndex from 'styles/zIndex';
-import SearchIcon from 'mdi-react/SearchIcon';
-import Button from 'components/Button';
-import AccessibleLabel from 'components/AccessibleLabel';
-import { KeyCode } from 'types';
+import React, { useState, useCallback, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import Input from 'components/Input'
+import { push } from 'connected-react-router'
+import { stringify } from 'querystringify'
+import { css } from 'emotion'
+import { colors, fonts, breakpoints } from 'styles'
+import zIndex from 'styles/zIndex'
+import SearchIcon from 'mdi-react/SearchIcon'
+import Button from 'components/Button'
+import AccessibleLabel from 'components/AccessibleLabel'
+import { KeyCode } from 'types'
 
-type SearchBarProps = { className?: string; initialText?: string };
+type SearchBarProps = { className?: string; initialText?: string }
 
 const styles = {
   main: css(fonts.text250, breakpoints.breakpoint600(fonts.text300), {
@@ -56,23 +56,23 @@ const styles = {
     color: colors.white,
     transition: 'all 200ms ease-out',
   }),
-};
+}
 
 const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
-  const dispatch = useDispatch();
-  const [text, setText] = useState(initialText || '');
+  const dispatch = useDispatch()
+  const [text, setText] = useState(initialText || '')
   useEffect(() => {
     if (initialText) {
-      setText(initialText);
+      setText(initialText)
     }
-  }, [initialText]);
+  }, [initialText])
 
-  const canSearch = text.length > 0;
+  const canSearch = text.length > 0
   const search = useCallback(() => {
     if (canSearch) {
-      dispatch(push(`/search?${stringify({ q: text })}`));
+      dispatch(push(`/search?${stringify({ q: text })}`))
     }
-  }, [canSearch, dispatch, text]);
+  }, [canSearch, dispatch, text])
 
   return (
     <div className={css(styles.main, className)}>
@@ -83,7 +83,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
         handleTextChange={setText}
         onKeyDown={e => {
           if (e.keyCode === KeyCode.Enter && canSearch) {
-            search();
+            search()
           }
         }}
         placeholder="Search for podcasts, episodes, and clips"
@@ -101,7 +101,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
         <SearchIcon aria-hidden size={20} />
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

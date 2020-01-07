@@ -1,22 +1,22 @@
-import React from 'react';
-import { css } from 'emotion';
-import HttpContent from 'components/HttpContent';
-import { ClipState } from '../types';
-import EyeOutlineIcon from 'mdi-react/EyeOutlineIcon';
-import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import SectionHeader from 'components/SectionHeader';
-import ClipContext from './ClipContext';
-import TruncateContent from 'components/TruncateContent';
-import Attribute from 'components/Attribute';
-import ParagraphSkeleton from 'components/ParagraphSkeleton';
-import formatClipAge from 'utils/formatClipAge';
-import { ClipSharing } from './ClipSharing';
-import ClipEditing from './ClipEditing';
+import React from 'react'
+import { css } from 'emotion'
+import HttpContent from 'components/HttpContent'
+import { ClipState } from '../types'
+import EyeOutlineIcon from 'mdi-react/EyeOutlineIcon'
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon'
+import SectionHeader from 'components/SectionHeader'
+import ClipContext from './ClipContext'
+import TruncateContent from 'components/TruncateContent'
+import Attribute from 'components/Attribute'
+import ParagraphSkeleton from 'components/ParagraphSkeleton'
+import formatClipAge from 'utils/formatClipAge'
+import { ClipSharing } from './ClipSharing'
+import ClipEditing from './ClipEditing'
 
 type ClipPageBodyProps = {
-  clipId: string;
-  clipMetadata: ClipState['metadata'];
-};
+  clipId: string
+  clipMetadata: ClipState['metadata']
+}
 
 const styles = {
   description: css({
@@ -41,7 +41,7 @@ const styles = {
   sideContainer: css({
     gridTemplateAreas: 'side',
   }),
-};
+}
 
 const ClipPageBodyMain: React.FC<Pick<ClipPageBodyProps, 'clipMetadata'>> = ({ clipMetadata }) => (
   <HttpContent
@@ -66,7 +66,7 @@ const ClipPageBodyMain: React.FC<Pick<ClipPageBodyProps, 'clipMetadata'>> = ({ c
       </div>
     )}
   />
-);
+)
 
 const ClipPageBodySide: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => {
   return (
@@ -85,8 +85,8 @@ const ClipPageBodySide: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata })
       />
       <ClipSharing {...{ clipId, clipMetadata }} />
     </>
-  );
-};
+  )
+}
 
 const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => (
   <div className={styles.main}>
@@ -97,6 +97,6 @@ const ClipPageBody: React.FC<ClipPageBodyProps> = ({ clipId, clipMetadata }) => 
       <ClipPageBodySide {...{ clipId, clipMetadata }} />
     </div>
   </div>
-);
+)
 
-export default ClipPageBody;
+export default ClipPageBody

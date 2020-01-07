@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
 
 type RoundedCornersProps = {
-  className?: string;
-  top?: boolean;
-  bottom?: boolean;
-};
+  className?: string
+  top?: boolean
+  bottom?: boolean
+}
 
 const styles = {
   border: css({
@@ -33,7 +33,7 @@ const styles = {
     bottom: 0,
     marginTop: -30,
   }),
-};
+}
 
 const RoundedCorners: React.FC<RoundedCornersProps> = ({ className, top, bottom }) => (
   <div
@@ -44,6 +44,6 @@ const RoundedCorners: React.FC<RoundedCornersProps> = ({ className, top, bottom 
       className
     )}
   />
-);
+)
 
-export default RoundedCorners;
+export default RoundedCorners

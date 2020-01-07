@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const useLocalStorage = <T extends object | string | number>(
   key: string,
@@ -6,25 +6,25 @@ const useLocalStorage = <T extends object | string | number>(
 ): [T, (val: T) => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window.localStorage.getItem(key)
 
-      return item ? JSON.parse(item) : initialValue;
+      return item ? JSON.parse(item) : initialValue
     } catch (error) {
-      return initialValue;
+      return initialValue
     }
-  });
+  })
 
   const setValue = (value: T) => {
     try {
-      setStoredValue(value);
+      setStoredValue(value)
 
-      window.localStorage.setItem(key, JSON.stringify(value));
+      window.localStorage.setItem(key, JSON.stringify(value))
     } catch (error) {
       // Eat error
     }
-  };
+  }
 
-  return [storedValue, setValue];
-};
+  return [storedValue, setValue]
+}
 
-export default useLocalStorage;
+export default useLocalStorage

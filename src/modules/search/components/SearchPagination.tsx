@@ -1,14 +1,14 @@
-import React from 'react';
-import useChangeQueryParam from 'hooks/useChangeQueryParam';
-import { push } from 'connected-react-router';
-import { css } from 'emotion';
-import PrimaryButton from 'components/PrimaryButton';
-import SecondaryButton from 'components/SecondaryButton';
+import React from 'react'
+import useChangeQueryParam from 'hooks/useChangeQueryParam'
+import { push } from 'connected-react-router'
+import { css } from 'emotion'
+import PrimaryButton from 'components/PrimaryButton'
+import SecondaryButton from 'components/SecondaryButton'
 
 type SearchPaginationProps = {
-  page: number;
-  total: number;
-};
+  page: number
+  total: number
+}
 
 const styles = {
   main: css({
@@ -18,11 +18,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'flex-end',
   }),
-};
+}
 
 const SearchPagination: React.FC<SearchPaginationProps> = ({ page, total }) => {
-  const numPages = Math.ceil(total / 10);
-  const changeQueryParam = useChangeQueryParam(push);
+  const numPages = Math.ceil(total / 10)
+  const changeQueryParam = useChangeQueryParam(push)
 
   return (
     <div className={styles.main}>
@@ -33,7 +33,7 @@ const SearchPagination: React.FC<SearchPaginationProps> = ({ page, total }) => {
         Next
       </PrimaryButton>
     </div>
-  );
-};
+  )
+}
 
-export default SearchPagination;
+export default SearchPagination

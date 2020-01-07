@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
-import { css } from 'emotion';
-import Audio from '../Audio';
-import { AudioControlsResult } from 'hooks/useAudioControls';
-import { colors, fonts, breakpoints } from 'styles';
-import PlayerControls from './PlayerControls';
-import formatHrMinSec from 'utils/formatHrMinSec';
-import { includes, pathOr } from 'ramda';
-import { KeyCode } from 'types';
-import AccessibleLabel from '../AccessibleLabel';
+import React, { useState, useEffect, useCallback } from 'react'
+import { Slider, Rail, Handles, Tracks } from 'react-compound-slider'
+import { css } from 'emotion'
+import Audio from '../Audio'
+import { AudioControlsResult } from 'hooks/useAudioControls'
+import { colors, fonts, breakpoints } from 'styles'
+import PlayerControls from './PlayerControls'
+import formatHrMinSec from 'utils/formatHrMinSec'
+import { includes, pathOr } from 'ramda'
+import { KeyCode } from 'types'
+import AccessibleLabel from '../AccessibleLabel'
 
 type PlayerProps = AudioControlsResult & {
-  audioRef: React.RefObject<HTMLAudioElement>;
-  audioUrl: string;
-  title: string;
-  start?: number;
-  end?: number;
-  captureKeyboardInput?: boolean;
-};
+  audioRef: React.RefObject<HTMLAudioElement>
+  audioUrl: string
+  title: string
+  start?: number
+  end?: number
+  captureKeyboardInput?: boolean
+}
 
 const styles = {
   controlsContainer: css({
@@ -79,10 +79,10 @@ const styles = {
     height: 4,
     width: '100%',
   }),
-};
+}
 
-const toSliderValue = (seconds: number) => Math.round(seconds * 100);
-const toSeconds = (value: number) => value / 100;
+const toSliderValue = (seconds: number) => Math.round(seconds * 100)
+const toSeconds = (value: number) => value / 100
 
 const Player: React.FC<PlayerProps> = ({
   audioRef,
@@ -94,21 +94,21 @@ const Player: React.FC<PlayerProps> = ({
   state,
   controls,
 }) => {
-  const { canPlay, duration, isPlaying, setTime, time } = state;
-  const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null);
+  const { canPlay, duration, isPlaying, setTime, time } = state
+  const [isSeeking, setIsSeeking] = useState<{ isPlaying: boolean } | null>(null)
   const togglePlayback = useCallback(() => {
     if (!isPlaying && canPlay) {
-      controls.play();
+      controls.play()
     } else {
-      controls.pause();
+      controls.pause()
     }
-  }, [isPlaying, canPlay, controls]);
+  }, [isPlaying, canPlay, controls])
 
   useEffect(() => {
     if (time >= (end || duration)) {
-      controls.pause();
+      controls.pause()
     }
-  }, [time, end, duration, controls]);
+  }, [time, end, duration, controls])
 
   useEffect(() => {
     const handleKeyboardControls = (e: KeyboardEvent) => {
@@ -121,31 +121,31 @@ const Player: React.FC<PlayerProps> = ({
         ]) ||
         !captureKeyboardInput
       ) {
-        return;
+        return
       }
 
       switch (e.keyCode) {
         case KeyCode.Space:
-          e.preventDefault();
-          togglePlayback();
-          return;
+          e.preventDefault()
+          togglePlayback()
+          return
         case KeyCode.ArrowLeft:
-          e.preventDefault();
-          canPlay && controls.seekRelative(-5);
-          return;
+          e.preventDefault()
+          canPlay && controls.seekRelative(-5)
+          return
         case KeyCode.ArrowRight:
-          e.preventDefault();
-          canPlay && controls.seekRelative(5);
-          return;
+          e.preventDefault()
+          canPlay && controls.seekRelative(5)
+          return
       }
-    };
+    }
 
-    window.addEventListener('keydown', handleKeyboardControls);
+    window.addEventListener('keydown', handleKeyboardControls)
 
     return () => {
-      window.removeEventListener('keydown', handleKeyboardControls);
-    };
-  }, [canPlay, captureKeyboardInput, togglePlayback, controls.seekRelative, controls]);
+      window.removeEventListener('keydown', handleKeyboardControls)
+    }
+  }, [canPlay, captureKeyboardInput, togglePlayback, controls.seekRelative, controls])
 
   return (
     <div>
@@ -158,18 +158,18 @@ const Player: React.FC<PlayerProps> = ({
           step={1}
           values={[toSliderValue(time)]}
           onChange={([value]) => {
-            controls.seek(toSeconds(value));
+            controls.seek(toSeconds(value))
             if (isSeeking && isSeeking.isPlaying) {
-              controls.play();
+              controls.play()
             }
-            setIsSeeking(null);
+            setIsSeeking(null)
           }}
           onUpdate={([value]) => {
-            setTime(toSeconds(value));
+            setTime(toSeconds(value))
           }}
           onSlideStart={() => {
-            setIsSeeking({ isPlaying });
-            controls.pause();
+            setIsSeeking({ isPlaying })
+            controls.pause()
           }}
         >
           <Rail>{({ getRailProps }) => <div className={styles.rail} {...getRailProps()} />}</Rail>
@@ -224,7 +224,7 @@ const Player: React.FC<PlayerProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Player;
+export default Player

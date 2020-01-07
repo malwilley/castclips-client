@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { css } from 'emotion';
+import * as React from 'react'
+import { css } from 'emotion'
 
 type LayoutContainerProps = {
-  className?: string;
-};
+  className?: string
+}
 
 const styles = {
   main: css({
@@ -15,10 +15,10 @@ const styles = {
     padding: '0 20px',
     width: '100%',
   }),
-};
+}
 
 const LayoutContainer: React.FC<LayoutContainerProps> = ({ children, className }) => (
   <div className={css(styles.main, className)}>{children}</div>
-);
+)
 
-export default LayoutContainer;
+export default LayoutContainer

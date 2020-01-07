@@ -1,15 +1,15 @@
-import * as React from 'react';
-import Card from 'components/Card';
-import { css } from 'emotion';
-import { colors, fonts, coverContainer } from 'styles';
-import { ClipMetadata } from 'modules/clip/types';
-import ClipCardAttributes from 'components/ClipCardAttributes';
-import ClipCardAccent from 'components/ClipCardAccent';
-import { Link } from 'react-router-dom';
+import * as React from 'react'
+import Card from 'components/Card'
+import { css } from 'emotion'
+import { colors, fonts, coverContainer } from 'styles'
+import { ClipMetadata } from 'modules/clip/types'
+import ClipCardAttributes from 'components/ClipCardAttributes'
+import ClipCardAccent from 'components/ClipCardAccent'
+import { Link } from 'react-router-dom'
 
 type PodcastClipCardProps = {
-  clip: ClipMetadata;
-};
+  clip: ClipMetadata
+}
 
 const styles = {
   main: css({
@@ -39,7 +39,7 @@ const styles = {
     },
     display: 'flex',
   }),
-};
+}
 
 const PodcastClipCard: React.FC<PodcastClipCardProps> = ({ clip }) => (
   <Card className={styles.main} hover>
@@ -50,6 +50,6 @@ const PodcastClipCard: React.FC<PodcastClipCardProps> = ({ clip }) => (
     <h5 className={styles.episode}>{clip.episode.title}</h5>
     <ClipCardAttributes className={styles.footer} clip={clip} />
   </Card>
-);
+)
 
-export default PodcastClipCard;
+export default PodcastClipCard

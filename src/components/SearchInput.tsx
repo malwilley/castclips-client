@@ -1,11 +1,11 @@
-import React from 'react';
-import SearchIcon from 'mdi-react/SearchIcon';
-import { css } from 'emotion';
-import StyledInput from './StyledInput';
-import { InputProps } from './Input';
-import { colors } from 'styles';
+import React from 'react'
+import SearchIcon from 'mdi-react/SearchIcon'
+import { css } from 'emotion'
+import StyledInput from './StyledInput'
+import { InputProps } from './Input'
+import { colors } from 'styles'
 
-type SearchInputProps = InputProps;
+type SearchInputProps = InputProps
 
 const styles = {
   main: css({
@@ -28,13 +28,13 @@ const styles = {
     padding: '0 1rem 0 2.5rem',
     border: `1px solid ${colors.gray80}`,
   }),
-};
+}
 
 const SearchInput: React.FC<SearchInputProps> = ({ className, ...props }) => (
   <div className={css(styles.main, className)}>
     <SearchIcon className={styles.icon} />
     <StyledInput className={styles.input} {...props} />
   </div>
-);
+)
 
-export default SearchInput;
+export default SearchInput

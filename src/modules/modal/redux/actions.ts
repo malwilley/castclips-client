@@ -1,5 +1,5 @@
-import { createAction } from 'redux/createAction';
-import { ActionsUnion } from 'redux/types';
+import { createAction } from 'redux/createAction'
+import { ActionsUnion } from 'redux/types'
 
 export enum ActionTypes {
   ModalSend = 'modal/send',
@@ -13,6 +13,6 @@ export const actions = {
   modalError: (message: string) => createAction(ActionTypes.ModalError, message),
   modalReset: () => createAction(ActionTypes.ModalReset),
   modalSuccess: () => createAction(ActionTypes.ModalSuccess),
-};
+}
 
-export type Actions = ActionsUnion<typeof actions>;
+export type Actions = ActionsUnion<typeof actions>

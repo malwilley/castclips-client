@@ -1,22 +1,22 @@
-import { css } from 'emotion';
-import React from 'react';
-import { HttpRequest } from 'types';
-import Card from 'components/Card';
-import HttpContent from 'components/HttpContent';
-import { ClipMetadata } from '../types';
-import TextSkeleton from 'components/TextSkeleton';
-import { colors, fonts } from 'styles';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import { Link } from 'react-router-dom';
-import LikeButton from './LikeButton';
-import Player from 'components/Player';
-import useAudioControls from 'hooks/useAudioControls';
-import { stringify } from 'querystringify';
-import ContinueListening from './ContinueListening';
+import { css } from 'emotion'
+import React from 'react'
+import { HttpRequest } from 'types'
+import Card from 'components/Card'
+import HttpContent from 'components/HttpContent'
+import { ClipMetadata } from '../types'
+import TextSkeleton from 'components/TextSkeleton'
+import { colors, fonts } from 'styles'
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon'
+import { Link } from 'react-router-dom'
+import LikeButton from './LikeButton'
+import Player from 'components/Player'
+import useAudioControls from 'hooks/useAudioControls'
+import { stringify } from 'querystringify'
+import ContinueListening from './ContinueListening'
 
 type ClipCardProps = {
-  clip: HttpRequest<ClipMetadata>;
-};
+  clip: HttpRequest<ClipMetadata>
+}
 
 const styles = {
   bottomContainer: css({
@@ -52,7 +52,7 @@ const styles = {
     padding: '8px 4px',
     transition: 'all 300ms ease-out',
   }),
-};
+}
 
 const ClipCardSuccess: React.FC<ClipMetadata> = ({
   id,
@@ -64,11 +64,11 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
   userHasLiked,
   likesCount,
 }) => {
-  const ref = React.useRef<HTMLAudioElement>(null);
-  const audioStateControls = useAudioControls(ref);
+  const ref = React.useRef<HTMLAudioElement>(null)
+  const audioStateControls = useAudioControls(ref)
   const {
     state: { time },
-  } = audioStateControls;
+  } = audioStateControls
 
   return (
     <>
@@ -97,8 +97,8 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
         </Link>
       </div>
     </>
-  );
-};
+  )
+}
 
 const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
   <Card className={styles.main} feature>
@@ -115,6 +115,6 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
       renderSuccess={clipData => <ClipCardSuccess {...clipData} />}
     />
   </Card>
-);
+)
 
-export default ClipCard;
+export default ClipCard

@@ -1,16 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { css } from 'emotion';
-import HeaderAccount from './HeaderAccount';
-import Logo from 'icons/Logo';
-import zIndex from 'styles/zIndex';
-import SearchBar from 'modules/search/components/SearchBar';
-import { clickable, colors } from 'styles';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { css } from 'emotion'
+import HeaderAccount from './HeaderAccount'
+import Logo from 'icons/Logo'
+import zIndex from 'styles/zIndex'
+import SearchBar from 'modules/search/components/SearchBar'
+import { clickable, colors } from 'styles'
 
 type HeaderProps = {
-  className?: string;
-  searchText?: string;
-};
+  className?: string
+  searchText?: string
+}
 
 const styles = {
   main: css({
@@ -61,7 +61,7 @@ const styles = {
     padding: '0 20px',
     width: '100%',
   }),
-};
+}
 
 const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
   <header className={css(styles.main, className)}>
@@ -77,6 +77,6 @@ const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
       </div>
     </div>
   </header>
-);
+)
 
-export default Header;
+export default Header

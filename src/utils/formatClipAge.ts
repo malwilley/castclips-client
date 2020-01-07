@@ -1,6 +1,6 @@
-import distanceInWordsStrict from 'date-fns/distance_in_words_strict';
+import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 
 const formatClipAge = (createdDate: Date) =>
-  distanceInWordsStrict(Date.now(), createdDate, { addSuffix: true });
+  distanceInWordsStrict(Date.now(), createdDate, { addSuffix: true })
 
-export default formatClipAge;
+export default formatClipAge

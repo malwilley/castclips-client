@@ -1,10 +1,10 @@
-import React from 'react';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
+import React from 'react'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
 
 type ContinueListeningProps = {
-  show?: boolean;
-};
+  show?: boolean
+}
 
 const styles = {
   main: css(fonts.bold300, {
@@ -30,7 +30,7 @@ const styles = {
     borderRight: '10px solid transparent',
     borderTop: `10px solid ${colors.secondary20}`,
   }),
-};
+}
 
 const ContinueListening: React.FC<ContinueListeningProps> = ({ show = false }) => (
   <div>
@@ -41,6 +41,6 @@ const ContinueListening: React.FC<ContinueListeningProps> = ({ show = false }) =
       </div>
     )}
   </div>
-);
+)
 
-export default ContinueListening;
+export default ContinueListening

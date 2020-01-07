@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from 'react'
 
-type AppbaseProps = React.SVGProps<SVGSVGElement>;
+type AppbaseProps = React.SVGProps<SVGSVGElement>
 const Appbase: React.FC<AppbaseProps> = props => (
   <svg
     aria-label="Appbase logo"
@@ -169,6 +169,6 @@ const Appbase: React.FC<AppbaseProps> = props => (
       />
     </g>
   </svg>
-);
+)
 
-export default Appbase;
+export default Appbase

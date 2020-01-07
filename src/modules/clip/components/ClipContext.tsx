@@ -1,18 +1,18 @@
-import * as React from 'react';
-import SectionHeader from 'components/SectionHeader';
-import Card from 'components/Card';
-import { ClipMetadata } from '../types';
-import formatHrMinSec from 'utils/formatHrMinSec';
-import { css } from 'emotion';
-import { colors, fonts, clickable, coverContainer } from 'styles';
-import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
-import formatPublishDate from 'utils/formatPublishDate';
-import ClipCardAccent from 'components/ClipCardAccent';
-import { Link } from 'react-router-dom';
-import { stringify } from 'querystringify';
+import * as React from 'react'
+import SectionHeader from 'components/SectionHeader'
+import Card from 'components/Card'
+import { ClipMetadata } from '../types'
+import formatHrMinSec from 'utils/formatHrMinSec'
+import { css } from 'emotion'
+import { colors, fonts, clickable, coverContainer } from 'styles'
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon'
+import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon'
+import formatPublishDate from 'utils/formatPublishDate'
+import ClipCardAccent from 'components/ClipCardAccent'
+import { Link } from 'react-router-dom'
+import { stringify } from 'querystringify'
 
-type ClipContextProps = { clip: ClipMetadata };
+type ClipContextProps = { clip: ClipMetadata }
 
 const styles = {
   card: css({
@@ -70,7 +70,7 @@ const styles = {
     marginRight: 10,
   }),
   link: css(clickable),
-};
+}
 
 const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
   <div>
@@ -120,6 +120,6 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
       </div>
     </Card>
   </div>
-);
+)
 
-export default ClipContext;
+export default ClipContext

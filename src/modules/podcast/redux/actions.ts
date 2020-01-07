@@ -1,6 +1,6 @@
-import { createAction } from 'redux/createAction';
-import { ActionsUnion } from 'redux/types';
-import { PodcastEpisode, PodcastState } from '../types';
+import { createAction } from 'redux/createAction'
+import { ActionsUnion } from 'redux/types'
+import { PodcastEpisode, PodcastState } from '../types'
 
 export enum ActionTypes {
   AddEpisodes = 'podcast/add_episodes',
@@ -22,6 +22,6 @@ export const actions = {
     createAction(ActionTypes.SetEpisodeSearchTerm, query),
   setEpisodeSearchOffset: (offset: PodcastState['search']['offset']) =>
     createAction(ActionTypes.SetEpisodeSearchOffset, offset),
-};
+}
 
-export type Actions = ActionsUnion<typeof actions>;
+export type Actions = ActionsUnion<typeof actions>

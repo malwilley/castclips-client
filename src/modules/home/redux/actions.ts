@@ -1,7 +1,7 @@
-import { createAction } from 'redux/createAction';
-import { ActionsUnion } from 'redux/types';
-import { HomeState } from '../types';
-import { ClipMetadata } from 'modules/clip/types';
+import { createAction } from 'redux/createAction'
+import { ActionsUnion } from 'redux/types'
+import { HomeState } from '../types'
+import { ClipMetadata } from 'modules/clip/types'
 
 export enum ActionTypes {
   AddHotClips = 'home/add_hot_clips',
@@ -15,6 +15,6 @@ export const actions = {
   fetchMoreHotClips: () => createAction(ActionTypes.FetchMoreHotClips),
   setHotClips: (clips: HomeState['hotClips']) => createAction(ActionTypes.SetHotClips, clips),
   setPage: (page: HomeState['page']) => createAction(ActionTypes.SetPage, page),
-};
+}
 
-export type Actions = ActionsUnion<typeof actions>;
+export type Actions = ActionsUnion<typeof actions>

@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
-import useResizeObserver from 'hooks/useResizeObserver';
-import { css } from 'emotion';
-import { range } from 'ramda';
+import React, { useMemo } from 'react'
+import useResizeObserver from 'hooks/useResizeObserver'
+import { css } from 'emotion'
+import { range } from 'ramda'
 
 type StackGridProps = {
-  children: Array<React.ReactNode>;
-  minColumnWidth: number;
-};
+  children: Array<React.ReactNode>
+  minColumnWidth: number
+}
 
 const styles = {
   main: css({
@@ -21,38 +21,38 @@ const styles = {
     },
     flex: 1,
   }),
-};
+}
 
 const StackGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
   const {
     ref,
     dimensions: { width },
-  } = useResizeObserver<HTMLDivElement>();
+  } = useResizeObserver<HTMLDivElement>()
 
-  const numColumns = Math.floor(width / minColumnWidth) || 1;
+  const numColumns = Math.floor(width / minColumnWidth) || 1
 
   const itemsByColumn = useMemo(() => {
     return children.reduce<React.ReactNode[][]>(
       (acc, next, i) => {
-        acc[i % numColumns].push(next);
-        return acc;
+        acc[i % numColumns].push(next)
+        return acc
       },
       range(0, numColumns).map(() => [])
-    );
-  }, [children, numColumns]);
+    )
+  }, [children, numColumns])
 
   const content = range(0, numColumns).map(i => (
     <div className={styles.column} key={i}>
       {itemsByColumn[i]}
     </div>
-  ));
+  ))
 
   return (
     <div className={styles.main} ref={ref}>
       {/* Prevents from rendering a single column before rerendering with the correct number */}
       {width ? content : null}
     </div>
-  );
-};
+  )
+}
 
-export default StackGrid;
+export default StackGrid

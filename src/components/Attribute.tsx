@@ -1,10 +1,10 @@
-import React from 'react';
-import { css } from 'emotion';
-import { fonts, colors } from 'styles';
+import React from 'react'
+import { css } from 'emotion'
+import { fonts, colors } from 'styles'
 
 type AttributeProps = {
-  icon: React.ReactNode;
-};
+  icon: React.ReactNode
+}
 
 const styles = {
   main: css(fonts.text300, {
@@ -33,13 +33,13 @@ const styles = {
     flexGrow: 1,
     width: 0,
   }),
-};
+}
 
 const Attribute: React.FC<AttributeProps> = ({ children, icon }) => (
   <div className={styles.main}>
     <div className={styles.icon}>{icon}</div>
     <div className={styles.content}>{children}</div>
   </div>
-);
+)
 
-export default Attribute;
+export default Attribute
