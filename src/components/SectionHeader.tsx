@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
 
 type SectionHeaderProps = {
-  className?: string;
-  light?: boolean;
-  top?: boolean;
-};
+  className?: string
+  light?: boolean
+  top?: boolean
+}
 
 const styles = {
   main: css({
@@ -31,13 +31,13 @@ const styles = {
   top: css({
     marginTop: '2rem',
   }),
-};
+}
 
 const SectionHeader: React.SFC<SectionHeaderProps> = ({ children, className, light, top }) => (
   <div className={css(styles.main, light && styles.light, top && styles.top, className)}>
     <h2 className={styles.text}>{children}</h2>
     <div className={styles.underline} />
   </div>
-);
+)
 
-export default SectionHeader;
+export default SectionHeader

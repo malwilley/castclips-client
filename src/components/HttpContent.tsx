@@ -1,11 +1,11 @@
-import { HttpRequest } from 'types';
+import { HttpRequest } from 'types'
 
 type HttpContentProps<T> = {
-  renderError?: (message: string) => JSX.Element | null;
-  renderFetching?: () => JSX.Element | null;
-  renderSuccess: (data: T) => JSX.Element | null;
-  request: HttpRequest<T>;
-};
+  renderError?: (message: string) => JSX.Element | null
+  renderFetching?: () => JSX.Element | null
+  renderSuccess: (data: T) => JSX.Element | null
+  request: HttpRequest<T>
+}
 
 const HttpContent = <T extends any>({
   request,
@@ -15,15 +15,15 @@ const HttpContent = <T extends any>({
 }: HttpContentProps<T>) => {
   switch (request.type) {
     case 'success':
-      return renderSuccess(request.data);
+      return renderSuccess(request.data)
     case 'error':
-      return renderError(request.message);
+      return renderError(request.message)
     case 'fetching':
-      return renderFetching();
+      return renderFetching()
     case 'not_asked':
     default:
-      return null;
+      return null
   }
-};
+}
 
-export default HttpContent;
+export default HttpContent

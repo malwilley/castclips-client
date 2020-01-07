@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import Input, { InputProps } from './Input';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import Input, { InputProps } from './Input'
 
-type StyledInputProps = InputProps;
+type StyledInputProps = InputProps
 
 type StyledInputLabelProps = {
-  htmlFor: string;
-};
+  htmlFor: string
+}
 
 const styles = {
   input: css({
@@ -32,13 +32,13 @@ const styles = {
     marginBottom: 10,
     fontWeight: 'bold',
   }),
-};
+}
 
 const StyledInputLabel: React.FC<StyledInputLabelProps> = ({ children, htmlFor }) => (
   <label className={styles.label} htmlFor={htmlFor}>
     {children}
   </label>
-);
+)
 
 const StyledInput: React.FC<StyledInputProps> = ({
   className,
@@ -51,8 +51,8 @@ const StyledInput: React.FC<StyledInputProps> = ({
       handleTextChange={handleTextChange}
       {...inputProps}
     />
-  );
-};
+  )
+}
 
-export { StyledInputLabel };
-export default StyledInput;
+export { StyledInputLabel }
+export default StyledInput

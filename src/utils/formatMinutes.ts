@@ -1,7 +1,7 @@
 const formatMinutes = (seconds: number) => {
-  const minutes = Math.floor(seconds / 60);
+  const minutes = Math.floor(seconds / 60)
 
-  return `${minutes} minutes`;
-};
+  return `${minutes} minutes`
+}
 
-export default formatMinutes;
+export default formatMinutes

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { css } from 'emotion';
+import * as React from 'react'
+import { css } from 'emotion'
 
 const styles = {
   main: css({
@@ -12,8 +12,8 @@ const styles = {
     justifyContent: 'flex-end',
     padding: '0 24px',
   }),
-};
+}
 
-const ModalFooter: React.SFC = ({ children }) => <div className={styles.main}>{children}</div>;
+const ModalFooter: React.SFC = ({ children }) => <div className={styles.main}>{children}</div>
 
-export default ModalFooter;
+export default ModalFooter

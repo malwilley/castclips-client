@@ -1,14 +1,14 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { css } from 'emotion';
-import Button from './Button';
-import { colors, fonts } from 'styles';
-import ContentCopyIcon from 'mdi-react/ContentCopyIcon';
-import AccessibleLabel from './AccessibleLabel';
+import React, { useState, useRef, useCallback } from 'react'
+import { css } from 'emotion'
+import Button from './Button'
+import { colors, fonts } from 'styles'
+import ContentCopyIcon from 'mdi-react/ContentCopyIcon'
+import AccessibleLabel from './AccessibleLabel'
 
 type CopyLinkProps = {
-  className?: string;
-  text: string;
-};
+  className?: string
+  text: string
+}
 
 const styles = {
   main: css({
@@ -49,35 +49,35 @@ const styles = {
     padding: 8,
     transition: 'background-color 200ms ease-out',
   }),
-};
+}
 
 // todo: change color/icon on success
 // settimeout for changeing back to normal
 // animate?
 
 const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
-  const [, setCopied] = useState<null | 'copied' | 'error'>(null);
-  const ref = useRef<HTMLInputElement>(null);
+  const [, setCopied] = useState<null | 'copied' | 'error'>(null)
+  const ref = useRef<HTMLInputElement>(null)
 
   const copyToClipboard = useCallback(() => {
     if (!ref.current) {
-      return;
+      return
     }
     try {
-      ref.current.select();
-      document.execCommand('copy');
-      setCopied('copied');
+      ref.current.select()
+      document.execCommand('copy')
+      setCopied('copied')
     } catch {
-      setCopied('error');
+      setCopied('error')
     }
-  }, [ref]);
+  }, [ref])
 
   const selectOnClick = useCallback(() => {
     if (!ref.current) {
-      return;
+      return
     }
-    ref.current.select();
-  }, [ref]);
+    ref.current.select()
+  }, [ref])
 
   return (
     <div className={css(styles.main, className)}>
@@ -93,7 +93,7 @@ const CopyLink: React.FC<CopyLinkProps> = ({ className, text }) => {
         <ContentCopyIcon aria-hidden size="1.2em" />
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default CopyLink;
+export default CopyLink

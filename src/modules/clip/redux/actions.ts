@@ -1,6 +1,6 @@
-import { createAction } from 'redux/createAction';
-import { ActionsUnion } from 'redux/types';
-import { ClipState } from '../types';
+import { createAction } from 'redux/createAction'
+import { ActionsUnion } from 'redux/types'
+import { ClipState } from '../types'
 
 export enum ActionTypes {
   SetMetadata = 'clip/set_metadata',
@@ -10,6 +10,6 @@ export enum ActionTypes {
 export const actions = {
   setMetadata: (metadata: ClipState['metadata']) => createAction(ActionTypes.SetMetadata, metadata),
   setLikeState: (likeState: boolean) => createAction(ActionTypes.SetLikeState, likeState),
-};
+}
 
-export type Actions = ActionsUnion<typeof actions>;
+export type Actions = ActionsUnion<typeof actions>

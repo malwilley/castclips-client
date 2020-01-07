@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { ClipMetadata } from 'modules/clip/types';
-import { css } from 'emotion';
-import { fonts } from 'styles';
-import HeartIcon from 'mdi-react/HeartIcon';
-import CalendarDayIcon from 'mdi-react/CalendarDayIcon';
-import formatClipAge from 'utils/formatClipAge';
-import capitalizeFirstLetter from 'utils/capitalizeFirstLetter';
-import Timestamp from './Timestamp';
-import TextSkeleton from './TextSkeleton';
+import * as React from 'react'
+import { ClipMetadata } from 'modules/clip/types'
+import { css } from 'emotion'
+import { fonts } from 'styles'
+import HeartIcon from 'mdi-react/HeartIcon'
+import CalendarDayIcon from 'mdi-react/CalendarDayIcon'
+import formatClipAge from 'utils/formatClipAge'
+import capitalizeFirstLetter from 'utils/capitalizeFirstLetter'
+import Timestamp from './Timestamp'
+import TextSkeleton from './TextSkeleton'
 
 type ClipCardAttributesProps = {
-  className?: string;
-  clip: ClipMetadata;
-};
+  className?: string
+  clip: ClipMetadata
+}
 
 const styles = {
   main: css({
@@ -24,14 +24,14 @@ const styles = {
     display: 'flex',
   }),
   iconText: css(fonts.attribute300),
-};
+}
 
 const ClipCardAttributesSkeleton: React.FC<{ className?: string }> = ({ className }) => (
   <div className={css(styles.main, className)}>
     <TextSkeleton height="1em" width={120} />
     <TextSkeleton height="1em" width={45} />
   </div>
-);
+)
 
 const ClipCardAttributes: React.FC<ClipCardAttributesProps> = ({
   className,
@@ -50,7 +50,7 @@ const ClipCardAttributes: React.FC<ClipCardAttributesProps> = ({
     </div>
     <Timestamp seconds={end - start} />
   </div>
-);
+)
 
-export { ClipCardAttributesSkeleton };
-export default ClipCardAttributes;
+export { ClipCardAttributesSkeleton }
+export default ClipCardAttributes

@@ -47,4 +47,4 @@ export default {
   gradient: 'linear-gradient(to right top, #07689f, #0074b5, #0081cc, #008de3, #009afa)',
   gunmetal800: '#272838',
   gunmetal100: '#aaaab0',
-};
+}

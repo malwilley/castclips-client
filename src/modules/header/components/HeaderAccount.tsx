@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { css } from 'emotion';
-import { AppState } from 'redux/types';
-import { connect } from 'react-redux';
-import { AuthState, UserLoggedIn } from 'modules/auth/types';
-import Button from 'components/Button';
-import firebase from 'modules/auth/firebase';
-import Downshift from 'downshift';
-import { colors, fonts, boxShadow } from 'styles';
-import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import { secondaryButtonStyles } from 'components/SecondaryButton';
+import * as React from 'react'
+import { Link } from 'react-router-dom'
+import { css } from 'emotion'
+import { AppState } from 'redux/types'
+import { connect } from 'react-redux'
+import { AuthState, UserLoggedIn } from 'modules/auth/types'
+import Button from 'components/Button'
+import firebase from 'modules/auth/firebase'
+import Downshift from 'downshift'
+import { colors, fonts, boxShadow } from 'styles'
+import MenuDownIcon from 'mdi-react/MenuDownIcon'
+import { secondaryButtonStyles } from 'components/SecondaryButton'
 
 type HeaderAccountProps = {
-  className?: string;
-  user: AuthState['user'];
-};
+  className?: string
+  user: AuthState['user']
+}
 
 const styles = {
   email: css({
@@ -84,7 +84,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   }),
-};
+}
 
 const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
   <Downshift>
@@ -114,22 +114,22 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
       </div>
     )}
   </Downshift>
-);
+)
 
 const HeaderAccountLoggedOut: React.FC = () => (
   <Link className={secondaryButtonStyles} to={'/signin'}>
     Sign in
   </Link>
-);
+)
 
 const HeaderAccount: React.FC<HeaderAccountProps> = ({ className, user }) => (
   <div className={className}>
     {user.type === 'loggedin' ? <HeaderAccountLoggedIn user={user} /> : <HeaderAccountLoggedOut />}
   </div>
-);
+)
 
 const mapStateToProps = (state: AppState) => ({
   user: state.auth.user,
-});
+})
 
-export default connect(mapStateToProps)(HeaderAccount);
+export default connect(mapStateToProps)(HeaderAccount)

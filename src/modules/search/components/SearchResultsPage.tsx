@@ -1,28 +1,28 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from 'redux/types';
-import { SearchType } from '../types';
-import HttpContent from 'components/HttpContent';
-import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard';
-import SearchTypeSwitch from './SearchTypeSwitch';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import LayoutContainer from 'components/LayoutContainer';
-import { LocalStorageKey } from 'types';
-import useLocalStorage from 'hooks/useLocalStorage';
-import { replace } from 'connected-react-router';
-import useChangeQueryParam from 'hooks/useChangeQueryParam';
-import { actions } from '../redux/actions';
-import { search } from 'api/firebase';
-import { getAuthToken } from 'modules/auth/firebase';
-import makeMapSearchResult from '../utils/mapSearchResult';
-import SearchPagination from './SearchPagination';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppState } from 'redux/types'
+import { SearchType } from '../types'
+import HttpContent from 'components/HttpContent'
+import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard'
+import SearchTypeSwitch from './SearchTypeSwitch'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import LayoutContainer from 'components/LayoutContainer'
+import { LocalStorageKey } from 'types'
+import useLocalStorage from 'hooks/useLocalStorage'
+import { replace } from 'connected-react-router'
+import useChangeQueryParam from 'hooks/useChangeQueryParam'
+import { actions } from '../redux/actions'
+import { search } from 'api/firebase'
+import { getAuthToken } from 'modules/auth/firebase'
+import makeMapSearchResult from '../utils/mapSearchResult'
+import SearchPagination from './SearchPagination'
 
 type SearchResultsPageProps = {
-  query: string;
-  type?: SearchType;
-  page?: number;
-};
+  query: string
+  type?: SearchType
+  page?: number
+}
 
 const styles = {
   container: css({
@@ -44,7 +44,7 @@ const styles = {
     height: 1,
     backgroundColor: colors.gray50,
   }),
-};
+}
 
 const fetchSearchResults = async ({
   dispatch,
@@ -52,21 +52,21 @@ const fetchSearchResults = async ({
   type,
   page,
 }: {
-  dispatch: (_: any) => void;
-  query: string;
-  type: SearchType;
-  page: number;
+  dispatch: (_: any) => void
+  query: string
+  type: SearchType
+  page: number
 }) => {
   if (!query) {
-    return;
+    return
   }
 
-  dispatch(actions.setSearchRequest({ request: { type: 'fetching' }, type }));
+  dispatch(actions.setSearchRequest({ request: { type: 'fetching' }, type }))
 
   try {
-    const token = await getAuthToken();
-    const offset = (page - 1) * 10;
-    const { results, total } = await search(token, { type, query, offset });
+    const token = await getAuthToken()
+    const offset = (page - 1) * 10
+    const { results, total } = await search(token, { type, query, offset })
     dispatch(
       actions.setSearchRequest({
         type,
@@ -78,45 +78,45 @@ const fetchSearchResults = async ({
           },
         },
       })
-    );
+    )
   } catch {
     dispatch(
       actions.setSearchRequest({
         request: { type: 'error', message: 'Error fetching search results' },
         type,
       })
-    );
+    )
   }
-};
+}
 
 const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   type: typeFromUrl,
   page = 1,
 }) => {
-  const dispatch = useDispatch();
-  const changeQueryParam = useChangeQueryParam(replace);
+  const dispatch = useDispatch()
+  const changeQueryParam = useChangeQueryParam(replace)
   const [storedType, setStoredType] = useLocalStorage<SearchType>(
     LocalStorageKey.SearchType,
     SearchType.Podcasts
-  );
+  )
 
-  const type = typeFromUrl || storedType;
-  const results = useSelector((state: AppState) => state.search[type]);
+  const type = typeFromUrl || storedType
+  const results = useSelector((state: AppState) => state.search[type])
 
   React.useEffect(() => {
     if (!typeFromUrl) {
-      changeQueryParam('type', type);
+      changeQueryParam('type', type)
     }
     if (type !== storedType) {
-      setStoredType(type);
+      setStoredType(type)
     }
-  }, [changeQueryParam, setStoredType, storedType, type, typeFromUrl]);
+  }, [changeQueryParam, setStoredType, storedType, type, typeFromUrl])
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchSearchResults({ dispatch, query, type, page });
-  }, [query, type, page, dispatch]);
+    window.scrollTo(0, 0)
+    fetchSearchResults({ dispatch, query, type, page })
+  }, [query, type, page, dispatch])
 
   return (
     <>
@@ -156,12 +156,12 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
                 ))}
                 <SearchPagination {...{ page, total: data.total }} />
               </>
-            );
+            )
           }}
         />
       </LayoutContainer>
     </>
-  );
-};
+  )
+}
 
-export default SearchResultsPage;
+export default SearchResultsPage

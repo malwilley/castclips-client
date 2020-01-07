@@ -1,9 +1,9 @@
-import React from 'react';
-import { colors } from 'styles';
+import React from 'react'
+import { colors } from 'styles'
 
 type LogoProps = React.SVGProps<SVGSVGElement> & {
-  color?: string;
-};
+  color?: string
+}
 
 const Logo: React.FC<LogoProps> = ({ color, ...props }) => (
   <svg
@@ -30,6 +30,6 @@ const Logo: React.FC<LogoProps> = ({ color, ...props }) => (
       </g>
     </g>
   </svg>
-);
+)
 
-export default Logo;
+export default Logo

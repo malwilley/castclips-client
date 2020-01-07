@@ -1,11 +1,11 @@
-import React from 'react';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import Button, { ButtonProps } from './Button';
+import React from 'react'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import Button, { ButtonProps } from './Button'
 
 export type PrimaryButtonProps = ButtonProps & {
-  destructive?: boolean;
-};
+  destructive?: boolean
+}
 
 const styles = {
   main: css(fonts.bold300, {
@@ -34,7 +34,7 @@ const styles = {
     },
     backgroundColor: colors.red400,
   }),
-};
+}
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   className,
@@ -42,6 +42,6 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   ...props
 }) => (
   <Button className={css(styles.main, destructive && styles.destructive, className)} {...props} />
-);
+)
 
-export default PrimaryButton;
+export default PrimaryButton

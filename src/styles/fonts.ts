@@ -1,16 +1,16 @@
-import { CSSObject } from 'create-emotion';
-import colors from './colors';
+import { CSSObject } from 'create-emotion'
+import colors from './colors'
 
 const heading: CSSObject = {
   fontWeight: 900,
-};
+}
 const bold: CSSObject = {
   fontWeight: 700,
-};
+}
 const text: CSSObject = {
   fontWeight: 'normal',
   lineHeight: 1.3,
-};
+}
 const attribute: CSSObject = {
   '& > svg': {
     color: colors.gray200,
@@ -23,7 +23,7 @@ const attribute: CSSObject = {
   fontWeight: 'normal',
   color: colors.gray300,
   marginRight: '1em',
-};
+}
 
 const fonts = {
   heading700: {
@@ -86,6 +86,6 @@ const fonts = {
     ...attribute,
     fontSize: '0.7rem',
   },
-};
+}
 
-export default fonts;
+export default fonts

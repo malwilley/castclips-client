@@ -1,18 +1,18 @@
 type ModalSending = {
-  type: 'sending';
-};
+  type: 'sending'
+}
 
 type ModalNotAsked = {
-  type: 'not_asked';
-};
+  type: 'not_asked'
+}
 
 type ModalError = {
-  type: 'error';
-  message: string;
-};
+  type: 'error'
+  message: string
+}
 
 type ModalSuccess = {
-  type: 'success';
-};
+  type: 'success'
+}
 
-export type ModalState = ModalSending | ModalNotAsked | ModalError | ModalSuccess;
+export type ModalState = ModalSending | ModalNotAsked | ModalError | ModalSuccess

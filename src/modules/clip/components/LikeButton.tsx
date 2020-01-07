@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors, clickable } from 'styles';
-import Button from 'components/Button';
-import HeartIcon from 'mdi-react/HeartIcon';
-import { useDispatch } from 'react-redux';
-import { thunks } from '../redux';
-import AccessibleLabel from 'components/AccessibleLabel';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors, clickable } from 'styles'
+import Button from 'components/Button'
+import HeartIcon from 'mdi-react/HeartIcon'
+import { useDispatch } from 'react-redux'
+import { thunks } from '../redux'
+import AccessibleLabel from 'components/AccessibleLabel'
 
 type LikeButtonProps = {
-  id: string;
-  hasLiked: boolean;
-  numLikes: number;
-};
+  id: string
+  hasLiked: boolean
+  numLikes: number
+}
 
 const styles = {
   main: css(clickable, {
@@ -26,15 +26,15 @@ const styles = {
   iconSelected: css({
     color: colors.red,
   }),
-};
+}
 
 const LikeButton: React.FC<LikeButtonProps> = ({ id, hasLiked, numLikes }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const onClick = React.useCallback(
     () => (hasLiked ? dispatch(thunks.unlikeClip(id)) : dispatch(thunks.likeClip(id))),
     [dispatch, hasLiked, id]
-  );
+  )
 
   return (
     <Button aria-labelledby="like-label" className={styles.main} onClick={onClick}>
@@ -48,7 +48,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ id, hasLiked, numLikes }) => {
         {numLikes || 0}{' '}
       </span>
     </Button>
-  );
-};
+  )
+}
 
-export default LikeButton;
+export default LikeButton

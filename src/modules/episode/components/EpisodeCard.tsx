@@ -1,17 +1,17 @@
-import { css } from 'emotion';
-import { EpisodeState, EpisodeMetadata } from '../types';
-import Card from 'components/Card';
-import HttpContent from 'components/HttpContent';
-import Player from 'components/Player';
-import React, { useState, useRef, useEffect } from 'react';
-import EpisodePlayerClipOptions from './EpisodePlayerClipOptions';
-import useAudioControls from 'hooks/useAudioControls';
-import { clamp } from 'ramda';
+import { css } from 'emotion'
+import { EpisodeState, EpisodeMetadata } from '../types'
+import Card from 'components/Card'
+import HttpContent from 'components/HttpContent'
+import Player from 'components/Player'
+import React, { useState, useRef, useEffect } from 'react'
+import EpisodePlayerClipOptions from './EpisodePlayerClipOptions'
+import useAudioControls from 'hooks/useAudioControls'
+import { clamp } from 'ramda'
 
 type EpisodeCardProps = {
-  episode: EpisodeState['metadata'];
-  time?: number;
-};
+  episode: EpisodeState['metadata']
+  time?: number
+}
 
 const styles = {
   main: css({
@@ -22,48 +22,48 @@ const styles = {
     maxWidth: 700,
     position: 'relative',
   }),
-};
+}
 
 const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'time'>> = ({
   audio,
   title,
   time: initialTime,
 }) => {
-  const ref = useRef<HTMLAudioElement>(null);
-  const audioStateControls = useAudioControls(ref);
+  const ref = useRef<HTMLAudioElement>(null)
+  const audioStateControls = useAudioControls(ref)
   const {
     state: { canPlay, duration, time },
     controls: { seek, pause, play },
-  } = audioStateControls;
-  const [start, setStart] = useState<Maybe<number>>(null);
-  const [end, setEnd] = useState<Maybe<number>>(null);
-  const [previewing, setPreviewing] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  } = audioStateControls
+  const [start, setStart] = useState<Maybe<number>>(null)
+  const [end, setEnd] = useState<Maybe<number>>(null)
+  const [previewing, setPreviewing] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
     if (previewing && time >= end!) {
-      seek(end!);
-      pause();
-      setPreviewing(false);
+      seek(end!)
+      pause()
+      setPreviewing(false)
     }
-  }, [previewing, time, end, seek, pause]);
+  }, [previewing, time, end, seek, pause])
 
   useEffect(() => {
     if (canPlay && initialTime) {
-      seek(initialTime);
+      seek(initialTime)
     }
-  }, [canPlay, initialTime, seek]);
+  }, [canPlay, initialTime, seek])
 
   const handlePreviewStart = () => {
-    seek(start!);
-    play();
-    setPreviewing(true);
-  };
+    seek(start!)
+    play()
+    setPreviewing(true)
+  }
 
   const handlePreviewStop = () => {
-    pause();
-    setPreviewing(false);
-  };
+    pause()
+    setPreviewing(false)
+  }
 
   return (
     <>
@@ -81,15 +81,15 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
         duration={duration}
         handleSetStart={newTime => {
           if (end && newTime > end) {
-            setEnd(null);
+            setEnd(null)
           }
-          setStart(clamp(0, duration, newTime));
+          setStart(clamp(0, duration, newTime))
         }}
         handleSetEnd={newTime => {
           if (start && newTime < start) {
-            setStart(null);
+            setStart(null)
           }
-          setEnd(clamp(0, duration, newTime));
+          setEnd(clamp(0, duration, newTime))
         }}
         previewing={previewing}
         handlePreviewStart={handlePreviewStart}
@@ -98,8 +98,8 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
         setModalOpen={setModalOpen}
       />
     </>
-  );
-};
+  )
+}
 
 const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode, time }) => (
   <Card className={styles.main} feature>
@@ -108,6 +108,6 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode, time }) => (
       renderSuccess={episodeData => <EpisodeCardSuccess {...episodeData} time={time} />}
     />
   </Card>
-);
+)
 
-export default EpisodeCard;
+export default EpisodeCard

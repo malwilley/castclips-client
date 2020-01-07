@@ -1,11 +1,11 @@
-import boxShadow from 'styles/boxShadow';
-import breakpoints from 'styles/breakpoints';
-import colors from 'styles/colors';
-import fonts from 'styles/fonts';
-import { CSSObject } from 'create-emotion';
-import zIndex from './zIndex';
+import boxShadow from 'styles/boxShadow'
+import breakpoints from 'styles/breakpoints'
+import colors from 'styles/colors'
+import fonts from 'styles/fonts'
+import { CSSObject } from 'create-emotion'
+import zIndex from './zIndex'
 
-const borderRadius = 8;
+const borderRadius = 8
 
 const clickable: CSSObject = {
   '&:hover': {
@@ -16,7 +16,7 @@ const clickable: CSSObject = {
   },
   display: 'inline-block',
   transition: 'transform 300ms ease-out',
-};
+}
 
 const coverContainer: CSSObject = {
   '&::after': {
@@ -28,6 +28,6 @@ const coverContainer: CSSObject = {
     content: '""',
     zIndex: zIndex.card,
   },
-};
+}
 
-export { breakpoints, clickable, coverContainer, borderRadius, boxShadow, colors, fonts };
+export { breakpoints, clickable, coverContainer, borderRadius, boxShadow, colors, fonts }

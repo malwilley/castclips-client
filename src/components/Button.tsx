@@ -1,12 +1,12 @@
-import { css } from 'emotion';
-import * as React from 'react';
-import { fonts } from 'styles';
+import { css } from 'emotion'
+import * as React from 'react'
+import { fonts } from 'styles'
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  active?: boolean;
-  className?: string;
-  onClick?: () => void;
-};
+  active?: boolean
+  className?: string
+  onClick?: () => void
+}
 
 const styles = {
   main: css(fonts.bold300, {
@@ -26,7 +26,7 @@ const styles = {
     padding: 0,
     userSelect: 'none',
   }),
-};
+}
 
 const Button: React.SFC<ButtonProps> = ({
   active = true,
@@ -38,6 +38,6 @@ const Button: React.SFC<ButtonProps> = ({
   <button className={css(styles.main, className)} disabled={!active} onClick={onClick} {...props}>
     {children}
   </button>
-);
+)
 
-export default Button;
+export default Button

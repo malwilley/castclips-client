@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { thunks } from '../redux';
-import { AppState } from 'redux/types';
-import { EpisodeState } from '../types';
-import HttpContent from 'components/HttpContent';
-import EpisodeClipCard from './EpisodeClipCard';
-import { css } from 'emotion';
-import NoData from 'components/NoData';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { thunks } from '../redux'
+import { AppState } from 'redux/types'
+import { EpisodeState } from '../types'
+import HttpContent from 'components/HttpContent'
+import EpisodeClipCard from './EpisodeClipCard'
+import { css } from 'emotion'
+import NoData from 'components/NoData'
 
 type EpisodeClipsProps = {
-  episodeId: string;
-};
+  episodeId: string
+}
 
 type EpisodeClipsConnectedProps = EpisodeClipsProps & {
-  clipsState: EpisodeState['clips'];
-  fetchClips: (id: string) => void;
-};
+  clipsState: EpisodeState['clips']
+  fetchClips: (id: string) => void
+}
 
 const styles = {
   container: css({
@@ -23,7 +23,7 @@ const styles = {
       marginBottom: 20,
     },
   }),
-};
+}
 
 const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
   clipsState,
@@ -31,8 +31,8 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
   fetchClips,
 }) => {
   React.useEffect(() => {
-    fetchClips(episodeId);
-  }, [fetchClips, episodeId]);
+    fetchClips(episodeId)
+  }, [fetchClips, episodeId])
 
   return (
     <HttpContent
@@ -50,18 +50,15 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
         )
       }
     />
-  );
-};
+  )
+}
 
 const mapDispatchToProps = {
   fetchClips: thunks.fetchClips,
-};
+}
 
 const mapStateToProps = (state: AppState) => ({
   clipsState: state.episode.clips,
-});
+})
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EpisodeClips);
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodeClips)

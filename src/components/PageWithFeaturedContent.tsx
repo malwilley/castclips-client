@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import zIndex from 'styles/zIndex';
-import RoundedCorners from './RoundedCorners';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import zIndex from 'styles/zIndex'
+import RoundedCorners from './RoundedCorners'
 
 type PageWithFeaturedContentProps = {
-  bodyContent: React.ReactNode;
-  featuredContent: React.ReactNode;
-  titleContent: React.ReactNode;
-};
+  bodyContent: React.ReactNode
+  featuredContent: React.ReactNode
+  titleContent: React.ReactNode
+}
 
 const styles = {
   main: css({
@@ -67,7 +67,7 @@ const styles = {
     padding: '2rem 0 2rem 0',
     zIndex: zIndex.card,
   }),
-};
+}
 
 const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
   bodyContent,
@@ -82,6 +82,6 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
   </div>
-);
+)
 
-export default PageWithFeaturedContent;
+export default PageWithFeaturedContent

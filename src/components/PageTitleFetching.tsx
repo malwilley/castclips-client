@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
 
 type PageTitleFetchingProps = {
-  className?: string;
-};
+  className?: string
+}
 
 const styles = {
   main: css({
@@ -24,13 +24,13 @@ const styles = {
     width: 250,
     opacity: 0.4,
   }),
-};
+}
 
 const PageTitleFetching: React.FC<PageTitleFetchingProps> = ({ className }) => (
   <div className={css(styles.main, className)}>
     <div className={styles.title} />
     <div className={styles.subTitle} />
   </div>
-);
+)
 
-export default PageTitleFetching;
+export default PageTitleFetching

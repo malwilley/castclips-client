@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Card from 'components/Card';
-import { css } from 'emotion';
-import { colors } from 'styles';
+import * as React from 'react'
+import Card from 'components/Card'
+import { css } from 'emotion'
+import { colors } from 'styles'
 
 const styles = {
   main: css({
@@ -36,7 +36,7 @@ const styles = {
     width: 80,
     height: 15,
   }),
-};
+}
 
 const PodcastClipCardFetching: React.FC = () => (
   <Card className={styles.main}>
@@ -47,6 +47,6 @@ const PodcastClipCardFetching: React.FC = () => (
       <div className={styles.viewStars} />
     </div>
   </Card>
-);
+)
 
-export default PodcastClipCardFetching;
+export default PodcastClipCardFetching

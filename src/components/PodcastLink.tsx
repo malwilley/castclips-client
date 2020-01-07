@@ -1,12 +1,12 @@
-import React from 'react';
-import { css } from 'emotion';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { css } from 'emotion'
+import { Link } from 'react-router-dom'
 
 type PodcastLinkProps = {
-  id: string;
-  thumbnail: string;
-  title: string;
-};
+  id: string
+  thumbnail: string
+  title: string
+}
 
 const styles = {
   main: css({
@@ -29,13 +29,13 @@ const styles = {
     display: 'inline',
     verticalAlign: 'middle',
   }),
-};
+}
 
 const PodcastLink: React.FC<PodcastLinkProps> = ({ id, thumbnail, title }) => (
   <Link className={styles.main} to={`/podcast/${id}`}>
     <img alt="Podcast thumbnail" className={styles.thumbnail} src={thumbnail} />
     {title}
   </Link>
-);
+)
 
-export default PodcastLink;
+export default PodcastLink

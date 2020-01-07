@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors } from 'styles';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors } from 'styles'
 
 type StyledInputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
-  className?: string;
-  handleTextChange: (text: string) => void;
-  text: string;
-};
+  className?: string
+  handleTextChange: (text: string) => void
+  text: string
+}
 
 const styles = {
   textArea: css({
@@ -31,11 +31,11 @@ const styles = {
     display: 'block',
     marginBottom: 10,
   }),
-};
+}
 
 const StyledTextAreaLabel: React.SFC = ({ children }) => (
   <label className={styles.label}>{children}</label>
-);
+)
 
 const StyledTextArea: React.SFC<StyledInputProps> = ({
   className,
@@ -49,7 +49,7 @@ const StyledTextArea: React.SFC<StyledInputProps> = ({
     value={text}
     {...inputProps}
   />
-);
+)
 
-export { StyledTextAreaLabel };
-export default StyledTextArea;
+export { StyledTextAreaLabel }
+export default StyledTextArea

@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer from './reducer'
 
-export { default as thunks } from './thunks';
-export default reducer;
+export { default as thunks } from './thunks'
+export default reducer

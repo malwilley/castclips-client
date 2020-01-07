@@ -1,18 +1,18 @@
-import * as React from 'react';
-import Card from 'components/Card';
-import { css } from 'emotion';
-import { fonts, colors, coverContainer } from 'styles';
-import ClipCardAccent from 'components/ClipCardAccent';
-import { ClipMetadata } from 'modules/clip/types';
-import ClipCardAttributes from 'components/ClipCardAttributes';
-import TruncateContent from 'components/TruncateContent';
-import { Link } from 'react-router-dom';
+import * as React from 'react'
+import Card from 'components/Card'
+import { css } from 'emotion'
+import { fonts, colors, coverContainer } from 'styles'
+import ClipCardAccent from 'components/ClipCardAccent'
+import { ClipMetadata } from 'modules/clip/types'
+import ClipCardAttributes from 'components/ClipCardAttributes'
+import TruncateContent from 'components/TruncateContent'
+import { Link } from 'react-router-dom'
 
 type EpisodeClipCardProps = {
-  className?: string;
-  clip: ClipMetadata;
-  episodeLength: number;
-};
+  className?: string
+  clip: ClipMetadata
+  episodeLength: number
+}
 
 const styles = {
   description: css(fonts.text200, {
@@ -37,7 +37,7 @@ const styles = {
   title: css(fonts.heading300, {
     color: colors.gray700,
   }),
-};
+}
 
 const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, episodeLength }) => (
   <Card className={css(styles.main, className)} hover>
@@ -50,6 +50,6 @@ const EpisodeClipCard: React.SFC<EpisodeClipCardProps> = ({ className, clip, epi
     </TruncateContent>
     <ClipCardAttributes clip={clip} />
   </Card>
-);
+)
 
-export default EpisodeClipCard;
+export default EpisodeClipCard

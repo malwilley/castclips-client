@@ -1,12 +1,12 @@
-import React from 'react';
-import Card from 'components/Card';
-import { css } from 'emotion';
-import { colors, coverContainer, breakpoints, fonts } from 'styles';
-import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types';
-import TextSkeleton from 'components/TextSkeleton';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import Card from 'components/Card'
+import { css } from 'emotion'
+import { colors, coverContainer, breakpoints, fonts } from 'styles'
+import { PodcastResult, EpisodeResult, SearchType, ClipResult } from '../types'
+import TextSkeleton from 'components/TextSkeleton'
+import { Link } from 'react-router-dom'
 
-type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult;
+type SearchResultCardProps = PodcastResult | ClipResult | EpisodeResult
 
 const styles = {
   main: css({
@@ -71,7 +71,7 @@ const styles = {
     height: '1.5rem',
     background: 'linear-gradient(to top, white 1rem, transparent)',
   }),
-};
+}
 
 const fetchingStyles = {
   main: css({
@@ -86,25 +86,25 @@ const fetchingStyles = {
     flexShrink: 0,
     border: 'none',
   }),
-};
+}
 
 const SubText: React.FC<SearchResultCardProps> = props => {
   switch (props.type) {
     case SearchType.Episodes:
-      return <h4 className={styles.subText}>{props.podcast.title}</h4>;
+      return <h4 className={styles.subText}>{props.podcast.title}</h4>
     case SearchType.Podcasts:
-      return <h4 className={styles.subText}>{props.publisher}</h4>;
+      return <h4 className={styles.subText}>{props.publisher}</h4>
     case SearchType.Clips:
       return (
         <div>
           <h4 className={styles.subText}>{props.podcast.title}</h4>
           <h4 className={styles.subText}>{props.episode.title}</h4>
         </div>
-      );
+      )
     default:
-      return null;
+      return null
   }
-};
+}
 
 const SearchResultCardFetching: React.FC = () => (
   <Card className={css(styles.main, fetchingStyles.main)}>
@@ -117,7 +117,7 @@ const SearchResultCardFetching: React.FC = () => (
       <TextSkeleton width="75%" height={16} marginBottom={2} color={colors.gray20} />
     </div>
   </Card>
-);
+)
 
 const SearchResultCard: React.FC<SearchResultCardProps> = props => (
   <Card className={styles.main} hover>
@@ -129,7 +129,7 @@ const SearchResultCard: React.FC<SearchResultCardProps> = props => (
     <p className={styles.description}>{props.description}</p>
     <div className={styles.hideOverflowGradient} />
   </Card>
-);
+)
 
-export { SearchResultCardFetching };
-export default SearchResultCard;
+export { SearchResultCardFetching }
+export default SearchResultCard

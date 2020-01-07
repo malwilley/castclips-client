@@ -1,4 +1,4 @@
-import * as qs from 'querystringify';
+import * as qs from 'querystringify'
 import {
   GetClipResponse,
   AddClipResponse,
@@ -10,12 +10,12 @@ import {
   TypeaheadResponse,
   SearchResultsResponse,
   GetHotClipsResponse,
-} from './types';
-import { SearchType } from 'modules/search/types';
-import config from 'config';
-import { stringify } from 'querystringify';
+} from './types'
+import { SearchType } from 'modules/search/types'
+import config from 'config'
+import { stringify } from 'querystringify'
 
-const host = config.firebase.apiHost;
+const host = config.firebase.apiHost
 
 const fetchFirebase = async <TResponse>(
   route: string,
@@ -30,16 +30,16 @@ const fetchFirebase = async <TResponse>(
           Authorization: `Bearer ${token}`,
         }
       : options.headers,
-  });
+  })
 
-  return response.json();
-};
+  return response.json()
+}
 
 export const getClip = async (id: string, token: string) => {
-  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}`, token);
+  const result = await fetchFirebase<GetClipResponse>(`/clip/${id}`, token)
 
-  return result;
-};
+  return result
+}
 
 export const addClip = async (clip: AddClipPayload, token: string) => {
   const result = await fetchFirebase<AddClipResponse>('/clip/', token, {
@@ -48,19 +48,19 @@ export const addClip = async (clip: AddClipPayload, token: string) => {
       'Content-Type': 'application/json',
     },
     method: 'POST',
-  });
+  })
 
-  return result;
-};
+  return result
+}
 
 export const editClip = async ({
   clipId,
   data,
   token,
 }: {
-  clipId: string;
-  token: string;
-  data: { title: string; description: string; start: number; end: number };
+  clipId: string
+  token: string
+  data: { title: string; description: string; start: number; end: number }
 }) => {
   await fetchFirebase(`/clip/${clipId}`, token, {
     body: JSON.stringify(data),
@@ -68,53 +68,47 @@ export const editClip = async ({
       'Content-Type': 'application/json',
     },
     method: 'PATCH',
-  });
-};
+  })
+}
 
 export const deleteClip = async ({ clipId, token }: { clipId: string; token: string }) => {
-  await fetchFirebase(`/clip/${clipId}`, token, { method: 'DELETE' });
-};
+  await fetchFirebase(`/clip/${clipId}`, token, { method: 'DELETE' })
+}
 
 export const likeClip = async (clipId: string, token: string) => {
-  await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'POST' });
-};
+  await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'POST' })
+}
 
 export const unlikeClip = async (clipId: string, token: string) => {
-  await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'DELETE' });
-};
+  await fetchFirebase(`/clip/${clipId}/like`, token, { method: 'DELETE' })
+}
 
 export const getHotClips = async (page: number) => {
-  const result = await fetchFirebase<GetHotClipsResponse>(`/clip/hot?${qs.stringify({ page })}`);
+  const result = await fetchFirebase<GetHotClipsResponse>(`/clip/hot?${qs.stringify({ page })}`)
 
-  return result;
-};
+  return result
+}
 
 export const getClipsForEpisode = async (episodeId: string) => {
-  const result = await fetchFirebase<GetClipsForEpisodeResponse>(
-    `/episode/${episodeId}/clips/`,
-    ''
-  );
+  const result = await fetchFirebase<GetClipsForEpisodeResponse>(`/episode/${episodeId}/clips/`, '')
 
-  return result;
-};
+  return result
+}
 
 export const getClipsForPodcast = async (podcastId: string) => {
-  const result = await fetchFirebase<GetClipsForPodcastResponse>(
-    `/podcast/${podcastId}/clips/`,
-    ''
-  );
+  const result = await fetchFirebase<GetClipsForPodcastResponse>(`/podcast/${podcastId}/clips/`, '')
 
-  return result;
-};
+  return result
+}
 
 export const typeahead = async (token: string, query: string) => {
   const result = await fetchFirebase<TypeaheadResponse>(
     `/typeahead?${qs.stringify({ q: query })}`,
     token
-  );
+  )
 
-  return result;
-};
+  return result
+}
 
 export const search = async (
   token: string,
@@ -129,22 +123,22 @@ export const search = async (
   const results = await fetchFirebase<SearchResultsResponse<any>>(
     `/search?${qs.stringify({ q: query, type, offset, podcastId, episodeId })}`,
     token
-  );
+  )
 
-  return results;
-};
+  return results
+}
 
 export const getPodcastData = async (token: string, id: string, nextEpisodePubDate?: number) => {
   const result = await fetchFirebase<PodcastMetadataResponse>(
     `/podcast/${id}${stringify(nextEpisodePubDate ? { nextEpisodePubDate } : {}, true)}`,
     token
-  );
+  )
 
-  return result;
-};
+  return result
+}
 
 export const getEpisodeData = async (token: string, id: string) => {
-  const result = await fetchFirebase<EpisodeMetadataResponse>(`/episode/${id}`, token);
+  const result = await fetchFirebase<EpisodeMetadataResponse>(`/episode/${id}`, token)
 
-  return result;
-};
+  return result
+}

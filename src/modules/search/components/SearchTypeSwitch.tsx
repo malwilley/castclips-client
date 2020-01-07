@@ -1,15 +1,15 @@
-import React from 'react';
-import { SearchType } from '../types';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import Button from 'components/Button';
-import AccessibleLabel from 'components/AccessibleLabel';
-import useChangeQueryParam from 'hooks/useChangeQueryParam';
+import React from 'react'
+import { SearchType } from '../types'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import Button from 'components/Button'
+import AccessibleLabel from 'components/AccessibleLabel'
+import useChangeQueryParam from 'hooks/useChangeQueryParam'
 
 type SearchTypeSwitchProps = {
-  className?: string;
-  type?: SearchType;
-};
+  className?: string
+  type?: SearchType
+}
 
 const styles = {
   main: css({
@@ -41,12 +41,12 @@ const styles = {
     background: colors.gradient,
     color: colors.white,
   }),
-};
+}
 
 const SearchTypeOption: React.FC<{
-  type: SearchType;
-  selected: SearchType;
-  setSearch: (searchType: SearchType) => void;
+  type: SearchType
+  selected: SearchType
+  setSearch: (searchType: SearchType) => void
 }> = ({ children, selected, setSearch, type }) => (
   <Button
     aria-labelledby={`${type}-switch-label`}
@@ -56,16 +56,16 @@ const SearchTypeOption: React.FC<{
     <AccessibleLabel id={`${type}-switch-label`}>Search {type}s</AccessibleLabel>
     {children}
   </Button>
-);
+)
 
 const SearchTypeSwitch: React.FC<SearchTypeSwitchProps> = ({
   className,
   type = SearchType.Podcasts,
 }) => {
-  const changeQueryParam = useChangeQueryParam();
+  const changeQueryParam = useChangeQueryParam()
   const setSearchType = (searchType: SearchType) => {
-    changeQueryParam('type', searchType);
-  };
+    changeQueryParam('type', searchType)
+  }
 
   return (
     <div className={css(styles.main, className)}>
@@ -79,7 +79,7 @@ const SearchTypeSwitch: React.FC<SearchTypeSwitchProps> = ({
         Clips
       </SearchTypeOption>
     </div>
-  );
-};
+  )
+}
 
-export default SearchTypeSwitch;
+export default SearchTypeSwitch

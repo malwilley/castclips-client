@@ -1,6 +1,6 @@
-import { createAction } from 'redux/createAction';
-import { ActionsUnion } from 'redux/types';
-import { EpisodeState } from '../types';
+import { createAction } from 'redux/createAction'
+import { ActionsUnion } from 'redux/types'
+import { EpisodeState } from '../types'
 
 export enum ActionTypes {
   SetClipId = 'episode/set_clip_id',
@@ -14,6 +14,6 @@ export const actions = {
   setClips: (clips?: EpisodeState['clips']) => createAction(ActionTypes.SetClips, clips),
   setMetadata: (metadata?: EpisodeState['metadata']) =>
     createAction(ActionTypes.SetMetadata, metadata),
-};
+}
 
-export type Actions = ActionsUnion<typeof actions>;
+export type Actions = ActionsUnion<typeof actions>

@@ -1,102 +1,102 @@
-import React, { useCallback } from 'react';
+import React, { useCallback } from 'react'
 
 export type AudioState = {
-  time: number;
-  duration: number;
-  isPlaying: boolean;
-  canPlay: boolean;
-  setTime: (time: number) => void;
-};
+  time: number
+  duration: number
+  isPlaying: boolean
+  canPlay: boolean
+  setTime: (time: number) => void
+}
 
 export type AudioControls = {
-  play: () => void;
-  pause: () => void;
-  seek: (time: number) => void;
-  seekRelative: (relativeTime: number) => void;
-};
+  play: () => void
+  pause: () => void
+  seek: (time: number) => void
+  seekRelative: (relativeTime: number) => void
+}
 
-export type AudioControlsResult = { state: AudioState; controls: AudioControls };
+export type AudioControlsResult = { state: AudioState; controls: AudioControls }
 
 // https://github.com/streamich/react-use/blob/master/util/createHTMLMediaHook.ts
 
 const useAudioControls = (
   ref: React.RefObject<HTMLAudioElement>
 ): { state: AudioState; controls: AudioControls } => {
-  const [time, setTime] = React.useState(0);
-  const [duration, setDuration] = React.useState(0);
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [canPlay, setCanPlay] = React.useState(false);
+  const [time, setTime] = React.useState(0)
+  const [duration, setDuration] = React.useState(0)
+  const [isPlaying, setIsPlaying] = React.useState(false)
+  const [canPlay, setCanPlay] = React.useState(false)
 
   const onTimeUpdate = React.useCallback(() => {
     if (ref.current) {
-      setTime(ref.current.currentTime);
+      setTime(ref.current.currentTime)
     }
-  }, [ref]);
+  }, [ref])
 
   const onDurationChange = React.useCallback(() => {
     if (ref.current) {
-      setDuration(ref.current.duration);
+      setDuration(ref.current.duration)
     }
-  }, [ref]);
+  }, [ref])
 
   const onPlay = React.useCallback(() => {
-    setIsPlaying(true);
-  }, [setIsPlaying]);
+    setIsPlaying(true)
+  }, [setIsPlaying])
 
   const onPause = React.useCallback(() => {
-    setIsPlaying(false);
-  }, [setIsPlaying]);
+    setIsPlaying(false)
+  }, [setIsPlaying])
 
   const onCanPlay = React.useCallback(() => {
-    setCanPlay(true);
-  }, [setCanPlay]);
+    setCanPlay(true)
+  }, [setCanPlay])
 
   React.useEffect(() => {
     if (!ref.current) {
-      return;
+      return
     }
 
-    ref.current.addEventListener('timeupdate', onTimeUpdate);
-    ref.current.addEventListener('durationchange', onDurationChange);
-    ref.current.addEventListener('canplay', onCanPlay);
-    ref.current.addEventListener('play', onPlay);
-    ref.current.addEventListener('pause', onPause);
+    ref.current.addEventListener('timeupdate', onTimeUpdate)
+    ref.current.addEventListener('durationchange', onDurationChange)
+    ref.current.addEventListener('canplay', onCanPlay)
+    ref.current.addEventListener('play', onPlay)
+    ref.current.addEventListener('pause', onPause)
 
-    const refCopy = ref.current;
+    const refCopy = ref.current
 
     return () => {
       if (!refCopy) {
-        return;
+        return
       }
 
-      refCopy.removeEventListener('timeupdate', onTimeUpdate);
-      refCopy.removeEventListener('durationchange', onDurationChange);
-      refCopy.removeEventListener('canplay', onCanPlay);
-      refCopy.removeEventListener('play', onPlay);
-      refCopy.removeEventListener('pause', onPause);
-    };
-  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay]);
+      refCopy.removeEventListener('timeupdate', onTimeUpdate)
+      refCopy.removeEventListener('durationchange', onDurationChange)
+      refCopy.removeEventListener('canplay', onCanPlay)
+      refCopy.removeEventListener('play', onPlay)
+      refCopy.removeEventListener('pause', onPause)
+    }
+  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay])
 
   const play = useCallback(() => {
-    ref.current && ref.current.play();
-  }, [ref]);
+    ref.current && ref.current.play()
+  }, [ref])
   const pause = useCallback(() => {
-    ref.current && ref.current.pause();
-  }, [ref]);
+    ref.current && ref.current.pause()
+  }, [ref])
   const seek = useCallback(
     (time: number) => {
-      const truncated = Math.min(duration, Math.max(0, time));
-      setTime(truncated);
-      ref.current && (ref.current.currentTime = truncated);
+      const truncated = Math.min(duration, Math.max(0, time))
+      setTime(truncated)
+      ref.current && (ref.current.currentTime = truncated)
     },
     [duration, ref]
-  );
+  )
   const seekRelative = useCallback(
     (relativeTime: number) => {
-      seek(time + relativeTime);
+      seek(time + relativeTime)
     },
     [seek, time]
-  );
+  )
 
   return {
     controls: {
@@ -112,7 +112,7 @@ const useAudioControls = (
       canPlay,
       setTime,
     },
-  };
-};
+  }
+}
 
-export default useAudioControls;
+export default useAudioControls

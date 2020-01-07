@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { EpisodeState } from '../types';
-import HttpContent from 'components/HttpContent';
-import { css } from 'emotion';
-import { colors, fonts, clickable } from 'styles';
-import SectionHeader from 'components/SectionHeader';
-import ParagraphSkeleton from 'components/ParagraphSkeleton';
-import EpisodeClips from './EpisodeClips';
-import EpisodeInformation from './EpisodeInformation';
-import TruncateContent from 'components/TruncateContent';
+import * as React from 'react'
+import { EpisodeState } from '../types'
+import HttpContent from 'components/HttpContent'
+import { css } from 'emotion'
+import { colors, fonts, clickable } from 'styles'
+import SectionHeader from 'components/SectionHeader'
+import ParagraphSkeleton from 'components/ParagraphSkeleton'
+import EpisodeClips from './EpisodeClips'
+import EpisodeInformation from './EpisodeInformation'
+import TruncateContent from 'components/TruncateContent'
 
 type EpisodePageBodyProps = {
-  episodeMetadata: EpisodeState['metadata'];
-  id: string;
-};
+  episodeMetadata: EpisodeState['metadata']
+  id: string
+}
 
 const styles = {
   main: css({
@@ -48,7 +48,7 @@ const styles = {
   title: css({
     marginBottom: 6,
   }),
-};
+}
 
 const EpisodePageBody: React.FC<EpisodePageBodyProps> = ({ episodeMetadata, id }) => (
   <div className={styles.main}>
@@ -76,6 +76,6 @@ const EpisodePageBody: React.FC<EpisodePageBodyProps> = ({ episodeMetadata, id }
       <EpisodeClips episodeId={id} />
     </div>
   </div>
-);
+)
 
-export default EpisodePageBody;
+export default EpisodePageBody

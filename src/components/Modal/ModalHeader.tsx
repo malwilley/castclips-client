@@ -1,15 +1,15 @@
-import * as React from 'react';
-import Button from 'components/Button';
-import CloseIcon from 'mdi-react/CloseIcon';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import AccessibleLabel from '../AccessibleLabel';
+import * as React from 'react'
+import Button from 'components/Button'
+import CloseIcon from 'mdi-react/CloseIcon'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import AccessibleLabel from '../AccessibleLabel'
 
 export type ModalHeaderProps = {
-  handleClose: () => void;
-  icon: React.ReactNode;
-  title: string;
-};
+  handleClose: () => void
+  icon: React.ReactNode
+  title: string
+}
 
 const styles = {
   closeButton: css({
@@ -53,7 +53,7 @@ const styles = {
     color: colors.gray600,
     fontSize: 18,
   }),
-};
+}
 
 const ModalHeader: React.SFC<ModalHeaderProps> = ({ handleClose, icon, title }) => (
   <div className={styles.main}>
@@ -68,6 +68,6 @@ const ModalHeader: React.SFC<ModalHeaderProps> = ({ handleClose, icon, title }) 
       <CloseIcon size={18} />
     </Button>
   </div>
-);
+)
 
-export default ModalHeader;
+export default ModalHeader

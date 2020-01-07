@@ -1,13 +1,13 @@
-import { parse } from 'querystringify';
-import React, { Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { SearchType } from './modules/search/types';
-import Footer from './components/Footer';
-import { css } from 'emotion';
-import PulsingLogo from './components/PulsingLogo';
-import Header from './modules/header';
-import RoundedCorners from './components/RoundedCorners';
-import { colors } from './styles';
+import { parse } from 'querystringify'
+import React, { Suspense, lazy } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { SearchType } from './modules/search/types'
+import Footer from './components/Footer'
+import { css } from 'emotion'
+import PulsingLogo from './components/PulsingLogo'
+import Header from './modules/header'
+import RoundedCorners from './components/RoundedCorners'
+import { colors } from './styles'
 
 const styles = {
   main: css({
@@ -20,26 +20,22 @@ const styles = {
     position: 'absolute',
     bottom: 0,
   }),
-};
+}
 
-const HomePage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'modules/home/components/HomePage')
-);
+const HomePage = lazy(() => import(/* webpackPrefetch: true */ 'modules/home/components/HomePage'))
 const SearchResultsPage = lazy(() =>
   import(/* webpackPrefetch: true */ 'modules/search/components/SearchResultsPage')
-);
+)
 const SigninPage = lazy(() =>
   import(/* webpackPrefetch: true */ 'modules/auth/components/SigninPage')
-);
+)
 const PodcastPage = lazy(() =>
   import(/* webpackPrefetch: true */ 'modules/podcast/components/PodcastPage')
-);
+)
 const EpisodePage = lazy(() =>
   import(/* webpackPrefetch: true */ 'modules/episode/components/EpisodePage')
-);
-const ClipPage = lazy(() =>
-  import(/* webpackPrefetch: true */ 'modules/clip/components/ClipPage')
-);
+)
+const ClipPage = lazy(() => import(/* webpackPrefetch: true */ 'modules/clip/components/ClipPage'))
 
 const App: React.FC = () => (
   <>
@@ -48,8 +44,8 @@ const App: React.FC = () => (
         <Route
           path="/"
           render={({ location: { search } }) => {
-            const { q } = parse(search) as { q?: string };
-            return <Header searchText={q} />;
+            const { q } = parse(search) as { q?: string }
+            return <Header searchText={q} />
           }}
         />
         <Switch>
@@ -76,11 +72,11 @@ const App: React.FC = () => (
             path="/search"
             render={({ location: { search } }) => {
               const { q, type, page } = parse(search) as {
-                q: string;
-                type: SearchType;
-                page: number;
-              };
-              return <SearchResultsPage query={q} type={type} page={page} />;
+                q: string
+                type: SearchType
+                page: number
+              }
+              return <SearchResultsPage query={q} type={type} page={page} />
             }}
           />
         </Switch>
@@ -89,6 +85,6 @@ const App: React.FC = () => (
       <Footer />
     </Suspense>
   </>
-);
+)
 
-export default App;
+export default App

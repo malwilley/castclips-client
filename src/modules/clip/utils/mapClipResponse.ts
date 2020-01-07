@@ -1,5 +1,5 @@
-import { GetClipResponse } from 'api/types';
-import { ClipMetadata } from '../types';
+import { GetClipResponse } from 'api/types'
+import { ClipMetadata } from '../types'
 
 const mapClipResponse = (clipResponse: GetClipResponse): ClipMetadata => ({
   ...clipResponse,
@@ -9,6 +9,6 @@ const mapClipResponse = (clipResponse: GetClipResponse): ClipMetadata => ({
   },
   createdAt: new Date(clipResponse.createdAt),
   published: new Date(clipResponse.published),
-});
+})
 
-export default mapClipResponse;
+export default mapClipResponse

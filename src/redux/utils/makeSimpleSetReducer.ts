@@ -1,4 +1,4 @@
-import { ActionWithPayload } from '../types';
+import { ActionWithPayload } from '../types'
 
 const makeSimpleSetReducer = <T extends string, P>(
   actionCreator: (payload?: P) => ActionWithPayload<T, P>,
@@ -6,10 +6,10 @@ const makeSimpleSetReducer = <T extends string, P>(
 ) => (state: P = defaultValue, action: ActionWithPayload<T, P>) => {
   switch (action.type) {
     case actionCreator().type:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default makeSimpleSetReducer;
+export default makeSimpleSetReducer

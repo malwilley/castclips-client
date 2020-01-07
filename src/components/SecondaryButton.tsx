@@ -1,9 +1,9 @@
-import React from 'react';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import Button, { ButtonProps } from './Button';
+import React from 'react'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import Button, { ButtonProps } from './Button'
 
-type SecondaryButtonProps = ButtonProps;
+type SecondaryButtonProps = ButtonProps
 
 const secondaryButtonStyles = css(fonts.bold300, {
   '&:disabled': {
@@ -26,11 +26,11 @@ const secondaryButtonStyles = css(fonts.bold300, {
   height: 42,
   minWidth: 100,
   transition: 'background-color 200ms ease-out, opacity 200ms ease-out',
-});
+})
 
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({ className, ...props }) => (
   <Button className={css(secondaryButtonStyles, className)} {...props} />
-);
+)
 
-export { secondaryButtonStyles };
-export default SecondaryButton;
+export { secondaryButtonStyles }
+export default SecondaryButton

@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { colors, fonts, clickable, breakpoints } from 'styles';
-import LayoutContainer from './LayoutContainer';
-import Logo from 'icons/Logo';
-import ListennotesPng from 'icons/Listennotes.png';
-import ListennotesWebp from 'icons/Listennotes.webp';
-import Appbase from 'icons/Appbase';
-import AccessibleLabel from './AccessibleLabel';
+import * as React from 'react'
+import { css } from 'emotion'
+import { colors, fonts, clickable, breakpoints } from 'styles'
+import LayoutContainer from './LayoutContainer'
+import Logo from 'icons/Logo'
+import ListennotesPng from 'icons/Listennotes.png'
+import ListennotesWebp from 'icons/Listennotes.webp'
+import Appbase from 'icons/Appbase'
+import AccessibleLabel from './AccessibleLabel'
 
 const styles = {
   main: css(
@@ -72,7 +72,7 @@ const styles = {
     alignItems: 'flex-end',
     flexWrap: 'wrap',
   }),
-};
+}
 
 const Footer: React.FC = () => (
   <div className={styles.main}>
@@ -113,6 +113,6 @@ const Footer: React.FC = () => (
       </div>
     </LayoutContainer>
   </div>
-);
+)
 
-export default Footer;
+export default Footer

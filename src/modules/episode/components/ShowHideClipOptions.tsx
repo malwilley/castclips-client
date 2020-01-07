@@ -1,13 +1,13 @@
-import * as React from 'react';
-import Button, { ButtonProps } from 'components/Button';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
-import ChevronUpIcon from 'mdi-react/ChevronUpIcon';
+import * as React from 'react'
+import Button, { ButtonProps } from 'components/Button'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import ChevronDownIcon from 'mdi-react/ChevronDownIcon'
+import ChevronUpIcon from 'mdi-react/ChevronUpIcon'
 
 type ShowHideClipOptionsProps = ButtonProps & {
-  show: boolean;
-};
+  show: boolean
+}
 
 const styles = {
   show: css({
@@ -25,21 +25,21 @@ const styles = {
   icon: css({
     marginLeft: 8,
   }),
-};
+}
 
 const ShowClipOptions: React.FC<ButtonProps> = props => (
   <Button className={styles.show} {...props}>
     Create a clip <ChevronDownIcon className={styles.icon} size={20} />
   </Button>
-);
+)
 
 const HideClipOptions: React.FC<ButtonProps> = props => (
   <Button className={styles.show} {...props}>
     Hide clip options <ChevronUpIcon className={styles.icon} size={20} />
   </Button>
-);
+)
 
 const ShowHideClipOptions: React.FC<ShowHideClipOptionsProps> = ({ show, ...props }) =>
-  show ? <HideClipOptions {...props} /> : <ShowClipOptions {...props} />;
+  show ? <HideClipOptions {...props} /> : <ShowClipOptions {...props} />
 
-export default ShowHideClipOptions;
+export default ShowHideClipOptions

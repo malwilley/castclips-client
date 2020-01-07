@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import { fonts, colors } from 'styles';
+import * as React from 'react'
+import { css } from 'emotion'
+import { fonts, colors } from 'styles'
 
 type CharacterCounterProps = {
-  className?: string;
-  max: number;
-  text: string;
-};
+  className?: string
+  max: number
+  text: string
+}
 
 const styles = {
   main: css(fonts.text200, {
@@ -15,10 +15,10 @@ const styles = {
   overLimit: css({
     color: colors.red,
   }),
-};
+}
 
 const CharacterCounter: React.FC<CharacterCounterProps> = ({ className, max, text }) => {
-  const numChars = text.length;
+  const numChars = text.length
 
   return (
     <div
@@ -27,7 +27,7 @@ const CharacterCounter: React.FC<CharacterCounterProps> = ({ className, max, tex
     >
       {numChars} / {max}
     </div>
-  );
-};
+  )
+}
 
-export default CharacterCounter;
+export default CharacterCounter

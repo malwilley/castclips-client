@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
+import React, { useState, useCallback } from 'react'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
 
 type TooltipProps = {
-  className?: string;
-  bottom?: boolean;
-  text: string;
-};
+  className?: string
+  bottom?: boolean
+  text: string
+}
 
 const styles = {
   main: css({
@@ -54,16 +54,16 @@ const styles = {
     borderRight: '6px solid transparent',
     borderBottom: `6px solid ${colors.gray700}`,
   }),
-};
+}
 
 const Tooltip: React.FC<TooltipProps> = ({ bottom = false, children, className, text }) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
   const onMouseOver = useCallback(() => {
-    setShow(true);
-  }, [setShow]);
+    setShow(true)
+  }, [setShow])
   const onMouseLeave = useCallback(() => {
-    setShow(false);
-  }, [setShow]);
+    setShow(false)
+  }, [setShow])
 
   return (
     <div
@@ -80,7 +80,7 @@ const Tooltip: React.FC<TooltipProps> = ({ bottom = false, children, className, 
       )}
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Tooltip;
+export default Tooltip

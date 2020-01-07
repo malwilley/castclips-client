@@ -1,3 +1,3 @@
-const stripHtml = (str: string) => str.replace(/<[^>]*>/gi, '');
+const stripHtml = (str: string) => str.replace(/<[^>]*>/gi, '')
 
-export default stripHtml;
+export default stripHtml

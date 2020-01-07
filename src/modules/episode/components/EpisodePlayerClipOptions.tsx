@@ -1,31 +1,31 @@
-import React from 'react';
-import Show from 'components/Show';
-import ClipPreview from './ClipPreview';
-import TimeRecorder from './TimeRecorder';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import { isNil } from 'ramda';
-import PreviewButton from './PreviewButton';
-import ArrowRightIcon from 'mdi-react/ArrowRightIcon';
-import CreateClipModal from './CreateClipModal';
-import ShareButton from './ShareButton';
-import { animated, useSpring } from 'react-spring';
-import ShowHideClipOptions from './ShowHideClipOptions';
-import useResizeObserver from 'hooks/useResizeObserver';
+import React from 'react'
+import Show from 'components/Show'
+import ClipPreview from './ClipPreview'
+import TimeRecorder from './TimeRecorder'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import { isNil } from 'ramda'
+import PreviewButton from './PreviewButton'
+import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
+import CreateClipModal from './CreateClipModal'
+import ShareButton from './ShareButton'
+import { animated, useSpring } from 'react-spring'
+import ShowHideClipOptions from './ShowHideClipOptions'
+import useResizeObserver from 'hooks/useResizeObserver'
 
 type EpisodePlayerClipOptionsProps = {
-  start: Maybe<number>;
-  end: Maybe<number>;
-  time: number;
-  duration: number;
-  handleSetStart: (time: number) => void;
-  handleSetEnd: (time: number) => void;
-  previewing: boolean;
-  handlePreviewStart: () => void;
-  handlePreviewStop: () => void;
-  modalOpen: boolean;
-  setModalOpen: (isOpen: boolean) => void;
-};
+  start: Maybe<number>
+  end: Maybe<number>
+  time: number
+  duration: number
+  handleSetStart: (time: number) => void
+  handleSetEnd: (time: number) => void
+  previewing: boolean
+  handlePreviewStart: () => void
+  handlePreviewStop: () => void
+  modalOpen: boolean
+  setModalOpen: (isOpen: boolean) => void
+}
 
 const styles = {
   container: css({
@@ -52,11 +52,11 @@ const styles = {
     textAlign: 'center',
     flexShrink: 1,
   }),
-};
+}
 
-const EpisodePlayerClipOptionsContent: React.FC<
-  EpisodePlayerClipOptionsProps & { isOpen: boolean }
-> = ({
+const EpisodePlayerClipOptionsContent: React.FC<EpisodePlayerClipOptionsProps & {
+  isOpen: boolean
+}> = ({
   end,
   start,
   duration,
@@ -70,12 +70,12 @@ const EpisodePlayerClipOptionsContent: React.FC<
   modalOpen,
   setModalOpen,
 }) => {
-  const clipBoundsSet = !isNil(start) && !isNil(end) && end > start;
+  const clipBoundsSet = !isNil(start) && !isNil(end) && end > start
   const {
     ref,
     dimensions: { height },
-  } = useResizeObserver<HTMLDivElement>();
-  const style = useSpring({ maxHeight: isOpen ? height : 0 });
+  } = useResizeObserver<HTMLDivElement>()
+  const style = useSpring({ maxHeight: isOpen ? height : 0 })
 
   return (
     <animated.div className={styles.container} style={style}>
@@ -112,8 +112,8 @@ const EpisodePlayerClipOptionsContent: React.FC<
         </div>
       </div>
     </animated.div>
-  );
-};
+  )
+}
 
 const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = props => {
   return (
@@ -125,7 +125,7 @@ const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = props 
         </>
       )}
     </Show>
-  );
-};
+  )
+}
 
-export default EpisodePlayerClipOptions;
+export default EpisodePlayerClipOptions

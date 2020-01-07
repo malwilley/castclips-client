@@ -1,13 +1,13 @@
-import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase/app';
-import firebaseApp from '../firebase';
-import LayoutContainer from 'components/LayoutContainer';
-import { css } from 'emotion';
-import { colors } from 'styles';
-import Card from 'components/Card';
-import zIndex from 'styles/zIndex';
-import RoundedCorners from 'components/RoundedCorners';
+import React from 'react'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import firebase from 'firebase/app'
+import firebaseApp from '../firebase'
+import LayoutContainer from 'components/LayoutContainer'
+import { css } from 'emotion'
+import { colors } from 'styles'
+import Card from 'components/Card'
+import zIndex from 'styles/zIndex'
+import RoundedCorners from 'components/RoundedCorners'
 
 const styles = {
   authCenter: css({
@@ -42,7 +42,7 @@ const styles = {
     color: colors.white,
     textAlign: 'center',
   }),
-};
+}
 
 const SigninPage: React.FC = () => {
   // get url params from redux (redirect)
@@ -54,7 +54,7 @@ const SigninPage: React.FC = () => {
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
-  };
+  }
 
   return (
     <>
@@ -71,7 +71,7 @@ const SigninPage: React.FC = () => {
         </Card>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SigninPage;
+export default SigninPage

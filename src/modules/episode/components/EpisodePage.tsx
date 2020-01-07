@@ -1,26 +1,26 @@
-import * as React from 'react';
-import HttpContent from 'components/HttpContent';
-import EpisodeCard from 'modules/episode/components/EpisodeCard';
-import { EpisodeState } from '../types';
-import { connect } from 'react-redux';
-import { AppState } from 'redux/types';
-import { thunks } from '../redux';
-import { css } from 'emotion';
-import { colors, fonts } from 'styles';
-import SectionHeader from 'components/SectionHeader';
-import PageWithFeaturedContent from 'components/PageWithFeaturedContent';
-import PageTitleFetching from 'components/PageTitleFetching';
-import EpisodePageBody from './EpisodePageBody';
-import PodcastLink from 'components/PodcastLink';
-import { RouteComponentProps } from 'react-router';
-import { parse } from 'querystringify';
+import * as React from 'react'
+import HttpContent from 'components/HttpContent'
+import EpisodeCard from 'modules/episode/components/EpisodeCard'
+import { EpisodeState } from '../types'
+import { connect } from 'react-redux'
+import { AppState } from 'redux/types'
+import { thunks } from '../redux'
+import { css } from 'emotion'
+import { colors, fonts } from 'styles'
+import SectionHeader from 'components/SectionHeader'
+import PageWithFeaturedContent from 'components/PageWithFeaturedContent'
+import PageTitleFetching from 'components/PageTitleFetching'
+import EpisodePageBody from './EpisodePageBody'
+import PodcastLink from 'components/PodcastLink'
+import { RouteComponentProps } from 'react-router'
+import { parse } from 'querystringify'
 
-type EpisodePageProps = RouteComponentProps<{ id: string }>;
+type EpisodePageProps = RouteComponentProps<{ id: string }>
 
 type EpisodePageConnectedProps = EpisodePageProps & {
-  episodeMetadata: EpisodeState['metadata'];
-  fetchEpisodeMetadata: (id: string) => void;
-};
+  episodeMetadata: EpisodeState['metadata']
+  fetchEpisodeMetadata: (id: string) => void
+}
 
 const styles = {
   description: css({
@@ -57,7 +57,7 @@ const styles = {
   title: css(fonts.heading700, {
     marginBottom: 6,
   }),
-};
+}
 
 const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   episodeMetadata,
@@ -65,13 +65,13 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   match,
   location: { search },
 }) => {
-  const { id } = match.params;
-  const { time } = parse(search) as { time?: string };
+  const { id } = match.params
+  const { time } = parse(search) as { time?: string }
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchEpisodeMetadata(id);
-  }, [fetchEpisodeMetadata, id]);
+    window.scrollTo(0, 0)
+    fetchEpisodeMetadata(id)
+  }, [fetchEpisodeMetadata, id])
 
   return (
     <PageWithFeaturedContent
@@ -99,13 +99,13 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
         />
       }
     />
-  );
-};
+  )
+}
 
 const mapStateToProps = (state: AppState) => ({
   episodeMetadata: state.episode.metadata,
-});
+})
 
-const mapDispatchToProps = { fetchEpisodeMetadata: thunks.fetchEpisodeMetadata };
+const mapDispatchToProps = { fetchEpisodeMetadata: thunks.fetchEpisodeMetadata }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EpisodePage);
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodePage)
