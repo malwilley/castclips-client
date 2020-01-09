@@ -15,7 +15,7 @@ import PageTitleFetching from 'components/PageTitleFetching'
 import ParagraphSkeleton from 'components/ParagraphSkeleton'
 import Attribute from 'components/Attribute'
 import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon'
-import LinkIcon from 'mdi-react/LinkIcon'
+import LinkIcon from 'mdi-react/LinkVariantIcon'
 import sanitizeUrl from 'utils/sanitizeUrl'
 
 type PodcastPageProps = {
