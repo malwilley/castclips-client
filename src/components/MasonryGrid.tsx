@@ -23,7 +23,7 @@ const styles = {
   }),
 }
 
-const StackGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
+const MasonryGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
   const {
     ref,
     dimensions: { width },
@@ -55,4 +55,4 @@ const StackGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
   )
 }
 
-export default StackGrid
+export default MasonryGrid
