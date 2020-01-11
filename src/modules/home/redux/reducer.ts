@@ -23,6 +23,12 @@ const hotClips: Reducer<HomeState['hotClips']> = (
       }
     case ActionTypes.SetHotClips:
       return action.payload
+    case ActionTypes.ErrorHotClips:
+      return {
+        type: 'error',
+        data: propOr([], 'data', state),
+        message: action.payload,
+      }
     default:
       return state
   }
@@ -31,7 +37,16 @@ const hotClips: Reducer<HomeState['hotClips']> = (
 const page: Reducer<HomeState['page']> = (state = 1, action: Actions) => {
   switch (action.type) {
     case ActionTypes.SetPage:
-      return action.payload
+      return action.payload.page
+    default:
+      return state
+  }
+}
+
+const end: Reducer<HomeState['end']> = (state = false, action: Actions) => {
+  switch (action.type) {
+    case ActionTypes.SetPage:
+      return action.payload.end
     default:
       return state
   }
@@ -40,6 +55,7 @@ const page: Reducer<HomeState['page']> = (state = 1, action: Actions) => {
 const reducer = combineReducers({
   hotClips,
   page,
+  end,
 })
 
 export default reducer

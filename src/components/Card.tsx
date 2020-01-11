@@ -23,6 +23,7 @@ const styles = {
         border: feature ? 'none' : '1px solid transparent',
         boxShadow: feature ? boxShadow.cardHover : boxShadow.card,
         zIndex: zIndex.card,
+        transform: 'translateY(-2px)',
       },
       position: 'relative',
       transition: 'all 200ms ease-out',

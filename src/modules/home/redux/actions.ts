@@ -8,13 +8,15 @@ export enum ActionTypes {
   FetchMoreHotClips = 'home/fetch_more_hot_clips',
   SetHotClips = 'home/set_hot_clips',
   SetPage = 'home/set_page',
+  ErrorHotClips = 'home/error_hot_clips',
 }
 
 export const actions = {
   addHotClips: (clips: ClipMetadata[]) => createAction(ActionTypes.AddHotClips, clips),
   fetchMoreHotClips: () => createAction(ActionTypes.FetchMoreHotClips),
   setHotClips: (clips: HomeState['hotClips']) => createAction(ActionTypes.SetHotClips, clips),
-  setPage: (page: HomeState['page']) => createAction(ActionTypes.SetPage, page),
+  setPage: (payload: Pick<HomeState, 'page' | 'end'>) => createAction(ActionTypes.SetPage, payload),
+  errorHotClips: (message: string) => createAction(ActionTypes.ErrorHotClips, message),
 }
 
 export type Actions = ActionsUnion<typeof actions>

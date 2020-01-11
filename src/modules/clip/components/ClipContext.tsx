@@ -11,6 +11,7 @@ import formatPublishDate from 'utils/formatPublishDate'
 import ClipCardAccent from 'components/ClipCardAccent'
 import { Link } from 'react-router-dom'
 import { stringify } from 'querystringify'
+import LinkIcon from 'mdi-react/LinkVariantIcon'
 
 type ClipContextProps = { clip: ClipMetadata }
 
@@ -24,11 +25,11 @@ const styles = {
     marginBottom: 4,
   }),
   info: css({
-    '& > a': {
-      textDecoration: 'underline',
-      fontWeight: 'bold',
-    },
     margin: '20px 0',
+    display: 'flex',
+    alignItems: 'center',
+    lineHeight: '24px',
+    verticalAlign: 'middle',
   }),
   podcastContainer: css({
     alignItems: 'flex-start',
@@ -69,7 +70,22 @@ const styles = {
     color: colors.gray200,
     marginRight: 10,
   }),
-  link: css(clickable),
+  link: css({
+    '& > svg': {
+      marginRight: 4,
+    },
+    ...clickable,
+    ...fonts.bold250,
+    display: 'inline-flex',
+    alignItems: 'center',
+    padding: '0 8px',
+    margin: '0 6px',
+    height: 24,
+    borderRadius: 4,
+    backgroundColor: colors.primary20,
+    color: colors.primary500,
+    textDecoration: 'none',
+  }),
 }
 
 const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
@@ -81,14 +97,14 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
         className={styles.link}
         href={`/episode/${clip.episode.id}${stringify({ time: clip.start }, true)}`}
       >
-        {formatHrMinSec(clip.start)}
+        <LinkIcon size={16} /> {formatHrMinSec(clip.start)}
       </a>{' '}
       and ends at{' '}
       <a
         className={styles.link}
         href={`/episode/${clip.episode.id}${stringify({ time: clip.end }, true)}`}
       >
-        {formatHrMinSec(clip.end)}
+        <LinkIcon size={16} /> {formatHrMinSec(clip.end)}
       </a>
     </p>
     <Card className={styles.card} hover>
