@@ -2,11 +2,11 @@ import React from 'react'
 import { css } from 'emotion'
 import { colors } from 'styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from 'redux/types'
 import { thunks } from '../redux'
 import TextPointer from './TextPointer'
 import HotClips from './HotClips'
 import RoundedCorners from 'components/RoundedCorners'
+import { getHotClips } from '../selectors'
 
 const styles = {
   gradientContainer: css({
@@ -57,11 +57,10 @@ const styles = {
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch()
-  const hotClips = useSelector((state: AppState) => state.home.hotClips)
 
   React.useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(thunks.fetchHotClips(0))
+    dispatch(thunks.fetchHotClips())
   }, [dispatch])
 
   return (
@@ -79,7 +78,7 @@ const HomePage: React.FC = () => {
         <RoundedCorners className={styles.roundedCorners} top />
       </div>
       <div className={styles.hotClipsContainer}>
-        <HotClips hotClips={hotClips} />
+        <HotClips />
       </div>
     </div>
   )

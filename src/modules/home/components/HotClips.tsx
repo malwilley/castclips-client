@@ -1,15 +1,17 @@
-import { HomeState } from '../types'
 import { css } from 'emotion'
 import { range } from 'ramda'
 import HotClip, { HotClipSkeleton } from './HotClip'
 import React from 'react'
 import MasonryGrid from 'components/MasonryGrid'
-import { breakpoints } from 'styles'
-import MapUnion from 'components/MapUnion'
+import { breakpoints, boxShadow, fonts, colors } from 'styles'
+import { useSelector, useDispatch } from 'react-redux'
+import { getHotClips, isEndOfClips } from '../selectors'
+import Button from 'components/Button'
+import ErrorMessage from 'components/ErrorMessage'
+import { thunks } from '../redux'
+import Spinner from 'components/Spinner/Spinner'
 
-type HotClipsProps = {
-  hotClips: HomeState['hotClips']
-}
+type HotClipsProps = {}
 
 const styles = {
   clipsContainer: css(
@@ -22,32 +24,69 @@ const styles = {
       maxWidth: 1400,
     }
   ),
+  addClipsButton: css({
+    '&:hover': {
+      boxShadow: boxShadow.cardHover,
+    },
+    width: 160,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: colors.white,
+    boxShadow: boxShadow.card,
+    color: colors.primary500,
+    margin: '40px auto 0 auto',
+    transition: 'box-shadow 200ms ease-out',
+    ...fonts.bold300,
+  }),
+  error: css({
+    margin: '20px auto 0 auto',
+    textAlign: 'center',
+  }),
 }
 
-const HotClips: React.FC<HotClipsProps> = ({ hotClips }) => (
-  <div className={styles.clipsContainer}>
-    <MapUnion
-      map={{
-        not_asked: () => null,
-        error: () => <div>Error</div>,
-        fetching: () => (
-          <MasonryGrid minColumnWidth={300}>
-            {range(0, 20).map(i => (
-              <HotClipSkeleton key={i} />
-            ))}
-          </MasonryGrid>
-        ),
-        success: ({ data: clips }) => (
-          <MasonryGrid minColumnWidth={300}>
-            {clips.map(clip => (
-              <HotClip clip={clip} key={clip.id} />
-            ))}
-          </MasonryGrid>
-        ),
-      }}
-      union={hotClips}
-    />
-  </div>
-)
+const FetchMoreClips: React.FC = () => {
+  const dispatch = useDispatch()
+  const hotClips = useSelector(getHotClips)
+  const end = useSelector(isEndOfClips)
+
+  const fetching = hotClips.type === 'fetching'
+
+  if (end) {
+    return null
+  }
+
+  return (
+    <Button
+      className={styles.addClipsButton}
+      disabled={fetching}
+      onClick={() => dispatch(thunks.fetchHotClips())}
+    >
+      {fetching ? <Spinner /> : <div>Load more</div>}
+    </Button>
+  )
+}
+
+const HotClips: React.FC<HotClipsProps> = () => {
+  const hotClips = useSelector(getHotClips)
+
+  if (hotClips.type === 'not_asked') {
+    return null
+  }
+
+  return (
+    <div className={styles.clipsContainer}>
+      <MasonryGrid minColumnWidth={300}>
+        {hotClips.data.map(clip => (
+          <HotClip clip={clip} key={clip.id} />
+        ))}
+        {hotClips.type === 'fetching' ? range(0, 20).map(i => <HotClipSkeleton key={i} />) : []}
+      </MasonryGrid>
+      {hotClips.type === 'error' && (
+        <ErrorMessage className={styles.error}>{hotClips.message}</ErrorMessage>
+      )}
+      <FetchMoreClips />
+    </div>
+  )
+}
 
 export default HotClips

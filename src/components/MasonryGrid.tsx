@@ -3,8 +3,7 @@ import useResizeObserver from 'hooks/useResizeObserver'
 import { css } from 'emotion'
 import { range } from 'ramda'
 
-type StackGridProps = {
-  children: Array<React.ReactNode>
+type MasonryGridProps = {
   minColumnWidth: number
 }
 
@@ -23,7 +22,7 @@ const styles = {
   }),
 }
 
-const MasonryGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => {
+const MasonryGrid: React.FC<MasonryGridProps> = ({ children, minColumnWidth }) => {
   const {
     ref,
     dimensions: { width },
@@ -32,7 +31,7 @@ const MasonryGrid: React.FC<StackGridProps> = ({ children, minColumnWidth }) => 
   const numColumns = Math.floor(width / minColumnWidth) || 1
 
   const itemsByColumn = useMemo(() => {
-    return children.reduce<React.ReactNode[][]>(
+    return React.Children.toArray(children).reduce<React.ReactNode[][]>(
       (acc, next, i) => {
         acc[i % numColumns].push(next)
         return acc
