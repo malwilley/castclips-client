@@ -3,7 +3,7 @@ import { thunks } from '../redux'
 import { connect } from 'react-redux'
 import Button from 'components/Button'
 import { PodcastState } from '../types'
-import Spinner from 'components/Spinner/Spinner'
+import Spinner from 'components/Spinner'
 import { css } from 'emotion'
 import { colors } from 'styles'
 

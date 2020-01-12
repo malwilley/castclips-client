@@ -9,7 +9,7 @@ import { getHotClips, isEndOfClips } from '../selectors'
 import Button from 'components/Button'
 import ErrorMessage from 'components/ErrorMessage'
 import { thunks } from '../redux'
-import Spinner from 'components/Spinner/Spinner'
+import Spinner from 'components/Spinner'
 
 type HotClipsProps = {}
 

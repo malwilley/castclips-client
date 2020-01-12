@@ -10,6 +10,7 @@ import Downshift from 'downshift'
 import { colors, fonts, boxShadow } from 'styles'
 import MenuDownIcon from 'mdi-react/MenuDownIcon'
 import { secondaryButtonStyles } from 'components/SecondaryButton'
+import zIndex from 'styles/zIndex'
 
 type HeaderAccountProps = {
   className?: string
@@ -50,17 +51,15 @@ const styles = {
     right: 0,
     width: 200,
     boxShadow: boxShadow.card,
+    zIndex: zIndex.flyout,
   }),
   dropdownItem: css({
-    '&:hover': {
-      backgroundColor: colors.gray20,
-    },
-    '& > button': {
-      fontWeight: 'normal',
-      color: colors.gray700,
-    },
+    color: colors.gray700,
     padding: '10px 20px',
     cursor: 'pointer',
+  }),
+  dropdownItemHighlighted: css({
+    backgroundColor: colors.gray20,
   }),
   signin: css(fonts.heading300, {
     padding: '10px 20px',
@@ -86,35 +85,59 @@ const styles = {
   }),
 }
 
-const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => (
-  <Downshift>
-    {({ isOpen, toggleMenu, getMenuProps, getToggleButtonProps }) => (
-      <div className={styles.loggedInMain}>
-        <Button
-          {...getToggleButtonProps()}
-          className={styles.loggedInToggle(isOpen)}
-          onClick={() => toggleMenu()}
-        >
-          <div className={styles.email}>
-            {user.data.photoUrl ? (
-              <img alt="User avatar" className={styles.userPic} src={user.data.photoUrl} />
-            ) : (
-              <div className={styles.userPicPlaceholder}>{user.data.email[0].toUpperCase()}</div>
-            )}
-            <MenuDownIcon className={styles.menuDown} size={24} />
-          </div>
-        </Button>
-        {isOpen && (
-          <ul className={styles.dropdown} {...getMenuProps()}>
-            <li className={styles.dropdownItem}>
-              <Button onClick={() => firebase.auth().signOut()}>Log out</Button>
-            </li>
-          </ul>
-        )}
-      </div>
-    )}
-  </Downshift>
-)
+const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => {
+  const handleSelect = (item: string) => {
+    switch (item) {
+      case 'logout':
+        return firebase.auth().signOut()
+      default:
+        return
+    }
+  }
+
+  return (
+    <Downshift onChange={handleSelect}>
+      {({
+        isOpen,
+        toggleMenu,
+        getMenuProps,
+        getToggleButtonProps,
+        getItemProps,
+        highlightedIndex,
+      }) => (
+        <div className={styles.loggedInMain}>
+          <Button
+            {...getToggleButtonProps()}
+            className={styles.loggedInToggle(isOpen)}
+            onClick={() => toggleMenu()}
+          >
+            <div className={styles.email}>
+              {user.data.photoUrl ? (
+                <img alt="User avatar" className={styles.userPic} src={user.data.photoUrl} />
+              ) : (
+                <div className={styles.userPicPlaceholder}>{user.data.email[0].toUpperCase()}</div>
+              )}
+              <MenuDownIcon className={styles.menuDown} size={24} />
+            </div>
+          </Button>
+          {isOpen && (
+            <ul className={styles.dropdown} {...getMenuProps()}>
+              <li
+                className={css(
+                  styles.dropdownItem,
+                  highlightedIndex === 0 && styles.dropdownItemHighlighted
+                )}
+                {...getItemProps({ item: 'logout' })}
+              >
+                Log out
+              </li>
+            </ul>
+          )}
+        </div>
+      )}
+    </Downshift>
+  )
+}
 
 const HeaderAccountLoggedOut: React.FC = () => (
   <Link className={secondaryButtonStyles} to={'/signin'}>

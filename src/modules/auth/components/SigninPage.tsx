@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase/app'
 import firebaseApp from '../firebase'
@@ -8,6 +8,7 @@ import { colors } from 'styles'
 import Card from 'components/Card'
 import zIndex from 'styles/zIndex'
 import RoundedCorners from 'components/RoundedCorners'
+import Spinner from 'components/Spinner'
 
 const styles = {
   authCenter: css({
@@ -45,6 +46,8 @@ const styles = {
 }
 
 const SigninPage: React.FC = () => {
+  const [isPendingRedirect, setIsPendingRedirect] = useState(false)
+
   // get url params from redux (redirect)
   const uiConfig = {
     signInFlow: 'redirect',
@@ -67,7 +70,14 @@ const SigninPage: React.FC = () => {
       <RoundedCorners top />
       <div className={styles.authCenter}>
         <Card className={styles.authContainer} feature>
-          <StyledFirebaseAuth firebaseAuth={firebaseApp.auth()} uiConfig={uiConfig} />
+          <StyledFirebaseAuth
+            firebaseAuth={firebaseApp.auth()}
+            uiConfig={uiConfig}
+            uiCallback={ui => {
+              setIsPendingRedirect(ui.isPendingRedirect())
+            }}
+          />
+          {isPendingRedirect && <Spinner size={50} />}
         </Card>
       </div>
     </>

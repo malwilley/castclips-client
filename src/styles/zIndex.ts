@@ -3,6 +3,7 @@ const header = 4
 const feature = 5
 const body = 6
 const card = 7
+const flyout = 10
 const modal = 103
 const modalBackground = 102
 
@@ -14,4 +15,5 @@ export default {
   header,
   modal,
   modalBackground,
+  flyout,
 }
