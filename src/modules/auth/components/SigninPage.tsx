@@ -9,6 +9,8 @@ import Card from 'components/Card'
 import zIndex from 'styles/zIndex'
 import RoundedCorners from 'components/RoundedCorners'
 import Spinner from 'components/Spinner'
+import { useLocation } from 'react-router'
+import { parse } from 'querystringify'
 
 const styles = {
   authCenter: css({
@@ -47,11 +49,12 @@ const styles = {
 
 const SigninPage: React.FC = () => {
   const [isPendingRedirect, setIsPendingRedirect] = useState(false)
+  const { search } = useLocation()
+  const { destination = '/' } = parse(search) as { destination?: string }
 
-  // get url params from redux (redirect)
   const uiConfig = {
     signInFlow: 'redirect',
-    signInSuccessUrl: '/',
+    signInSuccessUrl: destination,
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,

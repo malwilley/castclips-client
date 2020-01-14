@@ -1,9 +1,8 @@
-import * as React from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { css } from 'emotion'
-import { AppState } from 'redux/types'
-import { connect } from 'react-redux'
-import { AuthState, UserLoggedIn } from 'modules/auth/types'
+import { useSelector } from 'react-redux'
+import { UserLoggedIn } from 'modules/auth/types'
 import Button from 'components/Button'
 import firebase from 'modules/auth/firebase'
 import Downshift from 'downshift'
@@ -11,10 +10,12 @@ import { colors, fonts, boxShadow } from 'styles'
 import MenuDownIcon from 'mdi-react/MenuDownIcon'
 import { secondaryButtonStyles } from 'components/SecondaryButton'
 import zIndex from 'styles/zIndex'
+import { stringify } from 'querystringify'
+import { getUserState } from 'modules/auth/selectors'
+import { useLocation } from 'react-router'
 
 type HeaderAccountProps = {
   className?: string
-  user: AuthState['user']
 }
 
 const styles = {
@@ -139,20 +140,31 @@ const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => {
   )
 }
 
-const HeaderAccountLoggedOut: React.FC = () => (
-  <Link className={secondaryButtonStyles} to={'/signin'}>
-    Sign in
-  </Link>
-)
+const HeaderAccountLoggedOut: React.FC = () => {
+  const { pathname } = useLocation()
 
-const HeaderAccount: React.FC<HeaderAccountProps> = ({ className, user }) => (
-  <div className={className}>
-    {user.type === 'loggedin' ? <HeaderAccountLoggedIn user={user} /> : <HeaderAccountLoggedOut />}
-  </div>
-)
+  return (
+    <Link
+      className={secondaryButtonStyles}
+      to={`/signin${stringify({ destination: pathname }, true)}`}
+    >
+      Sign in
+    </Link>
+  )
+}
 
-const mapStateToProps = (state: AppState) => ({
-  user: state.auth.user,
-})
+const HeaderAccount: React.FC<HeaderAccountProps> = ({ className }) => {
+  const user = useSelector(getUserState)
 
-export default connect(mapStateToProps)(HeaderAccount)
+  return (
+    <div className={className}>
+      {user.type === 'loggedin' ? (
+        <HeaderAccountLoggedIn user={user} />
+      ) : (
+        <HeaderAccountLoggedOut />
+      )}
+    </div>
+  )
+}
+
+export default HeaderAccount
