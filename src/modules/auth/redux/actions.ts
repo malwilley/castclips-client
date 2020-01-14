@@ -1,13 +1,16 @@
 import { createAction } from 'redux/createAction'
 import { ActionsUnion } from 'redux/types'
-import { AuthState } from '../types'
 
 export enum ActionTypes {
-  SetUser = 'auth/set_user',
+  SignedInUser = 'auth/signed-in',
+  AnonymousUser = 'auth/anonymous',
+  Unauthenticated = 'auth/unauthenticated',
 }
 
 export const actions = {
-  setUser: (user: AuthState['user']) => createAction(ActionTypes.SetUser, user),
+  signInUser: (user: firebase.User) => createAction(ActionTypes.SignedInUser, user),
+  signInAnonymously: (user: firebase.User) => createAction(ActionTypes.AnonymousUser, user),
+  logoutUser: () => createAction(ActionTypes.Unauthenticated),
 }
 
 export type Actions = ActionsUnion<typeof actions>

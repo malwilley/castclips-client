@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import { Store } from 'redux/types'
 import { actions } from './redux/actions'
-import { UserData } from './types'
 import config from 'config'
 
 const app = firebase.initializeApp({
@@ -12,50 +11,17 @@ const app = firebase.initializeApp({
 
 const auth = app.auth()
 
-const mapUser = ({
-  displayName,
-  email,
-  emailVerified,
-  metadata: { creationTime, lastSignInTime },
-  refreshToken,
-  photoURL,
-  uid,
-}: firebase.User): UserData => ({
-  displayName: displayName || '',
-  email: email || '',
-  emailVerified,
-  creationTime,
-  lastSignInTime,
-  refreshToken,
-  photoUrl: photoURL,
-  uid,
-})
-
 const attachAuthListener = (store: Store) => {
   auth.onAuthStateChanged(user => {
+    console.log('auth state changed', user)
     if (user) {
       if (user.isAnonymous) {
-        return store.dispatch(
-          actions.setUser({
-            type: 'anonymous',
-            data: mapUser(user),
-          })
-        )
+        return store.dispatch(actions.signInAnonymously(user))
       }
-      return store.dispatch(
-        actions.setUser({
-          type: 'loggedin',
-          data: mapUser(user),
-        })
-      )
+      return store.dispatch(actions.signInUser(user))
     }
 
-    return store.dispatch(
-      actions.setUser({
-        type: 'loggedout',
-        data: null,
-      })
-    )
+    return store.dispatch(actions.logoutUser())
   })
 }
 
@@ -70,7 +36,18 @@ const signInAnonymouslyAndGetToken = async () => {
 }
 
 const getAuthToken = async () => {
+  console.log('getting auth token for', auth.currentUser)
   const user = auth.currentUser
+
+  try {
+    if (!user) {
+      // Make sure we aren't waiting for the result of a redirect
+      await auth.getRedirectResult()
+    }
+  } catch {
+    console.error('Error with signin redirect')
+  }
+
   const token = user ? await user.getIdToken() : await signInAnonymouslyAndGetToken()
 
   return token

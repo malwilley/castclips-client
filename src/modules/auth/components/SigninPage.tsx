@@ -11,6 +11,8 @@ import RoundedCorners from 'components/RoundedCorners'
 import Spinner from 'components/Spinner'
 import { useLocation } from 'react-router'
 import { parse } from 'querystringify'
+import { useDispatch } from 'react-redux'
+import { actions } from '../redux/actions'
 
 const styles = {
   authCenter: css({
@@ -48,11 +50,12 @@ const styles = {
 }
 
 const SigninPage: React.FC = () => {
+  const dispatch = useDispatch()
   const [isPendingRedirect, setIsPendingRedirect] = useState(false)
   const { search } = useLocation()
   const { destination = '/' } = parse(search) as { destination?: string }
 
-  const uiConfig = {
+  const uiConfig: firebaseui.auth.Config = {
     signInFlow: 'redirect',
     signInSuccessUrl: destination,
     signInOptions: [
@@ -60,6 +63,13 @@ const SigninPage: React.FC = () => {
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
+    callbacks: {
+      signInSuccessWithAuthResult: authResult => {
+        dispatch(actions.signInUser(authResult.user))
+
+        return true
+      },
+    },
   }
 
   return (

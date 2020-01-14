@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { css } from 'emotion'
 import { useSelector } from 'react-redux'
-import { UserLoggedIn } from 'modules/auth/types'
+import { PermanentUser, UserType } from 'modules/auth/types'
 import Button from 'components/Button'
 import firebase from 'modules/auth/firebase'
 import Downshift from 'downshift'
@@ -86,7 +86,7 @@ const styles = {
   }),
 }
 
-const HeaderAccountLoggedIn: React.FC<{ user: UserLoggedIn }> = ({ user }) => {
+const HeaderAccountLoggedIn: React.FC<{ user: PermanentUser }> = ({ user }) => {
   const handleSelect = (item: string) => {
     switch (item) {
       case 'logout':
@@ -158,7 +158,7 @@ const HeaderAccount: React.FC<HeaderAccountProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      {user.type === 'loggedin' ? (
+      {user.type === UserType.Permanent ? (
         <HeaderAccountLoggedIn user={user} />
       ) : (
         <HeaderAccountLoggedOut />

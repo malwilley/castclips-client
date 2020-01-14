@@ -1,12 +1,11 @@
 import React from 'react'
 import { css } from 'emotion'
 import { colors } from 'styles'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { thunks } from '../redux'
 import TextPointer from './TextPointer'
 import HotClips from './HotClips'
 import RoundedCorners from 'components/RoundedCorners'
-import { getHotClips } from '../selectors'
 
 const styles = {
   gradientContainer: css({
