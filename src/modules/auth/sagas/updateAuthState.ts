@@ -10,7 +10,6 @@ const getUserData = pick(['uid', 'displayName', 'email', 'photoURL', 'phoneNumbe
 
 const authStateChannel = eventChannel<{ type: UserType; data?: UserInfo }>(emitter => {
   const unsubscribe = auth.onAuthStateChanged(user => {
-    console.log('auth state changed', user)
     if (user) {
       if (user.isAnonymous) {
         return emitter({ type: UserType.Anonymous, data: getUserData(user) })
