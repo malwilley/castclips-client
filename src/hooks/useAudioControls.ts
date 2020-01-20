@@ -64,6 +64,7 @@ const useAudioControls = (
 
     // Need `autoPlay` on to support iOS, so pause the audio
     ref.current.pause()
+    ref.current.currentTime = 0
 
     const refCopy = ref.current
 
