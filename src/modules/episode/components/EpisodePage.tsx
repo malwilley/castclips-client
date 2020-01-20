@@ -13,6 +13,9 @@ import { useRouteMatch, useLocation } from 'react-router'
 import { parse } from 'querystringify'
 import { getEpisodeUnion } from '../selectors'
 import { actions } from '../redux/actions'
+import useTitle from 'hooks/useTitle'
+import HttpUnion from 'utils/HttpUnion'
+import { EpisodeMetadata } from '../types'
 
 const styles = {
   description: css({
@@ -53,14 +56,12 @@ const styles = {
 
 const EpisodePage: React.FC = () => {
   const dispatch = useDispatch()
-  const episodeMetadata = useSelector(getEpisodeUnion)
+  const episodeUnion = useSelector(getEpisodeUnion)
 
   const {
     params: { id },
   } = useRouteMatch<{ id: string }>()
-
   const { search } = useLocation()
-
   const { time } = parse(search) as { time?: string }
 
   React.useEffect(() => {
@@ -68,13 +69,15 @@ const EpisodePage: React.FC = () => {
     dispatch(actions.fetchEpisode(id))
   }, [dispatch, id])
 
+  useTitle(HttpUnion.map(({ title }: EpisodeMetadata) => title)(episodeUnion))
+
   return (
     <PageWithFeaturedContent
-      bodyContent={<EpisodePageBody episodeMetadata={episodeMetadata} id={id} />}
-      featuredContent={<EpisodeCard episode={episodeMetadata} time={Number(time)} />}
+      bodyContent={<EpisodePageBody episodeMetadata={episodeUnion} id={id} />}
+      featuredContent={<EpisodeCard episode={episodeUnion} time={Number(time)} />}
       titleContent={
         <HttpContent
-          request={episodeMetadata}
+          request={episodeUnion}
           renderFetching={() => (
             <>
               <SectionHeader light>episode</SectionHeader>

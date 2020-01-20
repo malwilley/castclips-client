@@ -6,6 +6,7 @@ import TextPointer from './TextPointer'
 import HotClips from './HotClips'
 import RoundedCorners from 'components/RoundedCorners'
 import { actions } from '../redux/actions'
+import useTitle from 'hooks/useTitle'
 
 const styles = {
   gradientContainer: css({
@@ -56,6 +57,8 @@ const styles = {
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch()
+
+  useTitle('CastClips - Share your favorite podcast moments', { suffix: false })
 
   useEffect(() => {
     window.scrollTo(0, 0)

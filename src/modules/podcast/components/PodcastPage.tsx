@@ -16,6 +16,9 @@ import LinkIcon from 'mdi-react/LinkVariantIcon'
 import sanitizeUrl from 'utils/sanitizeUrl'
 import { actions } from '../redux'
 import { getPodcastMetadataUnion, getPodcastEpisodesUnion } from '../selectors'
+import useTitle from 'hooks/useTitle'
+import HttpUnion from 'utils/HttpUnion'
+import { PodcastMetadata } from '../types'
 
 type PodcastPageProps = {
   id: string
@@ -92,6 +95,8 @@ const PodcastPage: React.FC<PodcastPageProps> = ({ id }) => {
     window.scrollTo(0, 0)
     dispatch(actions.fetchPodcastMetadata(id))
   }, [dispatch, id])
+
+  useTitle(HttpUnion.map(({ title }: PodcastMetadata) => title)(podcastUnion))
 
   return (
     <PageWithFeaturedContent
