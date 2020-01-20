@@ -8,11 +8,7 @@ export enum UserType {
 export type UserData = {
   displayName: string
   email: string
-  emailVerified: boolean
-  creationTime?: string
-  lastSignInTime?: string
   photoUrl: string | null
-  refreshToken: string
   uid: string
 }
 
@@ -34,7 +30,7 @@ export type AnonymousUser = {
   data: UserData
 }
 
-type UserState = PermanentUser | UnknownUser | AnonymousUser | UnauthenticatedUser
+export type UserState = PermanentUser | UnknownUser | AnonymousUser | UnauthenticatedUser
 
 export type AuthState = {
   user: UserState

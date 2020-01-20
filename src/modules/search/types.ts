@@ -50,10 +50,12 @@ export type ClipResult = {
 
 export type SearchResult = PodcastResult | EpisodeResult | ClipResult
 
-export type SearchResults<T extends SearchResult> = HttpRequest<{
+export type SearchResultsData<T> = {
   results: T[]
   total: number
-}>
+}
+
+export type SearchResults<T extends SearchResult> = HttpRequest<SearchResultsData<T>>
 
 export type SearchState = {
   [SearchType.Podcasts]: SearchResults<PodcastResult>
@@ -64,5 +66,5 @@ export type SearchState = {
 export type SearchParams = {
   query: string
   type: SearchType
-  offset?: number
+  page?: number
 }

@@ -8,14 +8,26 @@ import {
   ClipResult,
   EpisodeResult,
 } from '../types'
+import { path } from 'ramda'
 
 const makeResultReducer = <T extends SearchResult>(type: SearchType) => (
   state: SearchResults<T> = { type: 'not_asked' },
   action: Actions
 ): SearchResults<T> => {
+  if (path(['payload', 'type'], action) !== type) {
+    return state
+  }
+
   switch (action.type) {
+    case ActionTypes.ErrorSearchResults:
+      return { type: 'error', message: action.payload.message }
+    case ActionTypes.ExecuteSearch:
+      return { type: 'fetching' }
     case ActionTypes.SetSearchResults:
-      return (action.payload.type === type ? action.payload.request : state) as SearchResults<T>
+      return {
+        type: 'success',
+        data: { results: action.payload.results, total: action.payload.total },
+      } as SearchResults<T>
     default:
       return state
   }

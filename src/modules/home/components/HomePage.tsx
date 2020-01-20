@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { css } from 'emotion'
 import { colors } from 'styles'
 import { useDispatch } from 'react-redux'
-import { thunks } from '../redux'
 import TextPointer from './TextPointer'
 import HotClips from './HotClips'
 import RoundedCorners from 'components/RoundedCorners'
+import { actions } from '../redux/actions'
 
 const styles = {
   gradientContainer: css({
@@ -57,9 +57,9 @@ const styles = {
 const HomePage: React.FC = () => {
   const dispatch = useDispatch()
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(thunks.fetchHotClips())
+    dispatch(actions.fetchHotClips())
   }, [dispatch])
 
   return (

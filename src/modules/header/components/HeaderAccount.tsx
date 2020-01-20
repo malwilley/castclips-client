@@ -13,6 +13,7 @@ import zIndex from 'styles/zIndex'
 import { stringify } from 'querystringify'
 import { getUserState } from 'modules/auth/selectors'
 import { useLocation } from 'react-router'
+import MapUnion from 'components/MapUnion'
 
 type HeaderAccountProps = {
   className?: string
@@ -154,15 +155,19 @@ const HeaderAccountLoggedOut: React.FC = () => {
 }
 
 const HeaderAccount: React.FC<HeaderAccountProps> = ({ className }) => {
-  const user = useSelector(getUserState)
+  const userUnion = useSelector(getUserState)
 
   return (
     <div className={className}>
-      {user.type === UserType.Permanent ? (
-        <HeaderAccountLoggedIn user={user} />
-      ) : (
-        <HeaderAccountLoggedOut />
-      )}
+      <MapUnion
+        map={{
+          [UserType.Permanent]: user => <HeaderAccountLoggedIn user={user} />,
+          [UserType.Anonymous]: () => <HeaderAccountLoggedOut />,
+          [UserType.Unauthenticated]: () => <HeaderAccountLoggedOut />,
+          [UserType.Unknown]: () => null,
+        }}
+        union={userUnion}
+      />
     </div>
   )
 }

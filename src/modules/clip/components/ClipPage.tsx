@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import HttpContent from 'components/HttpContent'
 import ClipCard from 'modules/clip/components/ClipCard'
 import { AppState } from 'redux/types'
-import { thunks } from '../redux'
 import PageWithFeaturedContent from 'components/PageWithFeaturedContent'
 import SectionHeader from 'components/SectionHeader'
 import { Link } from 'react-router-dom'
@@ -11,8 +10,8 @@ import { colors, fonts } from 'styles'
 import PageTitleFetching from 'components/PageTitleFetching'
 import ClipPageBody from './ClipPageBody'
 import PodcastLink from 'components/PodcastLink'
-import { useSelector } from 'react-redux'
-import useThunkDispatch from 'hooks/useThunkDispatch'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../redux/actions'
 
 type ClipPageProps = {
   id: string
@@ -39,13 +38,13 @@ const styles = {
 }
 
 const ClipPage: React.FC<ClipPageProps> = ({ id }) => {
-  const thunkDispatch = useThunkDispatch()
+  const dispatch = useDispatch()
   const clipMetadata = useSelector((state: AppState) => state.clip.metadata)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    thunkDispatch(thunks.fetchClip(id))
-  }, [id, thunkDispatch])
+    dispatch(actions.fetchClip(id))
+  }, [id, dispatch])
 
   return (
     <PageWithFeaturedContent

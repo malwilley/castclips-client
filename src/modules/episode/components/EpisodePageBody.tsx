@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { EpisodeState } from '../types'
 import HttpContent from 'components/HttpContent'
 import { css } from 'emotion'

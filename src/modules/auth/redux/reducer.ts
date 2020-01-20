@@ -1,22 +1,18 @@
 import { combineReducers } from 'redux'
-import { AuthState, UserData, UserType, UnknownUser, PermanentUser, AnonymousUser } from '../types'
+import {
+  AuthState,
+  UserData,
+  UserType,
+  PermanentUser,
+  AnonymousUser,
+  UnauthenticatedUser,
+} from '../types'
 import { Actions, ActionTypes } from './actions'
+import { UserInfo } from 'firebase'
 
-const mapFirebaseUser = ({
-  displayName,
-  email,
-  emailVerified,
-  metadata: { creationTime, lastSignInTime },
-  refreshToken,
-  photoURL,
-  uid,
-}: firebase.User): UserData => ({
-  displayName: displayName || '',
-  email: email || '',
-  emailVerified,
-  creationTime,
-  lastSignInTime,
-  refreshToken,
+const mapFirebaseUser = ({ displayName, email, photoURL, uid }: UserInfo): UserData => ({
+  displayName: displayName ?? '',
+  email: email ?? '',
   photoUrl: photoURL,
   uid,
 })
@@ -35,8 +31,8 @@ const user = (state: AuthState['user'] = { type: UserType.Unknown }, action: Act
       } as AnonymousUser
     case ActionTypes.Unauthenticated:
       return {
-        type: UserType.Unknown,
-      } as UnknownUser
+        type: UserType.Unauthenticated,
+      } as UnauthenticatedUser
     default:
       return state
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'redux/types'
 import { SearchType } from '../types'
@@ -12,11 +12,8 @@ import { LocalStorageKey } from 'types'
 import useLocalStorage from 'hooks/useLocalStorage'
 import { replace } from 'connected-react-router'
 import useChangeQueryParam from 'hooks/useChangeQueryParam'
-import { actions } from '../redux/actions'
-import { search } from 'api/firebase'
-import { getAuthToken } from 'modules/auth/firebase'
-import makeMapSearchResult from '../utils/mapSearchResult'
 import SearchPagination from './SearchPagination'
+import { actions } from '../redux/actions'
 
 type SearchResultsPageProps = {
   query: string
@@ -46,49 +43,6 @@ const styles = {
   }),
 }
 
-const fetchSearchResults = async ({
-  dispatch,
-  query,
-  type,
-  page,
-}: {
-  dispatch: (_: any) => void
-  query: string
-  type: SearchType
-  page: number
-}) => {
-  if (!query) {
-    return
-  }
-
-  dispatch(actions.setSearchRequest({ request: { type: 'fetching' }, type }))
-
-  try {
-    const token = await getAuthToken()
-    const offset = (page - 1) * 10
-    const { results, total } = await search(token, { type, query, offset })
-    dispatch(
-      actions.setSearchRequest({
-        type,
-        request: {
-          type: 'success',
-          data: {
-            total,
-            results: results.map(makeMapSearchResult(type)),
-          },
-        },
-      })
-    )
-  } catch {
-    dispatch(
-      actions.setSearchRequest({
-        request: { type: 'error', message: 'Error fetching search results' },
-        type,
-      })
-    )
-  }
-}
-
 const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   query,
   type: typeFromUrl,
@@ -104,7 +58,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   const type = typeFromUrl || storedType
   const results = useSelector((state: AppState) => state.search[type])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!typeFromUrl) {
       changeQueryParam('type', type)
     }
@@ -113,9 +67,9 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     }
   }, [changeQueryParam, setStoredType, storedType, type, typeFromUrl])
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0)
-    fetchSearchResults({ dispatch, query, type, page })
+    dispatch(actions.executeSearch({ query, type, page }))
   }, [query, type, page, dispatch])
 
   return (

@@ -1,9 +1,6 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import PodcastCard from 'modules/podcast/components/PodcastCard'
-import { thunks } from '../redux'
-import { connect } from 'react-redux'
-import { AppState } from 'redux/types'
-import { PodcastState } from '../types'
+import { useDispatch, useSelector } from 'react-redux'
 import PageWithFeaturedContent from 'components/PageWithFeaturedContent'
 import SectionHeader from 'components/SectionHeader'
 import { css } from 'emotion'
@@ -17,16 +14,11 @@ import Attribute from 'components/Attribute'
 import AnimationPlayOutlineIcon from 'mdi-react/AnimationPlayOutlineIcon'
 import LinkIcon from 'mdi-react/LinkVariantIcon'
 import sanitizeUrl from 'utils/sanitizeUrl'
+import { actions } from '../redux'
+import { getPodcastMetadataUnion, getPodcastEpisodesUnion } from '../selectors'
 
 type PodcastPageProps = {
   id: string
-}
-
-type PodcastPageConnectedProps = PodcastPageProps & {
-  episodes: PodcastState['episodes']
-  fetchClipsForPodcast: (id: string) => void
-  fetchPodcastMetadata: (id: string) => void
-  podcastMetadata: PodcastState['metadata']
 }
 
 const styles = {
@@ -90,18 +82,16 @@ const styles = {
   }),
 }
 
-const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
-  episodes,
-  fetchClipsForPodcast,
-  fetchPodcastMetadata,
-  podcastMetadata,
-  id,
-}) => {
-  React.useEffect(() => {
+const PodcastPage: React.FC<PodcastPageProps> = ({ id }) => {
+  const dispatch = useDispatch()
+
+  const podcastUnion = useSelector(getPodcastMetadataUnion)
+  const episodesUnion = useSelector(getPodcastEpisodesUnion)
+
+  useEffect(() => {
     window.scrollTo(0, 0)
-    fetchPodcastMetadata(id)
-    fetchClipsForPodcast(id)
-  }, [fetchClipsForPodcast, fetchPodcastMetadata, id])
+    dispatch(actions.fetchPodcastMetadata(id))
+  }, [dispatch, id])
 
   return (
     <PageWithFeaturedContent
@@ -111,7 +101,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
             <SectionHeader className={styles.sectionHeader}>description</SectionHeader>
             <div className={styles.description}>
               <HttpContent
-                request={podcastMetadata}
+                request={podcastUnion}
                 renderFetching={() => <ParagraphSkeleton />}
                 renderSuccess={({ description }) => (
                   <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -119,12 +109,12 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
               />
             </div>
             <SectionHeader className={styles.sectionHeader}>latest episodes</SectionHeader>
-            <LatestEpisodes episodes={episodes} />
+            <LatestEpisodes episodes={episodesUnion} />
           </section>
           <section className={styles.clips}>
             <SectionHeader>podcast information</SectionHeader>
             <HttpContent
-              request={podcastMetadata}
+              request={podcastUnion}
               renderFetching={() => <ParagraphSkeleton />}
               renderSuccess={({ totalEpisodes, website }) => (
                 <div>
@@ -146,7 +136,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
           </section>
         </div>
       }
-      featuredContent={<PodcastCard podcast={podcastMetadata} />}
+      featuredContent={<PodcastCard podcast={podcastUnion} />}
       titleContent={
         <>
           <SectionHeader className={styles.podcastSectionHeader} light>
@@ -154,7 +144,7 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
           </SectionHeader>
           <div className={styles.title}>
             <HttpContent
-              request={podcastMetadata}
+              request={podcastUnion}
               renderFetching={() => <PageTitleFetching />}
               renderSuccess={({ title, publisher }) => (
                 <div className={styles.heading}>
@@ -170,14 +160,4 @@ const PodcastPage: React.FC<PodcastPageConnectedProps> = ({
   )
 }
 
-const mapDispatchToProps = {
-  fetchClipsForPodcast: thunks.fetchClipsForPodcast,
-  fetchPodcastMetadata: thunks.fetchPodcastMetadata,
-}
-
-const mapStateToProps = (state: AppState) => ({
-  episodes: state.podcast.episodes,
-  podcastMetadata: state.podcast.metadata,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PodcastPage)
+export default PodcastPage

@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react'
 import Modal from 'components/Modal'
 import DeleteIcon from 'mdi-react/DeleteIcon'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getClipData } from '../selectors'
 import { css } from 'emotion'
 import useModalState from 'modules/modal/hooks/useModalState'
-import useThunkDispatch from 'hooks/useThunkDispatch'
-import thunks from '../redux/thunks'
 import { fonts } from 'styles'
+import { actions } from '../redux/actions'
 
 const styles = {
   container: css({
@@ -33,13 +32,13 @@ type DeleteClipModalProps = {
 }
 
 const DeleteClipModal: React.FC<DeleteClipModalProps> = ({ handleClose, isOpen }) => {
-  const thunkDispatch = useThunkDispatch()
+  const dispatch = useDispatch()
   const modalState = useModalState({ handleClose })
   const clipData = useSelector(getClipData)
 
   const deleteClip = useCallback(() => {
-    thunkDispatch(thunks.deleteClip(clipData!.id))
-  }, [clipData, thunkDispatch])
+    dispatch(actions.deleteClip(clipData!.id))
+  }, [clipData, dispatch])
 
   return (
     <Modal
