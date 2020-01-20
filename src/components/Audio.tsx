@@ -7,7 +7,7 @@ type AudioProps = {
 
 const Audio: React.FC<AudioProps> = ({ audioRef: ref, src, ...audioProps }) => {
   return (
-    <audio ref={ref} {...audioProps}>
+    <audio autoPlay ref={ref} {...audioProps}>
       <source src={src} type="audio/mp3" />
       <p>
         Your browser does not support the <code>audio</code> element.
