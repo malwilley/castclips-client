@@ -14,6 +14,8 @@ import { replace } from 'connected-react-router'
 import useChangeQueryParam from 'hooks/useChangeQueryParam'
 import SearchPagination from './SearchPagination'
 import { actions } from '../redux/actions'
+import useTitle from 'hooks/useTitle'
+import capitalizeFirstLetter from 'utils/capitalizeFirstLetter'
 
 type SearchResultsPageProps = {
   query: string
@@ -71,6 +73,8 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     window.scrollTo(0, 0)
     dispatch(actions.executeSearch({ query, type, page }))
   }, [query, type, page, dispatch])
+
+  useTitle(`${query} - ${capitalizeFirstLetter(type)}s`)
 
   return (
     <>

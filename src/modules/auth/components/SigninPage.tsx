@@ -13,6 +13,7 @@ import { useLocation } from 'react-router'
 import { parse } from 'querystringify'
 import { useDispatch } from 'react-redux'
 import { actions } from '../redux/actions'
+import useTitle from 'hooks/useTitle'
 
 const styles = {
   authCenter: css({
@@ -51,6 +52,9 @@ const styles = {
 
 const SigninPage: React.FC = () => {
   const dispatch = useDispatch()
+
+  useTitle('Sign in')
+
   const [isPendingRedirect, setIsPendingRedirect] = useState(false)
   const { search } = useLocation()
   const { destination = '/' } = parse(search) as { destination?: string }

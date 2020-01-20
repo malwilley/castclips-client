@@ -12,6 +12,9 @@ import ClipPageBody from './ClipPageBody'
 import PodcastLink from 'components/PodcastLink'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../redux/actions'
+import useTitle from 'hooks/useTitle'
+import HttpUnion from 'utils/HttpUnion'
+import { ClipMetadata } from '../types'
 
 type ClipPageProps = {
   id: string
@@ -39,20 +42,22 @@ const styles = {
 
 const ClipPage: React.FC<ClipPageProps> = ({ id }) => {
   const dispatch = useDispatch()
-  const clipMetadata = useSelector((state: AppState) => state.clip.metadata)
+  const clipUnion = useSelector((state: AppState) => state.clip.metadata)
 
   useEffect(() => {
     window.scrollTo(0, 0)
     dispatch(actions.fetchClip(id))
   }, [id, dispatch])
 
+  useTitle(HttpUnion.map(({ title }: ClipMetadata) => title)(clipUnion))
+
   return (
     <PageWithFeaturedContent
-      bodyContent={<ClipPageBody clipId={id} clipMetadata={clipMetadata} />}
-      featuredContent={<ClipCard clip={clipMetadata} />}
+      bodyContent={<ClipPageBody clipId={id} clipMetadata={clipUnion} />}
+      featuredContent={<ClipCard clip={clipUnion} />}
       titleContent={
         <HttpContent
-          request={clipMetadata}
+          request={clipUnion}
           renderFetching={() => (
             <>
               <SectionHeader light>user clip</SectionHeader>
