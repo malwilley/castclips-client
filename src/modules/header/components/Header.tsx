@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Link } from 'react-router-dom'
 import { css } from 'emotion'
-import HeaderAccount from './HeaderAccount'
 import Logo from 'icons/Logo'
 import zIndex from 'styles/zIndex'
 import SearchBar from 'modules/search/components/SearchBar'
@@ -63,6 +62,8 @@ const styles = {
   }),
 }
 
+const HeaderAccount = lazy(() => import(/* webpackChunkName: "header-account" */ './HeaderAccount'))
+
 const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
   <header className={css(styles.main, className)}>
     <div className={styles.contentContainer}>
@@ -70,7 +71,9 @@ const Header: React.FC<HeaderProps> = ({ className, searchText }) => (
         <Link className={styles.logo} to="/">
           <Logo height={30} width={130} />
         </Link>
-        <HeaderAccount />
+        <Suspense fallback={<div />}>
+          <HeaderAccount />
+        </Suspense>
       </div>
       <div className={styles.search}>
         <SearchBar initialText={searchText} />

@@ -1,11 +1,10 @@
-import * as React from 'react'
+import React, { lazy } from 'react'
 import { css } from 'emotion'
 import { colors, fonts, clickable, breakpoints } from 'styles'
 import LayoutContainer from './LayoutContainer'
 import Logo from 'icons/Logo'
 import ListennotesPng from 'icons/Listennotes.png'
 import ListennotesWebp from 'icons/Listennotes.webp'
-import Appbase from 'icons/Appbase'
 import AccessibleLabel from './AccessibleLabel'
 
 const styles = {
@@ -73,6 +72,8 @@ const styles = {
     flexWrap: 'wrap',
   }),
 }
+
+const Appbase = lazy(() => import(/* webpackChunkName: "appbase-icon" */ 'icons/Appbase'))
 
 const Footer: React.FC = () => (
   <div className={styles.main}>

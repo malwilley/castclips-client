@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import React, { useState, Suspense, lazy } from 'react'
 import firebase from 'firebase/app'
 import firebaseApp from '../firebase'
 import LayoutContainer from 'components/LayoutContainer'
@@ -50,6 +49,10 @@ const styles = {
   }),
 }
 
+const FirebaseAuth = lazy(() =>
+  import(/* webpackChunkName: "firebase-auth" */ 'react-firebaseui/StyledFirebaseAuth')
+)
+
 const SigninPage: React.FC = () => {
   const dispatch = useDispatch()
 
@@ -87,13 +90,15 @@ const SigninPage: React.FC = () => {
       <RoundedCorners top />
       <div className={styles.authCenter}>
         <Card className={styles.authContainer} feature>
-          <StyledFirebaseAuth
-            firebaseAuth={firebaseApp.auth()}
-            uiConfig={uiConfig}
-            uiCallback={ui => {
-              setIsPendingRedirect(ui.isPendingRedirect())
-            }}
-          />
+          <Suspense fallback={<Spinner size={50} />}>
+            <FirebaseAuth
+              firebaseAuth={firebaseApp.auth()}
+              uiConfig={uiConfig}
+              uiCallback={ui => {
+                setIsPendingRedirect(ui.isPendingRedirect())
+              }}
+            />
+          </Suspense>
           {isPendingRedirect && <Spinner size={50} />}
         </Card>
       </div>
