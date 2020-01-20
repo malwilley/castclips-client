@@ -1,3 +1,5 @@
+import { compose } from 'redux'
+
 declare module '*.svg' {
   const content: string
   export default content
@@ -33,4 +35,10 @@ declare module 'react-audio-player' {
   }
 
   export default ReactAudioPlayer
+}
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+  }
 }
