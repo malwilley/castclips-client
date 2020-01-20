@@ -1,30 +1,36 @@
+export enum UserType {
+  Anonymous = 'anonymous',
+  Unknown = 'unknown',
+  Unauthenticated = 'unauthenticated',
+  Permanent = 'permanent',
+}
+
 export type UserData = {
   displayName: string
   email: string
-  emailVerified: boolean
-  creationTime?: string
-  lastSignInTime?: string
   photoUrl: string | null
-  refreshToken: string
   uid: string
 }
 
-export type UserLoggedIn = {
-  type: 'loggedin'
+export type UnauthenticatedUser = {
+  type: UserType.Unauthenticated
+}
+
+export type PermanentUser = {
+  type: UserType.Permanent
   data: UserData
 }
 
-export type UserLoggedOut = {
-  type: 'loggedout'
-  data: null
+export type UnknownUser = {
+  type: UserType.Unknown
 }
 
 export type AnonymousUser = {
-  type: 'anonymous'
+  type: UserType.Anonymous
   data: UserData
 }
 
-type UserState = UserLoggedIn | UserLoggedOut | AnonymousUser
+export type UserState = PermanentUser | UnknownUser | AnonymousUser | UnauthenticatedUser
 
 export type AuthState = {
   user: UserState

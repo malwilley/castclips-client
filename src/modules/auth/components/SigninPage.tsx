@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase/app'
 import firebaseApp from '../firebase'
@@ -8,6 +8,11 @@ import { colors } from 'styles'
 import Card from 'components/Card'
 import zIndex from 'styles/zIndex'
 import RoundedCorners from 'components/RoundedCorners'
+import Spinner from 'components/Spinner'
+import { useLocation } from 'react-router'
+import { parse } from 'querystringify'
+import { useDispatch } from 'react-redux'
+import { actions } from '../redux/actions'
 
 const styles = {
   authCenter: css({
@@ -45,15 +50,26 @@ const styles = {
 }
 
 const SigninPage: React.FC = () => {
-  // get url params from redux (redirect)
-  const uiConfig = {
+  const dispatch = useDispatch()
+  const [isPendingRedirect, setIsPendingRedirect] = useState(false)
+  const { search } = useLocation()
+  const { destination = '/' } = parse(search) as { destination?: string }
+
+  const uiConfig: firebaseui.auth.Config = {
     signInFlow: 'redirect',
-    signInSuccessUrl: '/',
+    signInSuccessUrl: destination,
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
+    callbacks: {
+      signInSuccessWithAuthResult: authResult => {
+        dispatch(actions.signInUser(authResult.user))
+
+        return true
+      },
+    },
   }
 
   return (
@@ -67,7 +83,14 @@ const SigninPage: React.FC = () => {
       <RoundedCorners top />
       <div className={styles.authCenter}>
         <Card className={styles.authContainer} feature>
-          <StyledFirebaseAuth firebaseAuth={firebaseApp.auth()} uiConfig={uiConfig} />
+          <StyledFirebaseAuth
+            firebaseAuth={firebaseApp.auth()}
+            uiConfig={uiConfig}
+            uiCallback={ui => {
+              setIsPendingRedirect(ui.isPendingRedirect())
+            }}
+          />
+          {isPendingRedirect && <Spinner size={50} />}
         </Card>
       </div>
     </>

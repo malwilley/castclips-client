@@ -1,29 +1,22 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import ScissorsIcon from 'mdi-react/ScissorsIcon'
 import Modal from 'components/Modal'
 import StyledInput, { StyledInputLabel } from 'components/StyledInput'
 import { css } from 'emotion'
 import Asterisk from 'components/Asterisk'
-import { connect } from 'react-redux'
-import { thunks } from '../redux'
-import { AppState } from 'redux/types'
-import { EpisodeState } from '../types'
+import { useDispatch, useSelector } from 'react-redux'
 import StyledTextArea from 'components/StyledTextArea'
 import pick from 'ramda/es/pick'
-import { AddClipPayload } from 'api/types'
 import CharacterCounter from 'components/CharacterCounter'
+import { actions } from '../redux/actions'
+import useModalState from 'modules/modal/hooks/useModalState'
+import { getEpisodeUnion } from '../selectors'
 
 type ShareModalProps = {
   start: number
   end: number
   handleClose: () => void
   isOpen: boolean
-}
-
-type ShareModalConnectedProps = ShareModalProps & {
-  clipId: EpisodeState['view']['clipId']
-  createClip: (clip: AddClipPayload) => void
-  episode: EpisodeState['metadata']
 }
 
 const styles = {
@@ -38,35 +31,33 @@ const styles = {
   }),
 }
 
-const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
-  clipId,
-  createClip,
-  episode,
-  handleClose,
-  start,
-  end,
-  isOpen,
-}) => {
-  const [title, setTitle] = React.useState('')
-  const [description, setDescription] = React.useState('')
+const CreateClipModal: React.SFC<ShareModalProps> = ({ handleClose, start, end, isOpen }) => {
+  const dispatch = useDispatch()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+
+  const episode = useSelector(getEpisodeUnion)
+  const modalState = useModalState({ handleClose })
 
   const handleCreate = () => {
     if (episode.type !== 'success') {
       return
     }
 
-    createClip({
-      audio: episode.data.audio,
-      episode: pick(
-        ['id', 'title', 'description', 'published', 'audioLength', 'thumbnail'],
-        episode.data
-      ),
-      podcast: pick(['id', 'title', 'description', 'thumbnail'], episode.data.podcast),
-      title,
-      description,
-      start,
-      end,
-    })
+    dispatch(
+      actions.createClip({
+        audio: episode.data.audio,
+        episode: pick(
+          ['id', 'title', 'description', 'published', 'audioLength', 'thumbnail'],
+          episode.data
+        ),
+        podcast: pick(['id', 'title', 'description', 'thumbnail'], episode.data.podcast),
+        title,
+        description,
+        start,
+        end,
+      })
+    )
   }
 
   const valid = title.length > 0 && title.length < 200 && description.length < 2000
@@ -77,14 +68,13 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
       isOpen={isOpen}
       icon={<ScissorsIcon />}
       primaryButtonProps={
-        clipId.type === 'fetching'
+        modalState.type === 'sending'
           ? { active: false, children: 'Creating...' }
           : { active: valid, onClick: handleCreate, children: 'Create' }
       }
       title="Create a clip"
     >
       <div className={styles.container}>
-        {/* podcast/episode/clip info */}
         <div>
           <StyledInputLabel htmlFor="title-input">
             Clip title <Asterisk />
@@ -114,13 +104,4 @@ const CreateClipModal: React.SFC<ShareModalConnectedProps> = ({
   )
 }
 
-const mapStateToProps = (state: AppState) => ({
-  clipId: state.episode.view.clipId,
-  episode: state.episode.metadata,
-})
-
-const mapDispatchToProps = {
-  createClip: thunks.createClip,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateClipModal)
+export default CreateClipModal

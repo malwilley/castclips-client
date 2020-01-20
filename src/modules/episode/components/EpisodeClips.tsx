@@ -1,20 +1,14 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { thunks } from '../redux'
-import { AppState } from 'redux/types'
-import { EpisodeState } from '../types'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import HttpContent from 'components/HttpContent'
 import EpisodeClipCard from './EpisodeClipCard'
 import { css } from 'emotion'
 import NoData from 'components/NoData'
+import { getEpisodeClipsUnion } from '../selectors'
+import { actions } from '../redux/actions'
 
 type EpisodeClipsProps = {
   episodeId: string
-}
-
-type EpisodeClipsConnectedProps = EpisodeClipsProps & {
-  clipsState: EpisodeState['clips']
-  fetchClips: (id: string) => void
 }
 
 const styles = {
@@ -25,18 +19,18 @@ const styles = {
   }),
 }
 
-const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
-  clipsState,
-  episodeId,
-  fetchClips,
-}) => {
-  React.useEffect(() => {
-    fetchClips(episodeId)
-  }, [fetchClips, episodeId])
+const EpisodeClips: React.SFC<EpisodeClipsProps> = ({ episodeId }) => {
+  const dispatch = useDispatch()
+
+  const episodeClipsUnion = useSelector(getEpisodeClipsUnion)
+
+  useEffect(() => {
+    dispatch(actions.fetchEpisodeClips(episodeId))
+  }, [episodeId, dispatch])
 
   return (
     <HttpContent
-      request={clipsState}
+      request={episodeClipsUnion}
       renderFetching={() => null}
       renderSuccess={clips =>
         clips.length > 0 ? (
@@ -53,12 +47,4 @@ const EpisodeClips: React.SFC<EpisodeClipsConnectedProps> = ({
   )
 }
 
-const mapDispatchToProps = {
-  fetchClips: thunks.fetchClips,
-}
-
-const mapStateToProps = (state: AppState) => ({
-  clipsState: state.episode.clips,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(EpisodeClips)
+export default EpisodeClips

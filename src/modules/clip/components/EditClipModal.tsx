@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import Modal from 'components/Modal'
 import EditIcon from 'mdi-react/EditIcon'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getClipData } from '../selectors'
 import CharacterCounter from 'components/CharacterCounter'
 import StyledTextArea from 'components/StyledTextArea'
@@ -11,9 +11,8 @@ import formatHrMinSec from 'utils/formatHrMinSec'
 import parseHrMinSec from 'utils/parseHrMinSec'
 import { css } from 'emotion'
 import useModalState from 'modules/modal/hooks/useModalState'
-import useThunkDispatch from 'hooks/useThunkDispatch'
-import thunks from '../redux/thunks'
 import { colors, fonts } from 'styles'
+import { actions } from '../redux/actions'
 
 const styles = {
   container: css({
@@ -74,7 +73,7 @@ const formIsValid = ({
 }
 
 const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) => {
-  const thunkDispatch = useThunkDispatch()
+  const dispatch = useDispatch()
   const modalState = useModalState({ closeOnSuccess: true, handleClose })
   const clipData = useSelector(getClipData)
 
@@ -94,8 +93,8 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
   })
 
   const modifyClip = useCallback(() => {
-    thunkDispatch(
-      thunks.editClip({
+    dispatch(
+      actions.editClip({
         id: clipData!.id,
         title,
         description,
@@ -103,7 +102,7 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
         end,
       })
     )
-  }, [clipData, description, end, start, thunkDispatch, title])
+  }, [clipData, description, dispatch, end, start, title])
 
   return (
     <Modal

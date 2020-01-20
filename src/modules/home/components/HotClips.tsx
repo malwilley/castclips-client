@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getHotClips, isEndOfClips } from '../selectors'
 import Button from 'components/Button'
 import ErrorMessage from 'components/ErrorMessage'
-import { thunks } from '../redux'
-import Spinner from 'components/Spinner/Spinner'
+import Spinner from 'components/Spinner'
+import { actions } from '../redux/actions'
 
 type HotClipsProps = {}
 
@@ -59,7 +59,7 @@ const FetchMoreClips: React.FC = () => {
     <Button
       className={styles.addClipsButton}
       disabled={fetching}
-      onClick={() => dispatch(thunks.fetchHotClips())}
+      onClick={() => dispatch(actions.fetchHotClips())}
     >
       {fetching ? <Spinner /> : <div>Load more</div>}
     </Button>

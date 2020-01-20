@@ -11,12 +11,12 @@ import TextSkeleton from 'components/TextSkeleton'
 import stripHtml from 'utils/stripHtml'
 import capitalizeFirstLetter from 'utils/capitalizeFirstLetter'
 import { useDispatch, useSelector } from 'react-redux'
-import { thunks } from '../redux'
 import Card from 'components/Card'
 import { AppState } from 'redux/types'
 import { KeyCode } from 'types'
 import SearchInput from 'components/SearchInput'
 import Button from 'components/Button'
+import { actions } from '../redux'
 
 type LatestEpisodesProps = {
   episodes: PodcastState['episodes']
@@ -155,7 +155,7 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
           placeholder="Search..."
           onKeyDown={e => {
             if (e.keyCode === KeyCode.Enter) {
-              dispatch(thunks.searchEpisodes(text))
+              dispatch(actions.searchPodcastEpisodes(text))
             }
           }}
         />
@@ -164,7 +164,7 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
             className={styles.clear}
             onClick={() => {
               setText('')
-              dispatch(thunks.clearSearch())
+              dispatch(actions.clearPodcastEpisodeSearch())
             }}
           >
             Clear

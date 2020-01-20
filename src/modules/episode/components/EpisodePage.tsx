@@ -1,10 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 import HttpContent from 'components/HttpContent'
 import EpisodeCard from 'modules/episode/components/EpisodeCard'
-import { EpisodeState } from '../types'
-import { connect } from 'react-redux'
-import { AppState } from 'redux/types'
-import { thunks } from '../redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'emotion'
 import { colors, fonts } from 'styles'
 import SectionHeader from 'components/SectionHeader'
@@ -12,15 +9,10 @@ import PageWithFeaturedContent from 'components/PageWithFeaturedContent'
 import PageTitleFetching from 'components/PageTitleFetching'
 import EpisodePageBody from './EpisodePageBody'
 import PodcastLink from 'components/PodcastLink'
-import { RouteComponentProps } from 'react-router'
+import { useRouteMatch, useLocation } from 'react-router'
 import { parse } from 'querystringify'
-
-type EpisodePageProps = RouteComponentProps<{ id: string }>
-
-type EpisodePageConnectedProps = EpisodePageProps & {
-  episodeMetadata: EpisodeState['metadata']
-  fetchEpisodeMetadata: (id: string) => void
-}
+import { getEpisodeUnion } from '../selectors'
+import { actions } from '../redux/actions'
 
 const styles = {
   description: css({
@@ -59,19 +51,22 @@ const styles = {
   }),
 }
 
-const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
-  episodeMetadata,
-  fetchEpisodeMetadata,
-  match,
-  location: { search },
-}) => {
-  const { id } = match.params
+const EpisodePage: React.FC = () => {
+  const dispatch = useDispatch()
+  const episodeMetadata = useSelector(getEpisodeUnion)
+
+  const {
+    params: { id },
+  } = useRouteMatch<{ id: string }>()
+
+  const { search } = useLocation()
+
   const { time } = parse(search) as { time?: string }
 
   React.useEffect(() => {
     window.scrollTo(0, 0)
-    fetchEpisodeMetadata(id)
-  }, [fetchEpisodeMetadata, id])
+    dispatch(actions.fetchEpisode(id))
+  }, [dispatch, id])
 
   return (
     <PageWithFeaturedContent
@@ -102,10 +97,4 @@ const EpisodePage: React.FC<EpisodePageConnectedProps> = ({
   )
 }
 
-const mapStateToProps = (state: AppState) => ({
-  episodeMetadata: state.episode.metadata,
-})
-
-const mapDispatchToProps = { fetchEpisodeMetadata: thunks.fetchEpisodeMetadata }
-
-export default connect(mapStateToProps, mapDispatchToProps)(EpisodePage)
+export default EpisodePage

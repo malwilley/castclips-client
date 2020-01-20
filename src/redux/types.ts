@@ -1,6 +1,4 @@
 import reducer from './reducer'
-import { ThunkAction } from 'redux-thunk'
-import { AnyAction } from 'redux'
 import store from './store'
 
 export type AppState = ReturnType<typeof reducer>
@@ -18,9 +16,3 @@ type FunctionType = (...args: any[]) => any
 type ActionCreatorsMapObject = { [actionCreator: string]: FunctionType }
 
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>
-
-export type Thunk<P = undefined, R = void> = (
-  ...args: OptionalSpread<P>
-) => ThunkAction<R, AppState, undefined, AnyAction>
-
-export type ThunkResult<R> = ThunkAction<R, AppState, undefined, AnyAction>

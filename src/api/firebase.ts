@@ -115,13 +115,27 @@ export const search = async (
   {
     type,
     query,
-    offset = 0,
+    page = 1,
+    offset,
     podcastId,
     episodeId,
-  }: { type: SearchType; query: string; offset?: number; podcastId?: string; episodeId?: string }
+  }: {
+    type: SearchType
+    query: string
+    offset?: number
+    page?: number
+    podcastId?: string
+    episodeId?: string
+  }
 ) => {
   const results = await fetchFirebase<SearchResultsResponse<any>>(
-    `/search?${qs.stringify({ q: query, type, offset, podcastId, episodeId })}`,
+    `/search?${qs.stringify({
+      q: query,
+      type,
+      offset: offset ? offset : 10 * (page - 1),
+      podcastId,
+      episodeId,
+    })}`,
     token
   )
 
