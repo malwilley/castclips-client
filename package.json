@@ -12,14 +12,10 @@
     "downshift": "^3.2.7",
     "emotion": "^9.2.6",
     "firebase": "^7.6.1",
-    "lodash": "^4.17.4",
-    "lodash.throttle": "^4.1.1",
     "mdi-react": "^5.5.0",
-    "query-string": "^6.1.0",
     "querystringify": "^2.1.0",
     "ramda": "^0.26.1",
     "react": "^16.8.1",
-    "react-autosuggest": "^9.3.4",
     "react-compound-slider": "^2.0.0",
     "react-dom": "^16.8.1",
     "react-firebaseui": "^4.0.0",
@@ -44,9 +40,6 @@
     "now-build": "GENERATE_SOURCEMAP=false && yarn prettier-check && yarn build",
     "now-dev": "react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
