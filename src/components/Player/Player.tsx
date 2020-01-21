@@ -9,6 +9,7 @@ import formatHrMinSec from 'utils/formatHrMinSec'
 import { includes, pathOr } from 'ramda'
 import { KeyCode } from 'types'
 import AccessibleLabel from '../AccessibleLabel'
+import TextSkeleton from 'components/TextSkeleton'
 
 type PlayerProps = AudioControlsResult & {
   audioRef: React.RefObject<HTMLAudioElement>
@@ -24,7 +25,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '12px 30px 10px 4px',
+    padding: '12px 20px 10px 4px',
   }),
   timeLabel: css(fonts.text250, breakpoints.breakpoint600(fonts.text300), {
     color: colors.gray700,
@@ -83,6 +84,13 @@ const styles = {
 
 const toSliderValue = (seconds: number) => Math.round(seconds * 100)
 const toSeconds = (value: number) => value / 100
+
+const PlayerFetching: React.FC = () => (
+  <div className={styles.controlsContainer}>
+    <PlayerControls />
+    <TextSkeleton width={140} height={30} />
+  </div>
+)
 
 const Player: React.FC<PlayerProps> = ({
   audioRef,
@@ -227,4 +235,5 @@ const Player: React.FC<PlayerProps> = ({
   )
 }
 
+export { PlayerFetching }
 export default Player

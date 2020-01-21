@@ -13,6 +13,7 @@ import Player from 'components/Player'
 import useAudioControls from 'hooks/useAudioControls'
 import { stringify } from 'querystringify'
 import ContinueListening from './ContinueListening'
+import { PlayerFetching } from 'components/Player/Player'
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>
@@ -26,6 +27,7 @@ const styles = {
     marginTop: 20,
     padding: 20,
     width: '100%',
+    height: 70,
   }),
   main: css({
     overflow: 'visible',
@@ -106,8 +108,9 @@ const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
       request={clip}
       renderFetching={() => (
         <>
-          {/*<ClipPlayer clip={{ start: 0, end: 0, title: '', audio: '' }} />*/}
+          <PlayerFetching />
           <div className={styles.bottomContainer}>
+            <TextSkeleton height={38} width={80} color={colors.gray50} />
             <TextSkeleton height={38} width={200} color={colors.gray50} />
           </div>
         </>

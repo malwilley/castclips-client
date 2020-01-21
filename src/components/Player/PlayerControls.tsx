@@ -8,15 +8,16 @@ import PauseIcon from 'mdi-react/PauseIcon'
 import { colors } from 'styles'
 import Tooltip from '../Tooltip'
 import AccessibleLabel from '../AccessibleLabel'
+import noop from 'utils/noop'
 
-type PlayerControlsProps = {
-  className?: string
+type PlayerControlsProps = Partial<{
+  className: string
   canPlay: boolean
   isPlaying: boolean
-  handlePlayPauseClick?: () => void
-  handleForwardClick?: () => void
-  handleBackClick?: () => void
-}
+  handlePlayPauseClick: () => void
+  handleForwardClick: () => void
+  handleBackClick: () => void
+}>
 
 const styles = {
   controlsAndTimeContainer: css({
@@ -51,11 +52,11 @@ const styles = {
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   className,
-  canPlay,
-  handleBackClick,
-  handleForwardClick,
-  handlePlayPauseClick,
-  isPlaying,
+  canPlay = false,
+  handleBackClick = noop,
+  handleForwardClick = noop,
+  handlePlayPauseClick = noop,
+  isPlaying = false,
 }) => (
   <div className={css(styles.controlsAndTimeContainer, className)}>
     <div className={styles.controlsContainer}>

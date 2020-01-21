@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { css } from 'emotion'
 import { colors } from 'styles'
 import zIndex from 'styles/zIndex'
@@ -57,6 +57,7 @@ const styles = {
   }),
   titleContainer: css({
     '@media (min-width: 800px)': {
+      minHeight: 260,
       padding: '3.5rem 0 4rem 0',
     },
     gridRowStart: 2,
@@ -65,6 +66,7 @@ const styles = {
     gridColumnEnd: 3,
     color: colors.white,
     padding: '2rem 0 2rem 0',
+    minHeight: 220,
     zIndex: zIndex.card,
   }),
 }
