@@ -1,12 +1,14 @@
 import { css } from 'emotion'
 import { EpisodeState, EpisodeMetadata } from '../types'
 import Card from 'components/Card'
-import HttpContent from 'components/HttpContent'
 import Player from 'components/Player'
 import React, { useState, useRef, useEffect } from 'react'
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions'
 import useAudioControls from 'hooks/useAudioControls'
 import { clamp } from 'ramda'
+import MapUnion from 'components/MapUnion'
+import NoData from 'components/NoData'
+import { PlayerFetching } from 'components/Player/Player'
 
 type EpisodeCardProps = {
   episode: EpisodeState['metadata']
@@ -20,6 +22,7 @@ const styles = {
     overflow: 'visible',
     width: '100%',
     maxWidth: 700,
+    minHeight: 160,
     position: 'relative',
   }),
 }
@@ -103,9 +106,14 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
 
 const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode, time }) => (
   <Card className={styles.main} feature>
-    <HttpContent
-      request={episode}
-      renderSuccess={episodeData => <EpisodeCardSuccess {...episodeData} time={time} />}
+    <MapUnion
+      map={{
+        not_asked: () => null,
+        success: ({ data: episodeData }) => <EpisodeCardSuccess {...episodeData} time={time} />,
+        fetching: () => <PlayerFetching />,
+        error: () => <NoData message="Failed to load episode." />,
+      }}
+      union={episode}
     />
   </Card>
 )

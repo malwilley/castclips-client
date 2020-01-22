@@ -2,7 +2,6 @@ import { css } from 'emotion'
 import React from 'react'
 import { HttpRequest } from 'types'
 import Card from 'components/Card'
-import HttpContent from 'components/HttpContent'
 import { ClipMetadata } from '../types'
 import TextSkeleton from 'components/TextSkeleton'
 import { colors, fonts } from 'styles'
@@ -14,6 +13,8 @@ import useAudioControls from 'hooks/useAudioControls'
 import { stringify } from 'querystringify'
 import ContinueListening from './ContinueListening'
 import { PlayerFetching } from 'components/Player/Player'
+import MapUnion from 'components/MapUnion'
+import NoData from 'components/NoData'
 
 type ClipCardProps = {
   clip: HttpRequest<ClipMetadata>
@@ -104,18 +105,22 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
 
 const ClipCard: React.FC<ClipCardProps> = ({ clip }) => (
   <Card className={styles.main} feature>
-    <HttpContent
-      request={clip}
-      renderFetching={() => (
-        <>
-          <PlayerFetching />
-          <div className={styles.bottomContainer}>
-            <TextSkeleton height={38} width={80} color={colors.gray50} />
-            <TextSkeleton height={38} width={200} color={colors.gray50} />
-          </div>
-        </>
-      )}
-      renderSuccess={clipData => <ClipCardSuccess {...clipData} />}
+    <MapUnion
+      map={{
+        not_asked: () => null,
+        fetching: () => (
+          <>
+            <PlayerFetching />
+            <div className={styles.bottomContainer}>
+              <TextSkeleton height={38} width={80} />
+              <TextSkeleton height={38} width={200} />
+            </div>
+          </>
+        ),
+        success: ({ data: clipData }) => <ClipCardSuccess {...clipData} />,
+        error: () => <NoData message="Failed to load clips." />,
+      }}
+      union={clip}
     />
   </Card>
 )
