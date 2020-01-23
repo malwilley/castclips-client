@@ -30,6 +30,7 @@ type EpisodePlayerClipOptionsProps = {
 const styles = {
   container: css({
     overflow: 'hidden',
+    marginBottom: 60,
   }),
   buttonsContainer: css({
     '& > :not(:last-child)': {

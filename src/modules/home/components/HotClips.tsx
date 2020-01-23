@@ -59,7 +59,7 @@ const FetchMoreClips: React.FC = () => {
     <Button
       className={styles.addClipsButton}
       disabled={fetching}
-      onClick={() => dispatch(actions.fetchHotClips())}
+      onClick={() => dispatch(actions.fetchMoreHotClips())}
     >
       {fetching ? <Spinner /> : <div>Load more</div>}
     </Button>

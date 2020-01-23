@@ -1,16 +1,13 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 import { actions, ActionTypes } from '../redux/actions'
 import { getHotClips } from 'api/firebase'
-import { getHotClipsPage } from '../selectors'
 import mapClipResponse from 'modules/clip/utils/mapClipResponse'
 
 export function* fetchHotClips() {
-  const page = yield select(getHotClipsPage)
-
   try {
-    const clips = yield call(getHotClips, page)
-    yield put(actions.setPage({ page: page + 1, end: clips.length !== 20 }))
-    yield put(actions.addHotClips(clips.map(mapClipResponse)))
+    const clips = yield call(getHotClips, 1)
+    yield put(actions.setPage({ page: 1, end: clips.length !== 20 }))
+    yield put(actions.setHotClips({ type: 'success', data: clips.map(mapClipResponse) }))
   } catch {
     yield put(actions.errorHotClips('Error fetching clips'))
   }

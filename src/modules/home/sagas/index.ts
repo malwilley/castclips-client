@@ -1,3 +1,4 @@
 import { watchFetchHotClips } from './fetchHotClips'
+import { watchFetchMoreHotClips } from './fetchMoreHotClips'
 
-export default [watchFetchHotClips]
+export default [watchFetchHotClips, watchFetchMoreHotClips]

@@ -17,6 +17,8 @@ const hotClips: Reducer<HomeState['hotClips']> = (
       }
     }
     case ActionTypes.FetchHotClips:
+      return { type: 'fetching', data: [] }
+    case ActionTypes.FetchMoreHotClips:
       return {
         type: 'fetching',
         data: propOr([], 'data', state),

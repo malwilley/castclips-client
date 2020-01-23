@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { css } from 'emotion'
 import { colors } from 'styles'
 import zIndex from 'styles/zIndex'
@@ -8,6 +8,7 @@ type PageWithFeaturedContentProps = {
   bodyContent: React.ReactNode
   featuredContent: React.ReactNode
   titleContent: React.ReactNode
+  titleClassName?: string
 }
 
 const styles = {
@@ -57,6 +58,7 @@ const styles = {
   }),
   titleContainer: css({
     '@media (min-width: 800px)': {
+      minHeight: 260,
       padding: '3.5rem 0 4rem 0',
     },
     gridRowStart: 2,
@@ -65,6 +67,7 @@ const styles = {
     gridColumnEnd: 3,
     color: colors.white,
     padding: '2rem 0 2rem 0',
+    minHeight: 220,
     zIndex: zIndex.card,
   }),
 }
@@ -73,12 +76,13 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
   bodyContent,
   featuredContent,
   titleContent,
+  titleClassName,
 }) => (
   <div className={styles.main}>
     <div className={styles.heroContainer}>
       <RoundedCorners className={styles.bodyRounding} top />
     </div>
-    <div className={styles.titleContainer}>{titleContent}</div>
+    <div className={css(styles.titleContainer, titleClassName)}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
   </div>

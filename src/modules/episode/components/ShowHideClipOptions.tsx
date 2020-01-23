@@ -10,7 +10,7 @@ type ShowHideClipOptionsProps = ButtonProps & {
 }
 
 const styles = {
-  show: css({
+  main: css({
     '&:hover': {
       backgroundColor: colors.secondary50,
     },
@@ -19,27 +19,29 @@ const styles = {
     padding: '12px 20px',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    margin: '40px auto 0 auto',
     transition: '100ms background-color ease-out',
+    position: 'absolute',
+    bottom: 0,
+    left: '50%',
+    transform: 'translateX(-50%)',
   }),
   icon: css({
     marginLeft: 8,
   }),
 }
 
-const ShowClipOptions: React.FC<ButtonProps> = props => (
-  <Button className={styles.show} {...props}>
-    Create a clip <ChevronDownIcon className={styles.icon} size={20} />
+const ShowHideClipOptions: React.FC<ShowHideClipOptionsProps> = ({ show, ...props }) => (
+  <Button className={styles.main} {...props}>
+    {show ? (
+      <>
+        Hide clip options <ChevronUpIcon className={styles.icon} size={20} />
+      </>
+    ) : (
+      <>
+        Create a clip <ChevronDownIcon className={styles.icon} size={20} />
+      </>
+    )}
   </Button>
 )
-
-const HideClipOptions: React.FC<ButtonProps> = props => (
-  <Button className={styles.show} {...props}>
-    Hide clip options <ChevronUpIcon className={styles.icon} size={20} />
-  </Button>
-)
-
-const ShowHideClipOptions: React.FC<ShowHideClipOptionsProps> = ({ show, ...props }) =>
-  show ? <HideClipOptions {...props} /> : <ShowClipOptions {...props} />
 
 export default ShowHideClipOptions
