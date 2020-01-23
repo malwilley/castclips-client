@@ -83,6 +83,11 @@ const styles = {
       marginBottom: '-2rem',
     },
   }),
+  titleContainer: css({
+    '@media (min-width: 600px)': {
+      minHeight: 'unset',
+    },
+  }),
 }
 
 const PodcastPage: React.FC<PodcastPageProps> = ({ id }) => {
@@ -161,6 +166,7 @@ const PodcastPage: React.FC<PodcastPageProps> = ({ id }) => {
           </div>
         </>
       }
+      titleClassName={styles.titleContainer}
     />
   )
 }

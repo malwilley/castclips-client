@@ -8,6 +8,7 @@ type PageWithFeaturedContentProps = {
   bodyContent: React.ReactNode
   featuredContent: React.ReactNode
   titleContent: React.ReactNode
+  titleClassName?: string
 }
 
 const styles = {
@@ -75,12 +76,13 @@ const PageWithFeaturedContent: React.FC<PageWithFeaturedContentProps> = ({
   bodyContent,
   featuredContent,
   titleContent,
+  titleClassName,
 }) => (
   <div className={styles.main}>
     <div className={styles.heroContainer}>
       <RoundedCorners className={styles.bodyRounding} top />
     </div>
-    <div className={styles.titleContainer}>{titleContent}</div>
+    <div className={css(styles.titleContainer, titleClassName)}>{titleContent}</div>
     <div className={styles.body}>{bodyContent}</div>
     <div className={styles.feature}>{featuredContent}</div>
   </div>
