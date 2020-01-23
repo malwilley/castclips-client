@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import NoData from 'components/NoData'
 
 const PodcastClipsNoData: React.FC = () => (

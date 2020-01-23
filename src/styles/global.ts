@@ -1,36 +1,38 @@
-import { CSSObject } from 'create-emotion'
+import colors from './colors'
+import fonts from './fonts'
+import { Interpolation } from 'emotion'
 
-const global = {
-  ':root': {
-    '--h-font': "'Nunito', sans-serif",
-    '--p-font': "'Nunito', sans-serif",
-  },
+const global: Interpolation = {
   a: {
     textDecoration: 'none',
     color: 'inherit',
   },
+  '*, *:before, *:after': {
+    boxSizing: 'border-box',
+  },
   body: {
     margin: '0',
     padding: '0',
-    background: 'var(--color-light)',
-    color: 'var(--color-darkest)',
-    fontFamily: 'var(--p-font)',
-    fontWeight: 'var(--normal-weight)',
-    fontSize: '1rem',
+    background: colors.gray20,
+    color: colors.gray700,
+    fontFamily: "'Nunito', sans-serif",
+    ...fonts.text300,
   },
-  'h1, h2, h3, h4, h5': {
-    fontFamily: 'var(--h-font)',
-    fontWeight: 'var(--bold-weight)',
+  'h1, h2, h3, h4, h5, h6': {
     margin: '0',
+    fontWeight: 900,
   },
-  input: {
+  'input, textarea': {
     background: 'none',
-    fontFamily: 'var(--p-font)',
-    fontSize: '14px',
     outline: 'none',
     color: 'inherit',
     fontWeight: 'inherit',
+    fontSize: 'inherit',
     letterSpacing: 'inherit',
+  },
+  'ul, li': {
+    listStyle: 'none',
+    margin: 0,
   },
 }
 

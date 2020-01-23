@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { css } from 'emotion'
 import { colors } from 'styles'
 import { isNil } from 'ramda'

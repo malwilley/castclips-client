@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Button, { ButtonProps } from 'components/Button'
 import { css } from 'emotion'
 import { colors } from 'styles'

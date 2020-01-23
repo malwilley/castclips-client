@@ -1,6 +1,6 @@
 /* tslint:disable:max-line-length */
 
-import * as React from 'react'
+import React from 'react'
 
 const Spinner: React.SFC<React.SVGProps<SVGSVGElement>> = props => {
   return (

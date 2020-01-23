@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Button from 'components/Button'
 import CloseIcon from 'mdi-react/CloseIcon'
 import { css } from 'emotion'
