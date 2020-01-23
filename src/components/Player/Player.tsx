@@ -10,6 +10,7 @@ import { includes, pathOr } from 'ramda'
 import { KeyCode } from 'types'
 import AccessibleLabel from '../AccessibleLabel'
 import TextSkeleton from 'components/TextSkeleton'
+import PlayerLoadingIndicator from './PlayerLoadingIndicator'
 
 type PlayerProps = AudioControlsResult & {
   audioRef: React.RefObject<HTMLAudioElement>
@@ -158,6 +159,7 @@ const Player: React.FC<PlayerProps> = ({
   return (
     <div>
       <AccessibleLabel id="slider-label">Audio seek slider</AccessibleLabel>
+      {!canPlay && <PlayerLoadingIndicator />}
       <Audio src={audioUrl} title={title} audioRef={audioRef} />
       {canPlay && (
         <Slider
