@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import SectionHeader from 'components/SectionHeader'
 import Card from 'components/Card'
 import { ClipMetadata } from '../types'
@@ -26,10 +26,12 @@ const styles = {
   }),
   info: css({
     margin: '20px 0',
+    lineHeight: '24px',
+  }),
+  infoStartEndContainer: css({
     display: 'flex',
     alignItems: 'center',
-    lineHeight: '24px',
-    verticalAlign: 'middle',
+    margin: '2px 0',
   }),
   podcastContainer: css({
     alignItems: 'flex-start',
@@ -80,11 +82,10 @@ const styles = {
     alignItems: 'center',
     padding: '0 8px',
     margin: '0 6px',
-    height: 24,
     borderRadius: 4,
     backgroundColor: colors.primary20,
     color: colors.primary500,
-    textDecoration: 'none',
+    verticalAlign: 'middle',
   }),
 }
 
@@ -92,14 +93,14 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
   <div>
     <SectionHeader>from the episode</SectionHeader>
     <p className={styles.info}>
-      Clip starts at{' '}
+      Clip starts at
       <a
         className={styles.link}
         href={`/episode/${clip.episode.id}${stringify({ time: clip.start }, true)}`}
       >
         <LinkIcon size={16} /> {formatHrMinSec(clip.start)}
-      </a>{' '}
-      and ends at{' '}
+      </a>
+      and ends at
       <a
         className={styles.link}
         href={`/episode/${clip.episode.id}${stringify({ time: clip.end }, true)}`}
