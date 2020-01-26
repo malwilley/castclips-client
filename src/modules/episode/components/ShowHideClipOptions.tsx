@@ -24,6 +24,7 @@ const styles = {
     bottom: 0,
     left: '50%',
     transform: 'translateX(-50%)',
+    whiteSpace: 'nowrap',
   }),
   icon: css({
     marginLeft: 8,
