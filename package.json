@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "prettier-check": "prettier --check \"**/*.{html,ts,tsx,json}\"",
     "prettier-write": "prettier --write \"**/*.{html,ts,tsx,json}\"",
-    "now-build": "GENERATE_SOURCEMAP=false && yarn prettier-check && yarn build",
+    "now-build": "yarn prettier-check && yarn build",
     "now-dev": "react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
