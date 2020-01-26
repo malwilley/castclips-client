@@ -4,7 +4,7 @@
   "alias": "castclips.com",
   "headers": [
     {
-      "source": "/static/(.*)",
+      "source": "^/static/(.*)",
       "headers": [
         {
           "key": "cache-control",
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "source": "/index.html",
+      "source": "^/index.html$",
       "headers": [
         {
           "key": "cache-control",
@@ -24,19 +24,19 @@
   ],
   "redirects": [
     {
-      "source": "/static/(.*)",
+      "source": "^/static/(.*)$",
       "destination": "/static/$1"
     },
     {
-      "source": "(.*).(png|json|xml|ico|txt|svg)",
-      "destination": "$1.$2"
+      "source": "^/(.*).(png|json|xml|ico|txt|svg)$",
+      "destination": "/$1.$2"
     },
     {
-      "source": "/precache-manifest.(.*)",
+      "source": "^/precache-manifest.(.*)$",
       "destination": "/precache-manifest.$1"
     },
     {
-      "source": "/(.*)",
+      "source": "^/(podcast|episode|clip|search|signin)?",
       "destination": "/index.html"
     }
   ]
