@@ -34,6 +34,10 @@
     {
       "source": "/precache-manifest.(.*)",
       "destination": "/precache-manifest.$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
