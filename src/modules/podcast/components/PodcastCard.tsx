@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { HttpRequest } from 'types'
 import { PodcastMetadata } from '../types'
 import HttpContent from 'components/HttpContent'

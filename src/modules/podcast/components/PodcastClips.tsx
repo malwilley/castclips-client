@@ -1,16 +1,12 @@
-import * as React from 'react'
-import HttpContent from 'components/HttpContent'
-import { PodcastState } from '../types'
-import { connect } from 'react-redux'
-import { AppState } from 'redux/types'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import PodcastClipCard from './PodcastClipCard'
 import { css } from 'emotion'
 import PodcastClipCardFetching from './PodcastClipCardFetching'
 import PodcastClipsNoData from './PodcastClipsNoData'
-
-type PodcastClipsConnectedProps = {
-  clipsRequest: PodcastState['clips']
-}
+import { getPodcastClips } from '../selectors'
+import MapUnion from 'components/MapUnion'
+import NoData from 'components/NoData'
 
 const styles = {
   main: css({
@@ -20,38 +16,39 @@ const styles = {
   }),
 }
 
-const PodcastClips: React.FC<PodcastClipsConnectedProps> = ({ clipsRequest }) => {
+const PodcastClips: React.FC = () => {
+  const clipsUnion = useSelector(getPodcastClips)
+
   return (
     <div className={styles.main}>
-      <HttpContent
-        request={clipsRequest}
-        renderFetching={() => (
-          <>
-            {Array(3)
-              .fill(0)
-              .map((_, index) => (
-                <PodcastClipCardFetching key={index} />
-              ))}
-          </>
-        )}
-        renderSuccess={clips =>
-          clips.length > 0 ? (
+      <MapUnion
+        map={{
+          not_asked: () => null,
+          fetching: () => (
             <>
-              {clips.map(clip => (
-                <PodcastClipCard clip={clip} key={clip.id} />
-              ))}
+              {Array(3)
+                .fill(0)
+                .map((_, index) => (
+                  <PodcastClipCardFetching key={index} />
+                ))}
             </>
-          ) : (
-            <PodcastClipsNoData />
-          )
-        }
+          ),
+          success: ({ data: clips }) =>
+            clips.length > 0 ? (
+              <>
+                {clips.map(clip => (
+                  <PodcastClipCard clip={clip} key={clip.id} />
+                ))}
+              </>
+            ) : (
+              <PodcastClipsNoData />
+            ),
+          error: () => <NoData message="Failed to find clips" />,
+        }}
+        union={clipsUnion}
       />
     </div>
   )
 }
 
-const mapStateToProps = (state: AppState) => ({
-  clipsRequest: state.podcast.clips,
-})
-
-export default connect(mapStateToProps)(PodcastClips)
+export default PodcastClips

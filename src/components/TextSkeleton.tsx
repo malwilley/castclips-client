@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { colors } from 'styles'
 import { css } from 'emotion'
 import { CSSObject } from 'create-emotion'

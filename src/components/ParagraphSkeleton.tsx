@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import TextSkeleton from './TextSkeleton'
 import { colors } from 'styles'
 

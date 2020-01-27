@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { ButtonProps } from 'components/Button'
 import PlayCircleIcon from 'mdi-react/PlayCircleIcon'
 import StopCircleIcon from 'mdi-react/StopCircleIcon'

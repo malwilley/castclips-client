@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { css } from 'emotion'
 import { fonts, colors } from 'styles'
 import formatHrMinSec from 'utils/formatHrMinSec'

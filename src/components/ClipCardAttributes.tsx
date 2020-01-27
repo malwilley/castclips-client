@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { ClipMetadata } from 'modules/clip/types'
 import { css } from 'emotion'
 import { fonts } from 'styles'

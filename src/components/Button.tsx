@@ -1,5 +1,5 @@
 import { css } from 'emotion'
-import * as React from 'react'
+import React from 'react'
 import { fonts } from 'styles'
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {

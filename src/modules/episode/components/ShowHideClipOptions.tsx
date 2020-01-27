@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Button, { ButtonProps } from 'components/Button'
 import { css } from 'emotion'
 import { colors } from 'styles'
@@ -24,6 +24,7 @@ const styles = {
     bottom: 0,
     left: '50%',
     transform: 'translateX(-50%)',
+    whiteSpace: 'nowrap',
   }),
   icon: css({
     marginLeft: 8,

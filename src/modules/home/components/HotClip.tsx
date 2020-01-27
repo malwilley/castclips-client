@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { ClipMetadata } from 'modules/clip/types'
 import Card from 'components/Card'
 import { css } from 'emotion'
