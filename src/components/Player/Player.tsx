@@ -12,7 +12,7 @@ import AccessibleLabel from '../AccessibleLabel'
 import TextSkeleton from 'components/TextSkeleton'
 import PlayerLoadingIndicator from './PlayerLoadingIndicator'
 
-type PlayerProps = AudioControlsResult & {
+type PlayerProps = Pick<AudioControlsResult, 'state' | 'controls'> & {
   audioRef: React.RefObject<HTMLAudioElement>
   audioUrl: string
   title: string

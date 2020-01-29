@@ -1,9 +1,9 @@
 import React from 'react'
-import useChangeQueryParam from 'hooks/useChangeQueryParam'
-import { push } from 'connected-react-router'
 import { css } from 'emotion'
-import PrimaryButton from 'components/PrimaryButton'
-import SecondaryButton from 'components/SecondaryButton'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router'
+import { parse, stringify } from 'querystringify'
+import { primaryButtonStyles } from 'components/PrimaryButton'
 
 type SearchPaginationProps = {
   page: number
@@ -22,16 +22,27 @@ const styles = {
 
 const SearchPagination: React.FC<SearchPaginationProps> = ({ page, total }) => {
   const numPages = Math.ceil(total / 10)
-  const changeQueryParam = useChangeQueryParam(push)
+  const { pathname, search } = useLocation()
+  const params = parse(search)
 
   return (
     <div className={styles.main}>
-      <SecondaryButton active={page > 1} onClick={() => changeQueryParam('page', page - 1)}>
-        Previous
-      </SecondaryButton>
-      <PrimaryButton active={page < numPages} onClick={() => changeQueryParam('page', page + 1)}>
-        Next
-      </PrimaryButton>
+      {page > 1 && (
+        <Link
+          className={primaryButtonStyles}
+          to={`${pathname}?${stringify({ ...params, page: page - 1 })}`}
+        >
+          Previous
+        </Link>
+      )}
+      {page < numPages && (
+        <Link
+          className={primaryButtonStyles}
+          to={`${pathname}?${stringify({ ...params, page: page + 1 })}`}
+        >
+          Next
+        </Link>
+      )}
     </div>
   )
 }

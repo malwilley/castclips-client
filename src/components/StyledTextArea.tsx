@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
-import { colors } from 'styles'
+import { colors, fonts } from 'styles'
 
 type StyledInputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
   className?: string
@@ -11,25 +11,25 @@ type StyledInputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
 const styles = {
   textArea: css({
     '&::placeholder': {
-      color: colors.gray300,
+      color: colors.gray200,
     },
     '&:focus': {
       border: `1px solid ${colors.tertiary100}`,
       boxShadow: `0 1px 10px ${colors.tertiary100alpha30}`,
     },
     height: 120,
-    border: `1px solid ${colors.gray100}`,
-    borderRadius: 8,
-    fontSize: 14,
+    border: `1px solid ${colors.gray50}`,
+    borderRadius: 4,
     resize: 'none',
     width: '100%',
     padding: 12,
     transition: 'all 300ms ease-out',
+    ...fonts.text250,
   }),
   label: css({
-    color: colors.gray600,
+    ...fonts.bold300,
     display: 'block',
-    marginBottom: 10,
+    marginBottom: 6,
   }),
 }
 

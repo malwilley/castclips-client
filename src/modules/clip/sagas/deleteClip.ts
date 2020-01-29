@@ -4,12 +4,13 @@ import { waitForToken } from 'modules/auth/sagas/waitForToken'
 import { deleteClip as deleteClipApi } from 'api/firebase'
 import { actions as modalActions } from 'modules/modal/redux/actions'
 import { push } from 'connected-react-router'
-import { getClipId } from '../selectors'
+import { getClipData } from '../selectors'
+import { ClipMetadata } from '../types'
 
 export function* deleteClip(action: ReturnType<typeof actions.deleteClip>) {
   const clipId = action.payload
 
-  const currentlyLoadedClip = yield select(getClipId)
+  const currentlyLoadedClip: ClipMetadata = yield select(getClipData)
 
   yield put(modalActions.modalSend())
 
@@ -18,6 +19,7 @@ export function* deleteClip(action: ReturnType<typeof actions.deleteClip>) {
     yield call(deleteClipApi, { clipId, token })
     yield put(push(`/episode/${currentlyLoadedClip.episode.id}`))
   } catch (e) {
+    console.error(e)
     yield put(modalActions.modalError('Failed to delete clip.'))
   }
 }

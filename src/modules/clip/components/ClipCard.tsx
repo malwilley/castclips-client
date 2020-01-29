@@ -67,8 +67,7 @@ const ClipCardSuccess: React.FC<ClipMetadata> = ({
   userHasLiked,
   likesCount,
 }) => {
-  const ref = React.useRef<HTMLAudioElement>(null)
-  const audioStateControls = useAudioControls(ref)
+  const { ref, ...audioStateControls } = useAudioControls()
   const {
     state: { time },
   } = audioStateControls

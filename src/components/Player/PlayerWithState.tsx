@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import useAudioControls from 'hooks/useAudioControls'
 import Player from '.'
 
@@ -7,11 +7,17 @@ type PlayerWithStateProps = {
   title: string
   start?: number
   end?: number
+  initialTime?: number
 }
 
-const PlayerWithState: React.FC<PlayerWithStateProps> = ({ audioUrl, title, start, end }) => {
-  const ref = useRef<HTMLAudioElement>(null)
-  const audioStateControls = useAudioControls(ref)
+const PlayerWithState: React.FC<PlayerWithStateProps> = ({
+  audioUrl,
+  title,
+  start,
+  end,
+  initialTime,
+}) => {
+  const { ref, state, controls } = useAudioControls({ initialTime })
 
   return (
     <Player
@@ -20,7 +26,8 @@ const PlayerWithState: React.FC<PlayerWithStateProps> = ({ audioUrl, title, star
       title={title}
       start={start}
       end={end}
-      {...audioStateControls}
+      state={state}
+      controls={controls}
     />
   )
 }

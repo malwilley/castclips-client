@@ -6,15 +6,17 @@ import { actions } from '../redux/actions'
 const useModalState = ({
   closeOnSuccess = false,
   handleClose,
+  isOpen,
 }: {
   closeOnSuccess?: boolean
   handleClose: () => void
+  isOpen: boolean
 }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(actions.modalReset())
-  }, [dispatch])
+  }, [dispatch, isOpen])
 
   const modalState = useSelector(getModalState)
 

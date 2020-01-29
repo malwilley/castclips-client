@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import Modal from 'components/Modal'
+import Modal, { ModalFooter } from 'components/Modal'
 import EditIcon from 'mdi-react/EditIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import { getClipData } from '../selectors'
@@ -13,6 +13,8 @@ import { css } from 'emotion'
 import useModalState from 'modules/modal/hooks/useModalState'
 import { colors, fonts } from 'styles'
 import { actions } from '../redux/actions'
+import ErrorMessage from 'components/ErrorMessage'
+import PrimaryButton from 'components/PrimaryButton'
 
 const styles = {
   container: css({
@@ -74,7 +76,7 @@ const formIsValid = ({
 
 const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) => {
   const dispatch = useDispatch()
-  const modalState = useModalState({ closeOnSuccess: true, handleClose })
+  const modalState = useModalState({ closeOnSuccess: true, handleClose, isOpen })
   const clipData = useSelector(getClipData)
 
   const [title, setTitle] = useState(clipData?.title ?? '')
@@ -104,19 +106,18 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
     )
   }, [clipData, description, dispatch, end, start, title])
 
+  const busy = modalState.type === 'sending'
+
   return (
-    <Modal
-      handleClose={handleClose}
-      isOpen={isOpen}
-      icon={<EditIcon />}
-      primaryButtonProps={
-        modalState.type === 'sending'
-          ? { active: false, children: 'Modifying...' }
-          : { active: valid, onClick: modifyClip, children: 'Modify' }
-      }
-      title="Edit a clip"
-    >
-      <div className={styles.container}>
+    <Modal handleClose={handleClose} isOpen={isOpen} icon={<EditIcon />} title="Edit a clip">
+      <form
+        className={styles.container}
+        data-testid="edit-clip-modal"
+        onSubmit={e => {
+          modifyClip()
+          e.preventDefault()
+        }}
+      >
         <div className={styles.startEndContainer}>
           <div className={styles.timestampInput}>
             <StyledInputLabel htmlFor="start-input">
@@ -153,6 +154,7 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
             placeholder="A descriptive title for your clip"
             required
             value={title}
+            disabled={busy}
           />
           <CharacterCounter className={styles.counter} max={200} text={title} />
         </div>
@@ -163,13 +165,19 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
             handleTextChange={setDescription}
             placeholder="If the title isn't enough, say more here!"
             text={description}
+            disabled={busy}
           />
           <CharacterCounter className={styles.counter} max={2000} text={description} />
         </div>
         <div>
-          {modalState.type === 'error' && <div className={styles.error}>{modalState.message}</div>}
+          {modalState.type === 'error' && <ErrorMessage>{modalState.message}</ErrorMessage>}
         </div>
-      </div>
+        <ModalFooter>
+          <PrimaryButton active={valid && !busy} type="submit" data-testid="edit-clip-modal-submit">
+            {busy ? 'Modifying...' : 'Modify'}
+          </PrimaryButton>
+        </ModalFooter>
+      </form>
     </Modal>
   )
 }

@@ -17,6 +17,8 @@ const episodes = (state: PodcastState['episodes'] = { type: 'not_asked' }, actio
     }
     case ActionTypes.SetEpisodes:
       return action.payload
+    case ActionTypes.SearchPodcastEpisodes:
+      return { data: [], type: 'fetching' } as PodcastState['episodes']
     default:
       return state
   }
@@ -26,8 +28,10 @@ const metadata = makeHttpReducer<PodcastState['metadata']>(ActionTypes.SetMetada
 
 const query = (state: PodcastState['search']['query'] = '', action: Actions) => {
   switch (action.type) {
-    case ActionTypes.SetEpisodeSearchTerm:
+    case ActionTypes.SearchPodcastEpisodes:
       return action.payload
+    case ActionTypes.ClearPodcastEpisodeSearch:
+      return ''
     default:
       return state
   }
@@ -37,6 +41,8 @@ const offset = (state: PodcastState['search']['offset'] = 0, action: Actions) =>
   switch (action.type) {
     case ActionTypes.SetEpisodeSearchOffset:
       return action.payload
+    case ActionTypes.SearchPodcastEpisodes:
+      return 0
     default:
       return state
   }
