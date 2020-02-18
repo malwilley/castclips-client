@@ -8,10 +8,11 @@ import { isNil } from 'ramda'
 import PreviewButton from './PreviewButton'
 import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import CreateClipModal from './CreateClipModal'
-import ShareButton from './ShareButton'
 import { animated, useSpring } from 'react-spring'
 import ShowHideClipOptions from './ShowHideClipOptions'
 import useResizeObserver from 'hooks/useResizeObserver'
+import PrimaryButton from 'components/PrimaryButton'
+import PlusCircleOutlineIcon from 'mdi-react/PlusCircleOutlineIcon'
 
 type EpisodePlayerClipOptionsProps = {
   start: Maybe<number>
@@ -109,7 +110,14 @@ const EpisodePlayerClipOptionsContent: React.FC<EpisodePlayerClipOptionsProps & 
             handleClose={() => setModalOpen(false)}
             isOpen={modalOpen && clipBoundsSet}
           />
-          <ShareButton active={clipBoundsSet} onClick={() => setModalOpen(true)} />
+          <PrimaryButton
+            active={clipBoundsSet}
+            onClick={() => setModalOpen(true)}
+            data-testid="create-clip"
+          >
+            Create
+            <PlusCircleOutlineIcon size={16} />
+          </PrimaryButton>
         </div>
       </div>
     </animated.div>

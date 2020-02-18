@@ -2,7 +2,7 @@ import { css } from 'emotion'
 import { EpisodeState, EpisodeMetadata } from '../types'
 import Card from 'components/Card'
 import Player from 'components/Player'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import EpisodePlayerClipOptions from './EpisodePlayerClipOptions'
 import useAudioControls from 'hooks/useAudioControls'
 import { clamp } from 'ramda'
@@ -32,8 +32,7 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
   title,
   time: initialTime,
 }) => {
-  const ref = useRef<HTMLAudioElement>(null)
-  const audioStateControls = useAudioControls(ref)
+  const { ref, ...audioStateControls } = useAudioControls({ initialTime })
   const {
     state: { canPlay, duration, time },
     controls: { seek, pause, play },
@@ -50,12 +49,6 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
       setPreviewing(false)
     }
   }, [previewing, time, end, seek, pause])
-
-  useEffect(() => {
-    if (canPlay && initialTime) {
-      seek(initialTime)
-    }
-  }, [canPlay, initialTime, seek])
 
   const handlePreviewStart = () => {
     seek(start!)
@@ -77,29 +70,31 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
         captureKeyboardInput={!modalOpen}
         {...audioStateControls}
       />
-      <EpisodePlayerClipOptions
-        start={start}
-        end={end}
-        time={time}
-        duration={duration}
-        handleSetStart={newTime => {
-          if (end && newTime > end) {
-            setEnd(null)
-          }
-          setStart(clamp(0, duration, newTime))
-        }}
-        handleSetEnd={newTime => {
-          if (start && newTime < start) {
-            setStart(null)
-          }
-          setEnd(clamp(0, duration, newTime))
-        }}
-        previewing={previewing}
-        handlePreviewStart={handlePreviewStart}
-        handlePreviewStop={handlePreviewStop}
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-      />
+      {canPlay && (
+        <EpisodePlayerClipOptions
+          start={start}
+          end={end}
+          time={time}
+          duration={duration}
+          handleSetStart={newTime => {
+            if (end && newTime > end) {
+              setEnd(null)
+            }
+            setStart(clamp(0, duration, newTime))
+          }}
+          handleSetEnd={newTime => {
+            if (start && newTime < start) {
+              setStart(null)
+            }
+            setEnd(clamp(0, duration, newTime))
+          }}
+          previewing={previewing}
+          handlePreviewStart={handlePreviewStart}
+          handlePreviewStop={handlePreviewStop}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+        />
+      )}
     </>
   )
 }

@@ -31,6 +31,7 @@ const styles = {
     paddingTop: 20,
   }),
   logo: css(clickable, {
+    display: 'flex',
     gridArea: 'logo',
   }),
   logoAccountContainer: css({

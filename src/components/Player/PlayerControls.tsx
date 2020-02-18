@@ -67,6 +67,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
             className={styles.controlIcon}
             active={canPlay}
             onClick={handlePlayPauseClick}
+            data-testid="controls-pause"
           >
             <AccessibleLabel id="pause-label">Pause</AccessibleLabel>
             <PauseIcon />
@@ -79,8 +80,9 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
             className={styles.controlIcon}
             active={canPlay}
             onClick={handlePlayPauseClick}
+            data-testid="controls-play"
           >
-            <AccessibleLabel id="play-label">Play</AccessibleLabel>
+            {handlePlayPauseClick && <AccessibleLabel id="play-label">Play</AccessibleLabel>}
             <PlayArrowIcon />
           </Button>
         </Tooltip>

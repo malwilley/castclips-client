@@ -13,10 +13,6 @@ export function* searchPodcastEpisodes(action: ReturnType<typeof actions.searchP
     return
   }
 
-  yield put(actions.setEpisodeSearchTerm(query))
-  yield put(actions.setEpisodeSearchOffset(0))
-  yield put(actions.setEpisodes({ data: [], type: 'fetching' }))
-
   try {
     const token = yield call(waitForToken)
     const { results, nextOffset, total } = yield call(search, token, {

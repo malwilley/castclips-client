@@ -151,8 +151,9 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
         <SearchInput
           className={styles.search}
           handleTextChange={setText}
+          disabled={episodes.type === 'fetching'}
           value={text}
-          placeholder="Search..."
+          placeholder="Search episodes..."
           onKeyDown={e => {
             if (e.keyCode === KeyCode.Enter) {
               dispatch(actions.searchPodcastEpisodes(text))

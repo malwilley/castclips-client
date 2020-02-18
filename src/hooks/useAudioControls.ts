@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react'
+import { useEffect, useCallback, useState, useRef, RefObject } from 'react'
 
 export type AudioState = {
+  buffered: Array<{ start: number; end: number }>
   time: number
   duration: number
   isPlaying: boolean
@@ -15,56 +16,78 @@ export type AudioControls = {
   seekRelative: (relativeTime: number) => void
 }
 
-export type AudioControlsResult = { state: AudioState; controls: AudioControls }
+export type AudioControlsResult = {
+  ref: RefObject<HTMLAudioElement>
+  state: AudioState
+  controls: AudioControls
+}
 
-// https://github.com/streamich/react-use/blob/master/util/createHTMLMediaHook.ts
+export type UseAudioControlsParams = {
+  initialTime?: number
+}
 
-const useAudioControls = (
-  ref: React.RefObject<HTMLAudioElement>
-): { state: AudioState; controls: AudioControls } => {
-  const [time, setTime] = React.useState(0)
-  const [duration, setDuration] = React.useState(0)
-  const [isPlaying, setIsPlaying] = React.useState(false)
-  const [canPlay, setCanPlay] = React.useState(false)
+// https://github.com/streamich/react-use/blob/master/src/util/createHTMLMediaHook.ts
 
-  const onTimeUpdate = React.useCallback(() => {
+const useAudioControls = ({ initialTime }: UseAudioControlsParams = {}): AudioControlsResult => {
+  const ref = useRef<HTMLAudioElement>(null)
+  const [buffered, setBuffered] = useState([])
+  const [time, setTime] = useState(initialTime || 0)
+  const [duration, setDuration] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [canPlay, setCanPlay] = useState(false)
+
+  const onTimeUpdate = useCallback(() => {
     if (ref.current) {
       setTime(ref.current.currentTime)
     }
   }, [ref])
 
-  const onDurationChange = React.useCallback(() => {
+  const onDurationChange = useCallback(() => {
     if (ref.current) {
       setDuration(ref.current.duration)
     }
   }, [ref])
 
-  const onPlay = React.useCallback(() => {
+  const onPlay = useCallback(() => {
     setIsPlaying(true)
   }, [setIsPlaying])
 
-  const onPause = React.useCallback(() => {
+  const onPause = useCallback(() => {
     setIsPlaying(false)
   }, [setIsPlaying])
 
-  const onCanPlay = React.useCallback(() => {
+  const onCanPlay = useCallback(() => {
     setCanPlay(true)
   }, [setCanPlay])
 
-  React.useEffect(() => {
+  const onProgress = useCallback(() => {
+    if (ref.current) {
+      const elBuffered = ref.current.buffered
+      setBuffered(
+        Array(elBuffered.length)
+          .fill(0)
+          .reduce(
+            (acc, _, i) => [...acc, { start: elBuffered.start(i), end: elBuffered.end(i) }],
+            []
+          )
+      )
+    }
+  }, [setBuffered, ref])
+
+  useEffect(() => {
     if (!ref.current) {
       return
     }
 
     ref.current.addEventListener('timeupdate', onTimeUpdate)
     ref.current.addEventListener('durationchange', onDurationChange)
-    ref.current.addEventListener('canplay', onCanPlay)
+    ref.current.addEventListener('loadedmetadata', onCanPlay)
     ref.current.addEventListener('play', onPlay)
     ref.current.addEventListener('pause', onPause)
+    ref.current.addEventListener('progress', onProgress)
 
     // Need `autoPlay` on to support iOS, so pause the audio
     ref.current.pause()
-    ref.current.currentTime = 0
 
     const refCopy = ref.current
 
@@ -75,11 +98,12 @@ const useAudioControls = (
 
       refCopy.removeEventListener('timeupdate', onTimeUpdate)
       refCopy.removeEventListener('durationchange', onDurationChange)
-      refCopy.removeEventListener('canplay', onCanPlay)
+      refCopy.removeEventListener('loadedmetadata', onCanPlay)
       refCopy.removeEventListener('play', onPlay)
       refCopy.removeEventListener('pause', onPause)
+      refCopy.removeEventListener('progress', onProgress)
     }
-  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay])
+  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay, onProgress, initialTime])
 
   const play = useCallback(() => {
     ref.current && ref.current.play()
@@ -103,6 +127,7 @@ const useAudioControls = (
   )
 
   return {
+    ref,
     controls: {
       play,
       pause,
@@ -110,6 +135,7 @@ const useAudioControls = (
       seekRelative,
     },
     state: {
+      buffered,
       time,
       duration,
       isPlaying,

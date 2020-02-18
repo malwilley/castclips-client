@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ScissorsIcon from 'mdi-react/ScissorsIcon'
-import Modal from 'components/Modal'
+import Modal, { ModalFooter } from 'components/Modal'
 import StyledInput, { StyledInputLabel } from 'components/StyledInput'
 import { css } from 'emotion'
 import Asterisk from 'components/Asterisk'
@@ -10,7 +10,13 @@ import pick from 'ramda/es/pick'
 import CharacterCounter from 'components/CharacterCounter'
 import { actions } from '../redux/actions'
 import useModalState from 'modules/modal/hooks/useModalState'
-import { getEpisodeUnion } from '../selectors'
+import { getEpisodeData } from '../selectors'
+import PrimaryButton from 'components/PrimaryButton'
+import { fonts } from 'styles'
+import Card from 'components/Card'
+import ClipCardAccent from 'components/ClipCardAccent'
+import Timestamp from 'components/Timestamp'
+import ArrowRightIcon from 'mdi-react/ArrowRightIcon'
 
 type ShareModalProps = {
   start: number
@@ -22,12 +28,44 @@ type ShareModalProps = {
 const styles = {
   container: css({
     '& > :not(:last-child)': {
-      marginBottom: '1rem',
+      marginBottom: '0.5rem',
     },
   }),
   counter: css({
     textAlign: 'right',
     paddingTop: '0.5em',
+  }),
+  clipInfoCard: css({
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'flex',
+    marginBottom: 20,
+    padding: 10,
+  }),
+  thumbnail: css({
+    width: 65,
+    height: 65,
+    borderRadius: 8,
+    marginRight: 10,
+  }),
+  infoTextContainer: css({
+    '& > *': {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
+    flex: 1,
+    minWidth: 0,
+    whiteSpace: 'nowrap',
+    ...fonts.bold250,
+  }),
+  timestampsContainer: css({
+    '& > :not(:last-child)': {
+      marginRight: 6,
+    },
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 4,
+    ...fonts.text250,
   }),
 }
 
@@ -36,22 +74,18 @@ const CreateClipModal: React.SFC<ShareModalProps> = ({ handleClose, start, end, 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
-  const episode = useSelector(getEpisodeUnion)
-  const modalState = useModalState({ handleClose })
+  const episode = useSelector(getEpisodeData)!
+  const modalState = useModalState({ handleClose, isOpen })
 
   const handleCreate = () => {
-    if (episode.type !== 'success') {
-      return
-    }
-
     dispatch(
       actions.createClip({
-        audio: episode.data.audio,
+        audio: episode.audio,
         episode: pick(
           ['id', 'title', 'description', 'published', 'audioLength', 'thumbnail'],
-          episode.data
+          episode
         ),
-        podcast: pick(['id', 'title', 'description', 'thumbnail'], episode.data.podcast),
+        podcast: pick(['id', 'title', 'description', 'thumbnail'], episode.podcast),
         title,
         description,
         start,
@@ -60,21 +94,34 @@ const CreateClipModal: React.SFC<ShareModalProps> = ({ handleClose, start, end, 
     )
   }
 
+  const busy = modalState.type === 'sending'
   const valid = title.length > 0 && title.length < 200 && description.length < 2000
 
   return (
-    <Modal
-      handleClose={handleClose}
-      isOpen={isOpen}
-      icon={<ScissorsIcon />}
-      primaryButtonProps={
-        modalState.type === 'sending'
-          ? { active: false, children: 'Creating...' }
-          : { active: valid, onClick: handleCreate, children: 'Create' }
-      }
-      title="Create a clip"
-    >
-      <div className={styles.container}>
+    <Modal handleClose={handleClose} isOpen={isOpen} icon={<ScissorsIcon />} title="Create a clip">
+      <Card className={styles.clipInfoCard}>
+        <ClipCardAccent start={start} end={end} length={episode.audioLength} />
+        <img
+          className={styles.thumbnail}
+          alt={episode.podcast.title}
+          src={episode.podcast.thumbnail}
+        />
+        <div className={styles.infoTextContainer}>
+          <div>{episode.podcast.title}</div>
+          <div>{episode.title}</div>
+          <div className={styles.timestampsContainer}>
+            <Timestamp seconds={start} /> <ArrowRightIcon size={12} /> <Timestamp seconds={end} />
+          </div>
+        </div>
+      </Card>
+      <form
+        className={styles.container}
+        data-testid="create-clip-modal"
+        onSubmit={e => {
+          handleCreate()
+          e.preventDefault()
+        }}
+      >
         <div>
           <StyledInputLabel htmlFor="title-input">
             Clip title <Asterisk />
@@ -86,6 +133,7 @@ const CreateClipModal: React.SFC<ShareModalProps> = ({ handleClose, start, end, 
             placeholder="A descriptive title for your clip"
             required
             value={title}
+            disabled={busy}
           />
           <CharacterCounter className={styles.counter} max={200} text={title} />
         </div>
@@ -96,10 +144,16 @@ const CreateClipModal: React.SFC<ShareModalProps> = ({ handleClose, start, end, 
             handleTextChange={setDescription}
             placeholder="If the title isn't enough, say more here!"
             text={description}
+            disabled={busy}
           />
           <CharacterCounter className={styles.counter} max={2000} text={description} />
         </div>
-      </div>
+        <ModalFooter>
+          <PrimaryButton active={valid && !busy} data-testid="modal-create-clip">
+            {busy ? 'Creating...' : 'Create'}
+          </PrimaryButton>
+        </ModalFooter>
+      </form>
     </Modal>
   )
 }

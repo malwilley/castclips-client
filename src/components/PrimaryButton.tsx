@@ -19,6 +19,7 @@ const styles = {
       marginLeft: 8,
     },
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 8,
     display: 'flex',
     background: colors.secondary300,
@@ -44,4 +45,5 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   <Button className={css(styles.main, destructive && styles.destructive, className)} {...props} />
 )
 
+export const primaryButtonStyles = styles.main
 export default PrimaryButton

@@ -11,11 +11,12 @@ import LayoutContainer from 'components/LayoutContainer'
 import { LocalStorageKey } from 'types'
 import useLocalStorage from 'hooks/useLocalStorage'
 import { replace } from 'connected-react-router'
-import useChangeQueryParam from 'hooks/useChangeQueryParam'
 import SearchPagination from './SearchPagination'
 import { actions } from '../redux/actions'
 import useTitle from 'hooks/useTitle'
 import capitalizeFirstLetter from 'utils/capitalizeFirstLetter'
+import { useLocation } from 'react-router'
+import { parse, stringify } from 'querystringify'
 
 type SearchResultsPageProps = {
   query: string
@@ -45,13 +46,12 @@ const styles = {
   }),
 }
 
-const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
-  query,
-  type: typeFromUrl,
-  page = 1,
-}) => {
+const SearchResultsPage: React.FC<SearchResultsPageProps> = ({ query, page = 1 }) => {
   const dispatch = useDispatch()
-  const changeQueryParam = useChangeQueryParam(replace)
+  const { pathname, search } = useLocation()
+  const params: { type?: SearchType } = parse(search)
+  const typeFromUrl = params.type
+
   const [storedType, setStoredType] = useLocalStorage<SearchType>(
     LocalStorageKey.SearchType,
     SearchType.Podcasts
@@ -62,12 +62,12 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
 
   useEffect(() => {
     if (!typeFromUrl) {
-      changeQueryParam('type', type)
+      dispatch(replace(`${pathname}?${stringify({ ...params, type })}`))
     }
     if (type !== storedType) {
       setStoredType(type)
     }
-  }, [changeQueryParam, setStoredType, storedType, type, typeFromUrl])
+  }, [dispatch, params, pathname, setStoredType, storedType, type, typeFromUrl])
 
   useEffect(() => {
     window.scrollTo(0, 0)

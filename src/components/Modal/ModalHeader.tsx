@@ -7,8 +7,8 @@ import AccessibleLabel from '../AccessibleLabel'
 
 export type ModalHeaderProps = {
   handleClose: () => void
-  icon: React.ReactNode
-  title: string
+  icon?: React.ReactNode
+  title?: string
 }
 
 const styles = {
@@ -58,10 +58,14 @@ const styles = {
 const ModalHeader: React.SFC<ModalHeaderProps> = ({ handleClose, icon, title }) => (
   <div className={styles.main}>
     <div className={styles.iconTitleContainer}>
-      <div className={styles.icon}>{icon}</div>
-      <h1 className={styles.title} id="modal-title">
-        {title}
-      </h1>
+      {title && (
+        <>
+          <div className={styles.icon}>{icon}</div>
+          <h1 className={styles.title} id="modal-title">
+            {title}
+          </h1>
+        </>
+      )}
     </div>
     <Button aria-labelledby="close-modal" onClick={handleClose} className={styles.closeButton}>
       <AccessibleLabel id="close-modal">Close modal</AccessibleLabel>

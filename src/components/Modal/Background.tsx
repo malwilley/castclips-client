@@ -9,15 +9,17 @@ import { animated, config, useTransition } from 'react-spring'
 type ModalBackgroundProps = {
   handleClose: () => void
   isOpen: boolean
+  width?: number
 }
 
 const styles = {
-  contentContainer: css({
-    width: '100%',
-    maxWidth: 600,
-    zIndex: zIndex.modal,
-    WebkitOverflowScrolling: 'touch',
-  }),
+  contentContainer: (maxWidth: number) =>
+    css({
+      width: '100%',
+      maxWidth,
+      zIndex: zIndex.modal,
+      WebkitOverflowScrolling: 'touch',
+    }),
   main: css({
     '@media (max-width: 800px)': {
       padding: '60px 0 40px 0',
@@ -42,7 +44,12 @@ const styles = {
   }),
 }
 
-const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, handleClose, isOpen }) => {
+const ModalBackground: React.FC<ModalBackgroundProps> = ({
+  children,
+  handleClose,
+  isOpen,
+  width = 600,
+}) => {
   const closeOnEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.keyCode === 27) {
@@ -79,34 +86,32 @@ const ModalBackground: React.FC<ModalBackgroundProps> = ({ children, handleClose
     config: config.stiff,
   })
 
-  return (
+  return ReactDOM.createPortal(
     <>
       {transitions.map(({ item, key, props }) =>
-        item
-          ? ReactDOM.createPortal(
-              <animated.aside
-                aria-modal
-                aria-labelledby="modal-title"
-                className={styles.main}
-                key={key}
-                onMouseDown={handleClose}
-                role="dialog"
-                style={pick(['opacity'], props)}
-                tabIndex={-1}
-              >
-                <animated.div
-                  className={styles.contentContainer}
-                  onMouseDown={e => e.stopPropagation()}
-                  style={pick(['opacity', 'transform'], props)}
-                >
-                  {children}
-                </animated.div>
-              </animated.aside>,
-              document.body
-            )
-          : null
+        item ? (
+          <animated.aside
+            aria-modal
+            aria-labelledby="modal-title"
+            className={styles.main}
+            key={key}
+            onMouseDown={handleClose}
+            role="dialog"
+            style={pick(['opacity'], props)}
+            tabIndex={-1}
+          >
+            <animated.div
+              className={styles.contentContainer(width)}
+              onMouseDown={e => e.stopPropagation()}
+              style={pick(['opacity', 'transform'], props)}
+            >
+              {children}
+            </animated.div>
+          </animated.aside>
+        ) : null
       )}
-    </>
+    </>,
+    document.body
   )
 }
 

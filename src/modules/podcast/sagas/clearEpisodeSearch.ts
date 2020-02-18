@@ -11,7 +11,6 @@ export function* clearEpisodeSearch() {
     return
   }
 
-  yield put(actions.setEpisodeSearchTerm(''))
   yield put(actions.setEpisodes({ type: 'fetching', data: [] }))
 
   try {

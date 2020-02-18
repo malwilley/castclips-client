@@ -4,7 +4,7 @@ import Button from 'components/Button'
 import { PodcastState } from '../types'
 import Spinner from 'components/Spinner'
 import { css } from 'emotion'
-import { colors } from 'styles'
+import { colors, fonts } from 'styles'
 import { actions } from '../redux'
 import MapUnion from 'components/MapUnion'
 
@@ -17,6 +17,7 @@ const styles = {
     height: 50,
     width: '100%',
     color: colors.gray600,
+    ...fonts.bold250,
   }),
 }
 
@@ -36,13 +37,11 @@ const LoadMoreEpisodesButton: React.FC<LoadMoreEpisodesProps> = ({ episodes }) =
             className={styles.loadMoreRow}
             onClick={() => dispatch(actions.fetchMorePodcastEpisodes())}
           >
-            <h6>load more</h6>
+            Show more
           </Button>
         ),
         error: () => (
-          <Button className={styles.loadMoreRow}>
-            <h6>error loading episodes, try again?</h6>
-          </Button>
+          <Button className={styles.loadMoreRow}>Error loading episodes, try again?</Button>
         ),
         not_asked: () => null,
         end: () => null,

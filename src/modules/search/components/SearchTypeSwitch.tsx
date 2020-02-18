@@ -2,9 +2,10 @@ import React from 'react'
 import { SearchType } from '../types'
 import { css } from 'emotion'
 import { colors, fonts } from 'styles'
-import Button from 'components/Button'
 import AccessibleLabel from 'components/AccessibleLabel'
-import useChangeQueryParam from 'hooks/useChangeQueryParam'
+import { useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
+import { stringify, parse } from 'querystringify'
 
 type SearchTypeSwitchProps = {
   className?: string
@@ -27,6 +28,9 @@ const styles = {
       color: colors.gray700,
     },
     color: colors.gray200,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: '0 1.25rem',
     textTransform: 'uppercase',
     borderRadius: 25,
@@ -46,40 +50,37 @@ const styles = {
 const SearchTypeOption: React.FC<{
   type: SearchType
   selected: SearchType
-  setSearch: (searchType: SearchType) => void
-}> = ({ children, selected, setSearch, type }) => (
-  <Button
-    aria-labelledby={`${type}-switch-label`}
-    className={css(styles.option, type === selected && styles.optionSelected)}
-    onClick={() => setSearch(type)}
-  >
-    <AccessibleLabel id={`${type}-switch-label`}>Search {type}s</AccessibleLabel>
-    {children}
-  </Button>
-)
+}> = ({ children, selected, type }) => {
+  const { pathname, search } = useLocation()
+  const params = parse(search)
+
+  return (
+    <Link
+      aria-labelledby={`${type}-switch-label`}
+      className={css(styles.option, type === selected && styles.optionSelected)}
+      to={`${pathname}${stringify({ ...params, type }, true)}`}
+    >
+      <AccessibleLabel id={`${type}-switch-label`}>Search {type}s</AccessibleLabel>
+      {children}
+    </Link>
+  )
+}
 
 const SearchTypeSwitch: React.FC<SearchTypeSwitchProps> = ({
   className,
   type = SearchType.Podcasts,
-}) => {
-  const changeQueryParam = useChangeQueryParam()
-  const setSearchType = (searchType: SearchType) => {
-    changeQueryParam('type', searchType)
-  }
-
-  return (
-    <div className={css(styles.main, className)}>
-      <SearchTypeOption selected={type} setSearch={setSearchType} type={SearchType.Podcasts}>
-        Podcasts
-      </SearchTypeOption>
-      <SearchTypeOption selected={type} setSearch={setSearchType} type={SearchType.Episodes}>
-        Episodes
-      </SearchTypeOption>
-      <SearchTypeOption selected={type} setSearch={setSearchType} type={SearchType.Clips}>
-        Clips
-      </SearchTypeOption>
-    </div>
-  )
-}
+}) => (
+  <div className={css(styles.main, className)}>
+    <SearchTypeOption selected={type} type={SearchType.Podcasts}>
+      Podcasts
+    </SearchTypeOption>
+    <SearchTypeOption selected={type} type={SearchType.Episodes}>
+      Episodes
+    </SearchTypeOption>
+    <SearchTypeOption selected={type} type={SearchType.Clips}>
+      Clips
+    </SearchTypeOption>
+  </div>
+)
 
 export default SearchTypeSwitch

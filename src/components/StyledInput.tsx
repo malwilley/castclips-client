@@ -1,36 +1,33 @@
 import React from 'react'
 import { css } from 'emotion'
-import { colors } from 'styles'
+import { colors, fonts } from 'styles'
 import Input, { InputProps } from './Input'
 
 type StyledInputProps = InputProps
 
-type StyledInputLabelProps = {
-  htmlFor: string
-}
+type StyledInputLabelProps = React.LabelHTMLAttributes<HTMLLabelElement>
 
 const styles = {
   input: css({
     '&::placeholder': {
-      color: colors.gray300,
+      color: colors.gray200,
     },
     '&:focus': {
       border: `1px solid ${colors.tertiary100}`,
       boxShadow: `0 1px 10px ${colors.tertiary100alpha30}`,
     },
-    height: 42,
-    border: `1px solid ${colors.gray100}`,
-    borderRadius: 8,
-    fontSize: 14,
+    height: 38,
+    border: `1px solid ${colors.gray50}`,
+    borderRadius: 4,
     width: '100%',
     padding: '0 12px',
     transition: 'all 200ms ease-out',
+    ...fonts.text250,
   }),
   label: css({
-    color: colors.gray600,
+    ...fonts.bold300,
     display: 'block',
-    marginBottom: 10,
-    fontWeight: 'bold',
+    marginBottom: 6,
   }),
 }
 
