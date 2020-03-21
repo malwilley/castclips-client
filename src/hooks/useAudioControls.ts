@@ -31,7 +31,7 @@ export type UseAudioControlsParams = {
 const useAudioControls = ({ initialTime }: UseAudioControlsParams = {}): AudioControlsResult => {
   const ref = useRef<HTMLAudioElement>(null)
   const [buffered, setBuffered] = useState([])
-  const [time, setTime] = useState(initialTime || 0)
+  const [time, setTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [canPlay, setCanPlay] = useState(false)
@@ -75,6 +75,13 @@ const useAudioControls = ({ initialTime }: UseAudioControlsParams = {}): AudioCo
   }, [setBuffered, ref])
 
   useEffect(() => {
+    if (ref.current && initialTime) {
+      ref.current.currentTime = initialTime
+      setTime(initialTime)
+    }
+  }, [initialTime])
+
+  useEffect(() => {
     if (!ref.current) {
       return
     }
@@ -103,7 +110,7 @@ const useAudioControls = ({ initialTime }: UseAudioControlsParams = {}): AudioCo
       refCopy.removeEventListener('pause', onPause)
       refCopy.removeEventListener('progress', onProgress)
     }
-  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay, onProgress, initialTime])
+  }, [ref, onTimeUpdate, onDurationChange, onPlay, onPause, onCanPlay, onProgress])
 
   const play = useCallback(() => {
     ref.current && ref.current.play()
