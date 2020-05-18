@@ -15,8 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "types": ["cypress", "@types/testing-library__cypress"]
+    "jsx": "preserve"
   },
   "include": ["src"]
 }

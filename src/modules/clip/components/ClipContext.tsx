@@ -94,19 +94,19 @@ const ClipContext: React.FC<ClipContextProps> = ({ clip }) => (
     <SectionHeader>from the episode</SectionHeader>
     <p className={styles.info}>
       Clip starts at
-      <a
+      <Link
         className={styles.link}
-        href={`/episode/${clip.episode.id}${stringify({ time: clip.start }, true)}`}
+        to={`/episode/${clip.episode.id}${stringify({ time: clip.start }, true)}`}
       >
         <LinkIcon size={16} /> {formatHrMinSec(clip.start)}
-      </a>
+      </Link>
       and ends at
-      <a
+      <Link
         className={styles.link}
-        href={`/episode/${clip.episode.id}${stringify({ time: clip.end }, true)}`}
+        to={`/episode/${clip.episode.id}${stringify({ time: clip.end }, true)}`}
       >
         <LinkIcon size={16} /> {formatHrMinSec(clip.end)}
-      </a>
+      </Link>
     </p>
     <Card className={styles.card} hover>
       <ClipCardAccent end={clip.end} length={clip.episode.audioLength} start={clip.start} />
