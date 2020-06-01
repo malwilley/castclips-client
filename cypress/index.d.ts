@@ -1,5 +1,4 @@
-/// <reference types="Cypress" />
-/// <reference types="@types/testing-library__cypress" />
+/// <reference types="cypress" />
 
 declare namespace Cypress {
   interface Chainable {
@@ -8,7 +7,7 @@ declare namespace Cypress {
     seekToEnd(): Chainable<HTMLAudioElement>
   }
 
-  interface Chainer<Subject> {
+  interface Chainer {
     (chainer: 'be.playing'): Chainable<Subject>
     (chainer: 'not.be.playing'): Chainable<Subject>
     (chainer: 'currentTime', seconds: number): Chainable<Subject>

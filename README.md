@@ -53,3 +53,11 @@ yarn prettier:fix
 ```
 yarn lint
 ```
+
+### Tests
+
+This project uses Cypress for end-to-end testing. This covers much of the functionality for this small project, but adding unit tests could be added at a later date.
+
+```
+yarn cypress:open
+```
