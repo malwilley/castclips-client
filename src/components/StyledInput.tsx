@@ -14,7 +14,7 @@ const styles = {
     },
     '&:focus': {
       border: `1px solid ${colors.tertiary100}`,
-      boxShadow: `0 1px 10px ${colors.tertiary100alpha30}`,
+      boxShadow: `0 0 0 3px ${colors.tertiary100alpha30}`,
     },
     height: 38,
     border: `1px solid ${colors.gray50}`,

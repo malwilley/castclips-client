@@ -1,5 +1,5 @@
 import React from 'react'
-import { Logo } from 'icons'
+import LogoWaves from 'icons/LogoWaves'
 import { css, keyframes } from 'emotion'
 
 type PulsingLogoProps = {}
@@ -9,7 +9,7 @@ const pulse = keyframes({
     opacity: 1,
   },
   '50%': {
-    opacity: 0.5,
+    opacity: 0.3,
   },
 })
 
@@ -22,14 +22,14 @@ const styles = {
   }),
   logo: css({
     animation: `${pulse} 3s ease-out infinite`,
-    height: 60,
-    width: 248,
+    height: 100,
+    width: 100,
   }),
 }
 
 const PulsingLogo: React.FC<PulsingLogoProps> = () => (
   <div className={styles.main}>
-    <Logo className={styles.logo} />
+    <LogoWaves className={styles.logo} />
   </div>
 )
 
