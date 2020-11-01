@@ -37,9 +37,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**.{ts,tsx}\"",
     "cypress:open": "cypress open",
-    "prettier-check": "prettier --check \"**/*.{html,ts,tsx,json,md}\"",
-    "prettier-write": "prettier --write \"**/*.{html,ts,tsx,json,md}\"",
-    "now-build": "yarn lint && yarn prettier-check && yarn build",
+    "prettier:check": "prettier --check \"**/*.{html,ts,tsx,json,md}\"",
+    "prettier:write": "prettier --write \"**/*.{html,ts,tsx,json,md}\"",
+    "now-build": "yarn lint && yarn prettier:check && yarn build",
     "now-dev": "react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
