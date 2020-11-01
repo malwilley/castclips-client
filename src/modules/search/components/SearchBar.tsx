@@ -15,15 +15,21 @@ type SearchBarProps = { className?: string; initialText?: string }
 
 const styles = {
   main: css(fonts.text250, breakpoints.breakpoint600(fonts.text300), {
-    '&:hover, &:focus-within': {
+    '&:hover': {
+      backgroundColor: colors.white,
       border: `1px solid ${colors.gray50}`,
+    },
+    '&:focus-within': {
+      backgroundColor: colors.white,
+      border: `1px solid ${colors.tertiary100}`,
+      boxShadow: `0 0 0 5px ${colors.tertiary100alpha30}`,
     },
     backgroundColor: colors.gray20,
     border: `1px solid transparent`,
     borderRadius: 20,
     color: colors.gray700,
     position: 'relative',
-    transition: 'border 200ms ease-out',
+    transition: 'box-shadow 200ms ease-out, background-color 200ms ease-out, border 200ms ease-out',
     zIndex: zIndex.card,
   }),
   input: css({
