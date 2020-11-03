@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { css } from 'emotion'
 import { useSelector } from 'react-redux'
-import { PermanentUser, UserType } from 'modules/auth/types'
+import { PermanentUser } from 'modules/auth/types'
 import Button from 'components/Button'
 import firebase from 'modules/auth/firebase'
 import Downshift from 'downshift'
@@ -161,10 +161,10 @@ const HeaderAccount: React.FC<HeaderAccountProps> = ({ className }) => {
     <div className={className}>
       <MapUnion
         map={{
-          [UserType.Permanent]: user => <HeaderAccountLoggedIn user={user} />,
-          [UserType.Anonymous]: () => <HeaderAccountLoggedOut />,
-          [UserType.Unauthenticated]: () => <HeaderAccountLoggedOut />,
-          [UserType.Unknown]: () => null,
+          permanent: user => <HeaderAccountLoggedIn user={user} />,
+          anonymous: () => <HeaderAccountLoggedOut />,
+          unauthenticated: () => <HeaderAccountLoggedOut />,
+          unknown: () => null,
         }}
         union={userUnion}
       />

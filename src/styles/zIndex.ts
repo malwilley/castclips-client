@@ -7,7 +7,7 @@ const flyout = 10
 const modal = 103
 const modalBackground = 102
 
-export default {
+const zIndex = {
   background,
   feature,
   body,
@@ -17,3 +17,5 @@ export default {
   modalBackground,
   flyout,
 }
+
+export default zIndex

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'redux/types'
-import { SearchType } from '../types'
-import HttpContent from 'components/HttpContent'
+import { ClipResult, EpisodeResult, PodcastResult, SearchType } from '../types'
 import SearchResultCard, { SearchResultCardFetching } from './SearchResultCard'
 import SearchTypeSwitch from './SearchTypeSwitch'
 import { css } from 'emotion'
@@ -17,6 +16,8 @@ import useTitle from 'hooks/useTitle'
 import capitalizeFirstLetter from 'utils/capitalizeFirstLetter'
 import { useLocation } from 'react-router'
 import { parse, stringify } from 'querystringify'
+import MapUnion from 'components/MapUnion'
+import { map } from 'ramda'
 
 type SearchResultsPageProps = {
   query: string
@@ -82,39 +83,45 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({ query, page = 1 }
       <LayoutContainer className={styles.container}>
         <SearchTypeSwitch className={styles.searchTypeSwitch} type={type} />
         <h2 className={styles.resultsHeader}>
-          <HttpContent
-            request={results as any}
-            renderSuccess={({ total }) => (
-              <>
-                {(total || 0).toLocaleString()} {type}s matching <strong>{query}</strong>
-              </>
-            )}
+          <MapUnion
+            union={results}
+            map={{
+              not_asked: () => null,
+              fetching: () => null,
+              error: () => null,
+              success: ({ data }) => (
+                <>
+                  {data.total.toLocaleString()} {type}s matching <strong>{query}</strong>
+                </>
+              ),
+            }}
           />
         </h2>
-        <HttpContent
-          request={results as any}
-          renderFetching={() => (
-            <>
-              {Array(10)
-                .fill(0)
-                .map((_, index) => (
-                  <SearchResultCardFetching key={index} />
-                ))}
-            </>
-          )}
-          renderSuccess={data => {
-            return (
+        <MapUnion
+          union={results}
+          map={{
+            not_asked: () => null,
+            error: () => null,
+            fetching: () => (
               <>
-                {data.results.map((result: any) => (
-                  <SearchResultCard
-                    key={result.id}
-                    {...result}
-                    thumbnail={result.thumbnail || result.podcast.thumbnail}
-                  />
-                ))}
+                {Array(10)
+                  .fill(0)
+                  .map((_, index) => (
+                    <SearchResultCardFetching key={index} />
+                  ))}
+              </>
+            ),
+            success: ({ data }) => (
+              <>
+                {map(
+                  result => (
+                    <SearchResultCard key={result.id} {...result} />
+                  ),
+                  data.results as Array<PodcastResult | EpisodeResult | ClipResult>
+                )}
                 <SearchPagination {...{ page, total: data.total }} />
               </>
-            )
+            ),
           }}
         />
       </LayoutContainer>

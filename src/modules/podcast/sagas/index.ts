@@ -4,10 +4,12 @@ import { watchFetchMoreEpisodes } from './fetchMoreEpisodes'
 import { watchFetchPodcastMetadata } from './fetchPodcastMetadata'
 import { watchSearchPodcastEpisodes } from './searchPodcastEpisodes'
 
-export default [
+const podcastSagas = [
   watchClearEpisodeSearch,
   watchFetchClipsForPodcast,
   watchFetchMoreEpisodes,
   watchFetchPodcastMetadata,
   watchSearchPodcastEpisodes,
 ]
+
+export default podcastSagas

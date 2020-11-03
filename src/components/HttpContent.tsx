@@ -1,18 +1,20 @@
 import { HttpRequest } from 'types'
 
-type HttpContentProps<T> = {
-  renderError?: (message: string) => JSX.Element | null
-  renderFetching?: () => JSX.Element | null
-  renderSuccess: (data: T) => JSX.Element | null
-  request: HttpRequest<T>
+type HttpContentProps<TData> = {
+  renderError?: (message: string) => ReturnType<React.FC>
+  renderFetching?: () => ReturnType<React.FC>
+  renderSuccess: (data: TData) => ReturnType<React.FC>
+  request: HttpRequest<TData>
 }
 
-const HttpContent = <T extends any>({
+const defaultRenderNothing = () => null
+
+const HttpContent = <TData extends any>({
   request,
-  renderError = () => null,
-  renderFetching = () => null,
+  renderError = defaultRenderNothing,
+  renderFetching = defaultRenderNothing,
   renderSuccess,
-}: HttpContentProps<T>) => {
+}: HttpContentProps<TData>): ReturnType<React.FC> => {
   switch (request.type) {
     case 'success':
       return renderSuccess(request.data)
@@ -20,7 +22,6 @@ const HttpContent = <T extends any>({
       return renderError(request.message)
     case 'fetching':
       return renderFetching()
-    case 'not_asked':
     default:
       return null
   }

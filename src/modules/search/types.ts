@@ -34,12 +34,18 @@ export type EpisodeResult = {
 export type ClipResult = {
   type: SearchType.Clips
   audioLength: number
+  audio: string
+  createdAt: string
+  updatedAt: string
+  views: number
   id: string
   title: string
   description: string
-  thumbnail: string
   podcast: {
     title: string
+    id: string
+    description: string
+    thumbnail: string
   }
   episode: {
     title: string
