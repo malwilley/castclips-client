@@ -40,7 +40,7 @@ const MasonryGrid: React.FC<MasonryGridProps> = ({ children, minColumnWidth }) =
     )
   }, [children, numColumns])
 
-  const content = range(0, numColumns).map(i => (
+  const content = range(0, numColumns).map((i) => (
     <div className={styles.column} key={i}>
       {itemsByColumn[i]}
     </div>

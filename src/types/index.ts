@@ -27,7 +27,7 @@ export type ErrorWithData<T> = {
   message: string
 }
 
-export type HttpRequest<T> = NotAsked | Fetching | Success<T> | Error
+export type HttpRequest<T = any> = NotAsked | Fetching | Success<T> | Error
 
 export type LazyLoadedData<T> = NotAsked | FetchingWithData<T> | Success<T> | ErrorWithData<T>
 

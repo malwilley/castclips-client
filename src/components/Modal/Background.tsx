@@ -102,7 +102,7 @@ const ModalBackground: React.FC<ModalBackgroundProps> = ({
           >
             <animated.div
               className={styles.contentContainer(width)}
-              onMouseDown={e => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
               style={pick(['opacity', 'transform'], props)}
             >
               {children}

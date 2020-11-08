@@ -1,4 +1,4 @@
-export default {
+const colors = {
   background: '#fdfdff',
   primary700: '#044b74',
   primary500: '#07689f',
@@ -48,3 +48,5 @@ export default {
   gunmetal800: '#272838',
   gunmetal100: '#aaaab0',
 }
+
+export default colors

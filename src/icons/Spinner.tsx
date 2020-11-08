@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const Spinner: React.SFC<React.SVGProps<SVGSVGElement>> = props => {
+const Spinner: React.SFC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       {...props}

@@ -88,7 +88,7 @@ const fetchingStyles = {
   }),
 }
 
-const SubText: React.FC<SearchResultCardProps> = props => {
+const SubText: React.FC<SearchResultCardProps> = (props) => {
   switch (props.type) {
     case SearchType.Episodes:
       return <h4 className={styles.subText}>{props.podcast.title}</h4>
@@ -119,17 +119,21 @@ const SearchResultCardFetching: React.FC = () => (
   </Card>
 )
 
-const SearchResultCard: React.FC<SearchResultCardProps> = props => (
-  <Card className={styles.main} hover>
-    <img alt="Thumbnail" className={styles.thumbnail} src={props.thumbnail} />
-    <Link className={css(coverContainer)} to={`/${props.type}/${props.id}`}>
-      <h3 className={styles.title}>{props.title}</h3>
-    </Link>
-    <SubText {...props} />
-    <p className={styles.description}>{props.description}</p>
-    <div className={styles.hideOverflowGradient} />
-  </Card>
-)
+const SearchResultCard: React.FC<SearchResultCardProps> = (props) => {
+  const thumbnail = props.type === SearchType.Clips ? props.podcast.thumbnail : props.thumbnail
+
+  return (
+    <Card className={styles.main} hover>
+      <img alt="Thumbnail" className={styles.thumbnail} src={thumbnail} />
+      <Link className={css(coverContainer)} to={`/${props.type}/${props.id}`}>
+        <h3 className={styles.title}>{props.title}</h3>
+      </Link>
+      <SubText {...props} />
+      <p className={styles.description}>{props.description}</p>
+      <div className={styles.hideOverflowGradient} />
+    </Card>
+  )
+}
 
 export { SearchResultCardFetching }
 export default SearchResultCard

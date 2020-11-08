@@ -61,7 +61,7 @@ const DeleteClipModal: React.FC<DeleteClipModalProps> = ({ handleClose, isOpen }
       <form
         className={styles.container}
         data-testid="delete-clip-modal"
-        onSubmit={e => {
+        onSubmit={(e) => {
           dispatch(actions.deleteClip(clipData!.id))
           e.preventDefault()
         }}

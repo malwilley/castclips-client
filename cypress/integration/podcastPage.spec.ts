@@ -4,9 +4,7 @@ describe('clipPage', () => {
   })
 
   it('can search podcast episodes', () => {
-    cy.findByPlaceholderText('Search episodes...')
-      .click()
-      .type('2015{enter}')
+    cy.findByPlaceholderText('Search episodes...').click().type('2015{enter}')
     cy.findByText('Til Death Do Us Blart 2015').should('exist')
     cy.queryByText('Til Death Do Us Blart 2016').should('not.exist')
     cy.findByText('Clear').click()

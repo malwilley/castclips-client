@@ -81,7 +81,7 @@ const HotClipSkeleton: React.FC = () => (
   <Card className={styles.main} feature>
     <div className={styles.container}>
       <div className={styles.skeletonTitle}>
-        {range(0, Math.ceil(Math.random() * 4)).map(i => (
+        {range(0, Math.ceil(Math.random() * 4)).map((i) => (
           <TextSkeleton key={i} height="1rem" width={`${Math.random() * 40 + 60}%`} />
         ))}
       </div>

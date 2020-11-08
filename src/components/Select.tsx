@@ -25,7 +25,7 @@ const Select = <T extends string>({
 }: SelectProps<T>) => (
   <select
     className={css(styles.main, className)}
-    onChange={e => {
+    onChange={(e) => {
       handleSelectionChange(e.target.value as T)
     }}
     value={value}

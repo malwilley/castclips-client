@@ -52,7 +52,7 @@ const ClipPageBodyMain: React.FC<Pick<ClipPageBodyProps, 'clipMetadata'>> = ({ c
         <ParagraphSkeleton />
       </div>
     )}
-    renderSuccess={clip => (
+    renderSuccess={(clip) => (
       <div>
         {clip.description && (
           <>

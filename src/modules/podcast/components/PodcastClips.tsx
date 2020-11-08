@@ -36,7 +36,7 @@ const PodcastClips: React.FC = () => {
           success: ({ data: clips }) =>
             clips.length > 0 ? (
               <>
-                {clips.map(clip => (
+                {clips.map((clip) => (
                   <PodcastClipCard clip={clip} key={clip.id} />
                 ))}
               </>

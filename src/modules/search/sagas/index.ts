@@ -1,3 +1,5 @@
 import { watchExecuteSearch } from './executeSearch'
 
-export default [watchExecuteSearch]
+const searchSagas = [watchExecuteSearch]
+
+export default searchSagas

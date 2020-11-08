@@ -86,7 +86,7 @@ const PodcastCard: React.FC<PodcastCardProps> = ({ podcast }) => {
     <HttpContent
       request={podcast}
       renderFetching={() => <PodcastDataFetching />}
-      renderSuccess={data => <PodcastDataSuccess {...data} />}
+      renderSuccess={(data) => <PodcastDataSuccess {...data} />}
     />
   )
 }

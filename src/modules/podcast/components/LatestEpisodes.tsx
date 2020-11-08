@@ -154,7 +154,7 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
           disabled={episodes.type === 'fetching'}
           value={text}
           placeholder="Search episodes..."
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.keyCode === KeyCode.Enter) {
               dispatch(actions.searchPodcastEpisodes(text))
             }
@@ -175,7 +175,7 @@ const LatestEpisodes: React.FC<LatestEpisodesProps> = ({ episodes }) => {
         )}
       </div>
       {episodeList.length > 0
-        ? episodeList.map(episode => <EpisodeRow key={episode.id} episode={episode} />)
+        ? episodeList.map((episode) => <EpisodeRow key={episode.id} episode={episode} />)
         : Array(10)
             .fill(0)
             .map((_, index) => <EpisodeRowLoading key={index} />)}

@@ -1,4 +1,6 @@
 import { watchFetchHotClips } from './fetchHotClips'
 import { watchFetchMoreHotClips } from './fetchMoreHotClips'
 
-export default [watchFetchHotClips, watchFetchMoreHotClips]
+const homeSagas = [watchFetchHotClips, watchFetchMoreHotClips]
+
+export default homeSagas

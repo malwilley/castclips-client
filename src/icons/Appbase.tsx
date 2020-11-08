@@ -2,7 +2,7 @@ import React from 'react'
 
 type AppbaseProps = React.SVGProps<SVGSVGElement>
 
-const Appbase: React.FC<AppbaseProps> = props => (
+const Appbase: React.FC<AppbaseProps> = (props) => (
   <svg
     aria-label="Appbase logo"
     viewBox="0 0 851.609 193.273"

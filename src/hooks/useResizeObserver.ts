@@ -15,7 +15,7 @@ const useResizeObserver = <T extends Element>() => {
       return
     }
 
-    const resizeObserver = new ResizeObserver(entries => {
+    const resizeObserver = new ResizeObserver((entries) => {
       if (!Array.isArray(entries) || !entries.length) {
         return
       }

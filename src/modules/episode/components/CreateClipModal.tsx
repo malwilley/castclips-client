@@ -117,7 +117,7 @@ const CreateClipModal: React.SFC<ShareModalProps> = ({ handleClose, start, end, 
       <form
         className={styles.container}
         data-testid="create-clip-modal"
-        onSubmit={e => {
+        onSubmit={(e) => {
           handleCreate()
           e.preventDefault()
         }}
