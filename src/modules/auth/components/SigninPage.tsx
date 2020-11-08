@@ -49,8 +49,8 @@ const styles = {
   }),
 }
 
-const FirebaseAuth = lazy(() =>
-  import(/* webpackChunkName: "firebase-auth" */ 'react-firebaseui/StyledFirebaseAuth')
+const FirebaseAuth = lazy(
+  () => import(/* webpackChunkName: "firebase-auth" */ 'react-firebaseui/StyledFirebaseAuth')
 )
 
 const SigninPage: React.FC = () => {
@@ -71,7 +71,7 @@ const SigninPage: React.FC = () => {
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
-      signInSuccessWithAuthResult: authResult => {
+      signInSuccessWithAuthResult: (authResult) => {
         dispatch(actions.signInUser(authResult.user))
 
         return true
@@ -94,7 +94,7 @@ const SigninPage: React.FC = () => {
             <FirebaseAuth
               firebaseAuth={firebaseApp.auth()}
               uiConfig={uiConfig}
-              uiCallback={ui => {
+              uiCallback={(ui) => {
                 setIsPendingRedirect(ui.isPendingRedirect())
               }}
             />

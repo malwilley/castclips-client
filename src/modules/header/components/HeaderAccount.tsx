@@ -161,7 +161,7 @@ const HeaderAccount: React.FC<HeaderAccountProps> = ({ className }) => {
     <div className={className}>
       <MapUnion
         map={{
-          permanent: user => <HeaderAccountLoggedIn user={user} />,
+          permanent: (user) => <HeaderAccountLoggedIn user={user} />,
           anonymous: () => <HeaderAccountLoggedOut />,
           unauthenticated: () => <HeaderAccountLoggedOut />,
           unknown: () => null,

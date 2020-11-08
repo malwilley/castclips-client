@@ -4,9 +4,9 @@ import { UserType } from '../types'
 
 const getAuthState = (state: AppState) => state.auth
 
-export const getUserState = createSelector(getAuthState, state => state.user)
+export const getUserState = createSelector(getAuthState, (state) => state.user)
 
-export const getUserData = createSelector(getUserState, user => {
+export const getUserData = createSelector(getUserState, (user) => {
   if (user.type === UserType.Anonymous || user.type === UserType.Permanent) {
     return user.data
   }
@@ -14,4 +14,4 @@ export const getUserData = createSelector(getUserState, user => {
   return null
 })
 
-export const getUserUid = createSelector(getUserData, user => (user ? user.uid : null))
+export const getUserUid = createSelector(getUserData, (user) => (user ? user.uid : null))

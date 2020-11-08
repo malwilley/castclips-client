@@ -88,7 +88,7 @@ const fetchingStyles = {
   }),
 }
 
-const SubText: React.FC<SearchResultCardProps> = props => {
+const SubText: React.FC<SearchResultCardProps> = (props) => {
   switch (props.type) {
     case SearchType.Episodes:
       return <h4 className={styles.subText}>{props.podcast.title}</h4>
@@ -119,7 +119,7 @@ const SearchResultCardFetching: React.FC = () => (
   </Card>
 )
 
-const SearchResultCard: React.FC<SearchResultCardProps> = props => {
+const SearchResultCard: React.FC<SearchResultCardProps> = (props) => {
   const thumbnail = props.type === SearchType.Clips ? props.podcast.thumbnail : props.thumbnail
 
   return (

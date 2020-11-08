@@ -56,9 +56,11 @@ const styles = {
   }),
 }
 
-const EpisodePlayerClipOptionsContent: React.FC<EpisodePlayerClipOptionsProps & {
-  isOpen: boolean
-}> = ({
+const EpisodePlayerClipOptionsContent: React.FC<
+  EpisodePlayerClipOptionsProps & {
+    isOpen: boolean
+  }
+> = ({
   end,
   start,
   duration,
@@ -124,7 +126,7 @@ const EpisodePlayerClipOptionsContent: React.FC<EpisodePlayerClipOptionsProps & 
   )
 }
 
-const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = props => {
+const EpisodePlayerClipOptions: React.FC<EpisodePlayerClipOptionsProps> = (props) => {
   return (
     <Show>
       {({ isOpen, toggle }) => (

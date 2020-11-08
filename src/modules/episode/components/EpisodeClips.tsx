@@ -32,10 +32,10 @@ const EpisodeClips: React.SFC<EpisodeClipsProps> = ({ episodeId }) => {
     <HttpContent
       request={episodeClipsUnion}
       renderFetching={() => null}
-      renderSuccess={clips =>
+      renderSuccess={(clips) =>
         clips.length > 0 ? (
           <div className={styles.container}>
-            {clips.map(clip => (
+            {clips.map((clip) => (
               <EpisodeClipCard clip={clip} key={clip.id} episodeLength={clip.episode.audioLength} />
             ))}
           </div>

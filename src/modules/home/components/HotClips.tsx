@@ -76,10 +76,10 @@ const HotClips: React.FC<HotClipsProps> = () => {
   return (
     <div className={styles.clipsContainer}>
       <MasonryGrid minColumnWidth={300}>
-        {hotClips.data.map(clip => (
+        {hotClips.data.map((clip) => (
           <HotClip clip={clip} key={clip.id} />
         ))}
-        {hotClips.type === 'fetching' ? range(0, 20).map(i => <HotClipSkeleton key={i} />) : []}
+        {hotClips.type === 'fetching' ? range(0, 20).map((i) => <HotClipSkeleton key={i} />) : []}
       </MasonryGrid>
       {hotClips.type === 'error' && (
         <ErrorMessage className={styles.error}>{hotClips.message}</ErrorMessage>

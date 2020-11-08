@@ -76,13 +76,13 @@ const EpisodeCardSuccess: React.FC<EpisodeMetadata & Pick<EpisodeCardProps, 'tim
           end={end}
           time={time}
           duration={duration}
-          handleSetStart={newTime => {
+          handleSetStart={(newTime) => {
             if (end && newTime > end) {
               setEnd(null)
             }
             setStart(clamp(0, duration, newTime))
           }}
-          handleSetEnd={newTime => {
+          handleSetEnd={(newTime) => {
             if (start && newTime < start) {
               setStart(null)
             }

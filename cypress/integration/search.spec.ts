@@ -22,12 +22,8 @@ describe('Search', () => {
   })
 
   it('can search using search bar', () => {
-    cy.findByLabelText('Search')
-      .clear()
-      .type('new query')
-    cy.findByText('Submit')
-      .parent()
-      .click()
+    cy.findByLabelText('Search').clear().type('new query')
+    cy.findByText('Submit').parent().click()
 
     cy.findByText('new query').should('exist')
     cy.url().should('include', 'q=new%20query')

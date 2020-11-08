@@ -8,8 +8,8 @@ import { pick } from 'ramda'
 
 const getUserData = pick(['uid', 'displayName', 'email', 'photoURL', 'phoneNumber', 'providerId'])
 
-const authStateChannel = eventChannel<{ type: UserType; data?: UserInfo }>(emitter => {
-  const unsubscribe = auth.onAuthStateChanged(user => {
+const authStateChannel = eventChannel<{ type: UserType; data?: UserInfo }>((emitter) => {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
     if (user) {
       if (user.isAnonymous) {
         return emitter({ type: UserType.Anonymous, data: getUserData(user) })

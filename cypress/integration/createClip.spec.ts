@@ -5,68 +5,42 @@ describe('Create clip', () => {
   })
 
   it('can input timestamps by hand', () => {
-    cy.findByPlaceholderText('Start time')
-      .type('30:47')
-      .blur()
-      .should('have.value', '00:30:47')
-    cy.findByPlaceholderText('End time')
-      .type('1:01:01')
-      .blur()
-      .should('have.value', '01:01:01')
+    cy.findByPlaceholderText('Start time').type('30:47').blur().should('have.value', '00:30:47')
+    cy.findByPlaceholderText('End time').type('1:01:01').blur().should('have.value', '01:01:01')
     cy.findByTestId('create-clip').should('not.be.disabled')
   })
 
   it('does not allow a clip to be created with no start time', () => {
-    cy.findAllByText('Set current time')
-      .last()
-      .click()
+    cy.findAllByText('Set current time').last().click()
     cy.findByTestId('create-clip').should('be.disabled')
   })
 
   it('does not allow a clip to be created with no end time', () => {
-    cy.findAllByText('Set current time')
-      .first()
-      .click()
+    cy.findAllByText('Set current time').first().click()
     cy.findByTestId('create-clip').should('be.disabled')
   })
 
   it('does not allow a clip to be created with end time before or equal to start time', () => {
     // start = end
-    cy.findAllByText('Set current time')
-      .first()
-      .click()
-    cy.findAllByText('Set current time')
-      .last()
-      .click()
+    cy.findAllByText('Set current time').first().click()
+    cy.findAllByText('Set current time').last().click()
     cy.findByTestId('create-clip').should('be.disabled')
 
     // start > end
-    cy.findAllByText('+1')
-      .first()
-      .click()
+    cy.findAllByText('+1').first().click()
     cy.findByTestId('create-clip').should('be.disabled')
   })
 
   describe('Clip modal', () => {
     beforeEach(() => {
-      cy.findAllByText('Set current time')
-        .first()
-        .click()
-      cy.findAllByText('+1')
-        .last()
-        .click()
-        .click()
-        .click()
+      cy.findAllByText('Set current time').first().click()
+      cy.findAllByText('+1').last().click().click().click()
       cy.findByText('Create').click()
     })
 
     it('can create a 3 second clip, edit, and delete it', () => {
-      cy.findByLabelText('Clip title *')
-        .click()
-        .type('Test title')
-      cy.findByLabelText('Clip description')
-        .click()
-        .type('Test description')
+      cy.findByLabelText('Clip title *').click().type('Test title')
+      cy.findByLabelText('Clip description').click().type('Test description')
       cy.findByTestId('modal-create-clip').click()
       cy.url().should('include', '/clip')
       cy.findByText('Test title').should('exist')
@@ -75,14 +49,8 @@ describe('Create clip', () => {
 
       // Edit clip
       cy.findByText('Edit clip').click()
-      cy.findByLabelText('Clip title *')
-        .click()
-        .clear()
-        .type('New title')
-      cy.findByLabelText('Clip description')
-        .click()
-        .clear()
-        .type('New description')
+      cy.findByLabelText('Clip title *').click().clear().type('New title')
+      cy.findByLabelText('Clip description').click().clear().type('New description')
       cy.findByTestId('edit-clip-modal-submit').click()
       cy.findByText('New title').should('exist')
       cy.findByText('New description').should('exist')
@@ -104,14 +72,10 @@ describe('Create clip', () => {
           'jPheZKWAPWp92NRilw6u67HGSyQQ8qTHuYKd5ec2YIS5Psv05MIZySQByHsb0i6xkGPbgJetp9UT4tNxpWEdBbdE2kDkEhaQ01SvB4WSgzjolfizkcXgwOulfQXaEOUSOA4jvSrgUtHxOUhOtJ4Nwn5Be2PzUkURnRngJZsEvZig1plbiIyVJv8YF0jdirFrqNZGnSLkH'
         )
       cy.findByTestId('modal-create-clip').should('be.disabled')
-      cy.findByLabelText('Clip title *')
-        .click()
-        .clear()
+      cy.findByLabelText('Clip title *').click().clear()
 
       // Description too long
-      cy.findByLabelText('Clip title *')
-        .click()
-        .type('valid')
+      cy.findByLabelText('Clip title *').click().type('valid')
       cy.findByLabelText('Clip description')
         .click()
         .type(

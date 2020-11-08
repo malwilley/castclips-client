@@ -45,7 +45,7 @@ const StyledTextArea: React.SFC<StyledInputProps> = ({
 }) => (
   <textarea
     className={css(styles.textArea, className)}
-    onChange={e => handleTextChange(e.target.value)}
+    onChange={(e) => handleTextChange(e.target.value)}
     value={text}
     {...inputProps}
   />

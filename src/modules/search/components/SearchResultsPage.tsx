@@ -114,7 +114,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({ query, page = 1 }
             success: ({ data }) => (
               <>
                 {map(
-                  result => (
+                  (result) => (
                     <SearchResultCard key={result.id} {...result} />
                   ),
                   data.results as Array<PodcastResult | EpisodeResult | ClipResult>

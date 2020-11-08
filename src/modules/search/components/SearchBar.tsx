@@ -87,7 +87,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ className, initialText }) => {
         aria-labelledby="search-label"
         className={styles.input}
         handleTextChange={setText}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           if (e.keyCode === KeyCode.Enter && canSearch) {
             search()
           }

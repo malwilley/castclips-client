@@ -113,7 +113,7 @@ const EditClipModal: React.FC<EditClipModalProps> = ({ handleClose, isOpen }) =>
       <form
         className={styles.container}
         data-testid="edit-clip-modal"
-        onSubmit={e => {
+        onSubmit={(e) => {
           modifyClip()
           e.preventDefault()
         }}

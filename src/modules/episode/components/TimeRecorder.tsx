@@ -118,7 +118,7 @@ const TimeRecorder: React.FC<TimeRecorderProps> = ({
         <input
           className={css(styles.input, !isNil(time) && styles.inputSet)}
           value={value}
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           onBlur={() => {
             handleRecordClick(parseHrMinSec(value))
           }}
