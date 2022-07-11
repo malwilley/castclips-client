@@ -27,8 +27,9 @@ const local: AppConfig = {
     apiKey: 'AIzaSyBtA0m2pgSQ16SOVXdAexWD5K_hqXWa1b0',
   },
   sentry: {
-    dsn: process.env.SENTRY_DSN,
-    tracesSampleRate: convertEnvVariableToNumber(process.env.SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    tracesSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
   },
 }
 
@@ -39,8 +40,9 @@ const development: AppConfig = {
     apiKey: 'AIzaSyBtA0m2pgSQ16SOVXdAexWD5K_hqXWa1b0',
   },
   sentry: {
-    dsn: process.env.SENTRY_DSN,
-    tracesSampleRate: convertEnvVariableToNumber(process.env.SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    tracesSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
   },
 }
 
@@ -51,8 +53,9 @@ const production: AppConfig = {
     apiKey: 'AIzaSyCDNk16gnJo4FHVLfqD-l_vEYZH8MCkcJo',
   },
   sentry: {
-    dsn: process.env.SENTRY_DSN,
-    tracesSampleRate: convertEnvVariableToNumber(process.env.SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    tracesSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
   },
 }
 
