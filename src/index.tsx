@@ -7,6 +7,15 @@ import store from './redux/store'
 import history from './redux/history'
 import { injectGlobal } from 'emotion'
 import global from 'styles/global'
+import * as Sentry from '@sentry/react'
+import { BrowserTracing } from '@sentry/tracing'
+import config from 'config'
+
+Sentry.init({
+  dsn: config.sentry.dsn,
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: config.sentry.tracesSampleRate,
+})
 
 ReactDOM.render(
   <Provider store={store}>
