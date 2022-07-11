@@ -2,10 +2,12 @@
   "name": "castclips-client",
   "version": "0.1.0",
   "engines": {
-    "node": "12.x"
+    "node": "16.x"
   },
   "private": true,
   "dependencies": {
+    "@sentry/react": "^7.6.0",
+    "@sentry/tracing": "^7.6.0",
     "connected-react-router": "^6.8.0",
     "date-fns": "^1.30.1",
     "downshift": "^3.2.7",
@@ -32,6 +34,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:local": "REACT_APP_CONFIG=local yarn start",
+    "typecheck": "tsc",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

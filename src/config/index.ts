@@ -4,6 +4,20 @@ type AppConfig = {
     authHost: string
     apiKey: string
   }
+  sentry: {
+    dsn?: string
+    tracesSampleRate: number
+  }
+}
+
+const convertEnvVariableToNumber = (value: string | undefined) => {
+  const number = Number(value)
+
+  if (!isNaN(number)) {
+    return number
+  }
+
+  return null
 }
 
 const local: AppConfig = {
@@ -11,6 +25,10 @@ const local: AppConfig = {
     apiHost: 'http://localhost:5000/castclips-dev/us-central1/api',
     authHost: 'castclips-dev.firebaseapp.com',
     apiKey: 'AIzaSyBtA0m2pgSQ16SOVXdAexWD5K_hqXWa1b0',
+  },
+  sentry: {
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: convertEnvVariableToNumber(process.env.SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
   },
 }
 
@@ -20,6 +38,10 @@ const development: AppConfig = {
     authHost: 'castclips-dev.firebaseapp.com',
     apiKey: 'AIzaSyBtA0m2pgSQ16SOVXdAexWD5K_hqXWa1b0',
   },
+  sentry: {
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: convertEnvVariableToNumber(process.env.SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+  },
 }
 
 const production: AppConfig = {
@@ -27,6 +49,10 @@ const production: AppConfig = {
     apiHost: 'https://us-central1-castclips-7c579.cloudfunctions.net/api',
     authHost: 'castclips-7c579.firebaseapp.com',
     apiKey: 'AIzaSyCDNk16gnJo4FHVLfqD-l_vEYZH8MCkcJo',
+  },
+  sentry: {
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: convertEnvVariableToNumber(process.env.SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
   },
 }
 
