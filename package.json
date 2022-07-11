@@ -32,18 +32,18 @@
     "typescript": "^4.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-app-rewired start",
     "start:local": "REACT_APP_CONFIG=local yarn start",
     "typecheck": "tsc",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**.{ts,tsx}\"",
     "cypress:open": "cypress open",
     "prettier:check": "prettier --check \"**/*.{html,ts,tsx,json,md}\"",
     "prettier:write": "prettier --write \"**/*.{html,ts,tsx,json,md}\"",
     "now-build": "yarn lint && yarn prettier:check && yarn build",
-    "now-dev": "react-scripts start",
+    "now-dev": "react-app-rewired start",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": [
@@ -53,6 +53,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@sentry/webpack-plugin": "^1.18.9",
     "@testing-library/cypress": "^5.3.0",
     "@types/jest": "26.0.15",
     "@types/node": "10.12.18",
@@ -65,6 +66,7 @@
     "@types/react-router-dom": "^5.1.6",
     "cypress": "^4.0.1",
     "prettier": "^2.1.2",
+    "react-app-rewired": "^2.2.1",
     "source-map-explorer": "^2.2.2",
     "tslint-config-prettier": "^1.17.0"
   }
