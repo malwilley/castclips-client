@@ -15,6 +15,8 @@ Sentry.init({
   dsn: config.sentry.dsn,
   integrations: [new BrowserTracing()],
   tracesSampleRate: config.sentry.tracesSampleRate,
+  replaysSessionSampleRate: config.sentry.replaysSessionSampleRate,
+  replaysOnErrorSampleRate: config.sentry.replaysOnErrorSampleRate,
 })
 
 ReactDOM.render(

@@ -7,6 +7,8 @@ type AppConfig = {
   sentry: {
     dsn?: string
     tracesSampleRate: number
+    replaysSessionSampleRate: number
+    replaysOnErrorSampleRate: number
   }
 }
 
@@ -30,6 +32,10 @@ const local: AppConfig = {
     dsn: process.env.REACT_APP_SENTRY_DSN,
     tracesSampleRate:
       convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+    replaysSessionSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_REPLAYS_SESSION_SAMPLE_RATE) ?? 0.1,
+    replaysOnErrorSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_REPLACES_ERROR_SAMPLE_RATE) ?? 1.0,
   },
 }
 
@@ -43,6 +49,10 @@ const development: AppConfig = {
     dsn: process.env.REACT_APP_SENTRY_DSN,
     tracesSampleRate:
       convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+    replaysSessionSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_REPLAYS_SESSION_SAMPLE_RATE) ?? 1.0,
+    replaysOnErrorSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_REPLACES_ERROR_SAMPLE_RATE) ?? 1.0,
   },
 }
 
@@ -56,6 +66,10 @@ const production: AppConfig = {
     dsn: process.env.REACT_APP_SENTRY_DSN,
     tracesSampleRate:
       convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE) ?? 1.0,
+    replaysSessionSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_REPLAYS_SESSION_SAMPLE_RATE) ?? 1.0,
+    replaysOnErrorSampleRate:
+      convertEnvVariableToNumber(process.env.REACT_APP_SENTRY_REPLACES_ERROR_SAMPLE_RATE) ?? 1.0,
   },
 }
 
