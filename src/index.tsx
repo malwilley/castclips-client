@@ -8,12 +8,12 @@ import history from './redux/history'
 import { injectGlobal } from 'emotion'
 import global from 'styles/global'
 import * as Sentry from '@sentry/react'
-import { BrowserTracing } from '@sentry/tracing'
+import { BrowserTracing, Replay } from '@sentry/tracing'
 import config from 'config'
 
 Sentry.init({
   dsn: config.sentry.dsn,
-  integrations: [new BrowserTracing()],
+  integrations: [new BrowserTracing(), new Replay()],
   tracesSampleRate: config.sentry.tracesSampleRate,
   replaysSessionSampleRate: config.sentry.replaysSessionSampleRate,
   replaysOnErrorSampleRate: config.sentry.replaysOnErrorSampleRate,
